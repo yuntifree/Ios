@@ -1,0 +1,709 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6F6FDAA61DB4B3DE00E50D9B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAA51DB4B3DE00E50D9B /* main.m */; };
+		6F6FDAA91DB4B3DE00E50D9B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAA81DB4B3DE00E50D9B /* AppDelegate.m */; };
+		6F6FDAB11DB4B3DE00E50D9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F6FDAB01DB4B3DE00E50D9B /* Assets.xcassets */; };
+		6F6FDAB41DB4B3DE00E50D9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F6FDAB21DB4B3DE00E50D9B /* LaunchScreen.storyboard */; };
+		6F6FDAC81DB4B7E700E50D9B /* DGTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAC71DB4B7E700E50D9B /* DGTabBarController.m */; };
+		6F6FDACC1DB4BB9800E50D9B /* DGNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDACB1DB4BB9800E50D9B /* DGNavigationViewController.m */; };
+		6F6FDACF1DB4BBCA00E50D9B /* DGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDACE1DB4BBCA00E50D9B /* DGViewController.m */; };
+		6F6FDAD31DB4BDD200E50D9B /* icon_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6FDAD11DB4BDD200E50D9B /* icon_back@2x.png */; };
+		6F6FDAD41DB4BDD200E50D9B /* icon_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6FDAD21DB4BDD200E50D9B /* icon_back@3x.png */; };
+		6F6FDAD71DB4C3CA00E50D9B /* NSData+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAD61DB4C3CA00E50D9B /* NSData+Additions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6F6FDADA1DB4C4EB00E50D9B /* UIImage+Fit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAD91DB4C4EB00E50D9B /* UIImage+Fit.m */; };
+		6F6FDAE21DB4C81100E50D9B /* WifiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAE01DB4C81100E50D9B /* WifiViewController.m */; };
+		6F6FDAE31DB4C81100E50D9B /* WifiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6FDAE11DB4C81100E50D9B /* WifiViewController.xib */; };
+		6F6FDAE71DB4C82100E50D9B /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAE51DB4C82100E50D9B /* NewsViewController.m */; };
+		6F6FDAE81DB4C82100E50D9B /* NewsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6FDAE61DB4C82100E50D9B /* NewsViewController.xib */; };
+		6F6FDAEC1DB4C83000E50D9B /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAEA1DB4C83000E50D9B /* ServiceViewController.m */; };
+		6F6FDAED1DB4C83000E50D9B /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6FDAEB1DB4C83000E50D9B /* ServiceViewController.xib */; };
+		6F6FDAF11DB4C83D00E50D9B /* ShoppingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAEF1DB4C83D00E50D9B /* ShoppingViewController.m */; };
+		6F6FDAF21DB4C83D00E50D9B /* ShoppingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6FDAF01DB4C83D00E50D9B /* ShoppingViewController.xib */; };
+		6F6FDAF71DB4D42F00E50D9B /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAF51DB4D42F00E50D9B /* WebViewController.m */; };
+		6F6FDAFB1DB4D5D200E50D9B /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAFA1DB4D5D200E50D9B /* UIView+Frame.m */; };
+		6F6FDAFE1DB4DC4A00E50D9B /* CALayer+xib.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAFD1DB4DC4A00E50D9B /* CALayer+xib.m */; };
+		6FFA16741DB5F9220077E7C3 /* RequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA16731DB5F9220077E7C3 /* RequestManager.m */; };
+		6FFA16791DB5FCE40077E7C3 /* MSApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA16781DB5FCE40077E7C3 /* MSApp.m */; };
+		6FFA167D1DB603DD0077E7C3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA167C1DB603DD0077E7C3 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6FFA16811DB606030077E7C3 /* DeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA16801DB606030077E7C3 /* DeviceManager.m */; };
+		6FFA16871DB606E10077E7C3 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA16841DB606E10077E7C3 /* SSKeychain.m */; };
+		6FFA16881DB606E10077E7C3 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA16861DB606E10077E7C3 /* SSKeychainQuery.m */; };
+		6FFA168C1DB6131B0077E7C3 /* libDongGuanSdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FFA168A1DB6131B0077E7C3 /* libDongGuanSdk.a */; };
+		AB020984596E8C03FB0D323B /* libPods-DGInfinity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FCEA52AEF21EB933235244F /* libPods-DGInfinity.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		210BA9B55C1B0E492E2A8407 /* Pods-DGInfinity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DGInfinity.release.xcconfig"; path = "Pods/Target Support Files/Pods-DGInfinity/Pods-DGInfinity.release.xcconfig"; sourceTree = "<group>"; };
+		3FCEA52AEF21EB933235244F /* libPods-DGInfinity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DGInfinity.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4988436FDFFAAA74256A74E6 /* Pods-DGInfinity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DGInfinity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DGInfinity/Pods-DGInfinity.debug.xcconfig"; sourceTree = "<group>"; };
+		6F6FDAA11DB4B3DE00E50D9B /* DGInfinity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DGInfinity.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F6FDAA51DB4B3DE00E50D9B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6F6FDAA71DB4B3DE00E50D9B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6F6FDAA81DB4B3DE00E50D9B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6F6FDAB01DB4B3DE00E50D9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6F6FDAB31DB4B3DE00E50D9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6F6FDAB51DB4B3DE00E50D9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F6FDAC61DB4B7E700E50D9B /* DGTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DGTabBarController.h; sourceTree = "<group>"; };
+		6F6FDAC71DB4B7E700E50D9B /* DGTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DGTabBarController.m; sourceTree = "<group>"; };
+		6F6FDAC91DB4B92C00E50D9B /* DGInfinity-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DGInfinity-Prefix.pch"; sourceTree = "<group>"; };
+		6F6FDACA1DB4BB9800E50D9B /* DGNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DGNavigationViewController.h; sourceTree = "<group>"; };
+		6F6FDACB1DB4BB9800E50D9B /* DGNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DGNavigationViewController.m; sourceTree = "<group>"; };
+		6F6FDACD1DB4BBCA00E50D9B /* DGViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DGViewController.h; sourceTree = "<group>"; };
+		6F6FDACE1DB4BBCA00E50D9B /* DGViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DGViewController.m; sourceTree = "<group>"; };
+		6F6FDAD11DB4BDD200E50D9B /* icon_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_back@2x.png"; sourceTree = "<group>"; };
+		6F6FDAD21DB4BDD200E50D9B /* icon_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_back@3x.png"; sourceTree = "<group>"; };
+		6F6FDAD51DB4C3CA00E50D9B /* NSData+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Additions.h"; sourceTree = "<group>"; };
+		6F6FDAD61DB4C3CA00E50D9B /* NSData+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Additions.m"; sourceTree = "<group>"; };
+		6F6FDAD81DB4C4EB00E50D9B /* UIImage+Fit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Fit.h"; sourceTree = "<group>"; };
+		6F6FDAD91DB4C4EB00E50D9B /* UIImage+Fit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Fit.m"; sourceTree = "<group>"; };
+		6F6FDADF1DB4C81100E50D9B /* WifiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiViewController.h; sourceTree = "<group>"; };
+		6F6FDAE01DB4C81100E50D9B /* WifiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiViewController.m; sourceTree = "<group>"; };
+		6F6FDAE11DB4C81100E50D9B /* WifiViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WifiViewController.xib; sourceTree = "<group>"; };
+		6F6FDAE41DB4C82100E50D9B /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
+		6F6FDAE51DB4C82100E50D9B /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
+		6F6FDAE61DB4C82100E50D9B /* NewsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsViewController.xib; sourceTree = "<group>"; };
+		6F6FDAE91DB4C83000E50D9B /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
+		6F6FDAEA1DB4C83000E50D9B /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
+		6F6FDAEB1DB4C83000E50D9B /* ServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceViewController.xib; sourceTree = "<group>"; };
+		6F6FDAEE1DB4C83D00E50D9B /* ShoppingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingViewController.h; sourceTree = "<group>"; };
+		6F6FDAEF1DB4C83D00E50D9B /* ShoppingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingViewController.m; sourceTree = "<group>"; };
+		6F6FDAF01DB4C83D00E50D9B /* ShoppingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoppingViewController.xib; sourceTree = "<group>"; };
+		6F6FDAF41DB4D42F00E50D9B /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		6F6FDAF51DB4D42F00E50D9B /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		6F6FDAF91DB4D5D200E50D9B /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		6F6FDAFA1DB4D5D200E50D9B /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		6F6FDAFC1DB4DC4A00E50D9B /* CALayer+xib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+xib.h"; sourceTree = "<group>"; };
+		6F6FDAFD1DB4DC4A00E50D9B /* CALayer+xib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+xib.m"; sourceTree = "<group>"; };
+		6FFA16721DB5F9220077E7C3 /* RequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestManager.h; sourceTree = "<group>"; };
+		6FFA16731DB5F9220077E7C3 /* RequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestManager.m; sourceTree = "<group>"; };
+		6FFA16751DB5FA7F0077E7C3 /* DGInfinityConf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DGInfinityConf.h; sourceTree = "<group>"; };
+		6FFA16771DB5FCE40077E7C3 /* MSApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSApp.h; sourceTree = "<group>"; };
+		6FFA16781DB5FCE40077E7C3 /* MSApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSApp.m; sourceTree = "<group>"; };
+		6FFA167B1DB603DD0077E7C3 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		6FFA167C1DB603DD0077E7C3 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		6FFA167F1DB606030077E7C3 /* DeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceManager.h; sourceTree = "<group>"; };
+		6FFA16801DB606030077E7C3 /* DeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceManager.m; sourceTree = "<group>"; };
+		6FFA16831DB606E10077E7C3 /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
+		6FFA16841DB606E10077E7C3 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
+		6FFA16851DB606E10077E7C3 /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychainQuery.h; sourceTree = "<group>"; };
+		6FFA16861DB606E10077E7C3 /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychainQuery.m; sourceTree = "<group>"; };
+		6FFA168A1DB6131B0077E7C3 /* libDongGuanSdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libDongGuanSdk.a; sourceTree = "<group>"; };
+		6FFA168B1DB6131B0077E7C3 /* UserAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAuthManager.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6F6FDA9E1DB4B3DE00E50D9B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB020984596E8C03FB0D323B /* libPods-DGInfinity.a in Frameworks */,
+				6FFA168C1DB6131B0077E7C3 /* libDongGuanSdk.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		126E33E3ED1E1F9818BCD748 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4988436FDFFAAA74256A74E6 /* Pods-DGInfinity.debug.xcconfig */,
+				210BA9B55C1B0E492E2A8407 /* Pods-DGInfinity.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6F6FDA981DB4B3DE00E50D9B = {
+			isa = PBXGroup;
+			children = (
+				6F6FDAA31DB4B3DE00E50D9B /* DGInfinity */,
+				6F6FDABB1DB4B70C00E50D9B /* Frameworks */,
+				6F6FDAA21DB4B3DE00E50D9B /* Products */,
+				126E33E3ED1E1F9818BCD748 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		6F6FDAA21DB4B3DE00E50D9B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6F6FDAA11DB4B3DE00E50D9B /* DGInfinity.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6F6FDAA31DB4B3DE00E50D9B /* DGInfinity */ = {
+			isa = PBXGroup;
+			children = (
+				6F6FDABC1DB4B73500E50D9B /* Class */,
+				6F6FDABD1DB4B73500E50D9B /* Lib */,
+				6F6FDABE1DB4B73500E50D9B /* Resource */,
+				6F6FDAA71DB4B3DE00E50D9B /* AppDelegate.h */,
+				6F6FDAA81DB4B3DE00E50D9B /* AppDelegate.m */,
+				6F6FDAB01DB4B3DE00E50D9B /* Assets.xcassets */,
+				6F6FDAB21DB4B3DE00E50D9B /* LaunchScreen.storyboard */,
+				6F6FDAB51DB4B3DE00E50D9B /* Info.plist */,
+				6F6FDAA41DB4B3DE00E50D9B /* Supporting Files */,
+			);
+			path = DGInfinity;
+			sourceTree = "<group>";
+		};
+		6F6FDAA41DB4B3DE00E50D9B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6F6FDAA51DB4B3DE00E50D9B /* main.m */,
+				6F6FDAC91DB4B92C00E50D9B /* DGInfinity-Prefix.pch */,
+				6FFA16751DB5FA7F0077E7C3 /* DGInfinityConf.h */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6F6FDABB1DB4B70C00E50D9B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3FCEA52AEF21EB933235244F /* libPods-DGInfinity.a */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		6F6FDABC1DB4B73500E50D9B /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				6F6FDABF1DB4B79300E50D9B /* Category */,
+				6F6FDAC01DB4B79300E50D9B /* Common */,
+				6F6FDAC11DB4B79300E50D9B /* Control */,
+				6F6FDAC21DB4B79300E50D9B /* Controller */,
+				6F6FDAC31DB4B79300E50D9B /* Model */,
+				6F6FDAC41DB4B79300E50D9B /* View */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+		6F6FDABD1DB4B73500E50D9B /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				6FFA16891DB612DB0077E7C3 /* WiFiSDK */,
+				6FFA16821DB606E10077E7C3 /* SSKeychain */,
+				6FFA167A1DB603DD0077E7C3 /* Reachability */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		6F6FDABE1DB4B73500E50D9B /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				6F6FDAD01DB4BDD200E50D9B /* Common */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		6F6FDABF1DB4B79300E50D9B /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				6F6FDAD51DB4C3CA00E50D9B /* NSData+Additions.h */,
+				6F6FDAD61DB4C3CA00E50D9B /* NSData+Additions.m */,
+				6F6FDAD81DB4C4EB00E50D9B /* UIImage+Fit.h */,
+				6F6FDAD91DB4C4EB00E50D9B /* UIImage+Fit.m */,
+				6F6FDAF91DB4D5D200E50D9B /* UIView+Frame.h */,
+				6F6FDAFA1DB4D5D200E50D9B /* UIView+Frame.m */,
+				6F6FDAFC1DB4DC4A00E50D9B /* CALayer+xib.h */,
+				6F6FDAFD1DB4DC4A00E50D9B /* CALayer+xib.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		6F6FDAC01DB4B79300E50D9B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				6FFA167E1DB605F70077E7C3 /* DeviceManager */,
+				6FFA16761DB5FCD00077E7C3 /* MSApp */,
+				6FFA16711DB5F8FC0077E7C3 /* RequestManager */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		6F6FDAC11DB4B79300E50D9B /* Control */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Control;
+			sourceTree = "<group>";
+		};
+		6F6FDAC21DB4B79300E50D9B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6F6FDAF31DB4D39C00E50D9B /* Web */,
+				6F6FDADB1DB4C7AA00E50D9B /* News */,
+				6F6FDADC1DB4C7AA00E50D9B /* Service */,
+				6F6FDADD1DB4C7AA00E50D9B /* Shopping */,
+				6F6FDADE1DB4C7AA00E50D9B /* Wifi */,
+				6F6FDAC51DB4B7AA00E50D9B /* Base */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6F6FDAC31DB4B79300E50D9B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6F6FDAC41DB4B79300E50D9B /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6F6FDAC51DB4B7AA00E50D9B /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				6F6FDAC61DB4B7E700E50D9B /* DGTabBarController.h */,
+				6F6FDAC71DB4B7E700E50D9B /* DGTabBarController.m */,
+				6F6FDACA1DB4BB9800E50D9B /* DGNavigationViewController.h */,
+				6F6FDACB1DB4BB9800E50D9B /* DGNavigationViewController.m */,
+				6F6FDACD1DB4BBCA00E50D9B /* DGViewController.h */,
+				6F6FDACE1DB4BBCA00E50D9B /* DGViewController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		6F6FDAD01DB4BDD200E50D9B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				6F6FDAD11DB4BDD200E50D9B /* icon_back@2x.png */,
+				6F6FDAD21DB4BDD200E50D9B /* icon_back@3x.png */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		6F6FDADB1DB4C7AA00E50D9B /* News */ = {
+			isa = PBXGroup;
+			children = (
+				6F6FDAE41DB4C82100E50D9B /* NewsViewController.h */,
+				6F6FDAE51DB4C82100E50D9B /* NewsViewController.m */,
+				6F6FDAE61DB4C82100E50D9B /* NewsViewController.xib */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		6F6FDADC1DB4C7AA00E50D9B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6F6FDAE91DB4C83000E50D9B /* ServiceViewController.h */,
+				6F6FDAEA1DB4C83000E50D9B /* ServiceViewController.m */,
+				6F6FDAEB1DB4C83000E50D9B /* ServiceViewController.xib */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		6F6FDADD1DB4C7AA00E50D9B /* Shopping */ = {
+			isa = PBXGroup;
+			children = (
+				6F6FDAEE1DB4C83D00E50D9B /* ShoppingViewController.h */,
+				6F6FDAEF1DB4C83D00E50D9B /* ShoppingViewController.m */,
+				6F6FDAF01DB4C83D00E50D9B /* ShoppingViewController.xib */,
+			);
+			path = Shopping;
+			sourceTree = "<group>";
+		};
+		6F6FDADE1DB4C7AA00E50D9B /* Wifi */ = {
+			isa = PBXGroup;
+			children = (
+				6F6FDADF1DB4C81100E50D9B /* WifiViewController.h */,
+				6F6FDAE01DB4C81100E50D9B /* WifiViewController.m */,
+				6F6FDAE11DB4C81100E50D9B /* WifiViewController.xib */,
+			);
+			path = Wifi;
+			sourceTree = "<group>";
+		};
+		6F6FDAF31DB4D39C00E50D9B /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				6F6FDAF41DB4D42F00E50D9B /* WebViewController.h */,
+				6F6FDAF51DB4D42F00E50D9B /* WebViewController.m */,
+			);
+			path = Web;
+			sourceTree = "<group>";
+		};
+		6FFA16711DB5F8FC0077E7C3 /* RequestManager */ = {
+			isa = PBXGroup;
+			children = (
+				6FFA16721DB5F9220077E7C3 /* RequestManager.h */,
+				6FFA16731DB5F9220077E7C3 /* RequestManager.m */,
+			);
+			path = RequestManager;
+			sourceTree = "<group>";
+		};
+		6FFA16761DB5FCD00077E7C3 /* MSApp */ = {
+			isa = PBXGroup;
+			children = (
+				6FFA16771DB5FCE40077E7C3 /* MSApp.h */,
+				6FFA16781DB5FCE40077E7C3 /* MSApp.m */,
+			);
+			path = MSApp;
+			sourceTree = "<group>";
+		};
+		6FFA167A1DB603DD0077E7C3 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				6FFA167B1DB603DD0077E7C3 /* Reachability.h */,
+				6FFA167C1DB603DD0077E7C3 /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
+		6FFA167E1DB605F70077E7C3 /* DeviceManager */ = {
+			isa = PBXGroup;
+			children = (
+				6FFA167F1DB606030077E7C3 /* DeviceManager.h */,
+				6FFA16801DB606030077E7C3 /* DeviceManager.m */,
+			);
+			path = DeviceManager;
+			sourceTree = "<group>";
+		};
+		6FFA16821DB606E10077E7C3 /* SSKeychain */ = {
+			isa = PBXGroup;
+			children = (
+				6FFA16831DB606E10077E7C3 /* SSKeychain.h */,
+				6FFA16841DB606E10077E7C3 /* SSKeychain.m */,
+				6FFA16851DB606E10077E7C3 /* SSKeychainQuery.h */,
+				6FFA16861DB606E10077E7C3 /* SSKeychainQuery.m */,
+			);
+			path = SSKeychain;
+			sourceTree = "<group>";
+		};
+		6FFA16891DB612DB0077E7C3 /* WiFiSDK */ = {
+			isa = PBXGroup;
+			children = (
+				6FFA168A1DB6131B0077E7C3 /* libDongGuanSdk.a */,
+				6FFA168B1DB6131B0077E7C3 /* UserAuthManager.h */,
+			);
+			path = WiFiSDK;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6F6FDAA01DB4B3DE00E50D9B /* DGInfinity */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F6FDAB81DB4B3DE00E50D9B /* Build configuration list for PBXNativeTarget "DGInfinity" */;
+			buildPhases = (
+				826475D8868FD9224073C63F /* [CP] Check Pods Manifest.lock */,
+				6F6FDA9D1DB4B3DE00E50D9B /* Sources */,
+				6F6FDA9E1DB4B3DE00E50D9B /* Frameworks */,
+				6F6FDA9F1DB4B3DE00E50D9B /* Resources */,
+				855094AF014D308784C0E827 /* [CP] Embed Pods Frameworks */,
+				6F01BCEAC1CD7FB929EA2845 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DGInfinity;
+			productName = DGInfinity;
+			productReference = 6F6FDAA11DB4B3DE00E50D9B /* DGInfinity.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6F6FDA991DB4B3DE00E50D9B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = myeah;
+				TargetAttributes = {
+					6F6FDAA01DB4B3DE00E50D9B = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = RQ965LGBF2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 6F6FDA9C1DB4B3DE00E50D9B /* Build configuration list for PBXProject "DGInfinity" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6F6FDA981DB4B3DE00E50D9B;
+			productRefGroup = 6F6FDAA21DB4B3DE00E50D9B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6F6FDAA01DB4B3DE00E50D9B /* DGInfinity */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6F6FDA9F1DB4B3DE00E50D9B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F6FDAB41DB4B3DE00E50D9B /* LaunchScreen.storyboard in Resources */,
+				6F6FDAED1DB4C83000E50D9B /* ServiceViewController.xib in Resources */,
+				6F6FDAF21DB4C83D00E50D9B /* ShoppingViewController.xib in Resources */,
+				6F6FDAB11DB4B3DE00E50D9B /* Assets.xcassets in Resources */,
+				6F6FDAD31DB4BDD200E50D9B /* icon_back@2x.png in Resources */,
+				6F6FDAD41DB4BDD200E50D9B /* icon_back@3x.png in Resources */,
+				6F6FDAE31DB4C81100E50D9B /* WifiViewController.xib in Resources */,
+				6F6FDAE81DB4C82100E50D9B /* NewsViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6F01BCEAC1CD7FB929EA2845 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DGInfinity/Pods-DGInfinity-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		826475D8868FD9224073C63F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		855094AF014D308784C0E827 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DGInfinity/Pods-DGInfinity-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6F6FDA9D1DB4B3DE00E50D9B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FFA16741DB5F9220077E7C3 /* RequestManager.m in Sources */,
+				6F6FDADA1DB4C4EB00E50D9B /* UIImage+Fit.m in Sources */,
+				6FFA16871DB606E10077E7C3 /* SSKeychain.m in Sources */,
+				6F6FDAA91DB4B3DE00E50D9B /* AppDelegate.m in Sources */,
+				6FFA16791DB5FCE40077E7C3 /* MSApp.m in Sources */,
+				6F6FDACC1DB4BB9800E50D9B /* DGNavigationViewController.m in Sources */,
+				6F6FDAA61DB4B3DE00E50D9B /* main.m in Sources */,
+				6F6FDAF11DB4C83D00E50D9B /* ShoppingViewController.m in Sources */,
+				6F6FDAFE1DB4DC4A00E50D9B /* CALayer+xib.m in Sources */,
+				6F6FDAFB1DB4D5D200E50D9B /* UIView+Frame.m in Sources */,
+				6F6FDACF1DB4BBCA00E50D9B /* DGViewController.m in Sources */,
+				6F6FDAE21DB4C81100E50D9B /* WifiViewController.m in Sources */,
+				6F6FDAF71DB4D42F00E50D9B /* WebViewController.m in Sources */,
+				6F6FDAE71DB4C82100E50D9B /* NewsViewController.m in Sources */,
+				6FFA16811DB606030077E7C3 /* DeviceManager.m in Sources */,
+				6F6FDAD71DB4C3CA00E50D9B /* NSData+Additions.m in Sources */,
+				6FFA16881DB606E10077E7C3 /* SSKeychainQuery.m in Sources */,
+				6F6FDAEC1DB4C83000E50D9B /* ServiceViewController.m in Sources */,
+				6F6FDAC81DB4B7E700E50D9B /* DGTabBarController.m in Sources */,
+				6FFA167D1DB603DD0077E7C3 /* Reachability.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6F6FDAB21DB4B3DE00E50D9B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F6FDAB31DB4B3DE00E50D9B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6F6FDAB61DB4B3DE00E50D9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6F6FDAB71DB4B3DE00E50D9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6F6FDAB91DB4B3DE00E50D9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4988436FDFFAAA74256A74E6 /* Pods-DGInfinity.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = RQ965LGBF2;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DGInfinity/DGInfinity-Prefix.pch";
+				INFOPLIST_FILE = DGInfinity/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DGInfinity/Lib/WiFiSDK",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = my.DGInfinity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6F6FDABA1DB4B3DE00E50D9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 210BA9B55C1B0E492E2A8407 /* Pods-DGInfinity.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = RQ965LGBF2;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DGInfinity/DGInfinity-Prefix.pch";
+				INFOPLIST_FILE = DGInfinity/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DGInfinity/Lib/WiFiSDK",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = my.DGInfinity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6F6FDA9C1DB4B3DE00E50D9B /* Build configuration list for PBXProject "DGInfinity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F6FDAB61DB4B3DE00E50D9B /* Debug */,
+				6F6FDAB71DB4B3DE00E50D9B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6F6FDAB81DB4B3DE00E50D9B /* Build configuration list for PBXNativeTarget "DGInfinity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F6FDAB91DB4B3DE00E50D9B /* Debug */,
+				6F6FDABA1DB4B3DE00E50D9B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6F6FDA991DB4B3DE00E50D9B /* Project object */;
+}
