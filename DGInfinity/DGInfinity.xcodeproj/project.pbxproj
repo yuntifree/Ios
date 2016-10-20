@@ -43,6 +43,7 @@
 		6F3185181DB8A25700017D47 /* NewsReportCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3185161DB8A25700017D47 /* NewsReportCell.m */; };
 		6F3185191DB8A25700017D47 /* NewsReportCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3185171DB8A25700017D47 /* NewsReportCell.xib */; };
 		6F31851D1DB8A9DE00017D47 /* NewsReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F31851C1DB8A9DE00017D47 /* NewsReportModel.m */; };
+		6F31851F1DB8C97B00017D47 /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F31851E1DB8C97B00017D47 /* NullSafe.m */; };
 		6F6FDAA61DB4B3DE00E50D9B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAA51DB4B3DE00E50D9B /* main.m */; };
 		6F6FDAA91DB4B3DE00E50D9B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAA81DB4B3DE00E50D9B /* AppDelegate.m */; };
 		6F6FDAB11DB4B3DE00E50D9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F6FDAB01DB4B3DE00E50D9B /* Assets.xcassets */; };
@@ -122,6 +123,7 @@
 		6F3185171DB8A25700017D47 /* NewsReportCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsReportCell.xib; sourceTree = "<group>"; };
 		6F31851B1DB8A9DE00017D47 /* NewsReportModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsReportModel.h; sourceTree = "<group>"; };
 		6F31851C1DB8A9DE00017D47 /* NewsReportModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsReportModel.m; sourceTree = "<group>"; };
+		6F31851E1DB8C97B00017D47 /* NullSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NullSafe.m; sourceTree = "<group>"; };
 		6F6FDAA11DB4B3DE00E50D9B /* DGInfinity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DGInfinity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F6FDAA51DB4B3DE00E50D9B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6F6FDAA71DB4B3DE00E50D9B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 		6F6FDABF1DB4B79300E50D9B /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				6F31851E1DB8C97B00017D47 /* NullSafe.m */,
 				6F6FDAD51DB4C3CA00E50D9B /* NSData+Additions.h */,
 				6F6FDAD61DB4C3CA00E50D9B /* NSData+Additions.m */,
 				6F6FDAD81DB4C4EB00E50D9B /* UIImage+Fit.h */,
@@ -743,6 +746,7 @@
 				6F2E57F41DB792F600C39F27 /* ServiceHeaderView.m in Sources */,
 				6F6FDAE21DB4C81100E50D9B /* WifiViewController.m in Sources */,
 				6F6FDAF71DB4D42F00E50D9B /* WebViewController.m in Sources */,
+				6F31851F1DB8C97B00017D47 /* NullSafe.m in Sources */,
 				6F2E57B81DB758C300C39F27 /* AccountCGI.m in Sources */,
 				6F31850F1DB86DAB00017D47 /* ServiceCellModel.m in Sources */,
 				6F6FDAE71DB4C82100E50D9B /* NewsViewController.m in Sources */,
