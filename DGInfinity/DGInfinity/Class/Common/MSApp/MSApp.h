@@ -12,8 +12,15 @@
 
 @property (nonatomic, assign) NSInteger uid;
 @property (nonatomic, copy) NSString *token;
+@property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *privdata;
+@property (nonatomic, assign) NSTimeInterval expire;
+@property (nonatomic, copy) NSString *wifipass;
 
 + (instancetype)sharedMSApp;
 + (void)destory;
+
++ (void)setUserInfo:(NSDictionary *)data;
++ (void)autoLogin;
 
 @end

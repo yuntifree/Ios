@@ -10,4 +10,6 @@
 
 @interface DGViewController : UIViewController
 
+- (void)showHint:(NSString *)hint;
+
 @end

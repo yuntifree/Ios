@@ -6,7 +6,7 @@
 //  Copyright © 2016年 myeah. All rights reserved.
 //
 
-#import <AFNetworking/AFNetworking.h>
+#import <Foundation/Foundation.h>
 
 @interface DGCgiResult : NSObject
 
@@ -16,7 +16,7 @@
 
 @end
 
-@interface RequestManager : AFHTTPSessionManager
+@interface RequestManager : NSObject
 
 + (instancetype)shareManager;
 + (NSMutableDictionary *)httpParams;

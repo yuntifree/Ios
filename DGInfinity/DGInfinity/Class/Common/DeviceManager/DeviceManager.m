@@ -122,7 +122,7 @@
 {
     NSInteger nettype = 0;
     // 判断网络情况
-    Reachability *r = [Reachability reachabilityWithHostName:@"www.baidu.com"];
+    Reachability *r = [Reachability reachabilityForInternetConnection];
     switch ([r currentReachabilityStatus]) {
         case ReachableViaWiFi:
             // 使用WiFi网络

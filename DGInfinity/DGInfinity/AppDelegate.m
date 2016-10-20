@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "DGTabBarController.h"
 #import <IQKeyboardManager.h>
+#import "DeviceManager.h"
 
 @interface AppDelegate ()
 
@@ -28,8 +29,7 @@
     
     // wifiSDK
 #if !(TARGET_IPHONE_SIMULATOR)
-    [[UserAuthManager manager] initEnv:@"无线东莞DG-FREE" withWurl:@"http://192.168.100.4:880" withVNO:@"ROOT_VNO"];
-    [[UserAuthManager manager] logEnable:YES];
+    [[UserAuthManager manager] initEnv:WIFISDK_SSID withWurl:WIFISDK_URL withVNO:WIFISDK_VNOCODE];
 #endif
     
     // keyboardManager
@@ -37,6 +37,9 @@
     
     DGTabBarController *root = [[DGTabBarController alloc] init];
     self.window.rootViewController = root;
+    
+    // autoLogin
+    [MSApp autoLogin];
     
     return YES;
 }

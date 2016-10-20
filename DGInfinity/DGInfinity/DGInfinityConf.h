@@ -18,6 +18,7 @@ enum ErrorType {
     E_TOKEN = 101, // token验证失败
     E_CODE = 102, //短信验证码错误
     E_GET_CODE = 103, //获取短信验证码失败
+    E_USED_PHONE = 104, //手机号重复注册
     
     E_CGI_OFTEN = 0x90000,
     E_CGI_DUP   = 0x90010,
@@ -31,7 +32,22 @@ enum TermType {
     T_IOS = 1
 };
 
-#define ServerURL @"http://120.76.236.185/" // 测试环境
+typedef NS_ENUM(NSInteger, NewsType) {
+    NT_REPORT = 0,
+    NT_VIDEO = 1,
+    NT_APP = 2,
+    NT_GAME = 3
+};
+
+// Server
+#define ServerURL @"http://120.25.133.234/" // 测试环境
 #define AppVersion 1 // 客户端内部版本
+
+// WifiSDK
+#define WIFISDK_TIMEOUT  5 * 1000
+#define WIFISDK_URL @"http://192.168.100.4:880"
+#define WIFISDK_SSID @"无线东莞DG-FREE"
+#define WIFISDK_VNOCODE @"ROOT_VNO"
+
 
 #endif /* DGInfinityConf_h */

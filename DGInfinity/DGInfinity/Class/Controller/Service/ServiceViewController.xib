@@ -8,6 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ServiceViewController">
             <connections>
+                <outlet property="_listView" destination="Z8t-C9-83N" id="D4n-qJ-bcZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,16 +17,23 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Owp-75-EmT">
-                    <frame key="frameInset" minX="155" minY="271" width="46" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button"/>
-                    <connections>
-                        <action selector="testClick:" destination="-1" eventType="touchUpInside" id="gCa-PD-t5E"/>
-                    </connections>
-                </button>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Z8t-C9-83N">
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ueb-CT-hXR">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Z8t-C9-83N" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Qb5-5E-Puv"/>
+                <constraint firstAttribute="bottom" secondItem="Z8t-C9-83N" secondAttribute="bottom" id="X2H-EA-2nU"/>
+                <constraint firstItem="Z8t-C9-83N" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dJ8-O5-yyZ"/>
+                <constraint firstAttribute="trailing" secondItem="Z8t-C9-83N" secondAttribute="trailing" id="erF-Ij-cfd"/>
+            </constraints>
             <point key="canvasLocation" x="-183" y="51"/>
         </view>
     </objects>

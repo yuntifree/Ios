@@ -69,6 +69,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)showHint:(NSString *)hint
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:hint message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -8,6 +8,7 @@
 
 #import "RequestManager.h"
 #import "DeviceManager.h"
+#import <AFHTTPSessionManager.h>
 
 #define MAX_REQUEST_TIMEOUT     7
 
@@ -24,6 +25,12 @@
 
 @end
 
+@interface RequestManager ()
+{
+    AFHTTPSessionManager *_mgr;
+}
+@end
+
 @implementation RequestManager
 
 static RequestManager *manager = nil;
@@ -32,14 +39,23 @@ static RequestManager *manager = nil;
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        manager = (RequestManager *)[AFHTTPSessionManager manager];
-        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        manager.requestSerializer = [AFJSONRequestSerializer serializer];
-        
-        // set timeoutInterval
-        manager.requestSerializer.timeoutInterval = MAX_REQUEST_TIMEOUT;
+        manager = [[[self class] alloc] init];
     });
     return manager;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _mgr = [AFHTTPSessionManager manager];
+        _mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
+        _mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+        
+        // set timeoutInterval
+        _mgr.requestSerializer.timeoutInterval = MAX_REQUEST_TIMEOUT;
+    }
+    return self;
 }
 
 + (NSMutableDictionary *)httpParams
@@ -71,7 +87,7 @@ static RequestManager *manager = nil;
 - (void)loadAsync:(NSDictionary *)params cgi:(NSString *)cgi complete:(void(^)(DGCgiResult *res))complete
 {
     NetworkShow;
-    [self POST:[self urlPath:cgi] parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+    [_mgr POST:[self urlPath:cgi] parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NetworkHide;
@@ -88,9 +104,14 @@ static RequestManager *manager = nil;
             } else {
                 DGCgiResult *r = [[DGCgiResult alloc] init];
                 r._errno = E_INVALID_DATA;
-                r.desc = @"请检查您的网络~";
+                r.desc = @"请求数据错误~";
                 complete(r);
             }
+        } else {
+            DGCgiResult *r = [[DGCgiResult alloc] init];
+            r._errno = E_INVALID_DATA;
+            r.desc = @"请求数据错误~";
+            complete(r);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NetworkHide;

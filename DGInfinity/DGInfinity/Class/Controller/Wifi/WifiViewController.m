@@ -7,13 +7,13 @@
 //
 
 #import "WifiViewController.h"
-
-#define WIFISDK_TIMEOUT  5 * 1000
+#import "AccountCGI.h"
 
 @interface WifiViewController ()
 {
     __weak IBOutlet UITextField *_nameField;
     __weak IBOutlet UITextField *_passwordField;
+    __weak IBOutlet UITextField *_codeField;
     
 }
 @end
@@ -30,32 +30,57 @@
     // Do any additional setup after loading the view from its nib.
 }
 
-- (IBAction)doRegister:(id)sender {
-    if (!_nameField.text.length || !_passwordField.text.length) return;
+- (IBAction)getCode:(id)sender {
+    if (!_nameField.text.length) return;
     [SVProgressHUD show];
-#if !(TARGET_IPHONE_SIMULATOR)
-    [[UserAuthManager manager] doRegisterWithUserName:_nameField.text andPassWord:_passwordField.text andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
+    [AccountCGI getPhoneCode:_nameField.text type:0 complete:^(DGCgiResult *res) {
         [SVProgressHUD dismiss];
-        if (!error) {
-            NSString *retflag = response[@"retflag"];
-            if ([retflag isEqualToString:@"0"]) {
-                [self showHint:@"注册成功"];
-            } else {
-                [self showHint:response[@"reason"]];
-            }
+        if (E_OK == res._errno) {
+            [self showHint:@"获取成功"];
         } else {
-            [self showHint:[NSString stringWithFormat:@"请求失败 %@", error.description]];
+            [self showHint:res.desc];
         }
     }];
-#endif
 }
 
-- (IBAction)doLogon:(id)sender {
-    if (!_nameField.text.length || !_passwordField.text.length) return;
+- (IBAction)doRegister:(id)sender {
+    if (!_nameField.text.length || !_passwordField.text.length || !_codeField.text.length) return;
     [SVProgressHUD show];
-#if !(TARGET_IPHONE_SIMULATOR)
-    [[UserAuthManager manager] doLogon:_nameField.text andPassWord:_passwordField.text andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
+    [AccountCGI doRegister:_nameField.text password:_passwordField.text code:_codeField.text.integerValue complete:^(DGCgiResult *res) {
         [SVProgressHUD dismiss];
+        if (E_OK == res._errno) {
+            NSDictionary *data = res.data[@"data"];
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                SApp.username = _nameField.text;
+                SApp.wifipass = [[_passwordField.text dataUsingEncoding:NSUTF8StringEncoding] md5Hash];
+                [MSApp setUserInfo:data];
+#if !(TARGET_IPHONE_SIMULATOR)
+                [[UserAuthManager manager] doRegisterWithUserName:SApp.username andPassWord:SApp.wifipass andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
+                    if (!error) {
+                        NSString *retflag = response[@"retflag"];
+                        if ([retflag isEqualToString:@"0"]) {
+                            [self gotoLogon];
+                        } else {
+                            [self showHint:response[@"reason"]];
+                        }
+                    } else {
+                        [self showHint:[NSString stringWithFormat:@"请求失败 %@", error.description]];
+                    }
+                }];
+#else
+                [self showHint:@"注册成功"];
+#endif
+            }
+        } else {
+            [self showHint:res.desc];
+        }
+    }];
+}
+
+- (void)gotoLogon
+{
+#if !(TARGET_IPHONE_SIMULATOR)
+    [[UserAuthManager manager] doLogon:SApp.username andPassWord:SApp.wifipass andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
         if (!error) {
             NSString *retflag = response[@"retflag"];
             if ([retflag isEqualToString:@"0"]) {
@@ -70,31 +95,67 @@
 #endif
 }
 
-- (IBAction)doLogout:(id)sender {
+- (IBAction)doLogon:(id)sender {
     if (!_nameField.text.length || !_passwordField.text.length) return;
     [SVProgressHUD show];
-#if !(TARGET_IPHONE_SIMULATOR)
-    [[UserAuthManager manager] doLogout:_nameField.text andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
+    [AccountCGI login:_nameField.text password:_passwordField.text complete:^(DGCgiResult *res) {
         [SVProgressHUD dismiss];
-        if (!error) {
-            NSString *retflag = response[@"retflag"];
-            if ([retflag isEqualToString:@"0"]) {
-                [self showHint:@"登出成功"];
-            } else {
-                [self showHint:response[@"reason"]];
+        if (E_OK == res._errno) {
+            NSDictionary *data = res.data[@"data"];
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                SApp.username = _nameField.text;
+                [MSApp setUserInfo:data];
+#if !(TARGET_IPHONE_SIMULATOR)
+                [[UserAuthManager manager] doLogon:SApp.username andPassWord:SApp.wifipass andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
+                    if (!error) {
+                        NSString *retflag = response[@"retflag"];
+                        if ([retflag isEqualToString:@"0"]) {
+                            [self showHint:@"认证成功"];
+                        } else {
+                            [self showHint:response[@"reason"]];
+                        }
+                    } else {
+                        [self showHint:[NSString stringWithFormat:@"请求失败 %@", error.description]];
+                    }
+                }];
+#else
+                [self showHint:@"登录成功"];
+#endif
             }
         } else {
-            [self showHint:[NSString stringWithFormat:@"请求失败 %@", error.description]];
+            [self showHint:res.desc];
         }
     }];
-#endif
 }
 
-- (void)showHint:(NSString *)hint
-{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:hint message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
+- (IBAction)doLogout:(id)sender {
+    if (!SApp.username.length) return;
+    [SVProgressHUD show];
+    [AccountCGI logout:^(DGCgiResult *res) {
+        [SVProgressHUD dismiss];
+        if (E_OK == res._errno) {
+#if !(TARGET_IPHONE_SIMULATOR)
+            [[UserAuthManager manager] doLogout:SApp.username andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
+                if (!error) {
+                    NSString *retflag = response[@"retflag"];
+                    if ([retflag isEqualToString:@"0"]) {
+                        [self showHint:@"登出成功"];
+                        [MSApp destory];
+                    } else {
+                        [self showHint:response[@"reason"]];
+                    }
+                } else {
+                    [self showHint:[NSString stringWithFormat:@"请求失败 %@", error.description]];
+                }
+            }];
+#else
+            [self showHint:@"登出成功"];
+            [MSApp destory];
+#endif
+        } else {
+            [self showHint:res.desc];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
