@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.interactivePopGestureRecognizer.delegate = (id)self;
+    self.navigationBar.tintColor = [UIColor clearColor];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -168,4 +168,21 @@
     return CGSizeZero;
 }
 
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (void)collectionView:(UICollectionView *)colView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell* cell = [colView cellForItemAtIndexPath:indexPath];
+    [cell setBackgroundColor:RGB(0xf2f2f2, 1)];
+}
+
+- (void)collectionView:(UICollectionView *)colView  didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell* cell = [colView cellForItemAtIndexPath:indexPath];
+    [cell setBackgroundColor:[UIColor whiteColor]];
+}
+
 @end
