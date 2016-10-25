@@ -8,6 +8,7 @@
 
 #import "WifiViewController.h"
 #import "AccountCGI.h"
+#import <NetworkExtension/NetworkExtension.h>
 
 @interface WifiViewController ()
 {
@@ -44,6 +45,21 @@
 }
 
 - (IBAction)doRegister:(id)sender {
+//    DDDLog(@"username = %@,wifipass = %@",SApp.username, SApp.wifipass);
+//#if !(TARGET_IPHONE_SIMULATOR)
+//    [[UserAuthManager manager] doRegisterWithUserName:SApp.username andPassWord:SApp.wifipass andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
+//        if (!error) {
+//            NSString *retflag = response[@"retflag"];
+//            if ([retflag isEqualToString:@"0"]) {
+//                [self showHint:@"注册成功"];
+//            } else {
+//                [self showHint:response[@"reason"]];
+//            }
+//        } else {
+//            [self showHint:[NSString stringWithFormat:@"请求失败 %@", error.description]];
+//        }
+//    }];
+//#endif
     if (!_nameField.text.length || !_passwordField.text.length || !_codeField.text.length) return;
     [SVProgressHUD show];
     [AccountCGI doRegister:_nameField.text password:_passwordField.text code:_codeField.text.integerValue complete:^(DGCgiResult *res) {
@@ -52,14 +68,13 @@
             NSDictionary *data = res.data[@"data"];
             if ([data isKindOfClass:[NSDictionary class]]) {
                 SApp.username = _nameField.text;
-                SApp.wifipass = [[_passwordField.text dataUsingEncoding:NSUTF8StringEncoding] md5Hash];
                 [MSApp setUserInfo:data];
 #if !(TARGET_IPHONE_SIMULATOR)
                 [[UserAuthManager manager] doRegisterWithUserName:SApp.username andPassWord:SApp.wifipass andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
                     if (!error) {
                         NSString *retflag = response[@"retflag"];
                         if ([retflag isEqualToString:@"0"]) {
-                            [self gotoLogon];
+                            [self showHint:@"注册成功"];
                         } else {
                             [self showHint:response[@"reason"]];
                         }
@@ -79,6 +94,7 @@
 
 - (void)gotoLogon
 {
+    DDDLog(@"username = %@, wifipass = %@",SApp.username, SApp.wifipass);
 #if !(TARGET_IPHONE_SIMULATOR)
     [[UserAuthManager manager] doLogon:SApp.username andPassWord:SApp.wifipass andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
         if (!error) {
@@ -106,17 +122,9 @@
                 SApp.username = _nameField.text;
                 [MSApp setUserInfo:data];
 #if !(TARGET_IPHONE_SIMULATOR)
-                [[UserAuthManager manager] doLogon:SApp.username andPassWord:SApp.wifipass andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
-                    if (!error) {
-                        NSString *retflag = response[@"retflag"];
-                        if ([retflag isEqualToString:@"0"]) {
-                            [self showHint:@"认证成功"];
-                        } else {
-                            [self showHint:response[@"reason"]];
-                        }
-                    } else {
-                        [self showHint:[NSString stringWithFormat:@"请求失败 %@", error.description]];
-                    }
+                [[UserAuthManager manager] checkEnvironmentBlock:^(ENV_STATUS status) {
+                    DDDLog(@"-----%i",status);
+                    [self gotoLogon];
                 }];
 #else
                 [self showHint:@"登录成功"];

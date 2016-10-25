@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "DGTabBarController.h"
 #import <IQKeyboardManager.h>
-#import "DeviceManager.h"
 
 @interface AppDelegate ()
 
@@ -30,6 +29,7 @@
     // wifiSDK
 #if !(TARGET_IPHONE_SIMULATOR)
     [[UserAuthManager manager] initEnv:WIFISDK_SSID withWurl:WIFISDK_URL withVNO:WIFISDK_VNOCODE];
+    [[UserAuthManager manager] logEnable:YES];
 #endif
     
     // keyboardManager
@@ -40,6 +40,11 @@
     
     // autoLogin
     [MSApp autoLogin];
+    
+    UIUserNotificationType type =  UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:type
+                                                                             categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     
     return YES;
 }
@@ -52,7 +57,48 @@
     [[UINavigationBar appearance] setTranslucent:NO];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, SystemFont(18), NSFontAttributeName,nil]];
     [[UINavigationBar appearance] setBarTintColor:RGB(0x428be5, 1)];
+    
+//    [self registerNetwork:WIFISDK_SSID];
 }
+
+//- (void)registerNetwork:(NSString *)ssid
+//
+//{
+//    NSString *values[] = {ssid};
+//    
+//    CFArrayRef arrayRef = CFArrayCreate(kCFAllocatorDefault,(void *)values,
+//                                        
+//                                        (CFIndex)1, &kCFTypeArrayCallBacks);
+//    
+//    if( CNSetSupportedSSIDs(arrayRef)) {
+//        
+//        NSArray *ifs = (__bridge_transfer id)CNCopySupportedInterfaces();
+//        
+//        CNMarkPortalOnline((__bridge CFStringRef)(ifs[0]));
+//        
+//        DDDLog(@"%@", ifs);
+//        
+//    }
+//}
+
+////注册一个SSID，注意此方法多次调用时，最后一次有效
+//- (void)registerNetworkOnlyOneSSIDValidate:(NSString *)ssid
+//{
+//    [self registerNetwork:@[ssid]];
+//}
+////注册多个SSID，多次调用，最后一次有效
+//- (void)registerNetwork:(NSArray *)ssidStringArray
+//{
+//    CFArrayRef ssidCFArray = (__bridge CFArrayRef)ssidStringArray;
+//    if(!CNSetSupportedSSIDs(ssidCFArray)) {
+//        return;
+//    }
+//    CFArrayRef interfaces = CNCopySupportedInterfaces();
+//    for (int i = 0; i < CFArrayGetCount(interfaces); i++) {
+//        CFStringRef interface = CFArrayGetValueAtIndex(interfaces, i);
+//        CNMarkPortalOnline(interface);
+//    }
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

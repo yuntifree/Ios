@@ -34,14 +34,19 @@
 **********v1.0.6***********
 
 1.认证接口增加wlanusermac参数。
+ 
+**********v1.0.7***********
+ 
+1.适配iOS 10 nslog不能正常输出问题。
  */
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    ENV_NOT_WIFI = -1,      //当前连接的WiFi不是东莞环境的WiFi
-    ENV_NOT_LOGIN = 0,      //需要认证
+    ENV_NOT_WIFI = -1,      //无需认证的网络
+    ENV_NOT_LOGIN = 0,      //需要认证的网络
     ENV_ERROR = 1,          //无网络
     ENV_LOGIN = 2,          //已经认证成功
+
 }ENV_STATUS;
 
 
