@@ -46,7 +46,8 @@ typedef NS_ENUM(NSInteger, NewsType) {
 // WifiSDK
 #define WIFISDK_TIMEOUT  5 * 1000
 #define WIFISDK_URL @"http://192.168.100.4:880/wsmp/interface"
-#define WIFISDK_SSID @"无线东莞DG-FREE"
+//#define WIFISDK_SSID @"无线东莞DG-FREE"
+#define WIFISDK_SSID @"云行智慧"
 #define WIFISDK_VNOCODE @"ROOT_VNO"
 
 

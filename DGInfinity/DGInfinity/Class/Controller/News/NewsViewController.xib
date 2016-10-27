@@ -8,7 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewsViewController">
             <connections>
-                <outlet property="_listView" destination="ebB-Cq-a6h" id="49u-LF-nSj"/>
+                <outlet property="_titleView" destination="wMt-Wt-Hbm" id="KaZ-94-TxS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,22 +17,57 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ebB-Cq-a6h">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMt-Wt-Hbm">
+                    <subviews>
+                        <button opaque="NO" tag="1000" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="479-E0-pUg">
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <state key="normal" title="新闻">
+                                <color key="titleColor" red="0.48627450980392156" green="0.64313725490196072" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.07745205837404312" green="0.13601550753203429" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="titleBtnClick:" destination="-1" eventType="touchUpInside" id="CGo-KC-8Wp"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTy-n4-5ek">
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <state key="normal" title="视频">
+                                <color key="titleColor" red="0.48627450980392156" green="0.64313725490196072" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.077452058369999993" green="0.13601550749999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="titleBtnClick:" destination="-1" eventType="touchUpInside" id="eEO-fY-8H0"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="kt3-1I-dCm"/>
-                        <outlet property="delegate" destination="-1" id="bO0-Zr-Yax"/>
-                    </connections>
-                </tableView>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="LTy-n4-5ek" secondAttribute="trailing" id="HD4-zx-qiW"/>
+                        <constraint firstItem="479-E0-pUg" firstAttribute="top" secondItem="wMt-Wt-Hbm" secondAttribute="top" id="Pa3-k0-Zv7"/>
+                        <constraint firstAttribute="bottom" secondItem="479-E0-pUg" secondAttribute="bottom" id="Rhh-fR-tYG"/>
+                        <constraint firstAttribute="height" constant="40" id="S1N-vZ-0ea"/>
+                        <constraint firstItem="LTy-n4-5ek" firstAttribute="leading" secondItem="479-E0-pUg" secondAttribute="trailing" id="V3s-SM-O8n"/>
+                        <constraint firstItem="LTy-n4-5ek" firstAttribute="width" secondItem="479-E0-pUg" secondAttribute="width" id="WlP-9C-QoW"/>
+                        <constraint firstItem="LTy-n4-5ek" firstAttribute="height" secondItem="479-E0-pUg" secondAttribute="height" id="Y8W-ea-h7f"/>
+                        <constraint firstItem="479-E0-pUg" firstAttribute="leading" secondItem="wMt-Wt-Hbm" secondAttribute="leading" id="dG2-Wf-GF7"/>
+                        <constraint firstAttribute="bottom" secondItem="LTy-n4-5ek" secondAttribute="bottom" id="hgb-oU-fvw"/>
+                        <constraint firstItem="LTy-n4-5ek" firstAttribute="top" secondItem="wMt-Wt-Hbm" secondAttribute="top" id="quT-79-5hY"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="ebB-Cq-a6h" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="RhS-5U-z7M"/>
-                <constraint firstAttribute="bottom" secondItem="ebB-Cq-a6h" secondAttribute="bottom" id="Xdm-XV-lGq"/>
-                <constraint firstItem="ebB-Cq-a6h" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Z4J-Uf-Vqt"/>
-                <constraint firstAttribute="trailing" secondItem="ebB-Cq-a6h" secondAttribute="trailing" id="rlm-mZ-myl"/>
+                <constraint firstItem="wMt-Wt-Hbm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Gbv-Sf-2sY"/>
+                <constraint firstAttribute="trailing" secondItem="wMt-Wt-Hbm" secondAttribute="trailing" id="a64-fd-hjY"/>
+                <constraint firstItem="wMt-Wt-Hbm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="b0e-3n-DG9"/>
             </constraints>
+            <point key="canvasLocation" x="-622" y="-97"/>
         </view>
     </objects>
 </document>

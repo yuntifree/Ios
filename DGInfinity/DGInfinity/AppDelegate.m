@@ -9,13 +9,16 @@
 #import "AppDelegate.h"
 #import "DGTabBarController.h"
 #import <IQKeyboardManager.h>
+#import "NetworkManager.h"
+#import <MediaPlayer/MediaPlayer.h>
 
-@interface AppDelegate ()
-
+@interface AppDelegate () <NetWorkMgrDelegate>
+{
+    UIBackgroundTaskIdentifier _backgroundTaskID;
+}
 @end
 
 @implementation AppDelegate
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -35,16 +38,17 @@
     // keyboardManager
     [[IQKeyboardManager sharedManager] setEnable:YES];
     
+    // Notifications
+    [Tools registerNotification];
+    
+    // Network
+    [[NetworkManager shareManager] startNotifier];
+    
     DGTabBarController *root = [[DGTabBarController alloc] init];
     self.window.rootViewController = root;
     
     // autoLogin
     [MSApp autoLogin];
-    
-    UIUserNotificationType type =  UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:type
-                                                                             categories:nil];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     
     return YES;
 }
@@ -109,11 +113,25 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    _backgroundTaskID = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        
+        [[UIApplication sharedApplication] endBackgroundTask:_backgroundTaskID];
+        _backgroundTaskID = UIBackgroundTaskInvalid;
+    }];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[NetworkManager shareManager] addNetworkObserver:self];
+    });
 }
-
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    [[NetworkManager shareManager] removeNetworkObserver:self];
+    if (_backgroundTaskID) {
+        [[UIApplication sharedApplication] endBackgroundTask:_backgroundTaskID];
+        _backgroundTaskID = UIBackgroundTaskInvalid;
+    }
 }
 
 
@@ -126,5 +144,19 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark - NetWorkMgrDelegate
+- (void)didNetworkStateChanged:(NetworkStatus)ns
+{
+    static BOOL userNotifiedOfReachability = NO;
+    if (ns == ReachableViaWiFi) {
+        if (!userNotifiedOfReachability && [[Tools getCurrentSSID] isEqualToString:WIFISDK_SSID]) {
+            [Tools showNotificationMessages:@"点击这里，一键认证东莞无线城市WiFi"];
+            userNotifiedOfReachability = YES;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                userNotifiedOfReachability = NO;
+            });
+        }
+    }
+}
 
 @end

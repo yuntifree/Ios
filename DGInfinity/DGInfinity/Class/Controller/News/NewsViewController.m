@@ -7,31 +7,19 @@
 //
 
 #import "NewsViewController.h"
-#import "NewsCGI.h"
-#import "NewsReportCell.h"
-#import "NewsReportModel.h"
-#import "WebViewController.h"
+#import "NewsReportViewController.h"
+#import "NewsVideoViewController.h"
 
-@interface NewsViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface NewsViewController () <UIScrollViewDelegate>
 {
-    __weak IBOutlet UITableView *_listView;
+    __weak IBOutlet UIView *_titleView;
+    UIScrollView *_scrollView;
     
-    NSMutableArray *_newsArray;
-    NSInteger _minseq;
+    UIButton *_selectedBtn;
 }
 @end
 
 @implementation NewsViewController
-
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        _newsArray = [NSMutableArray arrayWithCapacity:20];
-        _minseq = 0;
-    }
-    return self;
-}
 
 - (NSString *)title
 {
@@ -42,60 +30,54 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setUpTableView];
-    [self getNews];
+    [self setUpTitleView];
+    [self setUpScrollView];
 }
 
-- (void)setUpTableView
+- (void)setUpTitleView
 {
-    [_listView registerNib:[UINib nibWithNibName:@"NewsReportCell" bundle:nil] forCellReuseIdentifier:@"NewsReportCell"];
-    _listView.tableFooterView = [UIView new];
-    _listView.rowHeight = (kScreenWidth - 30 - 6) / 3 / 1.5 + 70;
-    _listView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-    _listView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(getNews)];
+    _titleView.layer.shadowColor = [UIColor blackColor].CGColor;
+    _titleView.layer.shadowOpacity = 0.8;
+    _selectedBtn = (UIButton *)[_titleView viewWithTag:1000];
 }
 
-- (void)headerRefresh
+- (void)setUpScrollView
 {
-    _minseq = 0;
-    [_listView.mj_footer resetNoMoreData];
-    [self getNews];
+    CGFloat height = kScreenHeight - 20 - 44 - 40 - 49;
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 40, kScreenWidth, height)];
+    _scrollView.delegate = self;
+    _scrollView.contentSize = CGSizeMake(2 * kScreenWidth, 0);
+    _scrollView.pagingEnabled = YES;
+    _scrollView.bounces = NO;
+    _scrollView.showsVerticalScrollIndicator = NO;
+    _scrollView.showsHorizontalScrollIndicator = NO;
+    [self.view addSubview:_scrollView];
+    [self.view sendSubviewToBack:_scrollView];
+    
+    NewsReportViewController *reportVC = [[NewsReportViewController alloc] init];
+    reportVC.view.frame = CGRectMake(0, 0, kScreenWidth, height);
+    [self addChildViewController:reportVC];
+    [_scrollView addSubview:reportVC.view];
+    
+    NewsVideoViewController *videoVC = [[NewsVideoViewController alloc] init];
+    videoVC.view.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, height);
+    [self addChildViewController:videoVC];
+    [_scrollView addSubview:videoVC.view];
 }
 
-- (void)getNews
+- (IBAction)titleBtnClick:(UIButton *)sender {
+    [self changeContentWithPage:sender.tag - 1000];
+}
+
+- (void)changeContentWithPage:(NSInteger)page
 {
-    [NewsCGI getHot:NT_REPORT seq:_minseq complete:^(DGCgiResult *res) {
-        if (_minseq) {
-            [_listView.mj_footer endRefreshing];
-        } else {
-            [_listView.mj_header endRefreshing];
-        }
-        if (E_OK == res._errno) {
-            NSDictionary *data = res.data[@"data"];
-            if ([data isKindOfClass:[NSDictionary class]]) {
-                BOOL hasmore = [data[@"hasmore"] boolValue];
-                if (!hasmore) {
-                    [_listView.mj_footer endRefreshingWithNoMoreData];
-                }
-                NSArray *infos = data[@"infos"];
-                if ([infos isKindOfClass:[NSArray class]]) {
-                    if (_minseq == 0) {
-                        [_newsArray removeAllObjects];
-                    }
-                    for (NSDictionary *info in infos) {
-                        NewsReportModel *model = [NewsReportModel createWithInfo:info];
-                        [_newsArray addObject:model] ;
-                        if (!_minseq || _minseq > model.seq) {
-                            _minseq = model.seq;
-                        }
-                    }
-                }
-                [_listView reloadData];
-            }
-        } else {
-            [self showHint:res.desc];
-        }
-    }];
+    UIButton *button = (UIButton *)[_titleView.subviews objectAtIndex:page];
+    if (!button.selected) {
+        button.selected = YES;
+        _selectedBtn.selected = NO;
+        _selectedBtn = button;
+        [_scrollView setContentOffset:CGPointMake(page * kScreenWidth, 0) animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -103,30 +85,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - UITableViewDataSource, UITableViewDelegate
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    return _newsArray.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NewsReportCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewsReportCell"];
-    if (indexPath.row < _newsArray.count) {
-        [cell setNewsReportValue:_newsArray[indexPath.row]];
-    }
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row < _newsArray.count) {
-        NewsReportModel *model = _newsArray[indexPath.row];
-        WebViewController *vc = [[WebViewController alloc] init];
-        vc.url = model.dst;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    [self changeContentWithPage:scrollView.contentOffset.x / scrollView.width];
 }
 
 @end

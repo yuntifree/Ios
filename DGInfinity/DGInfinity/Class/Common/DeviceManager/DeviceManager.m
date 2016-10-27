@@ -11,7 +11,7 @@
 #import <stdio.h>
 #import <stdlib.h>
 #import "SSKeychain.h"
-#import "Reachability.h"
+#import "NetworkManager.h"
 
 @implementation DeviceManager
 
@@ -122,8 +122,7 @@
 {
     NSInteger nettype = 0;
     // 判断网络情况
-    Reachability *r = [Reachability reachabilityForInternetConnection];
-    switch ([r currentReachabilityStatus]) {
+    switch ([[NetworkManager shareManager] currentReachabilityStatus]) {
         case ReachableViaWiFi:
             // 使用WiFi网络
             nettype = 0;

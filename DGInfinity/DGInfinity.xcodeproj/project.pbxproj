@@ -64,6 +64,16 @@
 		6F6FDAF71DB4D42F00E50D9B /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAF51DB4D42F00E50D9B /* WebViewController.m */; };
 		6F6FDAFB1DB4D5D200E50D9B /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAFA1DB4D5D200E50D9B /* UIView+Frame.m */; };
 		6F6FDAFE1DB4DC4A00E50D9B /* CALayer+xib.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAFD1DB4DC4A00E50D9B /* CALayer+xib.m */; };
+		6FF5C7EE1DC1DA5B00B1A84A /* NewsReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5C7EC1DC1DA5B00B1A84A /* NewsReportViewController.m */; };
+		6FF5C7EF1DC1DA5B00B1A84A /* NewsReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FF5C7ED1DC1DA5B00B1A84A /* NewsReportViewController.xib */; };
+		6FF5C7F31DC1EDDD00B1A84A /* NewsVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5C7F11DC1EDDD00B1A84A /* NewsVideoViewController.m */; };
+		6FF5C7F41DC1EDDD00B1A84A /* NewsVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FF5C7F21DC1EDDD00B1A84A /* NewsVideoViewController.xib */; };
+		6FF5C7F71DC1F00200B1A84A /* NewsVideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5C7F61DC1F00200B1A84A /* NewsVideoModel.m */; };
+		6FF5C7FB1DC1F13D00B1A84A /* NewsVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5C7F91DC1F13D00B1A84A /* NewsVideoCell.m */; };
+		6FF5C7FC1DC1F13D00B1A84A /* NewsVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FF5C7FA1DC1F13D00B1A84A /* NewsVideoCell.xib */; };
+		6FF5C7FF1DC1F2FA00B1A84A /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FF5C7FE1DC1F2FA00B1A84A /* play.png */; };
+		6FF75EDF1DC09A6400166725 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF75EDE1DC09A6400166725 /* Tools.m */; };
+		6FF75EE31DC0BB0100166725 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF75EE21DC0BB0100166725 /* NetworkManager.m */; };
 		6FFA16741DB5F9220077E7C3 /* RequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA16731DB5F9220077E7C3 /* RequestManager.m */; };
 		6FFA16791DB5FCE40077E7C3 /* MSApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA16781DB5FCE40077E7C3 /* MSApp.m */; };
 		6FFA167D1DB603DD0077E7C3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA167C1DB603DD0077E7C3 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -160,6 +170,22 @@
 		6F6FDAFA1DB4D5D200E50D9B /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		6F6FDAFC1DB4DC4A00E50D9B /* CALayer+xib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+xib.h"; sourceTree = "<group>"; };
 		6F6FDAFD1DB4DC4A00E50D9B /* CALayer+xib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+xib.m"; sourceTree = "<group>"; };
+		6FF5C7EB1DC1DA5B00B1A84A /* NewsReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsReportViewController.h; sourceTree = "<group>"; };
+		6FF5C7EC1DC1DA5B00B1A84A /* NewsReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsReportViewController.m; sourceTree = "<group>"; };
+		6FF5C7ED1DC1DA5B00B1A84A /* NewsReportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsReportViewController.xib; sourceTree = "<group>"; };
+		6FF5C7F01DC1EDDD00B1A84A /* NewsVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsVideoViewController.h; sourceTree = "<group>"; };
+		6FF5C7F11DC1EDDD00B1A84A /* NewsVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsVideoViewController.m; sourceTree = "<group>"; };
+		6FF5C7F21DC1EDDD00B1A84A /* NewsVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsVideoViewController.xib; sourceTree = "<group>"; };
+		6FF5C7F51DC1F00200B1A84A /* NewsVideoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsVideoModel.h; sourceTree = "<group>"; };
+		6FF5C7F61DC1F00200B1A84A /* NewsVideoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsVideoModel.m; sourceTree = "<group>"; };
+		6FF5C7F81DC1F13D00B1A84A /* NewsVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsVideoCell.h; sourceTree = "<group>"; };
+		6FF5C7F91DC1F13D00B1A84A /* NewsVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsVideoCell.m; sourceTree = "<group>"; };
+		6FF5C7FA1DC1F13D00B1A84A /* NewsVideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsVideoCell.xib; sourceTree = "<group>"; };
+		6FF5C7FE1DC1F2FA00B1A84A /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		6FF75EDD1DC09A6400166725 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
+		6FF75EDE1DC09A6400166725 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
+		6FF75EE11DC0BB0100166725 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
+		6FF75EE21DC0BB0100166725 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		6FFA16721DB5F9220077E7C3 /* RequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestManager.h; sourceTree = "<group>"; };
 		6FFA16731DB5F9220077E7C3 /* RequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestManager.m; sourceTree = "<group>"; };
 		6FFA16751DB5FA7F0077E7C3 /* DGInfinityConf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DGInfinityConf.h; sourceTree = "<group>"; };
@@ -211,6 +237,7 @@
 		6F2E57B91DB78B2B00C39F27 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				6FF5C7FD1DC1F2FA00B1A84A /* News */,
 				6F2E57BA1DB78B2B00C39F27 /* Common */,
 				6F2E57CD1DB78B2B00C39F27 /* Service */,
 			);
@@ -285,6 +312,9 @@
 				6F3185151DB8A25700017D47 /* NewsReportCell.h */,
 				6F3185161DB8A25700017D47 /* NewsReportCell.m */,
 				6F3185171DB8A25700017D47 /* NewsReportCell.xib */,
+				6FF5C7F81DC1F13D00B1A84A /* NewsVideoCell.h */,
+				6FF5C7F91DC1F13D00B1A84A /* NewsVideoCell.m */,
+				6FF5C7FA1DC1F13D00B1A84A /* NewsVideoCell.xib */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -303,6 +333,8 @@
 			children = (
 				6F31851B1DB8A9DE00017D47 /* NewsReportModel.h */,
 				6F31851C1DB8A9DE00017D47 /* NewsReportModel.m */,
+				6FF5C7F51DC1F00200B1A84A /* NewsVideoModel.h */,
+				6FF5C7F61DC1F00200B1A84A /* NewsVideoModel.m */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -411,6 +443,8 @@
 		6F6FDAC01DB4B79300E50D9B /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6FF75EE01DC0BAF600166725 /* NetworkManager */,
+				6FF75EDC1DC09A5800166725 /* Tools */,
 				6FFA167E1DB605F70077E7C3 /* DeviceManager */,
 				6FFA16761DB5FCD00077E7C3 /* MSApp */,
 				6FFA16711DB5F8FC0077E7C3 /* RequestManager */,
@@ -477,6 +511,12 @@
 				6F6FDAE41DB4C82100E50D9B /* NewsViewController.h */,
 				6F6FDAE51DB4C82100E50D9B /* NewsViewController.m */,
 				6F6FDAE61DB4C82100E50D9B /* NewsViewController.xib */,
+				6FF5C7EB1DC1DA5B00B1A84A /* NewsReportViewController.h */,
+				6FF5C7EC1DC1DA5B00B1A84A /* NewsReportViewController.m */,
+				6FF5C7ED1DC1DA5B00B1A84A /* NewsReportViewController.xib */,
+				6FF5C7F01DC1EDDD00B1A84A /* NewsVideoViewController.h */,
+				6FF5C7F11DC1EDDD00B1A84A /* NewsVideoViewController.m */,
+				6FF5C7F21DC1EDDD00B1A84A /* NewsVideoViewController.xib */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -518,6 +558,32 @@
 				6F6FDAF51DB4D42F00E50D9B /* WebViewController.m */,
 			);
 			path = Web;
+			sourceTree = "<group>";
+		};
+		6FF5C7FD1DC1F2FA00B1A84A /* News */ = {
+			isa = PBXGroup;
+			children = (
+				6FF5C7FE1DC1F2FA00B1A84A /* play.png */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		6FF75EDC1DC09A5800166725 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				6FF75EDD1DC09A6400166725 /* Tools.h */,
+				6FF75EDE1DC09A6400166725 /* Tools.m */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		6FF75EE01DC0BAF600166725 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				6FF75EE11DC0BB0100166725 /* NetworkManager.h */,
+				6FF75EE21DC0BB0100166725 /* NetworkManager.m */,
+			);
+			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 		6FFA16711DB5F8FC0077E7C3 /* RequestManager */ = {
@@ -644,18 +710,22 @@
 				6F2E57DD1DB78B2B00C39F27 /* tab_icon_surf_selected@3x.png in Resources */,
 				6F2E57DA1DB78B2B00C39F27 /* tab_icon_surf@2x.png in Resources */,
 				6F2E57E71DB78B2B00C39F27 /* icon_es.png in Resources */,
+				6FF5C7FC1DC1F13D00B1A84A /* NewsVideoCell.xib in Resources */,
 				6F2E57DB1DB78B2B00C39F27 /* tab_icon_surf@3x.png in Resources */,
 				6F2E57D41DB78B2B00C39F27 /* icon_back@2x.png in Resources */,
 				6F2E57E41DB78B2B00C39F27 /* tab_icon_wifi_selected@2x.png in Resources */,
 				6F2E57D71DB78B2B00C39F27 /* tab_icon_flow@3x.png in Resources */,
+				6FF5C7F41DC1EDDD00B1A84A /* NewsVideoViewController.xib in Resources */,
 				6F2E57E51DB78B2B00C39F27 /* tab_icon_wifi_selected@3x.png in Resources */,
 				6F2E57DF1DB78B2B00C39F27 /* tab_icon_user@3x.png in Resources */,
 				6F2E57E21DB78B2B00C39F27 /* tab_icon_wifi@2x.png in Resources */,
 				6F2E57E11DB78B2B00C39F27 /* tab_icon_user_selected@3x.png in Resources */,
 				6F2E57D81DB78B2B00C39F27 /* tab_icon_flow_selected@2x.png in Resources */,
+				6FF5C7EF1DC1DA5B00B1A84A /* NewsReportViewController.xib in Resources */,
 				6F2E57E01DB78B2B00C39F27 /* tab_icon_user_selected@2x.png in Resources */,
 				6F6FDAB41DB4B3DE00E50D9B /* LaunchScreen.storyboard in Resources */,
 				6F2E57D91DB78B2B00C39F27 /* tab_icon_flow_selected@3x.png in Resources */,
+				6FF5C7FF1DC1F2FA00B1A84A /* play.png in Resources */,
 				6F6FDAED1DB4C83000E50D9B /* ServiceViewController.xib in Resources */,
 				6F3185191DB8A25700017D47 /* NewsReportCell.xib in Resources */,
 				6F2E57E31DB78B2B00C39F27 /* tab_icon_wifi@3x.png in Resources */,
@@ -745,16 +815,22 @@
 				6F6FDACF1DB4BBCA00E50D9B /* DGViewController.m in Sources */,
 				6F2E57F41DB792F600C39F27 /* ServiceHeaderView.m in Sources */,
 				6F6FDAE21DB4C81100E50D9B /* WifiViewController.m in Sources */,
+				6FF5C7EE1DC1DA5B00B1A84A /* NewsReportViewController.m in Sources */,
+				6FF75EE31DC0BB0100166725 /* NetworkManager.m in Sources */,
 				6F6FDAF71DB4D42F00E50D9B /* WebViewController.m in Sources */,
+				6FF75EDF1DC09A6400166725 /* Tools.m in Sources */,
 				6F31851F1DB8C97B00017D47 /* NullSafe.m in Sources */,
 				6F2E57B81DB758C300C39F27 /* AccountCGI.m in Sources */,
 				6F31850F1DB86DAB00017D47 /* ServiceCellModel.m in Sources */,
 				6F6FDAE71DB4C82100E50D9B /* NewsViewController.m in Sources */,
 				6FFA16811DB606030077E7C3 /* DeviceManager.m in Sources */,
+				6FF5C7F71DC1F00200B1A84A /* NewsVideoModel.m in Sources */,
 				6F6FDAD71DB4C3CA00E50D9B /* NSData+Additions.m in Sources */,
 				6F31850A1DB8601900017D47 /* ServiceSectionHeader.m in Sources */,
 				6F2E57F01DB78E0400C39F27 /* ServiceCell.m in Sources */,
 				6FFA16881DB606E10077E7C3 /* SSKeychainQuery.m in Sources */,
+				6FF5C7FB1DC1F13D00B1A84A /* NewsVideoCell.m in Sources */,
+				6FF5C7F31DC1EDDD00B1A84A /* NewsVideoViewController.m in Sources */,
 				6F6FDAEC1DB4C83000E50D9B /* ServiceViewController.m in Sources */,
 				6F6FDAC81DB4B7E700E50D9B /* DGTabBarController.m in Sources */,
 				6F2E57B41DB711D000C39F27 /* UITabBarItem+Setup.m in Sources */,

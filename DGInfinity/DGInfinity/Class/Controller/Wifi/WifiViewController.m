@@ -8,7 +8,6 @@
 
 #import "WifiViewController.h"
 #import "AccountCGI.h"
-#import <NetworkExtension/NetworkExtension.h>
 
 @interface WifiViewController ()
 {
