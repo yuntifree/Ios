@@ -17,8 +17,9 @@
     if ([[UIApplication sharedApplication] canOpenURL:openURL]) {
         [[UIApplication sharedApplication] openURL:openURL];
     } else {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请手动打开系统WiFi列表" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-        [alertView show];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请手动打开系统WiFi列表" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:nil]];
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:nil];
     }
 }
 

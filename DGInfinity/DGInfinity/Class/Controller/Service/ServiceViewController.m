@@ -12,6 +12,7 @@
 #import "ServiceHeaderView.h"
 #import "ServiceSectionHeader.h"
 #import "ServiceCellModel.h"
+#import "ServiceCGI.h"
 
 @interface ServiceViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 {
@@ -76,6 +77,7 @@
     //
     
     [self setUpCollectionView];
+    [self getServices];
 }
 
 - (void)setUpCollectionView
@@ -98,6 +100,20 @@
     _listView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
     
     [_listView registerNib:[UINib nibWithNibName:@"ServiceSectionHeader" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ServiceSectionHeader"];
+}
+
+- (void)getServices
+{
+    [ServiceCGI getServices:^(DGCgiResult *res) {
+        if (E_OK == res._errno) {
+            NSDictionary *data = res.data[@"data"];
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                DDDLog(@"----%@",data);
+            }
+        } else {
+            [self showHint:res.desc];
+        }
+    }];
 }
 
 - (void)openWebVC:(NSString *)url

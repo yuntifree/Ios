@@ -10,7 +10,7 @@
 #import "NewsCGI.h"
 #import "NewsVideoModel.h"
 #import "NewsVideoCell.h"
-#import <MediaPlayer/MediaPlayer.h>
+#import "WebViewController.h"
 
 @interface NewsVideoViewController () <UITableViewDataSource, UITableViewDelegate>
 {
@@ -117,8 +117,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row < _videosArray.count) {
         NewsVideoModel *model = _videosArray[indexPath.row];
-        MPMoviePlayerViewController *player = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:model.dst]];
-        [self presentMoviePlayerViewControllerAnimated:player];
+        WebViewController *vc = [[WebViewController alloc] init];
+        vc.url = model.dst;
+        vc.title = @"视频";
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

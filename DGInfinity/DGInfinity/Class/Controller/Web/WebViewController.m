@@ -35,6 +35,7 @@
         WKWebViewConfiguration *config = [WKWebViewConfiguration new];
         config.preferences = [WKPreferences new];
         config.userContentController = [WKUserContentController new];
+        config.requiresUserActionForMediaPlayback = NO;
         _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height - 64) configuration:config];
         _webView.navigationDelegate = self;
         _webView.UIDelegate = self;
@@ -102,7 +103,9 @@
 {
     if (object == self.webView) {
         if ([keyPath isEqualToString:@"title"]) {
-            self.title = self.webView.title;
+            if (self.webView.title.length) {
+                self.title = self.webView.title;
+            }
         } else if ([keyPath isEqualToString:@"estimatedProgress"]) {
             double progress = self.webView.estimatedProgress;
             if (progress == 1) {
