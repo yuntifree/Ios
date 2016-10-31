@@ -62,6 +62,7 @@
 #define COLOR(R, G, B, al) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:al]
 #define RGB(rgbValue, al) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:al]
 #define DMRandColor COLOR(arc4random_uniform(255), arc4random_uniform(255), arc4random_uniform(255), 1)
+#define IOS9 ([[[UIDevice currentDevice]systemVersion]floatValue] >= 9.0 ? YES : NO)
 #define IOS10 ([[[UIDevice currentDevice]systemVersion]floatValue] >= 10.0 ? YES : NO)
 #define kScreenFrame [UIScreen mainScreen].bounds
 #define kScreenWidth kScreenFrame.size.width

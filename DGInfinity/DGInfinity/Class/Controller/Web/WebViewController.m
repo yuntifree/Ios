@@ -10,6 +10,9 @@
 #import <WebKit/WebKit.h>
 
 @interface WebViewController () <WKNavigationDelegate, WKUIDelegate>
+{
+    WebItemType _type;
+}
 
 @property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) UIProgressView *progressView;
@@ -54,6 +57,15 @@
     return _progressView;
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _type = ITEMTYPE_BACK;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -68,6 +80,21 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Btn Action
+- (void)backBtnClick:(id)sender
+{
+    if ([self.webView canGoBack]) {
+        [self.webView goBack];
+    } else {
+        [super backBtnClick:sender];
+    }
+}
+
+- (void)closeBtnClick:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - KVO
@@ -102,6 +129,21 @@
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler
 {
     decisionHandler(WKNavigationResponsePolicyAllow);
+}
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation
+{
+    if ([webView canGoBack]) {
+        if (_type != ITEMTYPE_CLOSE) {
+            _type = ITEMTYPE_CLOSE;
+            [self setUpCloseItem];
+        }
+    } else {
+        if (_type != ITEMTYPE_BACK) {
+            _type = ITEMTYPE_BACK;
+            [self setUpBackItem];
+        }
+    }
 }
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error

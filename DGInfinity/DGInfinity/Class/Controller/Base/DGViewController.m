@@ -14,6 +14,39 @@
 
 @implementation DGViewController
 
+- (UIButton *)backBtn
+{
+    if (_backBtn == nil) {
+        _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _backBtn.frame = CGRectMake(10, 10, 24, 24);
+        [_backBtn addTarget:self action:@selector(backBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIGraphicsBeginImageContextWithOptions(_backBtn.frame.size, 0, [UIScreen mainScreen].scale);
+        [[UIColor clearColor] set];
+        UIRectFill(CGRectMake(0, 0, _backBtn.frame.size.width, _backBtn.frame.size.height));
+        
+        UIImage *image = ImageNamed(@"icon_back");
+        [image drawInRect:CGRectMake(0, (_backBtn.frame.size.height - image.size.height)/2, image.size.width, image.size.height) blendMode:kCGBlendModeNormal alpha:0.5];
+        UIImage *highLightedImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        [_backBtn setBackgroundImage:image forState:UIControlStateNormal];
+        [_backBtn setBackgroundImage:highLightedImage forState:UIControlStateHighlighted];
+    }
+    return _backBtn;
+}
+
+- (UIButton *)closeBtn
+{
+    if (_closeBtn == nil) {
+        _closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _closeBtn.frame = CGRectMake(0, 0, 44, 44);
+        [_closeBtn addTarget:self action:@selector(closeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_closeBtn setTitle:@"关闭" forState:UIControlStateNormal];
+        [_closeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+    return _closeBtn;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -43,30 +76,29 @@
 
 - (void)setUpBackItem
 {
-    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    backBtn.frame = CGRectMake(10, 10, 24, 24);
-    [backBtn addTarget:self action:@selector(backBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIGraphicsBeginImageContextWithOptions(backBtn.frame.size, 0, [UIScreen mainScreen].scale);
-    [[UIColor clearColor] set];
-    UIRectFill(CGRectMake(0, 0, backBtn.frame.size.width, backBtn.frame.size.height));
-    
-    UIImage *image = ImageNamed(@"icon_back");
-    [image drawInRect:CGRectMake(0, (backBtn.frame.size.height - image.size.height)/2, image.size.width, image.size.height) blendMode:kCGBlendModeNormal alpha:0.5];
-    UIImage *highLightedImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [backBtn setBackgroundImage:image forState:UIControlStateNormal];
-    [backBtn setBackgroundImage:highLightedImage forState:UIControlStateHighlighted];
-    
-    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backBtn];
     UIBarButtonItem *fixedSpaceBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFixedSpace target: nil action: nil];
     fixedSpaceBarButtonItem.width = -5;
     self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:fixedSpaceBarButtonItem, backBarButtonItem, nil];
 }
 
+- (void)setUpCloseItem
+{
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView: self.backBtn];
+    UIBarButtonItem *fixedSpaceBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFixedSpace target: nil action: nil];
+    UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView: self.closeBtn];
+    fixedSpaceBarButtonItem.width = -5;
+    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:backBarButtonItem, closeBarButtonItem, nil];
+}
+
 - (void)backBtnClick:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)closeBtnClick:(id)sender
+{
+    
 }
 
 - (void)showHint:(NSString *)hint

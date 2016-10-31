@@ -10,6 +10,13 @@
 
 @interface DGViewController : UIViewController
 
+@property (nonatomic, strong) UIButton *backBtn;
+@property (nonatomic, strong) UIButton *closeBtn;
+
 - (void)showHint:(NSString *)hint;
+- (void)setUpBackItem;
+- (void)setUpCloseItem;
+- (void)backBtnClick:(id)sender;
+- (void)closeBtnClick:(id)sender;
 
 @end

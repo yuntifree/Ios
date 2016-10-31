@@ -7,6 +7,8 @@
 //
 
 #import "NetworkManager.h"
+#import <SystemConfiguration/CaptiveNetwork.h>
+#import <NetworkExtension/NEHotspotHelper.h>
 
 @interface NetworkManager ()
 {
@@ -91,6 +93,49 @@ static NetworkManager *manager = nil;
     }
     @synchronized (_observers) {
         [_observers removeObjectAtIndex:index];
+    }
+}
+
+- (void)registerNetworkExtension
+{
+    if (!IOS9) {
+        [self registerNetworkOnlyOneSSIDValidate:WIFISDK_SSID];
+    } else {
+        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:@"✅东莞无线城市wifi，请点击连接", kNEHotspotHelperOptionDisplayName, nil];
+        dispatch_queue_t queue = dispatch_queue_create("com.yunxingzh.ex", 0);
+        [NEHotspotHelper registerWithOptions:options queue:queue handler: ^(NEHotspotHelperCommand * cmd) {
+            if(cmd.commandType == kNEHotspotHelperCommandTypeEvaluate || cmd.commandType == kNEHotspotHelperCommandTypeFilterScanList)
+            {
+                for (NEHotspotNetwork *network in cmd.networkList)
+                {
+                    if ([network.SSID isEqualToString:WIFISDK_SSID])
+                    {
+                        [network setConfidence:kNEHotspotHelperConfidenceHigh];
+                        NEHotspotHelperResponse *response = [cmd createResponse:kNEHotspotHelperResultSuccess];
+                        [response setNetwork:network];
+                        [response deliver];
+                    }
+                }
+            }
+        }];
+    }
+}
+
+- (void)registerNetworkOnlyOneSSIDValidate:(NSString *)ssid
+{
+    [self registerNetwork:@[ssid]];
+}
+
+- (void)registerNetwork:(NSArray *)ssidStringArray
+{
+    CFArrayRef ssidCFArray = (__bridge CFArrayRef)ssidStringArray;
+    if(!CNSetSupportedSSIDs(ssidCFArray)) {
+        return;
+    }
+    CFArrayRef interfaces = CNCopySupportedInterfaces();
+    for (int i = 0; i < CFArrayGetCount(interfaces); i++) {
+        CFStringRef interface = CFArrayGetValueAtIndex(interfaces, i);
+        CNMarkPortalOnline(interface);
     }
 }
 

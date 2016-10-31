@@ -8,6 +8,11 @@
 
 #import "DGViewController.h"
 
+typedef NS_ENUM(NSInteger, WebItemType) {
+    ITEMTYPE_BACK = 0,
+    ITEMTYPE_CLOSE = 1
+};
+
 @interface WebViewController : DGViewController
 
 @property (nonatomic, copy) NSString *url;
