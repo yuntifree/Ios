@@ -134,6 +134,15 @@ respective headers for the terms of their individual licenses.
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>Copyright 2011 - 2015 UMeng.com. All rights reserved.
+</string>
+			<key>Title</key>
+			<string>UMengAnalytics-NO-IDFA</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>The MIT License (MIT)
 
 Copyright (c) 2015 ibireme &lt;ibireme@gmail.com&gt;
@@ -219,6 +228,14 @@ SOFTWARE.
 </string>
 			<key>Title</key>
 			<string>YYWebImage</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>&#21271;&#20140;&#22522;&#35843;&#32593;&#32476;&#32929;&#20221;&#26377;&#38480;&#20844;&#21496;&#169;2015</string>
+			<key>Title</key>
+			<string>tingyunApp</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

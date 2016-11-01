@@ -50,5 +50,10 @@ typedef NS_ENUM(NSInteger, NewsType) {
 #define WIFISDK_SSID @"云行智慧"
 #define WIFISDK_VNOCODE @"ROOT_VNO"
 
+// 听云SDK
+#define TingYunAppKey @"8a6175653d1b4fe3948ad8d9cd1b3fd7"
+
+// 友盟SDK
+#define UMengAppKey @"58183f77c62dca59990026e0"
 
 #endif /* DGInfinityConf_h */

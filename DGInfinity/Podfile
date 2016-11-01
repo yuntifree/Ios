@@ -7,4 +7,6 @@ pod 'YYWebImage'
 pod 'IQKeyboardManager'
 pod 'SVProgressHUD'
 pod 'MJRefresh'
+pod 'tingyunApp'
+pod 'UMengAnalytics-NO-IDFA'
 end

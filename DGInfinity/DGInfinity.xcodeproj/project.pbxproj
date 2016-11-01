@@ -173,6 +173,7 @@
 		6F6FDAFA1DB4D5D200E50D9B /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		6F6FDAFC1DB4DC4A00E50D9B /* CALayer+xib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+xib.h"; sourceTree = "<group>"; };
 		6F6FDAFD1DB4DC4A00E50D9B /* CALayer+xib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+xib.m"; sourceTree = "<group>"; };
+		6F71A5AF1DC88D910019EF69 /* DGInfinity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DGInfinity.entitlements; sourceTree = "<group>"; };
 		6FF5C7EB1DC1DA5B00B1A84A /* NewsReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsReportViewController.h; sourceTree = "<group>"; };
 		6FF5C7EC1DC1DA5B00B1A84A /* NewsReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsReportViewController.m; sourceTree = "<group>"; };
 		6FF5C7ED1DC1DA5B00B1A84A /* NewsReportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsReportViewController.xib; sourceTree = "<group>"; };
@@ -391,6 +392,7 @@
 				6F6FDAA51DB4B3DE00E50D9B /* main.m */,
 				6F6FDAC91DB4B92C00E50D9B /* DGInfinity-Prefix.pch */,
 				6FFA16751DB5FA7F0077E7C3 /* DGInfinityConf.h */,
+				6F71A5AF1DC88D910019EF69 /* DGInfinity.entitlements */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -689,8 +691,16 @@
 				TargetAttributes = {
 					6F6FDAA01DB4B3DE00E50D9B = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = YJ5R75Z9ZM;
+						DevelopmentTeam = VN4WHFNWZZ;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+							com.apple.WAC = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -961,7 +971,9 @@
 			baseConfigurationReference = 4988436FDFFAAA74256A74E6 /* Pods-DGInfinity.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = YJ5R75Z9ZM;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = VN4WHFNWZZ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DGInfinity/DGInfinity-Prefix.pch";
 				INFOPLIST_FILE = DGInfinity/Info.plist;
@@ -970,8 +982,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DGInfinity/Lib/WiFiSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = flame.DGInfinity;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yunxingzh.wireless;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -980,7 +994,9 @@
 			baseConfigurationReference = 210BA9B55C1B0E492E2A8407 /* Pods-DGInfinity.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = YJ5R75Z9ZM;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = VN4WHFNWZZ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DGInfinity/DGInfinity-Prefix.pch";
 				INFOPLIST_FILE = DGInfinity/Info.plist;
@@ -989,7 +1005,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DGInfinity/Lib/WiFiSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = flame.DGInfinity;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yunxingzh.wireless;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

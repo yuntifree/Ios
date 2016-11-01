@@ -44,6 +44,11 @@
     [[NetworkManager shareManager] startNotifier];
     [[NetworkManager shareManager] registerNetworkExtension];
     
+    // UMeng
+    [MobClick setAppVersion:XcodeAppVersion];
+    UMConfigInstance.appKey = UMengAppKey;
+    [MobClick startWithConfigure:UMConfigInstance];
+    
     DGTabBarController *root = [[DGTabBarController alloc] init];
     self.window.rootViewController = root;
     

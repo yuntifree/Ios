@@ -21,6 +21,8 @@
 #import <YYWebImage.h>
 #import <MJRefresh.h>
 #import "Tools.h"
+#import <tingyunApp/NBSAppAgent.h>
+#import <UMMobClick/MobClick.h>
 
 #if !(TARGET_IPHONE_SIMULATOR)
 #import "UserAuthManager.h"
@@ -72,5 +74,10 @@
 #define NSUSERDEFAULTS [NSUserDefaults standardUserDefaults]
 #define SApp [MSApp sharedMSApp]
 #define CURRENT_TS [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970] * 1000];
+#define MobClick(_string) [MobClick event:_string] // 友盟自定义事件统计
+#define MobClickIndex(_string, index) [MobClick event:_string label:[NSString stringWithFormat:@"%ld",index]]
+#define MobClick_getVCName [NSString stringWithFormat:@"%s",object_getClassName(self)] // 获取当前视图的名称
+#define MobClickBegin [MobClick beginLogPageView:MobClick_getVCName] // 友盟页面访问路径统计
+#define MobClickEnd [MobClick endLogPageView:MobClick_getVCName]
 
 #endif /* DGInfinity_Prefix_pch */

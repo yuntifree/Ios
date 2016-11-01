@@ -17,6 +17,8 @@ PODS:
   - IQKeyboardManager (4.0.6)
   - MJRefresh (3.1.12)
   - SVProgressHUD (2.0.3)
+  - tingyunApp (2.4.1)
+  - UMengAnalytics-NO-IDFA (4.1.1)
   - YYCache (1.0.4)
   - YYImage (1.0.4):
     - YYImage/Core (= 1.0.4)
@@ -30,6 +32,8 @@ DEPENDENCIES:
   - IQKeyboardManager
   - MJRefresh
   - SVProgressHUD
+  - tingyunApp
+  - UMengAnalytics-NO-IDFA
   - YYWebImage
 
 SPEC CHECKSUMS:
@@ -37,10 +41,12 @@ SPEC CHECKSUMS:
   IQKeyboardManager: c52debb1967799ae7addb98eab0cf328083a874f
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
+  tingyunApp: bf9074313164f2b3595b5c2b422c8159cee03a58
+  UMengAnalytics-NO-IDFA: 1064992c1b7aaa22823179c0b33a664813fd7a85
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: f093fca187d12f763574c78b1c8b716bcdebb175
+PODFILE CHECKSUM: 9b1633d11dc5ed376e9ffee4caa0fa6f3c846a5b
 
 COCOAPODS: 1.0.1

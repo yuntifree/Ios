@@ -50,11 +50,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    MobClickBegin;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    MobClickEnd;
     [self.view endEditing:YES];
 }
 
