@@ -14,5 +14,6 @@
 + (void)registerNotification;
 + (void)showNotificationMessages:(NSString *)body;
 + (NSString *)getCurrentSSID;
++ (void)openSetting;
 
 @end

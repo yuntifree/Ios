@@ -160,6 +160,7 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     _mapView = nil;
 }
 
@@ -172,11 +173,19 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
 //        _myLocation = [[LocationInfo alloc] initWithCoordinate2D:[[BaiduMapSDK shareBaiduMapSDK] getUserLocation] busiName:@"我的位置" locationDesc:@"我的位置" isMyLocation:YES];
         CLLocationCoordinate2D location = CLLocationCoordinate2DMake(22.930574, 113.890796);
         _myLocation = [[LocationInfo alloc] initWithCoordinate2D:location busiName:@"我的位置" locationDesc:@"我的位置" isMyLocation:YES];
     }
     return self;
+}
+
+- (void)willEnterForeground
+{
+    if ([[BaiduMapSDK shareBaiduMapSDK] locationServicesEnabled] && !_mapView.annotations.count) {
+        [self addAnnotations];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -226,6 +235,10 @@
         [_mapView removeAnnotations:_mapView.annotations];
     }
     
+//    _myLocation = [[LocationInfo alloc] initWithCoordinate2D:[[BaiduMapSDK shareBaiduMapSDK] getUserLocation] busiName:@"我的位置" locationDesc:@"我的位置" isMyLocation:YES];
+    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(22.930574, 113.890796);
+    _myLocation = [[LocationInfo alloc] initWithCoordinate2D:location busiName:@"我的位置" locationDesc:@"我的位置" isMyLocation:YES];
+    
     LocationAnnotation *myAnnotation = [[LocationAnnotation alloc] init];
     myAnnotation.coordinate = _myLocation.coordinate2D;
     myAnnotation.title = _myLocation.busiName;
@@ -265,6 +278,15 @@
 #pragma mark - BMKMapViewDelegate
 - (void)mapViewDidFinishLoading:(BMKMapView *)mapView
 {
+    if (![[BaiduMapSDK shareBaiduMapSDK] locationServicesEnabled]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"无法获取位置信息，建议开启定位服务" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"忽略" style:UIAlertActionStyleCancel handler:nil]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"开启" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [Tools openSetting];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
     // 这一句为了处理第一次弹出paopaoView后，点击地图空白处，paopaoView不会消失的问题。
     _mapView.zoomLevel = _mapView.zoomLevel - 0.00001;
     [self addAnnotations];

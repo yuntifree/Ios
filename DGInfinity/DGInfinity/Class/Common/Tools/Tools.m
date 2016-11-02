@@ -60,4 +60,19 @@
     return ssid;
 }
 
++ (void)openSetting
+{
+    if (UIApplicationOpenSettingsURLString != NULL) {
+        NSURL *appSettings = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        if ([[UIApplication sharedApplication] canOpenURL:appSettings]) {
+            [[UIApplication sharedApplication] openURL:appSettings];
+        }
+    } else {
+        NSURL *url = [NSURL URLWithString:@"prefs:root=com.yunxingzh.wireless"];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    }
+}
+
 @end

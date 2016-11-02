@@ -78,8 +78,7 @@ UIKIT_STATIC_INLINE CLLocationDistance FMetersTwoCoordinate2D(CLLocationCoordina
 
 - (BOOL)locationServicesEnabled
 {
-    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-    return status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse;
+    return [CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied;
 }
 
 - (void)startUserLocationService
