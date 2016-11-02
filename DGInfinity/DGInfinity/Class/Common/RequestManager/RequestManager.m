@@ -72,9 +72,6 @@ static RequestManager *manager = nil;
     params[@"version"] = @(AppVersion);
     params[@"ts"] = CURRENT_TS;
     params[@"nettype"] = @([DeviceManager getNettype]);
-    params[@"channel"] = @"App Store";
-    params[@"model"] = [DeviceManager getiPhoneModel];
-    params[@"udid"] = [DeviceManager getDeviceId];
     
     return params;
 }

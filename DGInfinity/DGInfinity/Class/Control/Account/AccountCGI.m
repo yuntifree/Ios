@@ -7,6 +7,7 @@
 //
 
 #import "AccountCGI.h"
+#import "DeviceManager.h"
 
 @implementation AccountCGI
 
@@ -32,7 +33,10 @@
     NSMutableDictionary *params = [RequestManager httpParams];
     params[@"data"] = @{@"username": username,
                         @"password": [[password dataUsingEncoding:NSUTF8StringEncoding] md5Hash],
-                        @"code": @(code)};
+                        @"code": @(code),
+                        @"channel": @"App Store",
+                        @"model": [DeviceManager getiPhoneModel],
+                        @"udid": [DeviceManager getDeviceId]};
     [[RequestManager shareManager] loadAsync:params cgi:@"register" complete:^(DGCgiResult *res) {
         if (complete) {
             complete(res);
@@ -46,7 +50,9 @@
 {
     NSMutableDictionary *params = [RequestManager httpParams];
     params[@"data"] = @{@"username": username,
-                        @"password": [[password dataUsingEncoding:NSUTF8StringEncoding] md5Hash]};
+                        @"password": [[password dataUsingEncoding:NSUTF8StringEncoding] md5Hash],
+                        @"model": [DeviceManager getiPhoneModel],
+                        @"udid": [DeviceManager getDeviceId]};
     [[RequestManager shareManager] loadAsync:params cgi:@"login" complete:^(DGCgiResult *res) {
         if (complete) {
             complete(res);

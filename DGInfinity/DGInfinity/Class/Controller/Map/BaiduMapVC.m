@@ -44,7 +44,7 @@
  */
 @interface LocationActionPaopaoView : UIImageView
 
-- (id)initWithTitle:(NSString *)title address:(NSString *)address;
+- (id)initWithTitle:(NSString *)title subTitle:(NSString *)subTitle;
 
 @end
 
@@ -55,7 +55,7 @@
     DDDLog(@"LocationActionPaopaoView Dealloc");
 }
 
-- (id)initWithTitle:(NSString *)title address:(NSString *)address
+- (id)initWithTitle:(NSString *)title subTitle:(NSString *)subTitle
 {
     self = [super init];
     if (self) {
@@ -77,15 +77,15 @@
         [self addSubview:titleLb];
         
         // addressLb
-        UIFont *addressFont = [UIFont systemFontOfSize:10];
-        CGFloat addressW = [self widthWithString:address font:addressFont constrainedToSize:CGSizeMake(maxW, 12)];
-        UILabel *addressLb = [[UILabel alloc] initWithFrame:CGRectMake(8, 24, addressW, 12)];
-        addressLb.font = addressFont;
-        addressLb.text = address;
-        addressLb.textColor = RGB(0xffffff, 1);
-        [self addSubview:addressLb];
+        UIFont *subTitleFont = [UIFont systemFontOfSize:10];
+        CGFloat subTitleW = [self widthWithString:subTitle font:subTitleFont constrainedToSize:CGSizeMake(maxW, 12)];
+        UILabel *subTitleLb = [[UILabel alloc] initWithFrame:CGRectMake(8, 24, subTitleW, 12)];
+        subTitleLb.font = subTitleFont;
+        subTitleLb.text = subTitle;
+        subTitleLb.textColor = RGB(0xffffff, 1);
+        [self addSubview:subTitleLb];
         
-        CGFloat w = (titleW > addressW ? titleW : addressW) + btnW + 41;
+        CGFloat w = (titleW > subTitleW ? titleW : subTitleW) + btnW + 41;
         self.bounds = CGRectMake(0, 0, w, selfH);
         
         // 背景
@@ -125,15 +125,16 @@
     self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
     if (self) {
         LocationAnnotation *anno = (LocationAnnotation *)annotation;
-        NSString *imageStr = anno.isMyLocation ? @"mapapi.bundle/images/icon_center_point.png" : @"mapapi.bundle/images/pin_green.png";
-        UIImage *image = [UIImage imageNamed:imageStr];
+        NSURL *url = [[NSBundle mainBundle] URLForResource:@"mapapi" withExtension:@"bundle"];
+        NSBundle *imageBundle = [NSBundle bundleWithURL:url];
+        NSString *imageUrl = anno.isMyLocation ? [imageBundle pathForResource:@"icon_center_point" ofType:@"png" inDirectory:@"images"] : [imageBundle pathForResource:@"pin_green" ofType:@"png" inDirectory:@"images"];
+        UIImage *image = [UIImage imageWithContentsOfFile:imageUrl];
         UIImageView *iv = [[UIImageView alloc] initWithImage:image];
-        iv.bounds = CGRectMake(0, 0, image.size.width, image.size.height);
         self.bounds = iv.bounds;
         [self addSubview:iv];
         
         if (!anno.isMyLocation) { // 如果是终点，则弹出自定义泡泡
-            LocationActionPaopaoView *paopaoView = [[LocationActionPaopaoView alloc] initWithTitle:anno.title address:anno.subtitle];
+            LocationActionPaopaoView *paopaoView = [[LocationActionPaopaoView alloc] initWithTitle:anno.title subTitle:anno.subtitle];
             BMKActionPaopaoView *paopao = [[BMKActionPaopaoView alloc] initWithCustomView:paopaoView];
             self.paopaoView = paopao;
         }
