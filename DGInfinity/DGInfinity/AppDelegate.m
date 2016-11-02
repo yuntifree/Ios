@@ -11,7 +11,7 @@
 #import <IQKeyboardManager.h>
 #import "NetworkManager.h"
 
-@interface AppDelegate () <NetWorkMgrDelegate>
+@interface AppDelegate () <NetWorkMgrDelegate, BMKGeneralDelegate>
 {
     UIBackgroundTaskIdentifier _backgroundTaskID;
 }
@@ -48,6 +48,13 @@
     [MobClick setAppVersion:XcodeAppVersion];
     UMConfigInstance.appKey = UMengAppKey;
     [MobClick startWithConfigure:UMConfigInstance];
+    
+    // BaiduMap
+    [[BaiduMapSDK shareBaiduMapSDK] startUserLocationService];
+    BOOL ret = [[[BMKMapManager alloc] init] start:BaiduMapAppKey generalDelegate:self];
+    if (!ret) {
+        DDDLog(@"manager start failed!");
+    }
     
     DGTabBarController *root = [[DGTabBarController alloc] init];
     self.window.rootViewController = root;
@@ -120,6 +127,25 @@
                 userNotifiedOfReachability = NO;
             });
         }
+    }
+}
+
+#pragma mark - BMKGeneralDelegate
+- (void)onGetNetworkState:(int)iError
+{
+    if (0 == iError) {
+        DDDLog(@"联网成功");
+    } else {
+        DDDLog(@"onGetNetworkState %d", iError);
+    }
+}
+
+- (void)onGetPermissionState:(int)iError
+{
+    if (0 == iError) {
+        DDDLog(@"授权成功");
+    } else {
+        DDDLog(@"onGetPermissionState %d", iError);
     }
 }
 

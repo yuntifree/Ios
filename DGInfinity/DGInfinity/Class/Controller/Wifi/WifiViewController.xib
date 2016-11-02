@@ -72,6 +72,14 @@
                         <action selector="doRegister:" destination="-1" eventType="touchUpInside" id="5IE-xf-eci"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="obY-Xd-cvh">
+                    <frame key="frameInset" minX="42" minY="356" width="61" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="WiFi地图"/>
+                    <connections>
+                        <action selector="searchNearbyWifi:" destination="-1" eventType="touchUpInside" id="vbp-Zs-Rmx"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <point key="canvasLocation" x="-51.5" y="52.5"/>

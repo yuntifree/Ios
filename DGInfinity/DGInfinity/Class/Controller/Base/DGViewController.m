@@ -14,6 +14,11 @@
 
 @implementation DGViewController
 
+- (void)dealloc
+{
+    DDDLog(@"%@ Dealloc",MobClick_getVCName);
+}
+
 - (UIButton *)backBtn
 {
     if (_backBtn == nil) {

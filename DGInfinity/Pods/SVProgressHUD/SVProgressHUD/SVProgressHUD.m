@@ -101,6 +101,8 @@ static const CGFloat SVProgressHUDDefaultAnimationDuration = 0.15;
 #else
     dispatch_once(&once, ^{ sharedView = [[self alloc] initWithFrame:[[UIScreen mainScreen] bounds]]; });
 #endif
+    sharedView.defaultMaskType = SVProgressHUDMaskTypeClear;
+    sharedView.defaultStyle = SVProgressHUDStyleDark;
     return sharedView;
 }
 

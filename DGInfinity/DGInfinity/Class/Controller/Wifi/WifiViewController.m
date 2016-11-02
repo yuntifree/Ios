@@ -8,6 +8,7 @@
 
 #import "WifiViewController.h"
 #import "AccountCGI.h"
+#import "BaiduMapVC.h"
 
 @interface WifiViewController ()
 {
@@ -163,6 +164,12 @@
             [self showHint:res.desc];
         }
     }];
+}
+
+#pragma mark - WiFi Function
+- (IBAction)searchNearbyWifi:(id)sender {
+    BaiduMapVC *vc = [[BaiduMapVC alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -30,6 +30,14 @@
 				<string>prefs</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>dgwireless</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
@@ -60,5 +68,13 @@
 	<array>
 		<string>network-authentication</string>
 	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>baidumap</string>
+	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>使用您的位置来发现附近免费WiFi</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>使用您的位置来发现附近免费WiFi</string>
 </dict>
 </plist>

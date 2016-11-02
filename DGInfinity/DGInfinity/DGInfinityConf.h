@@ -56,4 +56,7 @@ typedef NS_ENUM(NSInteger, NewsType) {
 // 友盟SDK
 #define UMengAppKey @"58183f77c62dca59990026e0"
 
+// 百度地图SDK
+#define BaiduMapAppKey @"kvGmE3GGGkaBotP6N6jWSBVCRLGkrwkM"
+
 #endif /* DGInfinityConf_h */
