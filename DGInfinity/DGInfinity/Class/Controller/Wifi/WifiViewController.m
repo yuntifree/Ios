@@ -8,12 +8,24 @@
 
 #import "WifiViewController.h"
 #import "BaiduMapVC.h"
+#import "WiFiSpeedView.h"
 
-@interface WifiViewController ()
+@interface WifiViewController () <WIFISpeedViewDelegate>
+
+@property (nonatomic, strong) WiFiSpeedView *speedView;
 
 @end
 
 @implementation WifiViewController
+
+- (WiFiSpeedView *)speedView
+{
+    if (_speedView == nil) {
+        _speedView = [[WiFiSpeedView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 0.888 * kScreenWidth)];
+        _speedView.delegate = self;
+    }
+    return _speedView;
+}
 
 - (NSString *)title
 {
@@ -169,12 +181,35 @@
 }
 
 - (IBAction)speedTest:(id)sender {
-    
+    if (![self.view.subviews containsObject:self.speedView]) {
+        self.speedView.alpha = 0;
+        [self.view addSubview:self.speedView];
+        [UIView animateWithDuration:0.5 animations:^{
+            self.speedView.alpha = 1;
+        }];
+    } else {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.speedView.alpha = 0;
+        } completion:^(BOOL finished) {
+            [self.speedView removeFromSuperview];
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - WIFISpeedViewDelegate
+- (void)touchCloseBtn
+{
+    self.navigationController.tabBarController.selectedIndex = 1;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.speedView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.speedView removeFromSuperview];
+    }];
 }
 
 @end

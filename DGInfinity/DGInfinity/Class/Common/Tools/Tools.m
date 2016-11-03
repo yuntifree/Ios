@@ -8,6 +8,7 @@
 
 #import "Tools.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
+#import "NetworkManager.h"
 
 @implementation Tools
 
@@ -43,6 +44,9 @@
 
 + (NSString *)getCurrentSSID
 {
+    if ([[NetworkManager shareManager] currentReachabilityStatus] != ReachableViaWiFi) {
+        return nil;
+    }
     NSArray *supportedInterfacesArray = (__bridge_transfer id)CNCopySupportedInterfaces();
     id currentNetworkInfoDictionary = nil;
     for (NSString *interfaceName in supportedInterfacesArray) {

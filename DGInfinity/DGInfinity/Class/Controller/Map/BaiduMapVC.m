@@ -214,7 +214,7 @@
     _mapView = [[BMKMapView alloc] init];
     _mapView.translatesAutoresizingMaskIntoConstraints = NO;
     _mapView.centerCoordinate = _myLocation.coordinate2D;
-    _mapView.zoomLevel = 18;
+    _mapView.zoomLevel = 16.1;
     [_mapView setNeedsUpdateConstraints];
     [self.view addSubview:_mapView];
 }
