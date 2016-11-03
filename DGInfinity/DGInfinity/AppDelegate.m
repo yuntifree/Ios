@@ -10,6 +10,8 @@
 #import "DGTabBarController.h"
 #import <IQKeyboardManager.h>
 #import "NetworkManager.h"
+#import "LoginViewController.h"
+#import "AnimationManager.h"
 
 @interface AppDelegate () <NetWorkMgrDelegate, BMKGeneralDelegate>
 {
@@ -18,6 +20,21 @@
 @end
 
 @implementation AppDelegate
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setRootViewController) name:KNC_LOGIN object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setRootViewController) name:KNC_LOGOUT object:nil];
+    }
+    return self;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -56,8 +73,8 @@
         DDDLog(@"manager start failed!");
     }
     
-    DGTabBarController *root = [[DGTabBarController alloc] init];
-    self.window.rootViewController = root;
+    // RootViewController
+    [self setRootViewController];
     
     // autoLogin
     [MSApp autoLogin];
@@ -73,6 +90,22 @@
     [[UINavigationBar appearance] setTranslucent:NO];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, SystemFont(18), NSFontAttributeName,nil]];
     [[UINavigationBar appearance] setBarTintColor:RGB(0x428be5, 1)];
+}
+
+- (void)setRootViewController
+{
+    CAAnimation *animation = [self.window.layer animationForKey:@"changeRoot"];
+    if (!animation) {
+        animation = [AnimationManager changeRootAnimation];
+        [self.window.layer addAnimation:animation forKey:@"changeRoot"];
+    }
+    UIViewController *root;
+    if (SApp.uid) {
+        root = [[DGTabBarController alloc] init];
+    } else {
+        root = [[LoginViewController alloc] init];
+    }
+    self.window.rootViewController = root;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

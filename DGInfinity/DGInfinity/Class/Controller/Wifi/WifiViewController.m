@@ -7,16 +7,10 @@
 //
 
 #import "WifiViewController.h"
-#import "AccountCGI.h"
 #import "BaiduMapVC.h"
 
 @interface WifiViewController ()
-{
-    __weak IBOutlet UITextField *_nameField;
-    __weak IBOutlet UITextField *_passwordField;
-    __weak IBOutlet UITextField *_codeField;
-    
-}
+
 @end
 
 @implementation WifiViewController
@@ -31,6 +25,7 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+/*
 - (IBAction)getCode:(id)sender {
     if (!_nameField.text.length) return;
     [SVProgressHUD show];
@@ -165,11 +160,16 @@
         }
     }];
 }
+*/
 
 #pragma mark - WiFi Function
 - (IBAction)searchNearbyWifi:(id)sender {
     BaiduMapVC *vc = [[BaiduMapVC alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)speedTest:(id)sender {
+    
 }
 
 - (void)didReceiveMemoryWarning {

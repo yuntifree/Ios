@@ -56,6 +56,9 @@
 		6F2E65781DC9C86F00AF84BB /* UIImage+LeftAndRightStretch.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E65771DC9C86F00AF84BB /* UIImage+LeftAndRightStretch.mm */; };
 		6F2E657C1DC9DDE800AF84BB /* bg_navigation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2E657A1DC9DDE800AF84BB /* bg_navigation@2x.png */; };
 		6F2E657D1DC9DDE800AF84BB /* bg_navigation@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2E657B1DC9DDE800AF84BB /* bg_navigation@3x.png */; };
+		6F307BD61DCB20780015F9EC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307BD41DCB20780015F9EC /* LoginViewController.m */; };
+		6F307BD71DCB20780015F9EC /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F307BD51DCB20780015F9EC /* LoginViewController.xib */; };
+		6F307BDB1DCB24ED0015F9EC /* AnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307BDA1DCB24ED0015F9EC /* AnimationManager.m */; };
 		6F31850A1DB8601900017D47 /* ServiceSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3185081DB8601900017D47 /* ServiceSectionHeader.m */; };
 		6F31850B1DB8601900017D47 /* ServiceSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3185091DB8601900017D47 /* ServiceSectionHeader.xib */; };
 		6F31850F1DB86DAB00017D47 /* ServiceCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F31850E1DB86DAB00017D47 /* ServiceCellModel.m */; };
@@ -169,6 +172,11 @@
 		6F2E65771DC9C86F00AF84BB /* UIImage+LeftAndRightStretch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIImage+LeftAndRightStretch.mm"; sourceTree = "<group>"; };
 		6F2E657A1DC9DDE800AF84BB /* bg_navigation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_navigation@2x.png"; sourceTree = "<group>"; };
 		6F2E657B1DC9DDE800AF84BB /* bg_navigation@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_navigation@3x.png"; sourceTree = "<group>"; };
+		6F307BD31DCB20780015F9EC /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		6F307BD41DCB20780015F9EC /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		6F307BD51DCB20780015F9EC /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		6F307BD91DCB24ED0015F9EC /* AnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationManager.h; sourceTree = "<group>"; };
+		6F307BDA1DCB24ED0015F9EC /* AnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationManager.m; sourceTree = "<group>"; };
 		6F3185071DB8601900017D47 /* ServiceSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceSectionHeader.h; sourceTree = "<group>"; };
 		6F3185081DB8601900017D47 /* ServiceSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceSectionHeader.m; sourceTree = "<group>"; };
 		6F3185091DB8601900017D47 /* ServiceSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceSectionHeader.xib; sourceTree = "<group>"; };
@@ -407,6 +415,25 @@
 			path = BaiduMap;
 			sourceTree = "<group>";
 		};
+		6F307BD21DCB1F9C0015F9EC /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				6F307BD31DCB20780015F9EC /* LoginViewController.h */,
+				6F307BD41DCB20780015F9EC /* LoginViewController.m */,
+				6F307BD51DCB20780015F9EC /* LoginViewController.xib */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		6F307BD81DCB24D60015F9EC /* AnimationManager */ = {
+			isa = PBXGroup;
+			children = (
+				6F307BD91DCB24ED0015F9EC /* AnimationManager.h */,
+				6F307BDA1DCB24ED0015F9EC /* AnimationManager.m */,
+			);
+			path = AnimationManager;
+			sourceTree = "<group>";
+		};
 		6F31850C1DB86D8D00017D47 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -566,6 +593,7 @@
 		6F6FDAC01DB4B79300E50D9B /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6F307BD81DCB24D60015F9EC /* AnimationManager */,
 				6FF75EE01DC0BAF600166725 /* NetworkManager */,
 				6FF75EDC1DC09A5800166725 /* Tools */,
 				6FFA167E1DB605F70077E7C3 /* DeviceManager */,
@@ -589,6 +617,7 @@
 		6F6FDAC21DB4B79300E50D9B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6F307BD21DCB1F9C0015F9EC /* Login */,
 				6FCA54741DC9EA91000ED52A /* Map */,
 				6F6FDAF31DB4D39C00E50D9B /* Web */,
 				6F6FDADB1DB4C7AA00E50D9B /* News */,
@@ -874,6 +903,7 @@
 				6F2E57D91DB78B2B00C39F27 /* tab_icon_flow_selected@3x.png in Resources */,
 				6FF5C7FF1DC1F2FA00B1A84A /* play.png in Resources */,
 				6F6FDAED1DB4C83000E50D9B /* ServiceViewController.xib in Resources */,
+				6F307BD71DCB20780015F9EC /* LoginViewController.xib in Resources */,
 				6F3185191DB8A25700017D47 /* NewsReportCell.xib in Resources */,
 				6F2E57E31DB78B2B00C39F27 /* tab_icon_wifi@3x.png in Resources */,
 				6F2E57E81DB78B2B00C39F27 /* icon_gd.png in Resources */,
@@ -967,6 +997,7 @@
 				6F6FDACF1DB4BBCA00E50D9B /* DGViewController.m in Sources */,
 				6F2E57F41DB792F600C39F27 /* ServiceHeaderView.m in Sources */,
 				6F6FDAE21DB4C81100E50D9B /* WifiViewController.m in Sources */,
+				6F307BD61DCB20780015F9EC /* LoginViewController.m in Sources */,
 				6F2E65781DC9C86F00AF84BB /* UIImage+LeftAndRightStretch.mm in Sources */,
 				6FF5C7EE1DC1DA5B00B1A84A /* NewsReportViewController.m in Sources */,
 				6FF75EE31DC0BB0100166725 /* NetworkManager.m in Sources */,
@@ -986,6 +1017,7 @@
 				6FF5C7FB1DC1F13D00B1A84A /* NewsVideoCell.m in Sources */,
 				6FF5C7F31DC1EDDD00B1A84A /* NewsVideoViewController.m in Sources */,
 				6F6FDAEC1DB4C83000E50D9B /* ServiceViewController.m in Sources */,
+				6F307BDB1DCB24ED0015F9EC /* AnimationManager.m in Sources */,
 				6F6FDAC81DB4B7E700E50D9B /* DGTabBarController.m in Sources */,
 				6F2E57B41DB711D000C39F27 /* UITabBarItem+Setup.m in Sources */,
 				6FFA167D1DB603DD0077E7C3 /* Reachability.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "ShoppingViewController.h"
+#import "AccountCGI.h"
 
 @interface ShoppingViewController ()
 
@@ -22,6 +23,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (IBAction)logout:(id)sender {
+    if (!SApp.username.length) return;
+    [SVProgressHUD show];
+    [AccountCGI logout:^(DGCgiResult *res) {
+        [SVProgressHUD dismiss];
+        if (E_OK == res._errno) {
+            [MSApp destory];
+            [[NSNotificationCenter defaultCenter] postNotificationName:KNC_LOGOUT object:nil];
+        } else {
+            [self showHint:res.desc];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

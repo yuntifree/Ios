@@ -60,6 +60,47 @@
     return ssid;
 }
 
++ (NSString *)getBSSID
+{
+    /*! Get the interfaces */
+    NSArray *interfaces = (__bridge NSArray *) CNCopySupportedInterfaces();
+    NSString *BSSID;
+    
+    /*! Cycle interfaces */
+    for (NSString *interface in interfaces)
+    {
+        CFDictionaryRef networkDetails = CNCopyCurrentNetworkInfo((__bridge CFStringRef) interface);
+        if (networkDetails)
+        {
+            BSSID = (NSString *)CFDictionaryGetValue(networkDetails, kCNNetworkInfoKeyBSSID);
+            CFRelease(networkDetails);
+        }
+    }
+    
+    NSMutableString* formatSSID = [[NSMutableString alloc] initWithCapacity:100];
+    NSArray* separateSSID = [BSSID componentsSeparatedByString:@":"];
+    if( [separateSSID count] == 6 )
+    {
+        for (NSString * ssid in separateSSID) {
+            if( [formatSSID length] > 0 )
+            {
+                [formatSSID appendString:@":"];
+            }
+            if( [ssid length] == 1 )
+            {
+                [formatSSID appendFormat:@"0%@", ssid];
+            }
+            else
+            {
+                [formatSSID appendFormat:@"%@", ssid];
+            }
+            
+        }
+    }
+    
+    return formatSSID;
+}
+
 + (void)openSetting
 {
     if (UIApplicationOpenSettingsURLString != NULL) {

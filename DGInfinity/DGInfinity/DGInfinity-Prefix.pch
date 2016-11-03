@@ -62,6 +62,9 @@
 #define IPHONE6 (([UIScreen mainScreen].bounds.size.height == 667) ? YES : NO)
 #define IPHONE6P (([UIScreen mainScreen].bounds.size.height == 736) ? YES : NO)
 
+#define KNC_LOGIN       @"KNC_LOGIN"
+#define KNC_LOGOUT      @"KNC_LOGOUT"
+
 #define COLOR(R, G, B, al) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:al]
 #define RGB(rgbValue, al) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:al]
 #define DMRandColor COLOR(arc4random_uniform(255), arc4random_uniform(255), arc4random_uniform(255), 1)

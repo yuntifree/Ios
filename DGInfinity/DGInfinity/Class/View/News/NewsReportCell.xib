@@ -68,7 +68,7 @@
                 <outletCollection property="_imgViews" destination="wui-Es-OAb" id="7TA-wR-j6v"/>
                 <outletCollection property="_imgViews" destination="ArN-wO-OuO" id="Omi-ta-GAJ"/>
             </connections>
-            <point key="canvasLocation" x="-209" y="-41"/>
+            <point key="canvasLocation" x="-375" y="-58"/>
         </tableViewCell>
     </objects>
 </document>
