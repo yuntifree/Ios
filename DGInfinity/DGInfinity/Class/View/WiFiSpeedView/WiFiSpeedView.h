@@ -21,6 +21,7 @@
 @protocol WIFISpeedViewDelegate <NSObject>
 
 - (void)touchCloseBtn;
+@optional
 - (void)updateSpeedBarIcon:(NSString*)speed;
 - (void)updateSpeedNavTitle:(NSString*)navTitle;
 
