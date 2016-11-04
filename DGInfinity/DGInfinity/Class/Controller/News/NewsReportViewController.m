@@ -88,7 +88,7 @@
                 [_listView reloadData];
             }
         } else {
-            [self showHint:res.desc];
+            [self makeToast:res.desc];
         }
     }];
 }
@@ -101,6 +101,7 @@
 #pragma mark - UITableViewDataSource, UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    [tableView displayWitMsg:@"没有相关数据" ForDataCount:_newsArray.count];
     return _newsArray.count;
 }
 

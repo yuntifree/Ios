@@ -151,7 +151,7 @@
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
 {
-    DDDLog(@"%@",error);
+    [self makeToast:@"网页加载失败"];
 }
 
 #pragma mark - WKUIDelegate

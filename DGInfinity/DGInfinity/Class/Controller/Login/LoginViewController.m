@@ -8,16 +8,50 @@
 
 #import "LoginViewController.h"
 #import "AccountCGI.h"
+#import "CheckUtil.h"
+
+#define SECONDS 5
 
 @interface LoginViewController ()
 {
-    __weak IBOutlet UITextField *_nameField;
-    __weak IBOutlet UITextField *_passwordField;
+    __weak IBOutlet UITextField *_phoneField;
     __weak IBOutlet UITextField *_codeField;
+    __weak IBOutlet UIButton *_codeBtn;
+    
+    int _seconds;
 }
+
+@property (nonatomic, strong) NSTimer *timer;
+
 @end
 
 @implementation LoginViewController
+
+#pragma mark - lazy-init
+- (NSTimer *)timer
+{
+    if (_timer == nil) {
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerRun) userInfo:nil repeats:YES];
+    }
+    return _timer;
+}
+
+- (void)timerRun
+{
+    if (_seconds == 0) {
+        _codeBtn.enabled = YES;
+        [_codeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+        [self.timer setFireDate:[NSDate distantFuture]];
+    } else {
+        [_codeBtn setTitle:[NSString stringWithFormat:@"%is",_seconds--] forState:UIControlStateNormal];
+    }
+}
+
+- (void)invalidateTimer
+{
+    [self.timer invalidate];
+    self.timer = nil;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,50 +59,38 @@
 }
 
 - (IBAction)getCode:(id)sender {
-    if (!_nameField.text.length) return;
+    if (![CheckUtil checkPhoneNumber:_phoneField.text]) {
+        [self makeToast:@"请输入正确的手机号"];
+        return;
+    }
     [SVProgressHUD show];
-    [AccountCGI getPhoneCode:_nameField.text type:0 complete:^(DGCgiResult *res) {
+    [AccountCGI getPhoneCode:_phoneField.text type:0 complete:^(DGCgiResult *res) {
         [SVProgressHUD dismiss];
         if (E_OK == res._errno) {
-            [self showHint:@"获取成功"];
+            _codeBtn.enabled = NO;
+            _seconds = SECONDS;
+            [self.timer setFireDate:[NSDate date]];
         } else {
-            [self showHint:res.desc];
+            [self makeToast:res.desc];
         }
     }];
 }
 
 - (IBAction)doRegister:(id)sender {
-    if (!_nameField.text.length || !_passwordField.text.length || !_codeField.text.length) return;
+    if (!_phoneField.text.length || !_codeField.text.length) return;
     [SVProgressHUD show];
-    [AccountCGI doRegister:_nameField.text password:_passwordField.text code:_codeField.text.integerValue complete:^(DGCgiResult *res) {
+    [AccountCGI doRegister:_phoneField.text password:_codeField.text code:_codeField.text.integerValue complete:^(DGCgiResult *res) {
         [SVProgressHUD dismiss];
         if (E_OK == res._errno) {
             NSDictionary *data = res.data[@"data"];
             if ([data isKindOfClass:[NSDictionary class]]) {
-                SApp.username = _nameField.text;
+                SApp.username = _phoneField.text;
                 [MSApp setUserInfo:data];
+                [self invalidateTimer];
                 [[NSNotificationCenter defaultCenter] postNotificationName:KNC_LOGIN object:nil];
             }
         } else {
-            [self showHint:res.desc];
-        }
-    }];
-}
-
-- (IBAction)doLogon:(id)sender {
-    if (!_nameField.text.length || !_passwordField.text.length) return;
-    [SVProgressHUD show];
-    [AccountCGI login:_nameField.text password:_passwordField.text complete:^(DGCgiResult *res) {
-        [SVProgressHUD dismiss];
-        if (E_OK == res._errno) {
-            NSDictionary *data = res.data[@"data"];
-            if ([data isKindOfClass:[NSDictionary class]]) {
-                SApp.username = _nameField.text;
-                [MSApp setUserInfo:data];
-                [[NSNotificationCenter defaultCenter] postNotificationName:KNC_LOGIN object:nil];
-            }
-        } else {
-            [self showHint:res.desc];
+            [self makeToast:res.desc];
         }
     }];
 }

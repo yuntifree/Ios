@@ -265,7 +265,7 @@
                 }
             }
         } else {
-            [self showHint:res.desc];
+            [self makeToast:res.desc];
         }
     }];
 }

@@ -29,7 +29,7 @@
 
 @interface WiFiSpeedView : UIView<WIFMenuContentViewDeleagte>
 
-@property (nonatomic, weak) NSObject<WIFISpeedViewDelegate> *delegate;
+@property (nonatomic, weak) id <WIFISpeedViewDelegate> delegate;
 
 - (instancetype)initWithFrame:(CGRect)frame;
 

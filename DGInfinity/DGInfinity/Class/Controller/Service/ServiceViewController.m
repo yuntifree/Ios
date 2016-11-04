@@ -111,7 +111,7 @@
                 DDDLog(@"----%@",data);
             }
         } else {
-            [self showHint:res.desc];
+            [self makeToast:res.desc];
         }
     }];
 }
@@ -131,6 +131,7 @@
 #pragma mark - UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
+    [collectionView displayWitMsg:@"没有相关数据" ForDataCount:_dataArray.count];
     return _dataArray.count;
 }
 

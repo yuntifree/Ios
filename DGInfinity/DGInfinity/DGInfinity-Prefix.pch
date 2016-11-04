@@ -24,6 +24,9 @@
 #import <tingyunApp/NBSAppAgent.h>
 #import <UMMobClick/MobClick.h>
 #import "BaiduMapSDK.h"
+#import "UIView+Toast.h"
+#import "UITableView+EmptyData.h"
+#import "UICollectionView+EmptyData.h"
 
 #if !(TARGET_IPHONE_SIMULATOR)
 #import "UserAuthManager.h"

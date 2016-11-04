@@ -108,11 +108,9 @@
     
 }
 
-- (void)showHint:(NSString *)hint
+- (void)makeToast:(NSString *)message;
 {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:hint message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
+    [self.view makeToast:message];
 }
 
 - (BOOL)shouldAutorotate

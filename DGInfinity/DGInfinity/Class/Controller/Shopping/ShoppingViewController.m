@@ -34,7 +34,7 @@
             [MSApp destory];
             [[NSNotificationCenter defaultCenter] postNotificationName:KNC_LOGOUT object:nil];
         } else {
-            [self showHint:res.desc];
+            [self makeToast:res.desc];
         }
     }];
 }
