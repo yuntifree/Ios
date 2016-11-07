@@ -120,4 +120,26 @@
     }
 }
 
++ (CGFloat)layoutFactor
+{
+    CGFloat factor = 1.0f;
+    NSInteger height = kScreenHeight;
+    switch (height) {
+        case 480:
+            factor = 480 / 667.0;
+            break;
+        case 568:
+            factor = 568 / 667.0;
+            break;
+        case 667:
+            break;
+        case 736:
+            factor = 736 / 667.0;
+            break;
+        default:
+            break;
+    }
+    return factor;
+}
+
 @end

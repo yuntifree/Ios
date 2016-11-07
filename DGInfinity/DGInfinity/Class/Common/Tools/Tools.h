@@ -16,5 +16,6 @@
 + (NSString *)getCurrentSSID;
 + (NSString *)getBSSID;
 + (void)openSetting;
++ (CGFloat)layoutFactor;
 
 @end

@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "AccountCGI.h"
 #import "CheckUtil.h"
+#import "UIButton+ResizableImage.h"
 
 #define SECONDS 5
 
@@ -17,6 +18,8 @@
     __weak IBOutlet UITextField *_phoneField;
     __weak IBOutlet UITextField *_codeField;
     __weak IBOutlet UIButton *_codeBtn;
+    __weak IBOutlet UIButton *_okBtn;
+    __weak IBOutlet NSLayoutConstraint *_logoTop;
     
     int _seconds;
 }
@@ -56,6 +59,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self setUpSubviews];
+    if (SApp.username.length) {
+        _phoneField.text = SApp.username;
+    }
+}
+
+- (void)setUpSubviews
+{
+    // button
+    [_codeBtn dg_setBackgroundImage:ImageNamed(@"Code") forState:UIControlStateNormal];
+    [_codeBtn dg_setBackgroundImage:ImageNamed(@"Code_press") forState:UIControlStateHighlighted];
+    [_okBtn dg_setBackgroundImage:ImageNamed(@"Start button_normal") forState:UIControlStateNormal];
+    [_okBtn dg_setBackgroundImage:ImageNamed(@"Start button_press") forState:UIControlStateHighlighted];
+    
+    // textfield
+    NSDictionary *attriDic = @{NSFontAttributeName: [UIFont systemFontOfSize:12 weight:UIFontWeightMedium],
+                              NSForegroundColorAttributeName: COLOR(180, 180, 180, 1)};
+    _phoneField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入手机号" attributes:attriDic];
+    _codeField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入验证码" attributes:attriDic];
+    
+    // layout
+    _logoTop.constant = _logoTop.constant * [Tools layoutFactor];
 }
 
 - (IBAction)getCode:(id)sender {

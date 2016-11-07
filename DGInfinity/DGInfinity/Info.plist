@@ -41,6 +41,10 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>baidumap</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -48,6 +52,14 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>使用您的位置来发现附近免费WiFi</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>使用您的位置来发现附近免费WiFi</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>network-authentication</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -55,7 +67,7 @@
 		<string>armv7</string>
 	</array>
 	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleLightContent</string>
+	<string>UIStatusBarStyleDefault</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -64,17 +76,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>network-authentication</string>
-	</array>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>baidumap</string>
-	</array>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>使用您的位置来发现附近免费WiFi</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>使用您的位置来发现附近免费WiFi</string>
 </dict>
 </plist>

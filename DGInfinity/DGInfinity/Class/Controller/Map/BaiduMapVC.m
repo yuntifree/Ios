@@ -256,8 +256,7 @@
                     NSMutableArray *tem = [NSMutableArray arrayWithCapacity:20];
                     for (NSDictionary *info in infos) {
                         LocationAnnotation *annotation = [[LocationAnnotation alloc] init];
-                        annotation.title = [NSString stringWithFormat:@"%ld",[info[@"aid"] integerValue]];
-                        annotation.subtitle = @"东莞智慧城市WiFi";
+                        annotation.title = info[@"address"];
                         annotation.coordinate = CLLocationCoordinate2DMake([info[@"latitude"] doubleValue], [info[@"longitude"] doubleValue]);
                         [tem addObject:annotation];
                     }

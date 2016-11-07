@@ -100,10 +100,13 @@
         [self.window.layer addAnimation:animation forKey:@"changeRoot"];
     }
     UIViewController *root;
+    UIApplication *app = [UIApplication sharedApplication];
     if (SApp.uid) {
         root = [[DGTabBarController alloc] init];
+        [app setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     } else {
         root = [[LoginViewController alloc] init];
+        [app setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
     }
     self.window.rootViewController = root;
 }

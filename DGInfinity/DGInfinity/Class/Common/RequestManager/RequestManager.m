@@ -98,6 +98,12 @@ static RequestManager *manager = nil;
                 r.desc = [json objectForKey:@"desc"];
                 r.data = json;
                 complete(r);
+                
+                // 账号被踢 特殊逻辑
+                if (E_TOKEN == r._errno) {
+                    [MSApp destory];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:KNC_LOGOUT object:nil];
+                }
             } else {
                 DGCgiResult *r = [[DGCgiResult alloc] init];
                 r._errno = E_INVALID_DATA;
