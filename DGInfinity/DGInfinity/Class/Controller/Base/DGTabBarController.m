@@ -26,13 +26,13 @@
     self = [super init];
     if (self) {
         DGNavigationViewController *wifiNav = [[DGNavigationViewController alloc] initWithRootViewController:[WifiViewController new]];
-        [wifiNav.tabBarItem setImage:@"tab_icon_wifi" selectedImage:@"tab_icon_wifi_selected"];
+        [wifiNav.tabBarItem setImage:@"tab_icon_wifi_gray" selectedImage:@"tab_icon_wifi_blue"];
         DGNavigationViewController *newsNav = [[DGNavigationViewController alloc] initWithRootViewController:[NewsViewController new]];
-        [newsNav.tabBarItem setImage:@"tab_icon_flow" selectedImage:@"tab_icon_flow_selected"];
+        [newsNav.tabBarItem setImage:@"tab_ico_headlines_gray" selectedImage:@"tab_ico_headlines_blue"];
         DGNavigationViewController *serviceNav = [[DGNavigationViewController alloc] initWithRootViewController:[ServiceViewController new]];
-        [serviceNav.tabBarItem setImage:@"tab_icon_surf" selectedImage:@"tab_icon_surf_selected"];
+        [serviceNav.tabBarItem setImage:@"tab_ico_service_gray" selectedImage:@"tab_ico_service_green"];
         DGNavigationViewController *shoppingNav = [[DGNavigationViewController alloc] initWithRootViewController:[ShoppingViewController new]];
-        [shoppingNav.tabBarItem setImage:@"tab_icon_user" selectedImage:@"tab_icon_user_selected"];
+        [shoppingNav.tabBarItem setImage:@"tab_ico_buy_gray" selectedImage:@"tab_icon_buy_blue"];
         self.viewControllers = @[wifiNav, newsNav, serviceNav, shoppingNav];
     }
     return self;

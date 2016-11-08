@@ -11,6 +11,23 @@
 
 @interface NewsReportCell : UITableViewCell
 
++ (instancetype)getNewsReportCell:(UITableView *)tableView model:(NewsReportModel *)model;
 - (void)setNewsReportValue:(NewsReportModel *)model;
+
+@end
+
+@interface NewsReport3PCell : NewsReportCell
+
+@end
+
+@interface NewsReport1PCell : NewsReportCell
+
+@end
+
+@interface NewsReportNPCell : NewsReportCell
+
+@end
+
+@interface NewsReportADCell : NewsReportCell
 
 @end

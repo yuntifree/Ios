@@ -44,7 +44,7 @@
 {
     [_listView registerNib:[UINib nibWithNibName:@"NewsVideoCell" bundle:nil] forCellReuseIdentifier:@"NewsVideoCell"];
     _listView.tableFooterView = [UIView new];
-    _listView.rowHeight = (kScreenWidth - 30) / 1.85 + 70;
+    _listView.rowHeight = (kScreenWidth - 40) * 168 / 334 + 52;
     _listView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
     _listView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(getNews)];
 }

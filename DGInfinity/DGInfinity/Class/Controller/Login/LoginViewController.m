@@ -11,7 +11,7 @@
 #import "CheckUtil.h"
 #import "UIButton+ResizableImage.h"
 
-#define SECONDS 5
+#define SECONDS 60
 
 @interface LoginViewController ()
 {
@@ -62,13 +62,14 @@
     [self setUpSubviews];
     if (SApp.username.length) {
         _phoneField.text = SApp.username;
+        _codeBtn.enabled = YES;
     }
 }
 
 - (void)setUpSubviews
 {
     // button
-    [_codeBtn dg_setBackgroundImage:ImageNamed(@"Code") forState:UIControlStateNormal];
+    [_codeBtn dg_setBackgroundImage:ImageNamed(@"Code_normal") forState:UIControlStateNormal];
     [_codeBtn dg_setBackgroundImage:ImageNamed(@"Code_press") forState:UIControlStateHighlighted];
     [_okBtn dg_setBackgroundImage:ImageNamed(@"Start button_normal") forState:UIControlStateNormal];
     [_okBtn dg_setBackgroundImage:ImageNamed(@"Start button_press") forState:UIControlStateHighlighted];
@@ -81,6 +82,19 @@
     
     // layout
     _logoTop.constant = _logoTop.constant * [Tools layoutFactor];
+}
+
+- (IBAction)textFieldChanged:(id)sender {
+    if (_phoneField.text.length) {
+        _codeBtn.enabled = YES;
+        if (_codeField.text.length) {
+            _okBtn.enabled = YES;
+        } else {
+            _okBtn.enabled = NO;
+        }
+    } else {
+        _codeBtn.enabled = NO;
+    }
 }
 
 - (IBAction)getCode:(id)sender {

@@ -27,6 +27,7 @@
 #import "UIView+Toast.h"
 #import "UITableView+EmptyData.h"
 #import "UICollectionView+EmptyData.h"
+#import "NSDate+Format.h"
 
 #if !(TARGET_IPHONE_SIMULATOR)
 #import "UserAuthManager.h"

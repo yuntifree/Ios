@@ -43,9 +43,9 @@
 
 - (void)setUpTableView
 {
-    [_listView registerNib:[UINib nibWithNibName:@"NewsReportCell" bundle:nil] forCellReuseIdentifier:@"NewsReportCell"];
     _listView.tableFooterView = [UIView new];
-    _listView.rowHeight = (kScreenWidth - 30 - 6) / 3 / 1.5 + 70;
+    _listView.estimatedRowHeight = 100;
+    _listView.rowHeight = UITableViewAutomaticDimension;
     _listView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
     _listView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(getNews)];
 }
@@ -107,9 +107,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NewsReportCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewsReportCell"];
+    UITableViewCell *cell = nil;
     if (indexPath.row < _newsArray.count) {
-        [cell setNewsReportValue:_newsArray[indexPath.row]];
+        cell = [NewsReportCell getNewsReportCell:tableView model:_newsArray[indexPath.row]];
     }
     return cell;
 }
@@ -119,9 +119,14 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row < _newsArray.count) {
         NewsReportModel *model = _newsArray[indexPath.row];
-        WebViewController *vc = [[WebViewController alloc] init];
-        vc.url = model.dst;
-        [self.navigationController pushViewController:vc animated:YES];
+        NSURL *url = [NSURL URLWithString:model.dst];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        } else {
+            WebViewController *vc = [[WebViewController alloc] init];
+            vc.url = model.dst;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 

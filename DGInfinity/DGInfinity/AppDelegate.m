@@ -12,6 +12,7 @@
 #import "NetworkManager.h"
 #import "LoginViewController.h"
 #import "AnimationManager.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface AppDelegate () <NetWorkMgrDelegate, BMKGeneralDelegate>
 {
@@ -89,7 +90,7 @@
     [[UIView appearance] setExclusiveTouch:YES];
     [[UINavigationBar appearance] setTranslucent:NO];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, SystemFont(18), NSFontAttributeName,nil]];
-    [[UINavigationBar appearance] setBarTintColor:RGB(0x428be5, 1)];
+    [[UINavigationBar appearance] setBarTintColor:COLOR(0, 156, 251, 1)];
 }
 
 - (void)setRootViewController

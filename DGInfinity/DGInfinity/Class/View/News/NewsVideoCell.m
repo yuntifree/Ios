@@ -13,7 +13,9 @@
     __weak IBOutlet UILabel *_titleLbl;
     __weak IBOutlet UIImageView *_imgView;
     __weak IBOutlet UILabel *_sourceLbl;
-    __weak IBOutlet UILabel *_timeLbl;
+    __weak IBOutlet UILabel *_dateLbl;
+    __weak IBOutlet UILabel *_playLbl;
+    
 }
 @end
 
@@ -35,11 +37,10 @@
     _titleLbl.text = model.title;
     if (model.images.count) {
         [_imgView yy_setImageWithURL:[NSURL URLWithString:model.images[0]] options:YYWebImageOptionSetImageWithFadeAnimation];
-    } else {
-        
     }
     _sourceLbl.text = model.source;
-    _timeLbl.text = model.ctime;
+    _dateLbl.text = model.date;
+    _playLbl.text = [NSString stringWithFormat:@"%ld次播放",model.play];
 }
 
 @end

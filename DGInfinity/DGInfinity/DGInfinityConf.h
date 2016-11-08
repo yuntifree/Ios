@@ -39,6 +39,11 @@ typedef NS_ENUM(NSInteger, NewsType) {
     NT_GAME = 3
 };
 
+typedef NS_ENUM(NSInteger, ReportType) {
+    RT_NEWS = 0,
+    RT_AD = 1
+};
+
 // Server
 #define ServerURL @"http://120.25.133.234/" // 测试环境
 #define AppVersion 1 // 客户端内部版本

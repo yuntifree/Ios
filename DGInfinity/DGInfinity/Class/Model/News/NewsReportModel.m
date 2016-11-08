@@ -16,9 +16,10 @@
     model.title = info[@"title"];
     model.images = info[@"images"];
     model.source = info[@"source"];
-    model.ctime = info[@"ctime"];
+    model.time = [NSDate stringWithDateStr:info[@"ctime"] formatStr:@"HH:mm"];
+    model.date = [NSDate stringWithDateStr:info[@"ctime"] formatStr:@"yyyy/MM/dd"];
     model.dst = info[@"dst"];
-    model.stype = [info[@"stype"] intValue];
+    model.stype = [info[@"stype"] integerValue];
     model.seq = [info[@"seq"] integerValue];
     return model;
 }
