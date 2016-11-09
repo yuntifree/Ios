@@ -15,7 +15,13 @@
     NewsReportModel *model = [NewsReportModel new];
     model.title = info[@"title"];
     model.images = info[@"images"];
-    model.source = info[@"source"];
+    NSString *source = info[@"source"];
+    if (kScreenWidth == 320 && source.length > 5) {
+        source = [NSString stringWithFormat:@"%@...",[source substringToIndex:5]];
+    } else if (source.length > 8) {
+        source = [NSString stringWithFormat:@"%@...",[source substringToIndex:8]];
+    }
+    model.source = source;
     model.time = [NSDate stringWithDateStr:info[@"ctime"] formatStr:@"HH:mm"];
     model.date = [NSDate stringWithDateStr:info[@"ctime"] formatStr:@"yyyy/MM/dd"];
     model.dst = info[@"dst"];

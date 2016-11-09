@@ -12,7 +12,6 @@
 #import "NetworkManager.h"
 #import "LoginViewController.h"
 #import "AnimationManager.h"
-#import <MediaPlayer/MediaPlayer.h>
 
 @interface AppDelegate () <NetWorkMgrDelegate, BMKGeneralDelegate>
 {
@@ -91,6 +90,7 @@
     [[UINavigationBar appearance] setTranslucent:NO];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, SystemFont(18), NSFontAttributeName,nil]];
     [[UINavigationBar appearance] setBarTintColor:COLOR(0, 156, 251, 1)];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
 }
 
 - (void)setRootViewController
@@ -101,13 +101,10 @@
         [self.window.layer addAnimation:animation forKey:@"changeRoot"];
     }
     UIViewController *root;
-    UIApplication *app = [UIApplication sharedApplication];
     if (SApp.uid) {
         root = [[DGTabBarController alloc] init];
-        [app setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     } else {
         root = [[LoginViewController alloc] init];
-        [app setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
     }
     self.window.rootViewController = root;
 }

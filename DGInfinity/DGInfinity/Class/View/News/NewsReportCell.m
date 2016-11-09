@@ -97,6 +97,11 @@
     _dateLbl.text = model.date;
 }
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+}
+
 @end
 
 @interface NewsReport1PCell ()

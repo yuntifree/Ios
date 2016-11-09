@@ -100,45 +100,39 @@
             </connections>
             <point key="canvasLocation" x="-1817" y="-231"/>
         </tableViewCell>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsReport1PCell" rowHeight="82" id="HdG-cV-B2o" customClass="NewsReport1PCell">
-            <rect key="frame" x="0.0" y="0.0" width="350" height="82"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsReport1PCell" rowHeight="104" id="HdG-cV-B2o" customClass="NewsReport1PCell">
+            <rect key="frame" x="0.0" y="0.0" width="350" height="104"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HdG-cV-B2o" id="jgu-CL-gbz">
-                <rect key="frame" x="0.0" y="0.0" width="350" height="81"/>
+                <rect key="frame" x="0.0" y="0.0" width="350" height="104"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4NC-c2-1Bu">
-                        <rect key="frame" x="12" y="8" width="104.5" height="68.5"/>
+                        <rect key="frame" x="12" y="8" width="19" height="12.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="4NC-c2-1Bu" secondAttribute="height" multiplier="113:74" id="iHu-iO-7T1"/>
                         </constraints>
                     </imageView>
                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V0K-x0-sqB">
-                        <rect key="frame" x="122.5" y="8" width="105" height="68.5"/>
+                        <rect key="frame" x="37" y="8" width="18.5" height="12.5"/>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B43-JZ-Zqp">
-                        <rect key="frame" x="233.5" y="8" width="104.5" height="68.5"/>
+                        <rect key="frame" x="61.5" y="8" width="19" height="12.5"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hfp-uH-5Ub">
-                        <rect key="frame" x="12" y="62" width="31" height="14.5"/>
+                        <rect key="frame" x="12" y="6" width="31" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.51764705879999995" green="0.51764705879999995" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="st9-zg-d2c">
-                        <rect key="frame" x="51" y="62" width="31" height="14.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="0.51764705879999995" green="0.51764705879999995" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OID-yk-nDf">
-                        <rect key="frame" x="90" y="62" width="31" height="14.5"/>
+                        <rect key="frame" x="51" y="6" width="31" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.51764705879999995" green="0.51764705879999995" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHN-EW-WdG">
-                        <rect key="frame" x="12" y="8" width="214" height="23"/>
+                        <rect key="frame" x="12" y="8" width="41.5" height="23"/>
                         <attributedString key="attributedText">
                             <fragment content="Label">
                                 <attributes>
@@ -148,6 +142,12 @@
                                 </attributes>
                             </fragment>
                         </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OID-yk-nDf">
+                        <rect key="frame" x="90" y="6" width="31" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.51764705879999995" green="0.51764705879999995" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -183,7 +183,7 @@
                 <outlet property="_timeLbl" destination="st9-zg-d2c" id="fZe-oz-PoQ"/>
                 <outlet property="_titleLbl" destination="dHN-EW-WdG" id="aYK-dC-RQt"/>
             </connections>
-            <point key="canvasLocation" x="-1817" y="-394"/>
+            <point key="canvasLocation" x="-1904" y="-503"/>
         </tableViewCell>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsReportNPCell" rowHeight="60" id="mWi-LR-BUa" customClass="NewsReportNPCell">
             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -252,7 +252,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="218"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vc5-va-9cL" id="seZ-DL-ngi">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="217"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="218"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OqG-zT-wHc">

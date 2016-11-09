@@ -191,7 +191,7 @@
 		6F2E57B21DB711D000C39F27 /* UITabBarItem+Setup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarItem+Setup.h"; sourceTree = "<group>"; };
 		6F2E57B31DB711D000C39F27 /* UITabBarItem+Setup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarItem+Setup.m"; sourceTree = "<group>"; };
 		6F2E57B61DB758C300C39F27 /* AccountCGI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountCGI.h; sourceTree = "<group>"; };
-		6F2E57B71DB758C300C39F27 /* AccountCGI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountCGI.m; sourceTree = "<group>"; };
+		6F2E57B71DB758C300C39F27 /* AccountCGI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AccountCGI.m; path = ../Control/Account/AccountCGI.m; sourceTree = "<group>"; };
 		6F2E57BB1DB78B2B00C39F27 /* icon_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_back@2x.png"; sourceTree = "<group>"; };
 		6F2E57BC1DB78B2B00C39F27 /* icon_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_back@3x.png"; sourceTree = "<group>"; };
 		6F2E57CE1DB78B2B00C39F27 /* icon_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_bg.png; sourceTree = "<group>"; };
@@ -415,7 +415,6 @@
 			isa = PBXGroup;
 			children = (
 				6F2E57B61DB758C300C39F27 /* AccountCGI.h */,
-				6F2E57B71DB758C300C39F27 /* AccountCGI.m */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -815,6 +814,7 @@
 		6F6FDAC21DB4B79300E50D9B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6F2E57B71DB758C300C39F27 /* AccountCGI.m */,
 				6F307BD21DCB1F9C0015F9EC /* Login */,
 				6FCA54741DC9EA91000ED52A /* Map */,
 				6F6FDAF31DB4D39C00E50D9B /* Web */,
