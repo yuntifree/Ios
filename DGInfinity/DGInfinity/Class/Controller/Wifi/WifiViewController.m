@@ -9,8 +9,12 @@
 #import "WifiViewController.h"
 #import "BaiduMapVC.h"
 #import "WiFiSpeedView.h"
+#import "WiFiMenuView.h"
 
 @interface WifiViewController () <WIFISpeedViewDelegate>
+{
+    UIScrollView *_scrollView;
+}
 
 @property (nonatomic, strong) WiFiSpeedView *speedView;
 
@@ -35,6 +39,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [self setUpScrollView];
+}
+
+- (void)setUpScrollView
+{
+    CGFloat height = kScreenHeight - 20 - 44 - 49;
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, height)];
+    _scrollView.contentSize = CGSizeMake(kScreenWidth, height * 2);
+    _scrollView.pagingEnabled = YES;
+    _scrollView.bounces = NO;
+    _scrollView.showsVerticalScrollIndicator = NO;
+    _scrollView.showsHorizontalScrollIndicator = NO;
+    [self.view addSubview:_scrollView];
+    
+    WiFiMenuView *menuView = [[NSBundle mainBundle] loadNibNamed:@"WiFiMenuView" owner:nil options:nil][0];
+    menuView.frame = CGRectMake(0, 0, kScreenWidth, height);
+    [_scrollView addSubview:menuView];
 }
 
 /*

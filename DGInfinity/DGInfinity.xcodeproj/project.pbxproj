@@ -65,6 +65,28 @@
 		6F2E657C1DC9DDE800AF84BB /* bg_navigation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2E657A1DC9DDE800AF84BB /* bg_navigation@2x.png */; };
 		6F2E657D1DC9DDE800AF84BB /* bg_navigation@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2E657B1DC9DDE800AF84BB /* bg_navigation@3x.png */; };
 		6F3067241DD30CEF00FA841E /* ReportClickModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3067231DD30CEF00FA841E /* ReportClickModel.m */; };
+		6F3067281DD3292C00FA841E /* WiFiMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3067271DD3292C00FA841E /* WiFiMenuView.m */; };
+		6F30672A1DD3293F00FA841E /* WiFiMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3067291DD3293F00FA841E /* WiFiMenuView.xib */; };
+		6F30673F1DD32B8000FA841E /* btn_wifi map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F30672C1DD32B8000FA841E /* btn_wifi map@2x.png */; };
+		6F3067401DD32B8000FA841E /* btn_wifi map@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F30672D1DD32B8000FA841E /* btn_wifi map@3x.png */; };
+		6F3067411DD32B8000FA841E /* btn_wifi welfare @2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F30672E1DD32B8000FA841E /* btn_wifi welfare @2x.png */; };
+		6F3067421DD32B8000FA841E /* btn_wifi welfare @3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F30672F1DD32B8000FA841E /* btn_wifi welfare @3x.png */; };
+		6F3067431DD32B8000FA841E /* btn_wifisetting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3067301DD32B8000FA841E /* btn_wifisetting@2x.png */; };
+		6F3067441DD32B8000FA841E /* btn_wifisetting@3X.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3067311DD32B8000FA841E /* btn_wifisetting@3X.png */; };
+		6F3067451DD32B8000FA841E /* btn_wifitest@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3067321DD32B8000FA841E /* btn_wifitest@2x.png */; };
+		6F3067461DD32B8000FA841E /* btn_wifitest@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3067331DD32B8000FA841E /* btn_wifitest@3x.png */; };
+		6F3067471DD32B8000FA841E /* circle_num@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3067341DD32B8000FA841E /* circle_num@2x.png */; };
+		6F3067481DD32B8000FA841E /* circle_num@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3067351DD32B8000FA841E /* circle_num@3x.png */; };
+		6F3067491DD32B8000FA841E /* Connect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3067361DD32B8000FA841E /* Connect@2x.png */; };
+		6F30674A1DD32B8000FA841E /* Connect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3067371DD32B8000FA841E /* Connect@3x.png */; };
+		6F30674B1DD32B8000FA841E /* horn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3067381DD32B8000FA841E /* horn@2x.png */; };
+		6F30674C1DD32B8000FA841E /* horn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3067391DD32B8000FA841E /* horn@3x.png */; };
+		6F30674D1DD32B8000FA841E /* img_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F30673A1DD32B8000FA841E /* img_bg@2x.png */; };
+		6F30674E1DD32B8000FA841E /* img_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F30673B1DD32B8000FA841E /* img_bg@3x.png */; };
+		6F30674F1DD32B8000FA841E /* img_bg_i4.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F30673C1DD32B8000FA841E /* img_bg_i4.png */; };
+		6F3067501DD32B8000FA841E /* Label_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F30673D1DD32B8000FA841E /* Label_more@2x.png */; };
+		6F3067511DD32B8000FA841E /* Label_more@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F30673E1DD32B8000FA841E /* Label_more@3x.png */; };
+		6F3067561DD344EF00FA841E /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3067551DD344EF00FA841E /* PulsingHaloLayer.m */; };
 		6F307BD61DCB20780015F9EC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307BD41DCB20780015F9EC /* LoginViewController.m */; };
 		6F307BD71DCB20780015F9EC /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F307BD51DCB20780015F9EC /* LoginViewController.xib */; };
 		6F307BDB1DCB24ED0015F9EC /* AnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307BDA1DCB24ED0015F9EC /* AnimationManager.m */; };
@@ -231,6 +253,31 @@
 		6F2E657B1DC9DDE800AF84BB /* bg_navigation@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_navigation@3x.png"; sourceTree = "<group>"; };
 		6F3067221DD30CEF00FA841E /* ReportClickModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportClickModel.h; sourceTree = "<group>"; };
 		6F3067231DD30CEF00FA841E /* ReportClickModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportClickModel.m; sourceTree = "<group>"; };
+		6F3067261DD3292C00FA841E /* WiFiMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiMenuView.h; sourceTree = "<group>"; };
+		6F3067271DD3292C00FA841E /* WiFiMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WiFiMenuView.m; sourceTree = "<group>"; };
+		6F3067291DD3293F00FA841E /* WiFiMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WiFiMenuView.xib; sourceTree = "<group>"; };
+		6F30672C1DD32B8000FA841E /* btn_wifi map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_wifi map@2x.png"; sourceTree = "<group>"; };
+		6F30672D1DD32B8000FA841E /* btn_wifi map@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_wifi map@3x.png"; sourceTree = "<group>"; };
+		6F30672E1DD32B8000FA841E /* btn_wifi welfare @2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_wifi welfare @2x.png"; sourceTree = "<group>"; };
+		6F30672F1DD32B8000FA841E /* btn_wifi welfare @3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_wifi welfare @3x.png"; sourceTree = "<group>"; };
+		6F3067301DD32B8000FA841E /* btn_wifisetting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_wifisetting@2x.png"; sourceTree = "<group>"; };
+		6F3067311DD32B8000FA841E /* btn_wifisetting@3X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_wifisetting@3X.png"; sourceTree = "<group>"; };
+		6F3067321DD32B8000FA841E /* btn_wifitest@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_wifitest@2x.png"; sourceTree = "<group>"; };
+		6F3067331DD32B8000FA841E /* btn_wifitest@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_wifitest@3x.png"; sourceTree = "<group>"; };
+		6F3067341DD32B8000FA841E /* circle_num@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle_num@2x.png"; sourceTree = "<group>"; };
+		6F3067351DD32B8000FA841E /* circle_num@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle_num@3x.png"; sourceTree = "<group>"; };
+		6F3067361DD32B8000FA841E /* Connect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Connect@2x.png"; sourceTree = "<group>"; };
+		6F3067371DD32B8000FA841E /* Connect@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Connect@3x.png"; sourceTree = "<group>"; };
+		6F3067381DD32B8000FA841E /* horn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "horn@2x.png"; sourceTree = "<group>"; };
+		6F3067391DD32B8000FA841E /* horn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "horn@3x.png"; sourceTree = "<group>"; };
+		6F30673A1DD32B8000FA841E /* img_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_bg@2x.png"; sourceTree = "<group>"; };
+		6F30673B1DD32B8000FA841E /* img_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_bg@3x.png"; sourceTree = "<group>"; };
+		6F30673C1DD32B8000FA841E /* img_bg_i4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_bg_i4.png; sourceTree = "<group>"; };
+		6F30673D1DD32B8000FA841E /* Label_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Label_more@2x.png"; sourceTree = "<group>"; };
+		6F30673E1DD32B8000FA841E /* Label_more@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Label_more@3x.png"; sourceTree = "<group>"; };
+		6F3067531DD344EF00FA841E /* PulsingHalo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHalo.h; sourceTree = "<group>"; };
+		6F3067541DD344EF00FA841E /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHaloLayer.h; sourceTree = "<group>"; };
+		6F3067551DD344EF00FA841E /* PulsingHaloLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PulsingHaloLayer.m; sourceTree = "<group>"; };
 		6F307BD31DCB20780015F9EC /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		6F307BD41DCB20780015F9EC /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		6F307BD51DCB20780015F9EC /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -425,6 +472,7 @@
 		6F2E57B91DB78B2B00C39F27 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				6F30672B1DD32B8000FA841E /* WiFi */,
 				6F5033D81DD0706C001EBC97 /* Login */,
 				6F307BDC1DCB36900015F9EC /* WiFiSpeedView */,
 				6F2E65791DC9DDE800AF84BB /* BaiduMap */,
@@ -520,6 +568,52 @@
 				6F2E657B1DC9DDE800AF84BB /* bg_navigation@3x.png */,
 			);
 			path = BaiduMap;
+			sourceTree = "<group>";
+		};
+		6F3067251DD328C700FA841E /* WiFi */ = {
+			isa = PBXGroup;
+			children = (
+				6F3067261DD3292C00FA841E /* WiFiMenuView.h */,
+				6F3067271DD3292C00FA841E /* WiFiMenuView.m */,
+				6F3067291DD3293F00FA841E /* WiFiMenuView.xib */,
+			);
+			path = WiFi;
+			sourceTree = "<group>";
+		};
+		6F30672B1DD32B8000FA841E /* WiFi */ = {
+			isa = PBXGroup;
+			children = (
+				6F30672C1DD32B8000FA841E /* btn_wifi map@2x.png */,
+				6F30672D1DD32B8000FA841E /* btn_wifi map@3x.png */,
+				6F30672E1DD32B8000FA841E /* btn_wifi welfare @2x.png */,
+				6F30672F1DD32B8000FA841E /* btn_wifi welfare @3x.png */,
+				6F3067301DD32B8000FA841E /* btn_wifisetting@2x.png */,
+				6F3067311DD32B8000FA841E /* btn_wifisetting@3X.png */,
+				6F3067321DD32B8000FA841E /* btn_wifitest@2x.png */,
+				6F3067331DD32B8000FA841E /* btn_wifitest@3x.png */,
+				6F3067341DD32B8000FA841E /* circle_num@2x.png */,
+				6F3067351DD32B8000FA841E /* circle_num@3x.png */,
+				6F3067361DD32B8000FA841E /* Connect@2x.png */,
+				6F3067371DD32B8000FA841E /* Connect@3x.png */,
+				6F3067381DD32B8000FA841E /* horn@2x.png */,
+				6F3067391DD32B8000FA841E /* horn@3x.png */,
+				6F30673A1DD32B8000FA841E /* img_bg@2x.png */,
+				6F30673B1DD32B8000FA841E /* img_bg@3x.png */,
+				6F30673C1DD32B8000FA841E /* img_bg_i4.png */,
+				6F30673D1DD32B8000FA841E /* Label_more@2x.png */,
+				6F30673E1DD32B8000FA841E /* Label_more@3x.png */,
+			);
+			path = WiFi;
+			sourceTree = "<group>";
+		};
+		6F3067521DD344EF00FA841E /* PulsingHalo */ = {
+			isa = PBXGroup;
+			children = (
+				6F3067531DD344EF00FA841E /* PulsingHalo.h */,
+				6F3067541DD344EF00FA841E /* PulsingHaloLayer.h */,
+				6F3067551DD344EF00FA841E /* PulsingHaloLayer.m */,
+			);
+			path = PulsingHalo;
 			sourceTree = "<group>";
 		};
 		6F307BD21DCB1F9C0015F9EC /* Login */ = {
@@ -746,6 +840,7 @@
 		6F6FDABD1DB4B73500E50D9B /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				6F3067521DD344EF00FA841E /* PulsingHalo */,
 				6F3A1D8A1DCC733200BC22EC /* Toast */,
 				6F2E654E1DC9C2FA00AF84BB /* BaiduMapSDK */,
 				6FFA16891DB612DB0077E7C3 /* WiFiSDK */,
@@ -844,6 +939,7 @@
 		6F6FDAC41DB4B79300E50D9B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6F3067251DD328C700FA841E /* WiFi */,
 				6F307BF51DCB36980015F9EC /* WiFiSpeedView */,
 				6F3185101DB8783C00017D47 /* News */,
 				6F2E57EC1DB78DC400C39F27 /* Service */,
@@ -1088,17 +1184,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F30674F1DD32B8000FA841E /* img_bg_i4.png in Resources */,
 				6F5033F31DD0706C001EBC97 /* Start button_press@2x.png in Resources */,
 				6F2DF2CC1DD1D72C00A8F0EC /* tab_ico_headlines_gray@2X.png in Resources */,
 				6F2DF2C81DD1D72C00A8F0EC /* tab_ico_buy_gray@2X.png in Resources */,
+				6F3067501DD32B8000FA841E /* Label_more@2x.png in Resources */,
 				6F2DF2E01DD1E99C00A8F0EC /* play@3x.png in Resources */,
+				6F30674E1DD32B8000FA841E /* img_bg@3x.png in Resources */,
+				6F30674A1DD32B8000FA841E /* Connect@3x.png in Resources */,
 				6F2E657C1DC9DDE800AF84BB /* bg_navigation@2x.png in Resources */,
+				6F3067401DD32B8000FA841E /* btn_wifi map@3x.png in Resources */,
 				6F2E57F11DB78E0400C39F27 /* ServiceCell.xib in Resources */,
+				6F30674D1DD32B8000FA841E /* img_bg@2x.png in Resources */,
 				6F307BEC1DCB36900015F9EC /* center_image_white_ball_bg_ring@3x.png in Resources */,
+				6F3067481DD32B8000FA841E /* circle_num@3x.png in Resources */,
 				6F2DF2B31DD1B67900A8F0EC /* Code_normal@2x.png in Resources */,
 				6F2E57E71DB78B2B00C39F27 /* icon_es.png in Resources */,
+				6F30674B1DD32B8000FA841E /* horn@2x.png in Resources */,
 				6F2DF2CE1DD1D72C00A8F0EC /* tab_ico_service_gray@2X.png in Resources */,
+				6F3067491DD32B8000FA841E /* Connect@2x.png in Resources */,
 				6F2DF2CB1DD1D72C00A8F0EC /* tab_ico_headlines_blue@3x.png in Resources */,
+				6F30674C1DD32B8000FA841E /* horn@3x.png in Resources */,
 				6F307BEE1DCB36900015F9EC /* roundbutton_empty@3x.png in Resources */,
 				6FF5C7FC1DC1F13D00B1A84A /* NewsVideoCell.xib in Resources */,
 				6F5033F11DD0706C001EBC97 /* Start button_normal@2x.png in Resources */,
@@ -1116,9 +1222,11 @@
 				6F307BEF1DCB36900015F9EC /* roundbutton_white@2x.png in Resources */,
 				6F5033EF1DD0706C001EBC97 /* loading_icon_phone@2x.png in Resources */,
 				6F5033EC1DD0706C001EBC97 /* Input_hollow@3x.png in Resources */,
+				6F30673F1DD32B8000FA841E /* btn_wifi map@2x.png in Resources */,
 				6F2DF2D61DD1D72C00A8F0EC /* tab_icon_wifi_gray@2x.png in Resources */,
 				6F5033EE1DD0706C001EBC97 /* loading_icon_key@3x.png in Resources */,
 				6F5033E91DD0706C001EBC97 /* img@2x.png in Resources */,
+				6F3067461DD32B8000FA841E /* btn_wifitest@3x.png in Resources */,
 				6F307BF31DCB36900015F9EC /* speed_scale_image_current_speed@2x.png in Resources */,
 				6F2DF2C91DD1D72C00A8F0EC /* tab_ico_buy_gray@3x.png in Resources */,
 				6FF5C7EF1DC1DA5B00B1A84A /* NewsReportViewController.xib in Resources */,
@@ -1127,7 +1235,9 @@
 				6FCA54731DC9E7C3000ED52A /* mapapi.bundle in Resources */,
 				6F307BE91DCB36900015F9EC /* center_image_white_ball@2x.png in Resources */,
 				6F307BEB1DCB36900015F9EC /* center_image_white_ball_bg_ring@2x.png in Resources */,
+				6F3067451DD32B8000FA841E /* btn_wifitest@2x.png in Resources */,
 				6F2DF2DF1DD1E99C00A8F0EC /* play@2x.png in Resources */,
+				6F3067421DD32B8000FA841E /* btn_wifi welfare @3x.png in Resources */,
 				6F307BED1DCB36900015F9EC /* roundbutton_empty@2x.png in Resources */,
 				6F2DF2D41DD1D72C00A8F0EC /* tab_icon_wifi_blue@2x.png in Resources */,
 				6F5033F71DD07145001EBC97 /* logo@2x.png in Resources */,
@@ -1139,10 +1249,15 @@
 				6F2DF2D31DD1D72C00A8F0EC /* tab_icon_buy_blue@3x.png in Resources */,
 				6F3185191DB8A25700017D47 /* NewsReportCell.xib in Resources */,
 				6F2DF2CF1DD1D72C00A8F0EC /* tab_ico_service_gray@3x.png in Resources */,
+				6F3067411DD32B8000FA841E /* btn_wifi welfare @2x.png in Resources */,
+				6F3067431DD32B8000FA841E /* btn_wifisetting@2x.png in Resources */,
 				6F2E57E81DB78B2B00C39F27 /* icon_gd.png in Resources */,
 				6F2DF2CA1DD1D72C00A8F0EC /* tab_ico_headlines_blue@2x.png in Resources */,
 				6F5033FF1DD07DF5001EBC97 /* Code_press@3x.png in Resources */,
+				6F30672A1DD3293F00FA841E /* WiFiMenuView.xib in Resources */,
 				6F6FDAF21DB4C83D00E50D9B /* ShoppingViewController.xib in Resources */,
+				6F3067511DD32B8000FA841E /* Label_more@3x.png in Resources */,
+				6F3067471DD32B8000FA841E /* circle_num@2x.png in Resources */,
 				6F2E657D1DC9DDE800AF84BB /* bg_navigation@3x.png in Resources */,
 				6F6FDAB11DB4B3DE00E50D9B /* Assets.xcassets in Resources */,
 				6F2E57E61DB78B2B00C39F27 /* icon_bg.png in Resources */,
@@ -1150,6 +1265,7 @@
 				6F31850B1DB8601900017D47 /* ServiceSectionHeader.xib in Resources */,
 				6F2E57EA1DB78B2B00C39F27 /* icon_zf.png in Resources */,
 				6F6FDAE31DB4C81100E50D9B /* WifiViewController.xib in Resources */,
+				6F3067441DD32B8000FA841E /* btn_wifisetting@3X.png in Resources */,
 				6F2DF2CD1DD1D72C00A8F0EC /* tab_ico_headlines_gray@3x.png in Resources */,
 				6F2DF2D11DD1D72C00A8F0EC /* tab_ico_service_green@3x.png in Resources */,
 				6F2DF2D21DD1D72C00A8F0EC /* tab_icon_buy_blue@2x.png in Resources */,
@@ -1227,6 +1343,7 @@
 				6F6FDADA1DB4C4EB00E50D9B /* UIImage+Fit.m in Sources */,
 				6FFA16871DB606E10077E7C3 /* SSKeychain.m in Sources */,
 				6F6FDAA91DB4B3DE00E50D9B /* AppDelegate.m in Sources */,
+				6F3067281DD3292C00FA841E /* WiFiMenuView.m in Sources */,
 				6FFA16791DB5FCE40077E7C3 /* MSApp.m in Sources */,
 				6F6FDACC1DB4BB9800E50D9B /* DGNavigationViewController.m in Sources */,
 				6F2E334F1DC6F74000D9E502 /* ServiceCGI.m in Sources */,
@@ -1242,6 +1359,7 @@
 				6F6FDAFB1DB4D5D200E50D9B /* UIView+Frame.m in Sources */,
 				6F6FDACF1DB4BBCA00E50D9B /* DGViewController.m in Sources */,
 				6F2E57F41DB792F600C39F27 /* ServiceHeaderView.m in Sources */,
+				6F3067561DD344EF00FA841E /* PulsingHaloLayer.m in Sources */,
 				6F6FDAE21DB4C81100E50D9B /* WifiViewController.m in Sources */,
 				6F307BD61DCB20780015F9EC /* LoginViewController.m in Sources */,
 				6F2E65781DC9C86F00AF84BB /* UIImage+LeftAndRightStretch.mm in Sources */,
