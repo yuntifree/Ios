@@ -119,13 +119,26 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row < _newsArray.count) {
         NewsReportModel *model = _newsArray[indexPath.row];
+        [SApp reportClick:[ReportClickModel createWithReportModel:model]];
         NSURL *url = [NSURL URLWithString:model.dst];
-        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        if ([url.scheme isEqualToString:@"itms"] || [url.scheme isEqualToString:@"itms-apps"]) {
             [[UIApplication sharedApplication] openURL:url];
         } else {
             WebViewController *vc = [[WebViewController alloc] init];
             vc.url = model.dst;
             [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row < _newsArray.count) {
+        NewsReportModel *model = _newsArray[indexPath.row];
+        if (model.stype == RT_AD) {
+            ReportClickModel *rcm = [ReportClickModel createWithReportModel:model];
+            rcm.type = RCT_ADSHOW;
+            [SApp reportClick:rcm];
         }
     }
 }

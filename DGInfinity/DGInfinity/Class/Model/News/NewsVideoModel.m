@@ -13,6 +13,7 @@
 + (instancetype)createWithInfo:(NSDictionary *)info
 {
     NewsVideoModel *model = [NewsVideoModel new];
+    model.id_ = [info[@"id"] integerValue];
     model.title = info[@"title"];
     model.images = info[@"images"];
     model.source = info[@"source"];

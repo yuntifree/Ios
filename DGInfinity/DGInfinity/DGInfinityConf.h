@@ -44,6 +44,13 @@ typedef NS_ENUM(NSInteger, ReportType) {
     RT_AD = 1
 };
 
+typedef NS_ENUM(NSInteger, ReportClickType) {
+    RCT_VIDEOPLAY = 0,
+    RCT_NEWSCLICK = 1,
+    RCT_ADSHOW = 2,
+    RCT_ADCLICK = 3
+};
+
 // Server
 #define ServerURL @"http://120.25.133.234/" // 测试环境
 #define AppVersion 1 // 客户端内部版本

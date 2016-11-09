@@ -24,4 +24,21 @@
     }];
 }
 
++ (void)reportClick:(NSInteger)id_
+               type:(NSInteger)type
+           complete:(void (^)(DGCgiResult *res))complete
+{
+    NSMutableDictionary *params = [RequestManager httpParams];
+    params[@"data"] = @{@"id": @(id_),
+                        @"type": @(type)};
+    [[RequestManager shareManager] loadAsync:params cgi:@"report_click" complete:^(DGCgiResult *res) {
+        if (complete) {
+            complete(res);
+        }
+        if (E_OK == res._errno) {
+            DDDLog(@"上报成功, id = %ld , type = %ld", id_, type);
+        }
+    }];
+}
+
 @end

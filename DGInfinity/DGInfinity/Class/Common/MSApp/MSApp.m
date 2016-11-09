@@ -8,6 +8,7 @@
 
 #import "MSApp.h"
 #import "AccountCGI.h"
+#import "NewsCGI.h"
 
 #define KUD_UID                     @"KUD_UID"
 #define KUD_TOKEN                   @"KUD_TOKEN"
@@ -42,7 +43,7 @@ static MSApp *mSapp = nil;
 {
     self = [super init];
     if (self) {
-        
+        _reportArray = [NSMutableArray array];
     }
     return self;
 }
@@ -149,6 +150,26 @@ static MSApp *mSapp = nil;
 - (NSString *)wifipass
 {
     return [NSUSERDEFAULTS objectForKey:KUD_WIFIPASS];
+}
+
+#pragma mark - ReportClick
+- (void)reportClick:(ReportClickModel *)model
+{
+    BOOL exist = NO;
+    for (ReportClickModel *md in _reportArray) {
+        if (model.id_ == md.id_ && model.type == md.type) {
+            if (model.time > md.time + 60) {
+                md.time = model.time;
+                [NewsCGI reportClick:model.id_ type:model.type complete:nil];
+            }
+            exist = YES;
+            break;
+        }
+    }
+    if (!exist) {
+        [_reportArray addObject:model];
+        [NewsCGI reportClick:model.id_ type:model.type complete:nil];
+    }
 }
 
 @end

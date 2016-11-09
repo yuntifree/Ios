@@ -10,6 +10,7 @@
 
 @interface NewsVideoModel : NSObject
 
+@property (nonatomic, assign) NSInteger id_;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, strong) NSArray *images;
 @property (nonatomic, copy) NSString *source;

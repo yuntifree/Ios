@@ -64,6 +64,7 @@
 		6F2E65781DC9C86F00AF84BB /* UIImage+LeftAndRightStretch.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E65771DC9C86F00AF84BB /* UIImage+LeftAndRightStretch.mm */; };
 		6F2E657C1DC9DDE800AF84BB /* bg_navigation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2E657A1DC9DDE800AF84BB /* bg_navigation@2x.png */; };
 		6F2E657D1DC9DDE800AF84BB /* bg_navigation@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2E657B1DC9DDE800AF84BB /* bg_navigation@3x.png */; };
+		6F3067241DD30CEF00FA841E /* ReportClickModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3067231DD30CEF00FA841E /* ReportClickModel.m */; };
 		6F307BD61DCB20780015F9EC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307BD41DCB20780015F9EC /* LoginViewController.m */; };
 		6F307BD71DCB20780015F9EC /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F307BD51DCB20780015F9EC /* LoginViewController.xib */; };
 		6F307BDB1DCB24ED0015F9EC /* AnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307BDA1DCB24ED0015F9EC /* AnimationManager.m */; };
@@ -228,6 +229,8 @@
 		6F2E65771DC9C86F00AF84BB /* UIImage+LeftAndRightStretch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIImage+LeftAndRightStretch.mm"; sourceTree = "<group>"; };
 		6F2E657A1DC9DDE800AF84BB /* bg_navigation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_navigation@2x.png"; sourceTree = "<group>"; };
 		6F2E657B1DC9DDE800AF84BB /* bg_navigation@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_navigation@3x.png"; sourceTree = "<group>"; };
+		6F3067221DD30CEF00FA841E /* ReportClickModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportClickModel.h; sourceTree = "<group>"; };
+		6F3067231DD30CEF00FA841E /* ReportClickModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportClickModel.m; sourceTree = "<group>"; };
 		6F307BD31DCB20780015F9EC /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		6F307BD41DCB20780015F9EC /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		6F307BD51DCB20780015F9EC /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -614,6 +617,8 @@
 				6F31851C1DB8A9DE00017D47 /* NewsReportModel.m */,
 				6FF5C7F51DC1F00200B1A84A /* NewsVideoModel.h */,
 				6FF5C7F61DC1F00200B1A84A /* NewsVideoModel.m */,
+				6F3067221DD30CEF00FA841E /* ReportClickModel.h */,
+				6F3067231DD30CEF00FA841E /* ReportClickModel.m */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -1230,6 +1235,7 @@
 				6F307C021DCB36980015F9EC /* WiFiRecord.m in Sources */,
 				6F2E65711DC9C76000AF84BB /* BaiduMapSDK.m in Sources */,
 				6F3185141DB89C4300017D47 /* NewsCGI.m in Sources */,
+				6F3067241DD30CEF00FA841E /* ReportClickModel.m in Sources */,
 				6F02BAA91DCCA9C900C72833 /* UICollectionView+EmptyData.m in Sources */,
 				6F6FDAF11DB4C83D00E50D9B /* ShoppingViewController.m in Sources */,
 				6F6FDAFE1DB4DC4A00E50D9B /* CALayer+xib.m in Sources */,

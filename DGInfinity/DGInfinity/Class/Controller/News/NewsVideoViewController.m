@@ -118,6 +118,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row < _videosArray.count) {
         NewsVideoModel *model = _videosArray[indexPath.row];
+        [SApp reportClick:[ReportClickModel createWithVideoModel:model]];
         WebViewController *vc = [[WebViewController alloc] init];
         vc.url = model.dst;
         vc.title = @"视频";

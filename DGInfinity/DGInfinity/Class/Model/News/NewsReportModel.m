@@ -13,6 +13,7 @@
 + (instancetype)createWithInfo:(NSDictionary *)info
 {
     NewsReportModel *model = [NewsReportModel new];
+    model.id_ = [info[@"id"] integerValue];
     model.title = info[@"title"];
     model.images = info[@"images"];
     NSString *source = info[@"source"];
