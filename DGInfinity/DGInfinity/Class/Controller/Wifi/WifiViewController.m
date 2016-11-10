@@ -10,10 +10,16 @@
 #import "BaiduMapVC.h"
 #import "WiFiSpeedView.h"
 #import "WiFiMenuView.h"
+#import "WiFiTipView.h"
+#import "WiFiCGI.h"
 
-@interface WifiViewController () <WIFISpeedViewDelegate>
+#define Height (kScreenHeight - 20 - 44 - 49)
+
+@interface WifiViewController () <WIFISpeedViewDelegate, WiFiMenuViewDelegate, UIScrollViewDelegate>
 {
     UIScrollView *_scrollView;
+    WiFiMenuView *_menuView;
+    WiFiTipView *_tipView;
 }
 
 @property (nonatomic, strong) WiFiSpeedView *speedView;
@@ -25,7 +31,7 @@
 - (WiFiSpeedView *)speedView
 {
     if (_speedView == nil) {
-        _speedView = [[WiFiSpeedView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 0.888 * kScreenWidth)];
+        _speedView = [[WiFiSpeedView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth * 317 / 375)];
         _speedView.delegate = self;
     }
     return _speedView;
@@ -36,27 +42,64 @@
     return @"无线";
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [_tipView showInView:_menuView];
+        });
+    });
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
     [self setUpScrollView];
+    [self setUpSubViews];
+    [self getWeatherAndNews];
 }
 
 - (void)setUpScrollView
 {
-    CGFloat height = kScreenHeight - 20 - 44 - 49;
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, height)];
-    _scrollView.contentSize = CGSizeMake(kScreenWidth, height * 2);
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, Height)];
+    _scrollView.contentSize = CGSizeMake(kScreenWidth, Height * 2);
+    _scrollView.delegate = self;
     _scrollView.pagingEnabled = YES;
     _scrollView.bounces = NO;
+    _scrollView.delaysContentTouches = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:_scrollView];
+}
+
+- (void)setUpSubViews
+{
+    _menuView = [[NSBundle mainBundle] loadNibNamed:@"WiFiMenuView" owner:nil options:nil][0];
+    _menuView.frame = CGRectMake(0, 0, kScreenWidth, Height);
+    _menuView.delegate = self;
+    [_scrollView addSubview:_menuView];
     
-    WiFiMenuView *menuView = [[NSBundle mainBundle] loadNibNamed:@"WiFiMenuView" owner:nil options:nil][0];
-    menuView.frame = CGRectMake(0, 0, kScreenWidth, height);
-    [_scrollView addSubview:menuView];
+    _tipView = [[WiFiTipView alloc] initWithFrame:CGRectMake(kScreenWidth - 96, Height - 36, 88, 24)];
+}
+
+- (void)getWeatherAndNews
+{
+    [WiFiCGI getWeatherNews:^(DGCgiResult *res) {
+        if (E_OK == res._errno) {
+            NSDictionary *data = res.data[@"data"];
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                NSDictionary *weather = data[@"weather"];
+                if ([weather isKindOfClass:[NSDictionary class]]) {
+                    [_menuView setWeather:weather];
+                }
+            }
+        } else {
+            [self makeToast:res.desc];
+        }
+    }];
 }
 
 /*
@@ -196,28 +239,6 @@
 }
 */
 
-#pragma mark - WiFi Function
-- (IBAction)searchNearbyWifi:(id)sender {
-    BaiduMapVC *vc = [[BaiduMapVC alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (IBAction)speedTest:(id)sender {
-    if (![self.view.subviews containsObject:self.speedView]) {
-        self.speedView.alpha = 0;
-        [self.view addSubview:self.speedView];
-        [UIView animateWithDuration:0.5 animations:^{
-            self.speedView.alpha = 1;
-        }];
-    } else {
-        [UIView animateWithDuration:0.5 animations:^{
-            self.speedView.alpha = 0;
-        } completion:^(BOOL finished) {
-            [self.speedView removeFromSuperview];
-        }];
-    }
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -232,6 +253,40 @@
     } completion:^(BOOL finished) {
         [self.speedView removeFromSuperview];
     }];
+}
+
+#pragma mark - WiFiMenuViewDelegate
+- (void)WiFiMenuViewClick:(WiFiMenuType)type
+{
+    if (type == WiFiMenuTypeSpeedTest) {
+        if (![_menuView.subviews containsObject:self.speedView]) {
+            self.speedView.alpha = 0;
+            [_menuView addSubview:self.speedView];
+            [UIView animateWithDuration:0.5 animations:^{
+                self.speedView.alpha = 1;
+            }];
+        } else {
+            [UIView animateWithDuration:0.5 animations:^{
+                self.speedView.alpha = 0;
+            } completion:^(BOOL finished) {
+                [self.speedView removeFromSuperview];
+            }];
+        }
+    } else if (type == WiFiMenuTypeMap) {
+        BaiduMapVC *vc = [[BaiduMapVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (scrollView == _scrollView) {
+        if (_tipView) {
+            [_tipView dismiss];
+            _tipView = nil;
+        }
+    }
 }
 
 @end

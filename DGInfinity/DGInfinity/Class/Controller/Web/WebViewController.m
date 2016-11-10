@@ -36,7 +36,8 @@
         config.preferences = [WKPreferences new];
         config.userContentController = [WKUserContentController new];
         config.requiresUserActionForMediaPlayback = NO;
-        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height - 64) configuration:config];
+        CGFloat systemBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height + self.navigationController.navigationBar.height;
+        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - systemBarHeight) configuration:config];
         _webView.navigationDelegate = self;
         _webView.UIDelegate = self;
         [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
@@ -50,7 +51,7 @@
 {
     if (_progressView == nil) {
         _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-        _progressView.frame = CGRectMake(0, 0, self.view.width, 4);
+        _progressView.frame = CGRectMake(0, 0, kScreenWidth, 4);
         _progressView.progress = 0;
         _progressView.hidden = YES;
         [self.view addSubview:_progressView];
@@ -72,6 +73,18 @@
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor whiteColor];
     
+    if ([self.title isEqualToString:@"视频"]) {
+        NSNumber *orientationUnknown = [NSNumber numberWithInt:UIInterfaceOrientationUnknown];
+        [[UIDevice currentDevice] setValue:orientationUnknown forKey:@"orientation"];
+        
+        NSNumber *orientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
+        [[UIDevice currentDevice] setValue:orientationTarget forKey:@"orientation"];
+        
+        self.webView.backgroundColor = [UIColor blackColor];
+    } else {
+        self.webView.backgroundColor = [UIColor whiteColor];
+    }
+    
     if (_url.length) {
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:_url]];
         [self.webView loadRequest:request];
@@ -81,6 +94,16 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)shouldAutorotate
+{
+    return [self.title isEqualToString:@"视频"];
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    return self.shouldAutorotate ? UIInterfaceOrientationMaskLandscape : UIInterfaceOrientationMaskPortrait;
 }
 
 #pragma mark - Btn Action
@@ -136,6 +159,13 @@
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation
 {
+    if ([self.title isEqualToString:@"视频"]) {
+        [webView evaluateJavaScript:@"document.body.style.backgroundColor = '#000';" completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+            if (error) {
+                DDDLog(@"---%@",error);
+            }
+        }];
+    }
     if ([webView canGoBack]) {
         if (_type != ITEMTYPE_CLOSE) {
             _type = ITEMTYPE_CLOSE;

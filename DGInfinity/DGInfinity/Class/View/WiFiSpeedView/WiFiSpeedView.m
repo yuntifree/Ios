@@ -73,7 +73,7 @@ static NSUInteger kSharedBottomContainerOriginY = 0;
 
 #define UICOLOR_ARGB(color) [UIColor colorWithRed: ((((unsigned int)color) >> 16) & 0xFF) / 255.0 green: ((((unsigned int)color) >> 8) & 0xFF) / 255.0 blue: (((unsigned int)color) & 0xFF) / 255.0 alpha: ((((unsigned int)color) >> 24) & 0xFF) / 255.0]
 
-#define COLOR_THEME UICOLOR_ARGB(0xff288dff)
+#define COLOR_THEME COLOR(0, 156, 251, 1)
 #define COLOR_THEME_HIGHLIGHTED UICOLOR_ARGB(0xff1174e4)
 
 const CGFloat menuOpenTitleY = 0.2503;
@@ -420,8 +420,8 @@ const CGFloat menuOpenButtonY = 0.058965;
             NSLog(@"didFinishDetectWithAverageSpeed");
             [[NSNotificationCenter defaultCenter] postNotificationName: NOTIFICATION_CURRENT_SPEED_UPDATED object: nil];
             
-            __weak typeof(self) weakSelf = self;
-            [weakSelf performSelector:@selector(gotoFoundTabVC) withObject:nil afterDelay:2];
+//            __weak typeof(self) weakSelf = self;
+//            [weakSelf performSelector:@selector(gotoFoundTabVC) withObject:nil afterDelay:2];
         });
 //        dispatch_async(dispatch_get_global_queue(NULL, DISPATCH_QUEUE_PRIORITY_HIGH), ^{
 //            [[WFSpeedUploader sharedUploader] uploadSpeed:speed/1024];
@@ -505,9 +505,9 @@ const CGFloat menuOpenButtonY = 0.058965;
         return;
     }
 
-    if ([[NetworkManager shareManager] currentReachabilityStatus] != ReachableViaWiFi) {
-        return;
-    }
+//    if ([[NetworkManager shareManager] currentReachabilityStatus] != ReachableViaWiFi) {
+//        return;
+//    }
     
     [self adjustWiFiInfoPageForState:WFWiFiInfoConnectedStateConnectedTestingSpeed];
     _sharedWiFiInfoHintContainerButton.userInteractionEnabled = NO;

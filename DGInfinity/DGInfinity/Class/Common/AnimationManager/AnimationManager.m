@@ -159,28 +159,20 @@
 + (CAAnimation *)popInAnimation
 {
     
-    CAKeyframeAnimation *animation  = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
-    
-    NSMutableArray *values = [NSMutableArray array];
-    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.4, 0.4, 1.0)]];
-    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.3, 1.3, 1.0)]];
-    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.85, 0.85, 0.7)]];
-    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
-    
-    animation.duration = 1;
-    animation.values = values;
+    CAKeyframeAnimation *animation  = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
+    animation.duration = 0.75;
+    animation.values = @[@0.7, @1.2, @1];
     
     CABasicAnimation *fadeIn = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    fadeIn.duration = 1;
+    fadeIn.duration = 0.75;
     fadeIn.fromValue = [NSNumber numberWithFloat:0.f];
     fadeIn.toValue = [NSNumber numberWithFloat:1.f];
     fadeIn.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     fadeIn.fillMode = kCAFillModeForwards;
     
     CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
-    animationGroup.animations = @[fadeIn];
-    animationGroup.duration = 1;
-    animationGroup.removedOnCompletion = NO;
+    animationGroup.animations = @[animation, fadeIn];
+    animationGroup.duration = 0.75;
     animationGroup.fillMode = kCAFillModeForwards;
     return animationGroup;
 }

@@ -36,12 +36,12 @@
 
 - (BOOL)shouldAutorotate
 {
-    return NO;
+    return [self.viewControllers.lastObject shouldAutorotate];
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskPortrait;
+    return [self.viewControllers.lastObject supportedInterfaceOrientations];
 }
 
 @end

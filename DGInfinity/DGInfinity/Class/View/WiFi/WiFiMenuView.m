@@ -12,7 +12,12 @@
 @interface WiFiMenuView ()
 {
     __weak IBOutlet UIButton *_connectBtn;
+    __weak IBOutlet UILabel *_statusLbl;
+    __weak IBOutlet UILabel *_temperatureLbl;
+    __weak IBOutlet UILabel *_weatherLbl;
     
+    __weak IBOutlet NSLayoutConstraint *_connectBtnTop;
+    __weak IBOutlet NSLayoutConstraint *_statusLblBottom;
 }
 @end
 
@@ -21,10 +26,32 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    
+    _connectBtnTop.constant *= [Tools layoutFactor];
+    _statusLblBottom.constant *= [Tools layoutFactor];
+    
     PulsingHaloLayer *halo = [PulsingHaloLayer layer];
-    halo.position = _connectBtn.center;
+    halo.position = CGPointMake(kScreenWidth / 2, _connectBtnTop.constant + 56.5);
     [self.layer addSublayer:halo];
     [halo start];
+}
+
+- (void)setWeather:(NSDictionary *)weather
+{
+    _temperatureLbl.text = [NSString stringWithFormat:@"%ld°C",[weather[@"temp"] integerValue]];
+    _weatherLbl.text = weather[@"info"];
+}
+
+- (IBAction)menuViewTap:(UITapGestureRecognizer *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(WiFiMenuViewClick:)]) {
+        [_delegate WiFiMenuViewClick:sender.view.tag];
+    }
+}
+
+- (IBAction)connectBtnClick:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(WiFiMenuViewClick:)]) {
+        [_delegate WiFiMenuViewClick:sender.tag];
+    }
 }
 
 @end

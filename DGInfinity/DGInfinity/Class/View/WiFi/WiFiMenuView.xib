@@ -22,7 +22,7 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="8DQ-T2-OqM">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="317"/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZHF-di-tNg">
+                        <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZHF-di-tNg">
                             <rect key="frame" x="131" y="63" width="113" height="113"/>
                             <color key="backgroundColor" red="0.85882352941176465" green="0.94901960784313721" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -38,9 +38,12 @@
                                     <real key="value" value="56.5"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="connectBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="lXs-JX-z7q"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发现东莞城市免费WiFi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ug-TH-yA9">
-                            <rect key="frame" x="86" y="242" width="203" height="24"/>
+                            <rect key="frame" x="86" y="246" width="203" height="24"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -60,8 +63,8 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="6ug-TH-yA9" secondAttribute="bottom" constant="47" id="1ZS-ru-siW"/>
                         <constraint firstAttribute="bottom" secondItem="EJL-Uv-jC0" secondAttribute="bottom" constant="13" id="78U-Sc-Gx6"/>
-                        <constraint firstItem="6ug-TH-yA9" firstAttribute="top" secondItem="ZHF-di-tNg" secondAttribute="bottom" constant="66" id="Haw-DK-s5v"/>
                         <constraint firstAttribute="bottom" secondItem="8DQ-T2-OqM" secondAttribute="bottom" id="KXn-IM-Ipo"/>
                         <constraint firstAttribute="trailing" secondItem="8DQ-T2-OqM" secondAttribute="trailing" id="Tkw-gk-n29"/>
                         <constraint firstItem="ZHF-di-tNg" firstAttribute="centerX" secondItem="Rvn-c3-FFE" secondAttribute="centerX" id="Uui-wv-Qyj"/>
@@ -119,7 +122,7 @@
                                 <constraint firstAttribute="width" constant="1" id="cpG-Mm-7Ry"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hqt-Py-Qrs">
+                        <view tag="1001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hqt-Py-Qrs">
                             <rect key="frame" x="0.0" y="0.0" width="187" height="103"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_wifisetting.png" translatesAutoresizingMaskIntoConstraints="NO" id="d25-Yz-3a4">
@@ -170,8 +173,11 @@
                                 <constraint firstItem="ahG-lC-a1b" firstAttribute="centerY" secondItem="d25-Yz-3a4" secondAttribute="centerY" constant="-7" id="ytM-Uy-nwy"/>
                                 <constraint firstItem="rV1-jk-vSp" firstAttribute="leading" secondItem="d25-Yz-3a4" secondAttribute="trailing" constant="5" id="zVf-rS-zvd"/>
                             </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="o02-dx-MzN" appends="YES" id="yzn-bs-KWA"/>
+                            </connections>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yRQ-Sa-xOo">
+                        <view tag="1002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yRQ-Sa-xOo">
                             <rect key="frame" x="188" y="0.0" width="187" height="103"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_wifitest.png" translatesAutoresizingMaskIntoConstraints="NO" id="cy8-rY-2s6">
@@ -203,8 +209,11 @@
                                 <constraint firstItem="W2o-7S-VFG" firstAttribute="centerY" secondItem="cy8-rY-2s6" secondAttribute="centerY" constant="-7" id="Oap-Y2-U9M"/>
                                 <constraint firstItem="aTg-Km-mRU" firstAttribute="leading" secondItem="cy8-rY-2s6" secondAttribute="trailing" constant="5" id="x70-dG-jVi"/>
                             </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="uBI-B8-lmk" appends="YES" id="sCr-mH-VkU"/>
+                            </connections>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yeV-4o-jYW">
+                        <view tag="1003" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yeV-4o-jYW">
                             <rect key="frame" x="0.0" y="104" width="187" height="102"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_wifi map.png" translatesAutoresizingMaskIntoConstraints="NO" id="WTv-sZ-a9t">
@@ -236,8 +245,11 @@
                                 <constraint firstItem="nQV-3p-s7d" firstAttribute="centerY" secondItem="WTv-sZ-a9t" secondAttribute="centerY" constant="-7" id="P48-Lo-Hkd"/>
                                 <constraint firstItem="PRh-GE-ccv" firstAttribute="leading" secondItem="WTv-sZ-a9t" secondAttribute="trailing" constant="5" id="wd7-Ec-2Vt"/>
                             </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="dpi-HY-Lnj" appends="YES" id="BIf-LH-wTv"/>
+                            </connections>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nIW-GT-f8x">
+                        <view tag="1004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nIW-GT-f8x">
                             <rect key="frame" x="188" y="104" width="187" height="102"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_wifi welfare .png" translatesAutoresizingMaskIntoConstraints="NO" id="3nf-oy-b9i">
@@ -269,6 +281,9 @@
                                 <constraint firstItem="3nf-oy-b9i" firstAttribute="leading" secondItem="nIW-GT-f8x" secondAttribute="leading" constant="18" id="SVq-zC-vHu"/>
                                 <constraint firstItem="d6F-IZ-r1c" firstAttribute="top" secondItem="IgN-Ti-h08" secondAttribute="bottom" constant="2" id="owT-98-Ni6"/>
                             </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="9if-Bl-NuR" appends="YES" id="LGh-bV-jeT"/>
+                            </connections>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -314,9 +329,34 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="_connectBtn" destination="ZHF-di-tNg" id="Z07-h1-g7w"/>
+                <outlet property="_connectBtnTop" destination="kEC-34-kJO" id="pCE-qI-eBR"/>
+                <outlet property="_statusLbl" destination="6ug-TH-yA9" id="1ER-vb-E9g"/>
+                <outlet property="_statusLblBottom" destination="1ZS-ru-siW" id="482-Lp-6Dg"/>
+                <outlet property="_temperatureLbl" destination="3qL-46-AD3" id="ych-DS-jzs"/>
+                <outlet property="_weatherLbl" destination="EJL-Uv-jC0" id="GWY-mQ-PkY"/>
             </connections>
             <point key="canvasLocation" x="-220.5" y="-169"/>
         </view>
+        <tapGestureRecognizer id="o02-dx-MzN">
+            <connections>
+                <action selector="menuViewTap:" destination="iN0-l3-epB" id="qsz-3v-Fgf"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="uBI-B8-lmk">
+            <connections>
+                <action selector="menuViewTap:" destination="iN0-l3-epB" id="jfZ-Mb-HUW"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="dpi-HY-Lnj">
+            <connections>
+                <action selector="menuViewTap:" destination="iN0-l3-epB" id="XoN-d7-PCu"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="9if-Bl-NuR">
+            <connections>
+                <action selector="menuViewTap:" destination="iN0-l3-epB" id="vgV-Ki-r4A"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="btn_wifi map.png" width="46" height="46"/>

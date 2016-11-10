@@ -47,6 +47,14 @@
     [self.effect addAnimation:self.animationGroup forKey:@"pulse"];
 }
 
+- (void)stop {
+    if ([self.effect.animationKeys count]) {
+        [self.effect removeAllAnimations];
+    }
+    [self.effect removeFromSuperlayer];
+    [self removeFromSuperlayer];
+}
+
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
     self.effect.frame = frame;
@@ -112,7 +120,7 @@
     _pulseInterval = 0;
     _useTimingFunction = YES;
 
-    self.repeatCount = INFINITY;
+    self.repeatCount = HUGE_VALF;
     self.radius = 56.5;
     self.haloLayerNumber = 3;
     self.startInterval = 1;
@@ -134,15 +142,20 @@
     scaleAnimation.toValue = @(116 / self.radius);
     scaleAnimation.duration = self.animationDuration;
     
-    CAKeyframeAnimation *opacityAnimation = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
+//    CAKeyframeAnimation *opacityAnimation = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
+//    opacityAnimation.duration = self.animationDuration;
+//    CGFloat fromValueForAlpha = CGColorGetAlpha(self.backgroundColor);
+//    opacityAnimation.values = @[@0, @(fromValueForAlpha * 2), @0];
+//    opacityAnimation.keyTimes = @[@0, @(self.keyTimeForHalfOpacity), @1];
+    
+    CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    opacityAnimation.fromValue = @1;
+    opacityAnimation.toValue = @0;
     opacityAnimation.duration = self.animationDuration;
-    CGFloat fromValueForAlpha = CGColorGetAlpha(self.backgroundColor);
-    opacityAnimation.values = @[@0, @(fromValueForAlpha * 2), @0];
-    opacityAnimation.keyTimes = @[@0, @(self.keyTimeForHalfOpacity), @1];
     
     NSArray *animations = @[scaleAnimation, opacityAnimation];
-    
     animationGroup.animations = animations;
+    animationGroup.removedOnCompletion = NO;
     
     self.animationGroup = animationGroup;
     self.animationGroup.delegate = self;
@@ -153,12 +166,11 @@
 #pragma mark - CAAnimationDelegate
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
-
-    if ([self.effect.animationKeys count]) {
-        [self.effect removeAllAnimations];
-    }
-    [self.effect removeFromSuperlayer];
-    [self removeFromSuperlayer];
+//    if ([self.effect.animationKeys count]) {
+//        [self.effect removeAllAnimations];
+//    }
+//    [self.effect removeFromSuperlayer];
+//    [self removeFromSuperlayer];
 }
 
 @end

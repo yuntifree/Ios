@@ -35,9 +35,6 @@
         if (complete) {
             complete(res);
         }
-        if (E_OK == res._errno) {
-            DDDLog(@"上报成功, id = %ld , type = %ld", id_, type);
-        }
     }];
 }
 

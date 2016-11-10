@@ -32,6 +32,8 @@
 		6F2DF2DF1DD1E99C00A8F0EC /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2DF2DD1DD1E99C00A8F0EC /* play@2x.png */; };
 		6F2DF2E01DD1E99C00A8F0EC /* play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2DF2DE1DD1E99C00A8F0EC /* play@3x.png */; };
 		6F2E334F1DC6F74000D9E502 /* ServiceCGI.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E334E1DC6F74000D9E502 /* ServiceCGI.m */; };
+		6F2E50771DD47EDB00663148 /* WiFiTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E50761DD47EDB00663148 /* WiFiTipView.m */; };
+		6F2E507B1DD498FD00663148 /* WiFiCGI.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E507A1DD498FD00663148 /* WiFiCGI.m */; };
 		6F2E57B41DB711D000C39F27 /* UITabBarItem+Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E57B31DB711D000C39F27 /* UITabBarItem+Setup.m */; };
 		6F2E57B81DB758C300C39F27 /* AccountCGI.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2E57B71DB758C300C39F27 /* AccountCGI.m */; };
 		6F2E57D41DB78B2B00C39F27 /* icon_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2E57BB1DB78B2B00C39F27 /* icon_back@2x.png */; };
@@ -211,10 +213,14 @@
 		6F2DF2DE1DD1E99C00A8F0EC /* play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@3x.png"; sourceTree = "<group>"; };
 		6F2E334D1DC6F74000D9E502 /* ServiceCGI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceCGI.h; sourceTree = "<group>"; };
 		6F2E334E1DC6F74000D9E502 /* ServiceCGI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceCGI.m; sourceTree = "<group>"; };
+		6F2E50751DD47EDB00663148 /* WiFiTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiTipView.h; sourceTree = "<group>"; };
+		6F2E50761DD47EDB00663148 /* WiFiTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WiFiTipView.m; sourceTree = "<group>"; };
+		6F2E50791DD498FD00663148 /* WiFiCGI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiCGI.h; sourceTree = "<group>"; };
+		6F2E507A1DD498FD00663148 /* WiFiCGI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WiFiCGI.m; sourceTree = "<group>"; };
 		6F2E57B21DB711D000C39F27 /* UITabBarItem+Setup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarItem+Setup.h"; sourceTree = "<group>"; };
 		6F2E57B31DB711D000C39F27 /* UITabBarItem+Setup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarItem+Setup.m"; sourceTree = "<group>"; };
 		6F2E57B61DB758C300C39F27 /* AccountCGI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountCGI.h; sourceTree = "<group>"; };
-		6F2E57B71DB758C300C39F27 /* AccountCGI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AccountCGI.m; path = ../Control/Account/AccountCGI.m; sourceTree = "<group>"; };
+		6F2E57B71DB758C300C39F27 /* AccountCGI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountCGI.m; sourceTree = "<group>"; };
 		6F2E57BB1DB78B2B00C39F27 /* icon_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_back@2x.png"; sourceTree = "<group>"; };
 		6F2E57BC1DB78B2B00C39F27 /* icon_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_back@3x.png"; sourceTree = "<group>"; };
 		6F2E57CE1DB78B2B00C39F27 /* icon_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_bg.png; sourceTree = "<group>"; };
@@ -461,10 +467,20 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		6F2E50781DD498EF00663148 /* WiFi */ = {
+			isa = PBXGroup;
+			children = (
+				6F2E50791DD498FD00663148 /* WiFiCGI.h */,
+				6F2E507A1DD498FD00663148 /* WiFiCGI.m */,
+			);
+			path = WiFi;
+			sourceTree = "<group>";
+		};
 		6F2E57B51DB758B800C39F27 /* Account */ = {
 			isa = PBXGroup;
 			children = (
 				6F2E57B61DB758C300C39F27 /* AccountCGI.h */,
+				6F2E57B71DB758C300C39F27 /* AccountCGI.m */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -576,6 +592,8 @@
 				6F3067261DD3292C00FA841E /* WiFiMenuView.h */,
 				6F3067271DD3292C00FA841E /* WiFiMenuView.m */,
 				6F3067291DD3293F00FA841E /* WiFiMenuView.xib */,
+				6F2E50751DD47EDB00663148 /* WiFiTipView.h */,
+				6F2E50761DD47EDB00663148 /* WiFiTipView.m */,
 			);
 			path = WiFi;
 			sourceTree = "<group>";
@@ -903,6 +921,7 @@
 		6F6FDAC11DB4B79300E50D9B /* Control */ = {
 			isa = PBXGroup;
 			children = (
+				6F2E50781DD498EF00663148 /* WiFi */,
 				6F2E654A1DC9C28A00AF84BB /* Map */,
 				6F2E334C1DC6F72600D9E502 /* Service */,
 				6F3185111DB89C3000017D47 /* News */,
@@ -914,7 +933,6 @@
 		6F6FDAC21DB4B79300E50D9B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				6F2E57B71DB758C300C39F27 /* AccountCGI.m */,
 				6F307BD21DCB1F9C0015F9EC /* Login */,
 				6FCA54741DC9EA91000ED52A /* Map */,
 				6F6FDAF31DB4D39C00E50D9B /* Web */,
@@ -1341,6 +1359,7 @@
 				6F2E65741DC9C76000AF84BB /* LocationInfo.m in Sources */,
 				6F31851D1DB8A9DE00017D47 /* NewsReportModel.m in Sources */,
 				6F6FDADA1DB4C4EB00E50D9B /* UIImage+Fit.m in Sources */,
+				6F2E507B1DD498FD00663148 /* WiFiCGI.m in Sources */,
 				6FFA16871DB606E10077E7C3 /* SSKeychain.m in Sources */,
 				6F6FDAA91DB4B3DE00E50D9B /* AppDelegate.m in Sources */,
 				6F3067281DD3292C00FA841E /* WiFiMenuView.m in Sources */,
@@ -1379,6 +1398,7 @@
 				6FF5C7F71DC1F00200B1A84A /* NewsVideoModel.m in Sources */,
 				6FCA54781DC9EA91000ED52A /* BaiduMapVC.m in Sources */,
 				6F6FDAD71DB4C3CA00E50D9B /* NSData+Additions.m in Sources */,
+				6F2E50771DD47EDB00663148 /* WiFiTipView.m in Sources */,
 				6F2DF2B71DD1BABB00A8F0EC /* NSDate+Format.m in Sources */,
 				6F307C031DCB36980015F9EC /* WiFiSpeedView.m in Sources */,
 				6F31850A1DB8601900017D47 /* ServiceSectionHeader.m in Sources */,

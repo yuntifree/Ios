@@ -50,12 +50,12 @@
 
 - (BOOL)shouldAutorotate
 {
-    return NO;
+    return [self.selectedViewController.childViewControllers.lastObject shouldAutorotate];
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskPortrait;
+    return [self.selectedViewController.childViewControllers.lastObject supportedInterfaceOrientations];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
