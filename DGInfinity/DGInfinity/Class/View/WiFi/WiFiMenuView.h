@@ -13,7 +13,8 @@ typedef NS_ENUM(NSInteger, WiFiMenuType) {
     WiFiMenuTypeManager = 1001,
     WiFiMenuTypeSpeedTest = 1002,
     WiFiMenuTypeMap = 1003,
-    WiFiMenuTypeWelfare = 1004
+    WiFiMenuTypeWelfare = 1004,
+    WiFiMenuTypeHot = 1005
 };
 
 @protocol WiFiMenuViewDelegate <NSObject>
@@ -27,5 +28,6 @@ typedef NS_ENUM(NSInteger, WiFiMenuType) {
 @property (nonatomic, weak) id <WiFiMenuViewDelegate> delegate;
 
 - (void)setWeather:(NSDictionary *)weather;
+- (void)setHotNews:(NSString *)title;
 
 @end

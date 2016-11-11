@@ -12,14 +12,23 @@
 #import "WiFiMenuView.h"
 #import "WiFiTipView.h"
 #import "WiFiCGI.h"
+#import "NewsReportModel.h"
+#import "WebViewController.h"
+#import "NewsReportCell.h"
+#import "WiFiFooterView.h"
 
 #define Height (kScreenHeight - 20 - 44 - 49)
 
-@interface WifiViewController () <WIFISpeedViewDelegate, WiFiMenuViewDelegate, UIScrollViewDelegate>
+@interface WifiViewController () <WIFISpeedViewDelegate, WiFiMenuViewDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     UIScrollView *_scrollView;
     WiFiMenuView *_menuView;
     WiFiTipView *_tipView;
+    UITableView *_tableView;
+    WiFiFooterView *_footerView;
+    
+    NSMutableArray *_newsArray;
+    NSDictionary *_frontInfo;
 }
 
 @property (nonatomic, strong) WiFiSpeedView *speedView;
@@ -40,6 +49,15 @@
 - (NSString *)title
 {
     return @"无线";
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        _newsArray = [NSMutableArray arrayWithCapacity:3];
+    }
+    return self;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -83,6 +101,29 @@
     [_scrollView addSubview:_menuView];
     
     _tipView = [[WiFiTipView alloc] initWithFrame:CGRectMake(kScreenWidth - 96, Height - 36, 88, 24)];
+    
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, Height, kScreenWidth, Height) style:UITableViewStylePlain];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.estimatedRowHeight = 100;
+    _tableView.rowHeight = UITableViewAutomaticDimension;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.backgroundColor = COLOR(245, 245, 245, 1);
+    [_scrollView addSubview:_tableView];
+    
+    _footerView = [[NSBundle mainBundle] loadNibNamed:@"WiFiFooterView" owner:nil options:nil][0];
+    _tableView.tableFooterView = _footerView;
+    __weak typeof(self) wself = self;
+    _tableView.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
+        [wself returnToFirstPage];
+    }];
+}
+
+- (void)returnToFirstPage
+{
+    _scrollView.scrollEnabled = YES;
+    [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    [_tableView.mj_header endRefreshing];
 }
 
 - (void)getWeatherAndNews
@@ -95,6 +136,32 @@
                 if ([weather isKindOfClass:[NSDictionary class]]) {
                     [_menuView setWeather:weather];
                 }
+                NSArray *news = data[@"news"];
+                if ([news isKindOfClass:[NSArray class]]) {
+                    for (NSDictionary *info in news) {
+                        NewsReportModel *model = [NewsReportModel createWithInfo:info];
+                        [_newsArray addObject:model];
+                        if (![_newsArray indexOfObject:model]) {
+                            [_menuView setHotNews:model.title];
+                        }
+                    }
+                }
+                [_tableView reloadData];
+            }
+        } else {
+            [self makeToast:res.desc];
+        }
+    }];
+}
+
+- (void)getFrontInfo
+{
+    [WiFiCGI getFrontInfo:^(DGCgiResult *res) {
+        if (E_OK == res._errno) {
+            NSDictionary *data = res.data[@"data"];
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                _frontInfo = data;
+                [_footerView setFrontInfo:_frontInfo];
             }
         } else {
             [self makeToast:res.desc];
@@ -239,6 +306,15 @@
 }
 */
 
+- (void)openWebWithModel:(NewsReportModel *)model
+{
+    WebViewController *vc = [[WebViewController alloc] init];
+    vc.url = model.dst;
+    vc.newsType = NT_REPORT;
+    vc.title = model.title;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -258,33 +334,100 @@
 #pragma mark - WiFiMenuViewDelegate
 - (void)WiFiMenuViewClick:(WiFiMenuType)type
 {
-    if (type == WiFiMenuTypeSpeedTest) {
-        if (![_menuView.subviews containsObject:self.speedView]) {
-            self.speedView.alpha = 0;
-            [_menuView addSubview:self.speedView];
-            [UIView animateWithDuration:0.5 animations:^{
-                self.speedView.alpha = 1;
-            }];
-        } else {
-            [UIView animateWithDuration:0.5 animations:^{
+    switch (type) {
+        case WiFiMenuTypeSpeedTest:
+        {
+            if (![_menuView.subviews containsObject:self.speedView]) {
                 self.speedView.alpha = 0;
-            } completion:^(BOOL finished) {
-                [self.speedView removeFromSuperview];
-            }];
+                [_menuView addSubview:self.speedView];
+                [UIView animateWithDuration:0.5 animations:^{
+                    self.speedView.alpha = 1;
+                }];
+            } else {
+                [UIView animateWithDuration:0.5 animations:^{
+                    self.speedView.alpha = 0;
+                } completion:^(BOOL finished) {
+                    [self.speedView removeFromSuperview];
+                }];
+            }
         }
-    } else if (type == WiFiMenuTypeMap) {
-        BaiduMapVC *vc = [[BaiduMapVC alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+            break;
+        case WiFiMenuTypeMap:
+        {
+            BaiduMapVC *vc = [[BaiduMapVC alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case WiFiMenuTypeHot:
+        {
+            if (_newsArray.count) {
+                [self openWebWithModel:_newsArray[0]];
+            }
+        }
+            break;
+        default:
+            break;
     }
 }
 
 #pragma mark - UIScrollViewDelegate
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     if (scrollView == _scrollView) {
-        if (_tipView) {
-            [_tipView dismiss];
-            _tipView = nil;
+        if (scrollView == _scrollView && scrollView.contentOffset.y) {
+            if (_tipView) {
+                [_tipView dismiss];
+                _tipView = nil;
+            }
+            if (_frontInfo == nil) {
+                [self getFrontInfo];
+            }
+            if (scrollView.contentOffset.y == Height) {
+                scrollView.scrollEnabled = NO;
+            }
+        }
+    }
+}
+
+#pragma mark - UITableViewDataSource, UITableViewDelegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    [tableView displayWitMsg:@"没有相关数据" ForDataCount:_newsArray.count];
+    return _newsArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = nil;
+    if (indexPath.row < _newsArray.count) {
+        cell = [NewsReportCell getNewsReportCell:tableView model:_newsArray[indexPath.row]];
+    }
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row < _newsArray.count) {
+        NewsReportModel *model = _newsArray[indexPath.row];
+        [SApp reportClick:[ReportClickModel createWithReportModel:model]];
+        NSURL *url = [NSURL URLWithString:model.dst];
+        if ([url.scheme isEqualToString:@"itms"] || [url.scheme isEqualToString:@"itms-apps"]) {
+            [[UIApplication sharedApplication] openURL:url];
+        } else {
+            [self openWebWithModel:model];
+        }
+    }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row < _newsArray.count) {
+        NewsReportModel *model = _newsArray[indexPath.row];
+        if (model.stype == RT_AD) {
+            ReportClickModel *rcm = [ReportClickModel createWithReportModel:model];
+            rcm.type = RCT_ADSHOW;
+            [SApp reportClick:rcm];
         }
     }
 }

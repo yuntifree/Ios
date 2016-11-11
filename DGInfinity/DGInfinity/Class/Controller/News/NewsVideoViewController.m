@@ -121,6 +121,7 @@
         [SApp reportClick:[ReportClickModel createWithVideoModel:model]];
         WebViewController *vc = [[WebViewController alloc] init];
         vc.url = model.dst;
+        vc.newsType = NT_VIDEO;
         vc.title = @"视频";
         [self.navigationController pushViewController:vc animated:YES];
     }

@@ -15,4 +15,9 @@
  */
 + (void)getWeatherNews:(void (^)(DGCgiResult *res))complete;
 
+/**
+ *  get_front_info
+ */
++ (void)getFrontInfo:(void (^)(DGCgiResult *res))complete;
+
 @end

@@ -88,11 +88,14 @@
                                 <constraint firstAttribute="width" constant="14" id="SFb-Hq-2qy"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="东莞头条" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AF4-jb-U74">
+                        <label opaque="NO" userInteractionEnabled="NO" tag="1005" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="东莞头条" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AF4-jb-U74">
                             <rect key="frame" x="30" y="3" width="341" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.29019607843137252" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="amY-bg-nYf" appends="YES" id="qhC-bJ-Mir"/>
+                            </connections>
                         </label>
                     </subviews>
                     <color key="backgroundColor" red="0.87058823529411766" green="0.94901960784313721" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
@@ -330,12 +333,13 @@
             <connections>
                 <outlet property="_connectBtn" destination="ZHF-di-tNg" id="Z07-h1-g7w"/>
                 <outlet property="_connectBtnTop" destination="kEC-34-kJO" id="pCE-qI-eBR"/>
+                <outlet property="_hotLbl" destination="AF4-jb-U74" id="IqI-Mf-SKA"/>
                 <outlet property="_statusLbl" destination="6ug-TH-yA9" id="1ER-vb-E9g"/>
                 <outlet property="_statusLblBottom" destination="1ZS-ru-siW" id="482-Lp-6Dg"/>
                 <outlet property="_temperatureLbl" destination="3qL-46-AD3" id="ych-DS-jzs"/>
                 <outlet property="_weatherLbl" destination="EJL-Uv-jC0" id="GWY-mQ-PkY"/>
             </connections>
-            <point key="canvasLocation" x="-220.5" y="-169"/>
+            <point key="canvasLocation" x="-247" y="-162"/>
         </view>
         <tapGestureRecognizer id="o02-dx-MzN">
             <connections>
@@ -355,6 +359,11 @@
         <tapGestureRecognizer id="9if-Bl-NuR">
             <connections>
                 <action selector="menuViewTap:" destination="iN0-l3-epB" id="vgV-Ki-r4A"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="amY-bg-nYf">
+            <connections>
+                <action selector="menuViewTap:" destination="iN0-l3-epB" id="JS9-bO-Pdy"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

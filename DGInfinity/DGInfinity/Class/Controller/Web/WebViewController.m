@@ -54,6 +54,7 @@
         _progressView.frame = CGRectMake(0, 0, kScreenWidth, 4);
         _progressView.progress = 0;
         _progressView.hidden = YES;
+        _progressView.trackTintColor = [UIColor whiteColor];
         [self.view addSubview:_progressView];
     }
     return _progressView;
@@ -73,7 +74,7 @@
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor whiteColor];
     
-    if ([self.title isEqualToString:@"视频"]) {
+    if (_newsType == NT_VIDEO) {
         NSNumber *orientationUnknown = [NSNumber numberWithInt:UIInterfaceOrientationUnknown];
         [[UIDevice currentDevice] setValue:orientationUnknown forKey:@"orientation"];
         
@@ -98,12 +99,12 @@
 
 - (BOOL)shouldAutorotate
 {
-    return [self.title isEqualToString:@"视频"];
+    return _newsType == NT_VIDEO;
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
-    return self.shouldAutorotate ? UIInterfaceOrientationMaskLandscape : UIInterfaceOrientationMaskPortrait;
+    return self.shouldAutorotate ? UIInterfaceOrientationMaskAllButUpsideDown : UIInterfaceOrientationMaskPortrait;
 }
 
 #pragma mark - Btn Action
@@ -112,7 +113,15 @@
     if ([self.webView canGoBack]) {
         [self.webView goBack];
     } else {
-        [super backBtnClick:sender];
+        if (_newsType == NT_VIDEO) {
+            NSNumber *orientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+            [[UIDevice currentDevice] setValue:orientationTarget forKey:@"orientation"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [super backBtnClick:sender];
+            });
+        } else {
+            [super backBtnClick:sender];
+        }
     }
 }
 
@@ -159,7 +168,7 @@
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation
 {
-    if ([self.title isEqualToString:@"视频"]) {
+    if (_newsType == NT_VIDEO) {
         [webView evaluateJavaScript:@"document.body.style.backgroundColor = '#000';" completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
             if (error) {
                 DDDLog(@"---%@",error);

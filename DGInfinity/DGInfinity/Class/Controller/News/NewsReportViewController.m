@@ -79,7 +79,7 @@
                     }
                     for (NSDictionary *info in infos) {
                         NewsReportModel *model = [NewsReportModel createWithInfo:info];
-                        [_newsArray addObject:model] ;
+                        [_newsArray addObject:model];
                         if (!_minseq || _minseq > model.seq) {
                             _minseq = model.seq;
                         }
@@ -126,6 +126,8 @@
         } else {
             WebViewController *vc = [[WebViewController alloc] init];
             vc.url = model.dst;
+            vc.newsType = NT_REPORT;
+            vc.title = model.title;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }

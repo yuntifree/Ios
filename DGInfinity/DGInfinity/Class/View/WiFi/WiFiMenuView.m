@@ -15,6 +15,7 @@
     __weak IBOutlet UILabel *_statusLbl;
     __weak IBOutlet UILabel *_temperatureLbl;
     __weak IBOutlet UILabel *_weatherLbl;
+    __weak IBOutlet UILabel *_hotLbl;
     
     __weak IBOutlet NSLayoutConstraint *_connectBtnTop;
     __weak IBOutlet NSLayoutConstraint *_statusLblBottom;
@@ -40,6 +41,12 @@
 {
     _temperatureLbl.text = [NSString stringWithFormat:@"%ld°C",[weather[@"temp"] integerValue]];
     _weatherLbl.text = weather[@"info"];
+}
+
+- (void)setHotNews:(NSString *)title
+{
+    _hotLbl.text = [NSString stringWithFormat:@"东莞头条：%@",title];
+    _hotLbl.userInteractionEnabled = YES;
 }
 
 - (IBAction)menuViewTap:(UITapGestureRecognizer *)sender {

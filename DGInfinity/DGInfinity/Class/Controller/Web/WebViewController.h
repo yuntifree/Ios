@@ -16,5 +16,6 @@ typedef NS_ENUM(NSInteger, WebItemType) {
 @interface WebViewController : DGViewController
 
 @property (nonatomic, copy) NSString *url;
+@property (nonatomic, assign) NewsType newsType;
 
 @end
