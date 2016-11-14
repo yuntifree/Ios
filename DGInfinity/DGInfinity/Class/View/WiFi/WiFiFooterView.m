@@ -14,6 +14,7 @@
     IBOutletCollection(UIButton) NSArray *_sectionBtns;
     __weak IBOutlet UILabel *_totalLbl;
     __weak IBOutlet UILabel *_saveLbl;
+    __weak IBOutlet UIImageView *_banner;
     
 }
 @end
@@ -36,14 +37,23 @@
         _totalLbl.text = [NSString stringWithFormat:@"%ld",[user[@"total"] integerValue]];
         _saveLbl.text = [NSString stringWithFormat:@"%ld",[user[@"save"] integerValue]];
     }
+    NSDictionary *banner = frontInfo[@"banner"];
+    if ([banner isKindOfClass:[NSDictionary class]]) {
+        [_banner yy_setImageWithURL:[NSURL URLWithString:banner[@"img"]] options:YYWebImageOptionSetImageWithFadeAnimation];
+        _banner.userInteractionEnabled = YES;
+    }
 }
 
-- (IBAction)lookForMoreNews:(id)sender {
-    
+- (IBAction)btnClick:(UIButton *)sender {
+    if (_block) {
+        _block(sender.tag);
+    }
 }
 
-- (IBAction)bannerTap:(id)sender {
-    
+- (IBAction)bannerTap:(UITapGestureRecognizer *)sender {
+    if (_block) {
+        _block(sender.view.tag);
+    }
 }
 
 @end

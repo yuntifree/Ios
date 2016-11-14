@@ -52,6 +52,7 @@
 - (void)changeBtn:(NSInteger)tag
 {
     UIButton *button = (UIButton *)[self viewWithTag:tag];
+    if (button == _selectedBtn) return;
     [UIView animateWithDuration:0.2 animations:^{
         _selectedBtn.selected = NO;
         _selectedBtn.titleLabel.font = SystemFont(16);

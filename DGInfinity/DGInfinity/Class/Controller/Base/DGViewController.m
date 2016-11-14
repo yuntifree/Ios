@@ -23,19 +23,10 @@
 {
     if (_backBtn == nil) {
         _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _backBtn.frame = CGRectMake(10, 10, 24, 24);
+        _backBtn.frame = CGRectMake(0, 0, 44, 44);
         [_backBtn addTarget:self action:@selector(backBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-        UIGraphicsBeginImageContextWithOptions(_backBtn.frame.size, 0, [UIScreen mainScreen].scale);
-        [[UIColor clearColor] set];
-        UIRectFill(CGRectMake(0, 0, _backBtn.frame.size.width, _backBtn.frame.size.height));
-        
         UIImage *image = ImageNamed(@"icon_back");
-        [image drawInRect:CGRectMake(0, (_backBtn.frame.size.height - image.size.height)/2, image.size.width, image.size.height) blendMode:kCGBlendModeNormal alpha:0.5];
-        UIImage *highLightedImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
         [_backBtn setBackgroundImage:image forState:UIControlStateNormal];
-        [_backBtn setBackgroundImage:highLightedImage forState:UIControlStateHighlighted];
     }
     return _backBtn;
 }
@@ -48,6 +39,7 @@
         [_closeBtn addTarget:self action:@selector(closeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_closeBtn setTitle:@"关闭" forState:UIControlStateNormal];
         [_closeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_closeBtn setContentEdgeInsets:UIEdgeInsetsMake(-2, 0, 0, 0)];
     }
     return _closeBtn;
 }
@@ -85,17 +77,17 @@
 {
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backBtn];
     UIBarButtonItem *fixedSpaceBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFixedSpace target: nil action: nil];
-    fixedSpaceBarButtonItem.width = -5;
+    fixedSpaceBarButtonItem.width = -15;
     self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:fixedSpaceBarButtonItem, backBarButtonItem, nil];
 }
 
 - (void)setUpCloseItem
 {
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView: self.backBtn];
-    UIBarButtonItem *fixedSpaceBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFixedSpace target: nil action: nil];
     UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView: self.closeBtn];
-    fixedSpaceBarButtonItem.width = -5;
-    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:backBarButtonItem, closeBarButtonItem, nil];
+    UIBarButtonItem *fixedSpaceBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFixedSpace target: nil action: nil];
+    fixedSpaceBarButtonItem.width = -15;
+    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:fixedSpaceBarButtonItem, backBarButtonItem, closeBarButtonItem, nil];
 }
 
 - (void)backBtnClick:(id)sender

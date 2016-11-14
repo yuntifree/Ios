@@ -6,41 +6,17 @@
 //  Copyright © 2015年 qihoo360. All rights reserved.
 //
 
-#import "WIFContentViewProtocol.h"
-#import "WiFiRecord.h"
 #import <UIKit/UIKit.h>
 
-#define IS_IPHONE_FOUR (kScreenWidth == 320 && kScreenHeight == 480)
-#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-#define IS_PAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+@interface WiFiSpeedRecord : NSObject
 
-#define IS_IPHONE_FIVE ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
-
-#define IS_IPHONE_SIX_PLUS ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? (CGSizeEqualToSize(CGSizeMake(1125, 2001), [[UIScreen mainScreen] currentMode].size) || CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size)) : NO)
-
-@protocol WIFISpeedViewDelegate <NSObject>
-
-- (void)touchCloseBtn;
-@optional
-- (void)updateSpeedBarIcon:(NSString*)speed;
-- (void)updateSpeedNavTitle:(NSString*)navTitle;
+@property (nonatomic, copy) NSString *speed;
+@property (nonatomic, copy) NSString *desc;
 
 @end
 
-@interface WiFiSpeedView : UIView<WIFMenuContentViewDeleagte>
-
-@property (nonatomic, weak) id <WIFISpeedViewDelegate> delegate;
+@interface WiFiSpeedView : UIView
 
 - (instancetype)initWithFrame:(CGRect)frame;
-
-//更新wifi的info信息
--(void)updateWiFiInfo:(WiFiRecord*) record;
-
-- (void)contentViewDidAppear;
-
-#pragma mark -- WIFMenuContentViewDeleagte
-- (void)wifiConnected;
-- (void)wifiDisconnected;
-- (void)wifiInfoUpdate:(WiFiRecord*) record;
 
 @end

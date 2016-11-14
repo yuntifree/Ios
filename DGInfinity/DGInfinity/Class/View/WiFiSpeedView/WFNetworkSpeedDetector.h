@@ -21,7 +21,7 @@
 
 
 @interface WFNetworkSpeedDetector : NSObject
-@property (assign, nonatomic) id<WFNetworkSpeedDetectorDelegate> delegate;
+@property (weak, nonatomic) id <WFNetworkSpeedDetectorDelegate> delegate;
 
 + (instancetype)sharedSpeedDetector;
 - (void)startSpeedDetector;

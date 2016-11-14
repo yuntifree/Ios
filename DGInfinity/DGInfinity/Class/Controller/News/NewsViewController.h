@@ -10,4 +10,6 @@
 
 @interface NewsViewController : DGViewController
 
+- (void)setCurrentPage:(NSInteger)index;
+
 @end

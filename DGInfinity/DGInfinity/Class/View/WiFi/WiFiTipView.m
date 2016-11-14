@@ -21,7 +21,7 @@
         label.font = SystemFont(12);
         label.textColor = [UIColor whiteColor];
         label.textAlignment = NSTextAlignmentCenter;
-        label.text = @"下拉查看更多";
+        label.text = @"上拉查看更多";
         [self addSubview:label];
     }
     return self;

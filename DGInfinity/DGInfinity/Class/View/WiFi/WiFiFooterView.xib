@@ -19,7 +19,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yDX-nE-jer">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEO-A5-NxF">
+                        <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEO-A5-NxF">
                             <rect key="frame" x="12" y="8" width="351" height="32"/>
                             <color key="backgroundColor" red="0.38823529411764707" green="0.7803921568627451" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -27,7 +27,7 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="lookForMoreNews:" destination="iN0-l3-epB" eventType="touchUpInside" id="nxU-W9-xqT"/>
+                                <action selector="btnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="nA3-iP-P48"/>
                             </connections>
                         </button>
                     </subviews>
@@ -40,13 +40,13 @@
                         <constraint firstItem="UEO-A5-NxF" firstAttribute="top" secondItem="yDX-nE-jer" secondAttribute="top" constant="8" id="p0W-aE-WFs"/>
                     </constraints>
                 </view>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qZi-Nd-L3K">
+                <imageView userInteractionEnabled="NO" tag="1001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qZi-Nd-L3K">
                     <rect key="frame" x="0.0" y="60" width="375" height="100"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="qZi-Nd-L3K" secondAttribute="height" multiplier="375:100" id="J5H-kI-AyU"/>
                     </constraints>
                     <connections>
-                        <outletCollection property="gestureRecognizers" destination="44a-4E-iRU" appends="YES" id="zZ4-JX-TuR"/>
+                        <outletCollection property="gestureRecognizers" destination="44a-4E-iRU" appends="YES" id="jtW-j0-VNf"/>
                     </connections>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="twa-G3-Zn0">
@@ -79,47 +79,65 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="stW-2f-j8N">
                     <rect key="frame" x="0.0" y="193" width="375" height="156"/>
                     <subviews>
-                        <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5Z-SY-Hz8">
+                        <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5Z-SY-Hz8">
                             <rect key="frame" x="0.0" y="0.0" width="125" height="78"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="东莞头条" image="news.png">
                                 <color key="titleColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="btnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="2Lo-5e-x2h"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QVM-Zd-5ci">
+                        <button opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QVM-Zd-5ci">
                             <rect key="frame" x="125" y="0.0" width="125" height="78"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="热门视频" image="video.png">
                                 <color key="titleColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="btnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="NY7-Ox-F4j"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FYh-7G-9m8">
+                        <button opaque="NO" tag="1004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FYh-7G-9m8">
                             <rect key="frame" x="250" y="0.0" width="125" height="78"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="同城服务" image="service.png">
                                 <color key="titleColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="btnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="mva-GL-4aH"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k29-Sm-EIE">
+                        <button opaque="NO" tag="1005" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k29-Sm-EIE">
                             <rect key="frame" x="0.0" y="78" width="125" height="78"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="智慧政务" image="government.png">
                                 <color key="titleColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="btnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="smC-Si-Apm"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" tag="1004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z0J-eC-lG3">
+                        <button opaque="NO" tag="1006" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z0J-eC-lG3">
                             <rect key="frame" x="125" y="78" width="125" height="78"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="同城直播" image="live.png">
                                 <color key="titleColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="btnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="VnB-3c-UaA"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" tag="1005" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCY-sQ-aI5">
+                        <button opaque="NO" tag="1007" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCY-sQ-aI5">
                             <rect key="frame" x="250" y="78" width="125" height="78"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="抢购" image="buying.png">
                                 <color key="titleColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="btnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="o9t-J9-1oF"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -271,6 +289,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="_banner" destination="qZi-Nd-L3K" id="vMR-9q-Msf"/>
                 <outlet property="_saveLbl" destination="lp4-q7-T3o" id="uJu-pE-XXE"/>
                 <outlet property="_totalLbl" destination="iy3-bG-GGF" id="cTk-vU-6F2"/>
                 <outletCollection property="_sectionBtns" destination="b5Z-SY-Hz8" id="mqk-1R-b6y"/>
@@ -284,7 +303,7 @@
         </view>
         <tapGestureRecognizer id="44a-4E-iRU">
             <connections>
-                <action selector="bannerTap:" destination="iN0-l3-epB" id="LcO-1n-tlc"/>
+                <action selector="bannerTap:" destination="iN0-l3-epB" id="bEX-lf-IEL"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

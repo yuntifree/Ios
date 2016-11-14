@@ -8,7 +8,6 @@
 
 #import "WifiViewController.h"
 #import "BaiduMapVC.h"
-#import "WiFiSpeedView.h"
 #import "WiFiMenuView.h"
 #import "WiFiTipView.h"
 #import "WiFiCGI.h"
@@ -16,10 +15,12 @@
 #import "WebViewController.h"
 #import "NewsReportCell.h"
 #import "WiFiFooterView.h"
+#import "WiFiSpeedTestViewController.h"
+#import "NewsViewController.h"
 
 #define Height (kScreenHeight - 20 - 44 - 49)
 
-@interface WifiViewController () <WIFISpeedViewDelegate, WiFiMenuViewDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface WifiViewController () <WiFiMenuViewDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     UIScrollView *_scrollView;
     WiFiMenuView *_menuView;
@@ -31,20 +32,9 @@
     NSDictionary *_frontInfo;
 }
 
-@property (nonatomic, strong) WiFiSpeedView *speedView;
-
 @end
 
 @implementation WifiViewController
-
-- (WiFiSpeedView *)speedView
-{
-    if (_speedView == nil) {
-        _speedView = [[WiFiSpeedView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth * 317 / 375)];
-        _speedView.delegate = self;
-    }
-    return _speedView;
-}
 
 - (NSString *)title
 {
@@ -111,12 +101,21 @@
     _tableView.backgroundColor = COLOR(245, 245, 245, 1);
     [_scrollView addSubview:_tableView];
     
-    _footerView = [[NSBundle mainBundle] loadNibNamed:@"WiFiFooterView" owner:nil options:nil][0];
-    _tableView.tableFooterView = _footerView;
     __weak typeof(self) wself = self;
-    _tableView.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [wself returnToFirstPage];
     }];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    [header setTitle:@"下拉，回到首页" forState:MJRefreshStateIdle];
+    [header setTitle:@"释放，回到首页" forState:MJRefreshStatePulling];
+    [header setTitle:@"加载中..." forState:MJRefreshStateRefreshing];
+    _tableView.mj_header = header;
+    
+    _footerView = [[NSBundle mainBundle] loadNibNamed:@"WiFiFooterView" owner:nil options:nil][0];
+    _tableView.tableFooterView = _footerView;
+    _footerView.block = ^(WiFiFooterType type) {
+        [wself handleFooterViewAction:type];
+    };
 }
 
 - (void)returnToFirstPage
@@ -124,6 +123,36 @@
     _scrollView.scrollEnabled = YES;
     [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [_tableView.mj_header endRefreshing];
+}
+
+- (void)handleFooterViewAction:(WiFiFooterType)type
+{
+    UITabBarController *root = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    UINavigationController *nav = root.viewControllers[1];
+    NewsViewController *vc = (NewsViewController *)nav.topViewController;
+    switch (type) {
+        case WiFiFooterTypeLookForNews:
+        case WiFiFooterTypeNews:
+        case WiFiFooterTypeVideo:
+        {
+            root.selectedIndex = 1;
+            if (type == WiFiFooterTypeLookForNews || type == WiFiFooterTypeNews) {
+                [vc setCurrentPage:0];
+            } else {
+                [vc setCurrentPage:1];
+            }
+        }
+            break;
+        case WiFiFooterTypeBanner:
+        {
+            WebViewController *vc = [[WebViewController alloc] init];
+            vc.url = _frontInfo[@"banner"][@"dst"];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)getWeatherAndNews
@@ -320,36 +349,14 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - WIFISpeedViewDelegate
-- (void)touchCloseBtn
-{
-    self.navigationController.tabBarController.selectedIndex = 1;
-    [UIView animateWithDuration:0.5 animations:^{
-        self.speedView.alpha = 0;
-    } completion:^(BOOL finished) {
-        [self.speedView removeFromSuperview];
-    }];
-}
-
 #pragma mark - WiFiMenuViewDelegate
 - (void)WiFiMenuViewClick:(WiFiMenuType)type
 {
     switch (type) {
         case WiFiMenuTypeSpeedTest:
         {
-            if (![_menuView.subviews containsObject:self.speedView]) {
-                self.speedView.alpha = 0;
-                [_menuView addSubview:self.speedView];
-                [UIView animateWithDuration:0.5 animations:^{
-                    self.speedView.alpha = 1;
-                }];
-            } else {
-                [UIView animateWithDuration:0.5 animations:^{
-                    self.speedView.alpha = 0;
-                } completion:^(BOOL finished) {
-                    [self.speedView removeFromSuperview];
-                }];
-            }
+            WiFiSpeedTestViewController *vc = [[WiFiSpeedTestViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case WiFiMenuTypeMap:

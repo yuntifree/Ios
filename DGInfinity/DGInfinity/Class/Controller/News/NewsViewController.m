@@ -74,6 +74,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)setCurrentPage:(NSInteger)index
+{
+    self.view.backgroundColor = [UIColor whiteColor]; // 隐式调用viewDidLoad
+    [_scrollView setContentOffset:CGPointMake(index * kScreenWidth, 0) animated:NO];
+    [_titleView changeBtn:index + 1000];
+}
+
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
