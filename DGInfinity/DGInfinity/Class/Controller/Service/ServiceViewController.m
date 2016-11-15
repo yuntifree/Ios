@@ -13,6 +13,16 @@
 #import "ServiceSectionHeader.h"
 #import "ServiceCellModel.h"
 #import "ServiceCGI.h"
+#import "ServiceSectionModel.h"
+
+// banner 上方链接栏
+static NSString *url[] = {
+    @"http://jump.luna.58.com/i/29Zo",
+    @"http://jump.luna.58.com/i/29Zp",
+    @"http://jump.luna.58.com/i/29Zq",
+    @"http://jump.luna.58.com/i/29Zr",
+    @"http://jump.luna.58.com/i/29Zs"
+};
 
 @interface ServiceViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 {
@@ -21,63 +31,52 @@
     NSMutableArray *_dataArray;
 }
 
-@property (nonatomic, strong) NSArray *sectionArray;
-
 @end
 
 @implementation ServiceViewController
 
-#pragma mark - lazy-init
-
-- (NSArray *)sectionArray
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    if (_sectionArray == nil) {
-        _sectionArray = @[@"智慧政务", @"交通出行", @"医疗服务", @"网上充值"];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        _dataArray = [NSMutableArray array];
     }
-    return _sectionArray;
-}
-
-- (NSString *)title
-{
-    return @"服务";
+    return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    // 构造假数据
-    NSArray *array = @[@[@{@"title": @"工商查询", @"url": @"http://www.gdcredit.gov.cn/fuwudating!toQiYeService.do"},
-                         @{@"title": @"就业补贴", @"url": @"http://shenbao.dg.gov.cn/dgcsfw_zfb/csfw/dg_qxj/weixinportal.jsp"},
-                         @{@"title": @"违章查询", @"url": @"http://112.74.64.177:8080/Traffic/ViolationByVehicleLicense"},
-                         @{@"title": @"客运查询", @"url": @"http://183.6.161.195:8089/select.html"},
-                         @{@"title": @"积分入户", @"url": @"http://shenbao.dg.gov.cn/dgcsfw_zfb/csfw/dg_rlzy/pages/jfrh-serach-zfb.jsp"},
-                         @{@"title": @"积分入学", @"url": @"http://shenbao.dg.gov.cn/dgcsfw_zfb/csfw/dg_rlzy/pages/jfrx-serach-zfb.jsp"}],
-                       @[@{@"title": @"公交查询", @"url": @"http://www.baidu.com"},
-                         @{@"title": @"火车票", @"url": @"http://www.baidu.com"},
-                         @{@"title": @"汽车票", @"url": @"http://www.baidu.com"},
-                         @{@"title": @"飞机票", @"url": @"http://www.baidu.com"},
-                         @{@"title": @"便民打车", @"url": @"http://www.baidu.com"}],
-                       @[@{@"title": @"预约挂号", @"url": @"http://www.baidu.com"},
-                         @{@"title": @"医院查询", @"url": @"http://www.baidu.com"}],
-                       @[@{@"title": @"手机话费", @"url": @"http://www.baidu.com"},
-                         @{@"title": @"手机流量", @"url": @"http://www.baidu.com"},
-                         @{@"title": @"水费", @"url": @"http://www.baidu.com"},
-                         @{@"title": @"电费", @"url": @"http://www.baidu.com"},
-                         @{@"title": @"煤气费", @"url": @"http://www.baidu.com"}],
-                       ];
-    _dataArray = [NSMutableArray arrayWithCapacity:4];
-    for (NSArray *sub in array) {
-        NSMutableArray *tem = [NSMutableArray arrayWithCapacity:6];
-        for (NSDictionary *info in sub) {
-            [tem addObject:[ServiceCellModel createWithInfo:info]];
-        }
-        [_dataArray addObject:tem];
-    }
-    //
-    
+    [self setUpTitleView];
     [self setUpCollectionView];
     [self getServices];
+}
+
+- (void)setUpTitleView
+{
+    UIView *searchView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth - 36, 30)];
+    searchView.backgroundColor = COLOR(1, 135, 238, 1);
+    searchView.layer.cornerRadius = 8;
+    searchView.layer.masksToBounds = YES;
+    [searchView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goSearch)]];
+    
+    UIImageView *icon = [[UIImageView alloc] initWithImage:ImageNamed(@"ico_search")];
+    icon.origin = CGPointMake(12, 2);
+    [searchView addSubview:icon];
+    
+    UILabel *placeholder = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, searchView.width - 80, searchView.height)];
+    placeholder.text = @"搜索或输入网址";
+    placeholder.font = SystemFont(14);
+    placeholder.textColor = COLOR(252, 252, 252, 0.6);
+    [searchView addSubview:placeholder];
+    
+    self.navigationItem.titleView = searchView;
+}
+
+- (void)goSearch
+{
+    
 }
 
 - (void)setUpCollectionView
@@ -91,24 +90,42 @@
     layout.minimumInteritemSpacing = 0;
     layout.itemSize = CGSizeMake(kScreenWidth / 3.0, 44.0);
     
-    ServiceHeaderView *header = [[ServiceHeaderView alloc] initWithFrame:CGRectMake(0, -100, kScreenWidth, 100)];
+    ServiceHeaderView *header = [[ServiceHeaderView alloc] initWithFrame:CGRectMake(0, -105, kScreenWidth, 105)];
     __weak typeof(self) wself = self;
     header.headClick = ^(NSInteger tag) {
-        [wself openWebVC:@"http://news.sina.com.cn"];
+        [wself openWebVC:url[tag]];
     };
     [_listView addSubview:header];
-    _listView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
+    _listView.contentInset = UIEdgeInsetsMake(105, 0, 0, 0);
     
     [_listView registerNib:[UINib nibWithNibName:@"ServiceSectionHeader" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ServiceSectionHeader"];
+    
+    _listView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
+}
+
+- (void)headerRefresh
+{
+    [self getServices];
 }
 
 - (void)getServices
 {
     [ServiceCGI getServices:^(DGCgiResult *res) {
+        [_listView.mj_header endRefreshing];
         if (E_OK == res._errno) {
             NSDictionary *data = res.data[@"data"];
             if ([data isKindOfClass:[NSDictionary class]]) {
-                DDDLog(@"----%@",data);
+                NSArray *services = data[@"services"];
+                if ([services isKindOfClass:[NSArray class]]) {
+                    if (_dataArray.count) {
+                        [_dataArray removeAllObjects];
+                    }
+                    for (NSDictionary *info in services) {
+                        ServiceSectionModel *model = [ServiceSectionModel createWithInfo:info];
+                        [_dataArray addObject:model];
+                    }
+                }
+                [_listView reloadData];
             }
         } else {
             [self makeToast:res.desc];
@@ -137,16 +154,20 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [_dataArray[section] count];
+    if (section < _dataArray.count) {
+        ServiceSectionModel *sModel = _dataArray[section];
+        return [sModel.items count];
+    }
+    return 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ServiceCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ServiceCell" forIndexPath:indexPath];
     if (indexPath.section < _dataArray.count) {
-        NSArray *array = _dataArray[indexPath.section];
-        if (indexPath.row < array.count) {
-            ServiceCellModel *model = array[indexPath.row];
+        ServiceSectionModel *sModel = _dataArray[indexPath.section];
+        if (indexPath.row < sModel.items.count) {
+            ServiceCellModel *model = sModel.items[indexPath.row];
             [cell setTitle:model.title];
         }
     }
@@ -158,7 +179,10 @@
     ServiceSectionHeader *header = nil;
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"ServiceSectionHeader" forIndexPath:indexPath];
-        [header setTitle:self.sectionArray[indexPath.section]];
+        if (indexPath.section < _dataArray.count) {
+            ServiceSectionModel *sModel = _dataArray[indexPath.section];
+            [header setTitle:sModel.title icon:sModel.icon];
+        }
     }
     return header;
 }
@@ -167,17 +191,17 @@
 {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     if (indexPath.section < _dataArray.count) {
-        NSArray *array = _dataArray[indexPath.section];
-        if (indexPath.row < array.count) {
-            ServiceCellModel *model = array[indexPath.row];
-            [self openWebVC:model.url];
+        ServiceSectionModel *sModel = _dataArray[indexPath.section];
+        if (indexPath.row < sModel.items.count) {
+            ServiceCellModel *model = sModel.items[indexPath.row];
+            [self openWebVC:model.dst];
         }
     }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(kScreenWidth, 35);
+    return CGSizeMake(kScreenWidth, 56);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
@@ -192,13 +216,13 @@
 
 - (void)collectionView:(UICollectionView *)colView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell* cell = [colView cellForItemAtIndexPath:indexPath];
+    UICollectionViewCell *cell = [colView cellForItemAtIndexPath:indexPath];
     [cell setBackgroundColor:RGB(0xf2f2f2, 1)];
 }
 
 - (void)collectionView:(UICollectionView *)colView  didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell* cell = [colView cellForItemAtIndexPath:indexPath];
+    UICollectionViewCell *cell = [colView cellForItemAtIndexPath:indexPath];
     [cell setBackgroundColor:[UIColor whiteColor]];
 }
 

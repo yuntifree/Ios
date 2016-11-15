@@ -7,8 +7,10 @@
 //
 
 #import "ServiceHeaderView.h"
+#import "UIButton+Vertical.h"
 
-#define Padding (kScreenWidth - 45 * 5) / 6.0
+#define Width 44
+#define Padding (kScreenWidth - Width * 5) / 6.0
 
 @implementation ServiceHeaderView
 
@@ -16,24 +18,21 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = RGB(0xfafafa, 1);
+        self.backgroundColor = [UIColor whiteColor];
         
         NSArray *titleArray = @[@"招聘", @"二手", @"租房", @"家政", @"更多"];
-        NSArray *imageArray = @[@"icon_zp", @"icon_es", @"icon_zf", @"icon_jz", @"icon_gd"];
+        NSArray *imageArray = @[@"cooperation", @"secong_hand", @"housing", @"Housekeeping", @"more"];
         for (int i = 0; i < titleArray.count; i++) {
-            UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-            [button setBackgroundImage:ImageNamed(imageArray[i]) forState:UIControlStateNormal];
-            button.frame = CGRectMake(Padding * (i + 1) + 45 * i, 10, 45, 45);
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            [button setImage:ImageNamed(imageArray[i]) forState:UIControlStateNormal];
+            [button setTitle:titleArray[i] forState:UIControlStateNormal];
+            [button setTitleColor:COLOR(60, 60, 60, 1) forState:UIControlStateNormal];
+            button.frame = CGRectMake(Padding * (i + 1) + Width * i, 0, Width, frame.size.height);
             button.tag = 10000 + i;
+            button.titleLabel.font = SystemFont(14);
             [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+            [button verticalImageAndTitle:9];
             [self addSubview:button];
-            
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(button.x, button.y + button.height + 12, 45, 17)];
-            label.textAlignment = NSTextAlignmentCenter;
-            label.textColor = RGB(0x000000, 0.6);
-            label.font = SystemFont(14);
-            label.text = titleArray[i];
-            [self addSubview:label];
         }
     }
     return self;

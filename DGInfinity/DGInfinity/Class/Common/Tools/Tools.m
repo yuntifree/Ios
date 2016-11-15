@@ -9,6 +9,7 @@
 #import "Tools.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import "NetworkManager.h"
+#import <AVFoundation/AVFoundation.h>
 
 @implementation Tools
 
@@ -140,6 +141,25 @@
             break;
     }
     return factor;
+}
+
++ (void)permissionOfCamera:(void (^)())successBlock noPermission:(void (^)(NSString *tip))noPermisson
+{
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) { // 检测摄像头权限
+        if (granted) { // 已经打开了摄像头权限
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (successBlock) {
+                    successBlock();
+                }
+            });
+        } else { // 没有打开摄像头权限
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (noPermisson) {
+                    noPermisson(@"此应用程序没有权限访问您的相机，请到「设置->东莞无线」中打开相机权限。");
+                }
+            });
+        }
+    }];
 }
 
 @end

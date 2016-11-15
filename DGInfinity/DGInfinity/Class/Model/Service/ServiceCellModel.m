@@ -14,7 +14,7 @@
 {
     ServiceCellModel *model = [ServiceCellModel new];
     model.title = info[@"title"];
-    model.url = info[@"url"];
+    model.dst = info[@"dst"];
     return model;
 }
 

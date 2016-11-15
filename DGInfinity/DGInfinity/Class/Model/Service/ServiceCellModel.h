@@ -11,7 +11,7 @@
 @interface ServiceCellModel : NSObject
 
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *url;
+@property (nonatomic, copy) NSString *dst;
 
 + (instancetype)createWithInfo:(NSDictionary *)info;
 

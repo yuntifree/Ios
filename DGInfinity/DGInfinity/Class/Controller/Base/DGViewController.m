@@ -39,7 +39,7 @@
         [_closeBtn addTarget:self action:@selector(closeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_closeBtn setTitle:@"关闭" forState:UIControlStateNormal];
         [_closeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_closeBtn setContentEdgeInsets:UIEdgeInsetsMake(-2, 0, 0, 0)];
+        [_closeBtn setContentEdgeInsets:UIEdgeInsetsMake(-1, 0, 0, 0)];
     }
     return _closeBtn;
 }

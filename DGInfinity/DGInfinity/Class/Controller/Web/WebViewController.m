@@ -89,6 +89,8 @@
     if (_url.length) {
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:_url]];
         [self.webView loadRequest:request];
+    } else {
+        [self makeToast:@"链接无效，加载失败"];
     }
 }
 

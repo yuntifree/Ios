@@ -17,6 +17,7 @@
 #import "WiFiFooterView.h"
 #import "WiFiSpeedTestViewController.h"
 #import "NewsViewController.h"
+#import "WiFiScanQrcodeViewController.h"
 
 #define Height (kScreenHeight - 20 - 44 - 49)
 
@@ -35,11 +36,6 @@
 @end
 
 @implementation WifiViewController
-
-- (NSString *)title
-{
-    return @"无线";
-}
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -65,9 +61,35 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self setUpNavItem];
     [self setUpScrollView];
     [self setUpSubViews];
     [self getWeatherAndNews];
+}
+
+- (void)setUpNavItem
+{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 74, 20)];
+    label.text = @"东莞无线";
+    label.textColor = [UIColor whiteColor];
+    label.font = SystemFont(18);
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:label];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage originalImage:@"wireless_ico_QRcode"] style:UIBarButtonItemStylePlain target:self action:@selector(scanQRcode)];
+}
+
+- (void)scanQRcode
+{
+    [Tools permissionOfCamera:^{
+        WiFiScanQrcodeViewController *vc = [WiFiScanQrcodeViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    } noPermission:^(NSString *tip) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:tip preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"忽略" style:UIAlertActionStyleCancel handler:nil]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"开启" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [Tools openSetting];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }];
 }
 
 - (void)setUpScrollView
