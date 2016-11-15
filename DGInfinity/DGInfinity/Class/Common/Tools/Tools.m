@@ -44,7 +44,7 @@
 
 + (NSString *)getCurrentSSID
 {
-    if ([[NetworkManager shareManager] currentReachabilityStatus] != ReachableViaWiFi) {
+    if (![[NetworkManager shareManager] isWiFi]) {
         return nil;
     }
     NSArray *supportedInterfacesArray = (__bridge_transfer id)CNCopySupportedInterfaces();

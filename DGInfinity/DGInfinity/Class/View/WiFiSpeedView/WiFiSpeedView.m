@@ -52,6 +52,13 @@ const float EPSINON = 0.00001;
 
 @implementation WiFiSpeedView
 
+- (void)dealloc
+{
+    if ([WFNetworkSpeedDetector sharedSpeedDetector].isSpeedDetecting) {
+        [[WFNetworkSpeedDetector sharedSpeedDetector] stopSpeedDetector];
+    }
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame: frame];
@@ -76,10 +83,15 @@ const float EPSINON = 0.00001;
     _foreProgressView.frame = _backProgressView.frame;
     [self addSubview:_foreProgressView];
     
-    image = ImageNamed(@"Needle");
+    image = ImageNamed(@"Oval");
+    UIImageView *ovalView = [[UIImageView alloc] initWithImage:image];
+    ovalView.frame = CGRectMake((self.width - image.size.width) / 2, CGRectGetMaxY(_foreProgressView.frame) - image.size.height / 2 - 1, image.size.width, image.size.height);
+    [self addSubview:ovalView];
+    
+    image = ImageNamed(@"Pointer");
     _indicatorView = [[UIImageView alloc] initWithImage:image];
     _indicatorView.layer.anchorPoint = CGPointMake(1, 0.5);
-    _indicatorView.layer.position = CGPointMake(self.width / 2 + 6, _foreProgressView.height);
+    _indicatorView.layer.position = ovalView.center;
     [self addSubview:_indicatorView];
     
     _speedLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_foreProgressView.frame) + 64, self.width, 18)];
@@ -177,7 +189,7 @@ const float EPSINON = 0.00001;
 
 - (void)startDetectSpeed
 {
-    if ([WFNetworkSpeedDetector sharedSpeedDetector].isSpeedDetecting ) {
+    if ([WFNetworkSpeedDetector sharedSpeedDetector].isSpeedDetecting) {
         return;
     }
     
@@ -229,9 +241,11 @@ const float EPSINON = 0.00001;
 - (void)strokeCurrentSpeed:(CGFloat)speed
 {
     CGFloat degree = [self degreeFromSpeed:speed];
-    _maskLayer.strokeEnd = degree / 180.0;
     CGFloat radians = degreesToRadians(degree);
-    _indicatorView.transform = CGAffineTransformMakeRotation(radians);
+    [UIView animateWithDuration:0.1 animations:^{
+        _indicatorView.layer.transform = CATransform3DMakeRotation(radians, 0, 0, 1);
+        _maskLayer.strokeEnd = degree / 180.0;
+    }];
 }
 
 //传入的speed的单位是KB

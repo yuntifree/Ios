@@ -74,6 +74,11 @@ static NetworkManager *manager = nil;
     return [_reachability currentReachabilityStatus];
 }
 
+- (BOOL)isWiFi
+{
+    return [self currentReachabilityStatus] == ReachableViaWiFi;
+}
+
 - (void)addNetworkObserver:(id<NetWorkMgrDelegate>)delegate
 {
     NSUInteger index = [_observers indexOfObjectIdenticalTo:delegate];

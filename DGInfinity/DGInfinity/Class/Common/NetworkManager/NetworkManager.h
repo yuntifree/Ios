@@ -24,5 +24,6 @@
 - (void)addNetworkObserver:(id<NetWorkMgrDelegate>)delegate;
 - (void)removeNetworkObserver:(id<NetWorkMgrDelegate>)delegate;
 - (void)registerNetworkExtension;
+- (BOOL)isWiFi;
 
 @end

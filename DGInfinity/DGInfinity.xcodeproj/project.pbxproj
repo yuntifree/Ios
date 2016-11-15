@@ -133,9 +133,11 @@
 		6F3E56431DD968C100F16A23 /* empty_Compass@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3E563B1DD968C100F16A23 /* empty_Compass@3x.png */; };
 		6F3E56441DD968C100F16A23 /* full_Compass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3E563C1DD968C100F16A23 /* full_Compass@2x.png */; };
 		6F3E56451DD968C100F16A23 /* full_Compass@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3E563D1DD968C100F16A23 /* full_Compass@3x.png */; };
-		6F3E56461DD968C100F16A23 /* Needle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3E563E1DD968C100F16A23 /* Needle@2x.png */; };
-		6F3E56471DD968C100F16A23 /* Needle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3E563F1DD968C100F16A23 /* Needle@3x.png */; };
 		6F3E564A1DD96D5600F16A23 /* WiFiSpeedTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E56491DD96D5600F16A23 /* WiFiSpeedTestViewController.m */; };
+		6F3F327F1DDAA9720024095A /* Oval@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3F327B1DDAA9720024095A /* Oval@2x.png */; };
+		6F3F32801DDAA9720024095A /* Oval@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3F327C1DDAA9720024095A /* Oval@3x.png */; };
+		6F3F32811DDAA9720024095A /* Pointer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3F327D1DDAA9720024095A /* Pointer@2x.png */; };
+		6F3F32821DDAA9720024095A /* Pointer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3F327E1DDAA9720024095A /* Pointer@3x.png */; };
 		6F5033E91DD0706C001EBC97 /* img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5033DB1DD0706C001EBC97 /* img@2x.png */; };
 		6F5033EA1DD0706C001EBC97 /* img@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5033DC1DD0706C001EBC97 /* img@3x.png */; };
 		6F5033EB1DD0706C001EBC97 /* Input_hollow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5033DD1DD0706C001EBC97 /* Input_hollow@2x.png */; };
@@ -357,10 +359,12 @@
 		6F3E563B1DD968C100F16A23 /* empty_Compass@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "empty_Compass@3x.png"; sourceTree = "<group>"; };
 		6F3E563C1DD968C100F16A23 /* full_Compass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "full_Compass@2x.png"; sourceTree = "<group>"; };
 		6F3E563D1DD968C100F16A23 /* full_Compass@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "full_Compass@3x.png"; sourceTree = "<group>"; };
-		6F3E563E1DD968C100F16A23 /* Needle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Needle@2x.png"; sourceTree = "<group>"; };
-		6F3E563F1DD968C100F16A23 /* Needle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Needle@3x.png"; sourceTree = "<group>"; };
 		6F3E56481DD96D5600F16A23 /* WiFiSpeedTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiSpeedTestViewController.h; sourceTree = "<group>"; };
 		6F3E56491DD96D5600F16A23 /* WiFiSpeedTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WiFiSpeedTestViewController.m; sourceTree = "<group>"; };
+		6F3F327B1DDAA9720024095A /* Oval@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Oval@2x.png"; sourceTree = "<group>"; };
+		6F3F327C1DDAA9720024095A /* Oval@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Oval@3x.png"; sourceTree = "<group>"; };
+		6F3F327D1DDAA9720024095A /* Pointer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pointer@2x.png"; sourceTree = "<group>"; };
+		6F3F327E1DDAA9720024095A /* Pointer@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pointer@3x.png"; sourceTree = "<group>"; };
 		6F5033DB1DD0706C001EBC97 /* img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img@2x.png"; sourceTree = "<group>"; };
 		6F5033DC1DD0706C001EBC97 /* img@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img@3x.png"; sourceTree = "<group>"; };
 		6F5033DD1DD0706C001EBC97 /* Input_hollow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Input_hollow@2x.png"; sourceTree = "<group>"; };
@@ -708,14 +712,16 @@
 		6F307BDC1DCB36900015F9EC /* WiFiSpeedView */ = {
 			isa = PBXGroup;
 			children = (
+				6F3F327B1DDAA9720024095A /* Oval@2x.png */,
+				6F3F327C1DDAA9720024095A /* Oval@3x.png */,
+				6F3F327D1DDAA9720024095A /* Pointer@2x.png */,
+				6F3F327E1DDAA9720024095A /* Pointer@3x.png */,
 				6F3E56381DD968C100F16A23 /* btn_test@2x.png */,
 				6F3E56391DD968C100F16A23 /* btn_test@3x.png */,
 				6F3E563A1DD968C100F16A23 /* empty_Compass@2x.png */,
 				6F3E563B1DD968C100F16A23 /* empty_Compass@3x.png */,
 				6F3E563C1DD968C100F16A23 /* full_Compass@2x.png */,
 				6F3E563D1DD968C100F16A23 /* full_Compass@3x.png */,
-				6F3E563E1DD968C100F16A23 /* Needle@2x.png */,
-				6F3E563F1DD968C100F16A23 /* Needle@3x.png */,
 			);
 			path = WiFiSpeedView;
 			sourceTree = "<group>";
@@ -1261,6 +1267,7 @@
 				6F2E657C1DC9DDE800AF84BB /* bg_navigation@2x.png in Resources */,
 				6F3067401DD32B8000FA841E /* btn_wifi map@3x.png in Resources */,
 				6F2E57F11DB78E0400C39F27 /* ServiceCell.xib in Resources */,
+				6F3F327F1DDAA9720024095A /* Oval@2x.png in Resources */,
 				6F30674D1DD32B8000FA841E /* img_bg@2x.png in Resources */,
 				6F3E56411DD968C100F16A23 /* btn_test@3x.png in Resources */,
 				6F30A1E21DD5AD5100149D73 /* video@3x.png in Resources */,
@@ -1277,7 +1284,6 @@
 				6FF5C7FC1DC1F13D00B1A84A /* NewsVideoCell.xib in Resources */,
 				6F5033F11DD0706C001EBC97 /* Start button_normal@2x.png in Resources */,
 				6F2E57D41DB78B2B00C39F27 /* icon_back@2x.png in Resources */,
-				6F3E56461DD968C100F16A23 /* Needle@2x.png in Resources */,
 				6F30A1D71DD5AD5100149D73 /* ico_Recommend@2x.png in Resources */,
 				6F5033EA1DD0706C001EBC97 /* img@3x.png in Resources */,
 				6F30A1DA1DD5AD5100149D73 /* icon_more@3x.png in Resources */,
@@ -1291,6 +1297,7 @@
 				6FCA54791DC9EA91000ED52A /* BaiduMapVC.xib in Resources */,
 				6F30A1E91DD5AE3E00149D73 /* WiFiFooterView.xib in Resources */,
 				6F5033EF1DD0706C001EBC97 /* loading_icon_phone@2x.png in Resources */,
+				6F3F32801DDAA9720024095A /* Oval@3x.png in Resources */,
 				6F5033EC1DD0706C001EBC97 /* Input_hollow@3x.png in Resources */,
 				6F30673F1DD32B8000FA841E /* btn_wifi map@2x.png in Resources */,
 				6F3E56441DD968C100F16A23 /* full_Compass@2x.png in Resources */,
@@ -1301,10 +1308,10 @@
 				6F3067461DD32B8000FA841E /* btn_wifitest@3x.png in Resources */,
 				6F30A1D31DD5AD5100149D73 /* buying@2x.png in Resources */,
 				6F2DF2C91DD1D72C00A8F0EC /* tab_ico_buy_gray@3x.png in Resources */,
+				6F3F32811DDAA9720024095A /* Pointer@2x.png in Resources */,
 				6FF5C7EF1DC1DA5B00B1A84A /* NewsReportViewController.xib in Resources */,
 				6F6FDAB41DB4B3DE00E50D9B /* LaunchScreen.storyboard in Resources */,
 				6F30A1DD1DD5AD5100149D73 /* live@2x.png in Resources */,
-				6F3E56471DD968C100F16A23 /* Needle@3x.png in Resources */,
 				6F3E56421DD968C100F16A23 /* empty_Compass@2x.png in Resources */,
 				6FCA54731DC9E7C3000ED52A /* mapapi.bundle in Resources */,
 				6F30A1D51DD5AD5100149D73 /* government@2x.png in Resources */,
@@ -1340,6 +1347,7 @@
 				6F2E57EA1DB78B2B00C39F27 /* icon_zf.png in Resources */,
 				6F3E56431DD968C100F16A23 /* empty_Compass@3x.png in Resources */,
 				6F6FDAE31DB4C81100E50D9B /* WifiViewController.xib in Resources */,
+				6F3F32821DDAA9720024095A /* Pointer@3x.png in Resources */,
 				6F30A1E11DD5AD5100149D73 /* video@2x.png in Resources */,
 				6F3067441DD32B8000FA841E /* btn_wifisetting@3X.png in Resources */,
 				6F30A1DC1DD5AD5100149D73 /* news@3x.png in Resources */,
