@@ -10,7 +10,7 @@
 
 typedef NS_ENUM(NSInteger, WiFiMenuType) {
     WiFiMenuTypeConnect = 1000,
-    WiFiMenuTypeManager = 1001,
+    WiFiMenuTypeExamination = 1001,
     WiFiMenuTypeSpeedTest = 1002,
     WiFiMenuTypeMap = 1003,
     WiFiMenuTypeWelfare = 1004,

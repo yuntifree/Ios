@@ -95,6 +95,12 @@
     _sourceLbl.text = model.source;
     _timeLbl.text = model.time;
     _dateLbl.text = model.date;
+    
+    if (model.read) {
+        _titleLbl.textColor = COLOR(132, 132, 132, 1);
+    } else {
+        _titleLbl.textColor = COLOR(67, 67, 67, 1);
+    }
 }
 
 - (void)awakeFromNib
@@ -126,6 +132,12 @@
     if (model.images.count) {
         [_imgView yy_setImageWithURL:[NSURL URLWithString:model.images[0]] options:YYWebImageOptionSetImageWithFadeAnimation];
     }
+    
+    if (model.read) {
+        _titleLbl.textColor = COLOR(132, 132, 132, 1);
+    } else {
+        _titleLbl.textColor = COLOR(67, 67, 67, 1);
+    }
 }
 
 @end
@@ -147,6 +159,12 @@
     _sourceLbl.text = model.source;
     _timeLbl.text = model.time;
     _dateLbl.text = model.date;
+    
+    if (model.read) {
+        _titleLbl.textColor = COLOR(132, 132, 132, 1);
+    } else {
+        _titleLbl.textColor = COLOR(67, 67, 67, 1);
+    }
 }
 
 @end
@@ -167,6 +185,12 @@
     _sourceLbl.text = model.source;
     if (model.images.count) {
         [_imgView yy_setImageWithURL:[NSURL URLWithString:model.images[0]] options:YYWebImageOptionSetImageWithFadeAnimation];
+    }
+    
+    if (model.read) {
+        _titleLbl.textColor = COLOR(132, 132, 132, 1);
+    } else {
+        _titleLbl.textColor = COLOR(67, 67, 67, 1);
     }
 }
 

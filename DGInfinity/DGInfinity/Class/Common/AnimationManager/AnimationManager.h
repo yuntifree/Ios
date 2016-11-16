@@ -23,5 +23,6 @@
 + (CAAnimation *)popOutAnimation;
 + (CAAnimation *)popInAnimation;
 + (CAAnimation *)changeRootAnimation;
++ (CAAnimation *)presentFadeAnimation;
 
 @end

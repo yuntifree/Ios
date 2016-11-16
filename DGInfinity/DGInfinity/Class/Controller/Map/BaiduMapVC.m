@@ -170,7 +170,9 @@
 @interface BaiduMapVC () <BMKMapViewDelegate>
 {
     BMKMapView *_mapView;
-    LocationInfo *_myLocation;
+    LocationAnnotation *_myAnnotation;
+    
+    NSMutableSet *_annotitaionSet;
 }
 
 @end
@@ -193,17 +195,27 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
-//        _myLocation = [[LocationInfo alloc] initWithCoordinate2D:[[BaiduMapSDK shareBaiduMapSDK] getUserLocation] busiName:@"我的位置" locationDesc:@"我的位置" isMyLocation:YES];
-        CLLocationCoordinate2D location = CLLocationCoordinate2DMake(22.930574, 113.890796);
-        _myLocation = [[LocationInfo alloc] initWithCoordinate2D:location busiName:@"我的位置" locationDesc:@"我的位置" isMyLocation:YES];
+        _annotitaionSet = [NSMutableSet setWithCapacity:20];
+        [self setUpMyAnnotation];
     }
     return self;
+}
+
+- (void)setUpMyAnnotation
+{
+    _myAnnotation = [LocationAnnotation new];
+//    _myAnnotation.coordinate = [[BaiduMapSDK shareBaiduMapSDK] getUserLocation];
+    _myAnnotation.coordinate = CLLocationCoordinate2DMake(22.930574, 113.890796);
+    _myAnnotation.title = @"我的位置";
+    _myAnnotation.isMyLocation = YES;
 }
 
 - (void)willEnterForeground
 {
     if ([[BaiduMapSDK shareBaiduMapSDK] locationServicesEnabled] && !_mapView.annotations.count) {
-        [self addAnnotations];
+        [self setUpMyAnnotation];
+        [_mapView addAnnotation:_myAnnotation];
+        [self navBtnClick];
     }
 }
 
@@ -212,6 +224,13 @@
     [super viewWillAppear:animated];
     [_mapView viewWillAppear];
     _mapView.delegate = self;
+    [SVProgressHUD showWithStatus:@"正在查找免费WiFi"];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [SVProgressHUD dismiss];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -232,7 +251,7 @@
     
     _mapView = [[BMKMapView alloc] init];
     _mapView.translatesAutoresizingMaskIntoConstraints = NO;
-    _mapView.centerCoordinate = _myLocation.coordinate2D;
+    _mapView.centerCoordinate = _myAnnotation.coordinate;
     _mapView.zoomLevel = 16.1;
     [_mapView setNeedsUpdateConstraints];
     [self.view addSubview:_mapView];
@@ -246,9 +265,10 @@
 
 - (void)navBtnClick
 {
+    if (![[BaiduMapSDK shareBaiduMapSDK] locationServicesEnabled]) return;
     BMKMapStatus *status = [BMKMapStatus new];
     status.fLevel = _mapView.zoomLevel - 0.00001;
-    status.targetGeoPt = _myLocation.coordinate2D;
+    status.targetGeoPt = _myAnnotation.coordinate;
     [_mapView setMapStatus:status withAnimation:YES];
 }
 
@@ -262,44 +282,26 @@
 }
 
 // 添加附近WiFi位置标注，和我的位置标注
-- (void)addAnnotations
+- (void)addAnnotations:(CLLocationCoordinate2D)location
 {
-    // 这一句为了处理第一次弹出paopaoView后，点击地图空白处，paopaoView不会消失的问题。
-    BMKMapStatus *status = [BMKMapStatus new];
-    status.fLevel = _mapView.zoomLevel - 0.00001;
-    status.targetGeoPt = _myLocation.coordinate2D;
-    [_mapView setMapStatus:status withAnimation:YES];
-    
-    if (_mapView.annotations.count) {
-        [_mapView removeAnnotations:_mapView.annotations];
-    }
-    
-//    _myLocation = [[LocationInfo alloc] initWithCoordinate2D:[[BaiduMapSDK shareBaiduMapSDK] getUserLocation] busiName:@"我的位置" locationDesc:@"我的位置" isMyLocation:YES];
-    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(22.930574, 113.890796);
-    _myLocation = [[LocationInfo alloc] initWithCoordinate2D:location busiName:@"我的位置" locationDesc:@"我的位置" isMyLocation:YES];
-    
-    LocationAnnotation *myAnnotation = [[LocationAnnotation alloc] init];
-    myAnnotation.coordinate = _myLocation.coordinate2D;
-    myAnnotation.title = _myLocation.busiName;
-    myAnnotation.isMyLocation = _myLocation.isMyLocation;
-    [_mapView addAnnotation:myAnnotation];
-    
-    [SVProgressHUD showWithStatus:@"正在查找免费WiFi"];
-    [MapCGI getNearbyAps:myAnnotation.coordinate.longitude latitude:myAnnotation.coordinate.latitude complete:^(DGCgiResult *res) {
-        [SVProgressHUD dismissWithDelay:1];
+    [MapCGI getNearbyAps:location.longitude latitude:location.latitude complete:^(DGCgiResult *res) {
         if (E_OK == res._errno) {
             NSDictionary *data = res.data[@"data"];
             if ([data isKindOfClass:[NSDictionary class]]) {
                 NSArray *infos = data[@"infos"];
                 if ([infos isKindOfClass:[NSArray class]]) {
-                    NSMutableArray *tem = [NSMutableArray arrayWithCapacity:20];
                     for (NSDictionary *info in infos) {
-                        LocationAnnotation *annotation = [[LocationAnnotation alloc] init];
-                        annotation.title = info[@"address"];
-                        annotation.coordinate = CLLocationCoordinate2DMake([info[@"latitude"] doubleValue], [info[@"longitude"] doubleValue]);
-                        [tem addObject:annotation];
+                        @autoreleasepool {
+                            LocationAnnotation *annotation = [[LocationAnnotation alloc] init];
+                            annotation.title = info[@"address"];
+                            annotation.coordinate = CLLocationCoordinate2DMake([info[@"latitude"] doubleValue], [info[@"longitude"] doubleValue]);
+                            NSString *hashFlag = [NSString stringWithFormat:@"%lf%lf", annotation.coordinate.latitude, annotation.coordinate.longitude];
+                            if (![_annotitaionSet containsObject:hashFlag]) {
+                                [_annotitaionSet addObject:hashFlag];
+                                [_mapView addAnnotation:annotation];
+                            }
+                        }
                     }
-                    [_mapView addAnnotations:tem];
                 }
             }
         } else {
@@ -316,18 +318,16 @@
 #pragma mark - BMKMapViewDelegate
 - (void)mapViewDidFinishLoading:(BMKMapView *)mapView
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (![[BaiduMapSDK shareBaiduMapSDK] locationServicesEnabled]) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"无法获取位置信息，建议开启定位服务" preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"忽略" style:UIAlertActionStyleCancel handler:nil]];
-            [alert addAction:[UIAlertAction actionWithTitle:@"开启" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [Tools openSetting];
-            }]];
-            [self presentViewController:alert animated:YES completion:nil];
-            return;
-        }
-        [self addAnnotations];
-    });
+    if (![[BaiduMapSDK shareBaiduMapSDK] locationServicesEnabled]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"无法获取位置信息，建议开启定位服务" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"忽略" style:UIAlertActionStyleCancel handler:nil]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"开启" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [Tools openSetting];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    [_mapView addAnnotation:_myAnnotation];
 }
 
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id<BMKAnnotation>)annotation
@@ -343,6 +343,12 @@
         annotationView = [[LocationAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
     }
     return annotationView;
+}
+
+- (void)mapView:(BMKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+    if (![[BaiduMapSDK shareBaiduMapSDK] locationServicesEnabled]) return;
+    [self addAnnotations:mapView.centerCoordinate];
 }
 
 @end

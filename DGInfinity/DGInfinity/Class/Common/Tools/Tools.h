@@ -18,5 +18,8 @@
 + (void)openSetting;
 + (CGFloat)layoutFactor;
 + (void)permissionOfCamera:(void (^)())successBlock noPermission:(void (^)(NSString *tip))noPermisson;
++ (NSString *)getWlanSubnetMask;
++ (NSString *)getWlanIPAddress;
++ (NSString *)getServerWiFiIPAddress;
 
 @end

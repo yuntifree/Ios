@@ -101,7 +101,7 @@
 #pragma mark - UITableViewDataSource, UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    [tableView displayWitMsg:@"没有相关数据" ForDataCount:_newsArray.count];
+    [tableView displayWitMsg:NoDataTip ForDataCount:_newsArray.count];
     return _newsArray.count;
 }
 
@@ -119,6 +119,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row < _newsArray.count) {
         NewsReportModel *model = _newsArray[indexPath.row];
+        model.read = YES;
+        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [SApp reportClick:[ReportClickModel createWithReportModel:model]];
         NSURL *url = [NSURL URLWithString:model.dst];
         if ([url.scheme isEqualToString:@"itms"] || [url.scheme isEqualToString:@"itms-apps"]) {

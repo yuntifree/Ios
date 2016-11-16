@@ -10,4 +10,6 @@
 
 @interface WifiViewController : DGViewController
 
+- (void)returnToFirstPage;
+
 @end

@@ -10,6 +10,20 @@
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import "NetworkManager.h"
 #import <AVFoundation/AVFoundation.h>
+#include <ifaddrs.h>
+#include <sys/socket.h>
+#include <sys/sysctl.h>
+#import <arpa/inet.h>
+#include <net/if.h>
+#include "getgateway.h"
+
+#define IOS_CELLULAR    @"pdp_ip0"
+#define IOS_WIFI        @"en0"
+#define IOS_VPN         @"utun0"
+#define IP_ADDR_IPv4    @"ipv4"
+#define IP_ADDR_IPv6    @"ipv6"
+#define IP_MASK_IPv4    @"mask_ipv4"
+#define IP_MASK_IPv6    @"mask_ipv6"
 
 @implementation Tools
 
@@ -160,6 +174,146 @@
             });
         }
     }];
+}
+
++ (NSString *)getWlanSubnetMask
+{
+    NSDictionary *dictionary = [self getIPAddresses];
+    NSString *mask = dictionary[@"en0/mask_ipv4"];
+    if ([mask length] == 0) {
+        mask = dictionary[@"en0/mask_ipv6"];
+    }
+    return mask;
+}
+
+/*! 获取 WLAN IP 地址 */
++ (NSString *)getWlanIPAddress
+{
+    BOOL isWlanIp = NO;
+    
+    NSString *address = [self getCurrentIPAddress: &isWlanIp];
+    
+    if (isWlanIp == NO) {
+        address = nil;
+    }
+    
+    return address;
+}
+
+/*!
+ *    获取设备当前的 IP 地址。
+ *    优先获取 WLAN 地址，其不存在时再获取 WWAN 地址；优先获取 IPv4 地址，其不存在时再获取 IPv6 地址
+ */
++ (NSString *)getCurrentIPAddress:(BOOL *)isWlanIp
+{
+    NSDictionary *dictionary = [self getIPAddresses];
+    
+    NSString *address = dictionary[@"en0/ipv4"];
+    if (isWlanIp) {
+        *isWlanIp = YES;
+    }
+    
+    //169.254.0.0-169.254.255.255，是保留地址段，开启了dhcp服务的设备但又无法获取到dhcp的会随机使用这个网段的 ip
+    if (address.length == 0 || [address hasPrefix: @"169.254"]) {
+        address = dictionary[@"en0/ipv6"];
+        if (isWlanIp) {
+            *isWlanIp = YES;
+        }
+    }
+    
+    if (address.length == 0) {
+        address = dictionary[@"pdp_ip0/ipv4"];
+        if (isWlanIp) {
+            *isWlanIp = NO;
+        }
+    }
+    
+    if (address.length == 0) {
+        address = dictionary[@"pdp_ip0/ipv6"];
+        if (isWlanIp) {
+            *isWlanIp = NO;
+        }
+    }
+    
+    return address;
+}
+
++ (NSDictionary *)getIPAddresses
+{
+    NSMutableDictionary *addresses = [NSMutableDictionary dictionaryWithCapacity:8];
+    
+    // retrieve the current interfaces - returns 0 on success
+    struct ifaddrs *interfaces;
+    if(!getifaddrs(&interfaces)) {
+        // Loop through linked list of interfaces
+        struct ifaddrs *interface;
+        for(interface=interfaces; interface; interface=interface->ifa_next) {
+            if(!(interface->ifa_flags & IFF_UP) /* || (interface->ifa_flags & IFF_LOOPBACK) */ ) {
+                continue; // deeply nested code harder to read
+            }
+            const struct sockaddr_in *addr = (const struct sockaddr_in*)interface->ifa_addr;
+            char addrBuf[ MAX(INET_ADDRSTRLEN, INET6_ADDRSTRLEN) ];
+            if(addr && (addr->sin_family==AF_INET || addr->sin_family==AF_INET6)) {
+                NSString *name = [NSString stringWithUTF8String:interface->ifa_name];
+                NSString *type;
+                if(addr->sin_family == AF_INET) {
+                    if(inet_ntop(AF_INET, &addr->sin_addr, addrBuf, INET_ADDRSTRLEN)) {
+                        type = IP_ADDR_IPv4;
+                    }
+                } else {
+                    const struct sockaddr_in6 *addr6 = (const struct sockaddr_in6*)interface->ifa_addr;
+                    if(inet_ntop(AF_INET6, &addr6->sin6_addr, addrBuf, INET6_ADDRSTRLEN)) {
+                        type = IP_ADDR_IPv6;
+                    }
+                }
+                if(type) {
+                    NSString *key = [NSString stringWithFormat:@"%@/%@", name, type];
+                    addresses[key] = [NSString stringWithUTF8String:addrBuf];
+                }
+            }
+            
+            const struct sockaddr_in *netmask = (const struct sockaddr_in *)interface->ifa_netmask;
+            if(netmask && (netmask->sin_family == AF_INET || netmask->sin_family == AF_INET6)) {
+                NSString *name = [NSString stringWithUTF8String:interface->ifa_name];
+                NSString *type = nil;
+                if (netmask->sin_family == AF_INET) {
+                    if(inet_ntop(AF_INET, &netmask->sin_addr, addrBuf, INET_ADDRSTRLEN)) {
+                        type = IP_MASK_IPv4;
+                    }
+                } else {
+                    const struct sockaddr_in6 *netmask = (const struct sockaddr_in6 *)interface->ifa_netmask;
+                    if(inet_ntop(AF_INET6, &netmask->sin6_addr, addrBuf, INET6_ADDRSTRLEN)) {
+                        type = IP_MASK_IPv6;
+                    }
+                }
+                if (type) {
+                    NSString *key = [NSString stringWithFormat:@"%@/%@", name, type];
+                    addresses[key] = [NSString stringWithUTF8String: addrBuf];
+                }
+            }
+        }
+        // Free memory
+        freeifaddrs(interfaces);
+    }
+    return [addresses count] ? addresses : nil;
+}
+
++ (NSString *)getServerWiFiIPAddress
+{
+    in_addr_t addr = 0;
+    getdefaultgateway(&addr);
+    addr = ntohl(addr);
+    
+    NSString *ip = nil;
+    if (addr > 0) {
+        int i1 = addr / (256 * 256 * 256);
+        int i2 = (addr - i1 * 256 * 256 * 256) / (256 * 256);
+        int i3 = (addr - i1 * 256 * 256 * 256 - i2 * 256 * 256) / 256;
+        int i4 = addr - i1 * 256 * 256 * 256 - i2 * 256 * 256 - i3 * 256;
+        ip = [NSString stringWithFormat: @"%d.%d.%d.%d", i1, i2, i3, i4];
+    }
+    
+    return ip;
 }
 
 @end

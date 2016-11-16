@@ -100,7 +100,7 @@
 #pragma mark - UITableViewDataSource, UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    [tableView displayWitMsg:@"没有相关数据" ForDataCount:_videosArray.count];
+    [tableView displayWitMsg:NoDataTip ForDataCount:_videosArray.count];
     return _videosArray.count;
 }
 

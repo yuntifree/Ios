@@ -13,7 +13,6 @@
 #import "ServiceViewController.h"
 #import "ShoppingViewController.h"
 #import "UITabBarItem+Setup.h"
-#import <AFNetworking.h>
 
 @interface DGTabBarController ()
 

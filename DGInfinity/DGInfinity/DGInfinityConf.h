@@ -71,4 +71,7 @@ typedef NS_ENUM(NSInteger, ReportClickType) {
 // 百度地图SDK
 #define BaiduMapAppKey @"kvGmE3GGGkaBotP6N6jWSBVCRLGkrwkM"
 
+// tip
+#define NoDataTip @"没有相关数据"
+
 #endif /* DGInfinityConf_h */

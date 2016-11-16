@@ -19,6 +19,7 @@
 @property (nonatomic, copy) NSString *dst;
 @property (nonatomic, assign) NSInteger stype;
 @property (nonatomic, assign) NSInteger seq;
+@property (nonatomic, assign) BOOL read;
 
 + (instancetype)createWithInfo:(NSDictionary *)info;
 

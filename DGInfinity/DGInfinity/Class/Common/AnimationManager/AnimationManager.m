@@ -186,4 +186,13 @@
     return animation;
 }
 
++ (CAAnimation *)presentFadeAnimation
+{
+    CATransition *animation = [CATransition animation];
+    animation.duration = 0.3;
+    animation.timingFunction = UIViewAnimationCurveEaseInOut;
+    animation.type = kCATransitionFade;
+    return animation;
+}
+
 @end

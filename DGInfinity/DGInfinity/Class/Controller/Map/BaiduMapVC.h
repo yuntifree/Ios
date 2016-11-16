@@ -8,7 +8,6 @@
 
 #import "DGViewController.h"
 #import <BaiduMapAPI_Map/BMKMapComponent.h>
-#import "LocationInfo.h"
 
 @interface BaiduMapVC : DGViewController
 

@@ -18,6 +18,7 @@
 #import "WiFiSpeedTestViewController.h"
 #import "NewsViewController.h"
 #import "WiFiScanQrcodeViewController.h"
+#import "WiFiExaminationViewController.h"
 
 #define Height (kScreenHeight - 20 - 44 - 49)
 
@@ -142,9 +143,11 @@
 
 - (void)returnToFirstPage
 {
-    _scrollView.scrollEnabled = YES;
-    [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-    [_tableView.mj_header endRefreshing];
+    if (_scrollView.contentOffset.y) {
+        _scrollView.scrollEnabled = YES;
+        [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+        [_tableView.mj_header endRefreshing];
+    }
 }
 
 - (void)handleFooterViewAction:(WiFiFooterType)type
@@ -394,6 +397,12 @@
             }
         }
             break;
+        case WiFiMenuTypeExamination:
+        {
+            WiFiExaminationViewController *vc = [[WiFiExaminationViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
         default:
             break;
     }
@@ -421,7 +430,7 @@
 #pragma mark - UITableViewDataSource, UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    [tableView displayWitMsg:@"没有相关数据" ForDataCount:_newsArray.count];
+    [tableView displayWitMsg:NoDataTip ForDataCount:_newsArray.count];
     return _newsArray.count;
 }
 
@@ -439,6 +448,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row < _newsArray.count) {
         NewsReportModel *model = _newsArray[indexPath.row];
+        model.read = YES;
+        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [SApp reportClick:[ReportClickModel createWithReportModel:model]];
         NSURL *url = [NSURL URLWithString:model.dst];
         if ([url.scheme isEqualToString:@"itms"] || [url.scheme isEqualToString:@"itms-apps"]) {

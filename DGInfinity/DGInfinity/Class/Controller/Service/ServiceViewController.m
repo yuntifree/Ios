@@ -14,6 +14,9 @@
 #import "ServiceCellModel.h"
 #import "ServiceCGI.h"
 #import "ServiceSectionModel.h"
+#import "DGNavigationViewController.h"
+#import "SearchViewController.h"
+#import "AnimationManager.h"
 
 // banner 上方链接栏
 static NSString *url[] = {
@@ -23,6 +26,8 @@ static NSString *url[] = {
     @"http://jump.luna.58.com/i/29Zr",
     @"http://jump.luna.58.com/i/29Zs"
 };
+
+const NSInteger headerHeight = 105.f;
 
 @interface ServiceViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 {
@@ -76,7 +81,9 @@ static NSString *url[] = {
 
 - (void)goSearch
 {
-    
+    DGNavigationViewController *nav = [[DGNavigationViewController alloc] initWithRootViewController:[SearchViewController new]];
+    [self.view.window.layer addAnimation:[AnimationManager presentFadeAnimation] forKey:nil];
+    [self presentViewController:nav animated:NO completion:nil];
 }
 
 - (void)setUpCollectionView
@@ -90,17 +97,18 @@ static NSString *url[] = {
     layout.minimumInteritemSpacing = 0;
     layout.itemSize = CGSizeMake(kScreenWidth / 3.0, 44.0);
     
-    ServiceHeaderView *header = [[ServiceHeaderView alloc] initWithFrame:CGRectMake(0, -105, kScreenWidth, 105)];
+    ServiceHeaderView *header = [[ServiceHeaderView alloc] initWithFrame:CGRectMake(0, -headerHeight, kScreenWidth, headerHeight)];
     __weak typeof(self) wself = self;
     header.headClick = ^(NSInteger tag) {
         [wself openWebVC:url[tag]];
     };
     [_listView addSubview:header];
-    _listView.contentInset = UIEdgeInsetsMake(105, 0, 0, 0);
+    _listView.contentInset = UIEdgeInsetsMake(headerHeight, 0, 0, 0);
     
     [_listView registerNib:[UINib nibWithNibName:@"ServiceSectionHeader" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ServiceSectionHeader"];
     
     _listView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
+    _listView.mj_header.ignoredScrollViewContentInsetTop = headerHeight;
 }
 
 - (void)headerRefresh
@@ -148,7 +156,7 @@ static NSString *url[] = {
 #pragma mark - UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    [collectionView displayWitMsg:@"没有相关数据" ForDataCount:_dataArray.count];
+    [collectionView displayWitMsg:NoDataTip ForDataCount:_dataArray.count];
     return _dataArray.count;
 }
 

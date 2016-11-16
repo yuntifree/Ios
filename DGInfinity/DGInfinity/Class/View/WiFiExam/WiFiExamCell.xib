@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WiFiExamDeviceCell" rowHeight="73" id="KGk-i7-Jjw" customClass="WiFiExamDeviceCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZHg-40-GoU">
+                        <rect key="frame" x="12" y="12" width="296" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.23137254901960785" green="0.23137254901960785" blue="0.23137254901960785" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7x-Uz-nfa">
+                        <rect key="frame" x="12" y="36" width="296" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="ZHg-40-GoU" secondAttribute="trailing" constant="12" id="2hA-bP-lc0"/>
+                    <constraint firstItem="h7x-Uz-nfa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="CLP-bd-6ZL"/>
+                    <constraint firstItem="h7x-Uz-nfa" firstAttribute="top" secondItem="ZHg-40-GoU" secondAttribute="bottom" constant="4" id="iFf-RP-kXb"/>
+                    <constraint firstAttribute="trailing" secondItem="h7x-Uz-nfa" secondAttribute="trailing" constant="12" id="pZt-QW-ftx"/>
+                    <constraint firstItem="ZHg-40-GoU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="sQ2-bA-RVL"/>
+                    <constraint firstItem="ZHg-40-GoU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="tya-HW-hzc"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="_brandLbl" destination="ZHg-40-GoU" id="HyP-gY-jjp"/>
+                <outlet property="_ipLbl" destination="h7x-Uz-nfa" id="3m5-ad-Pbd"/>
+            </connections>
+            <point key="canvasLocation" x="-385" y="-211.5"/>
+        </tableViewCell>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WiFiExamDescCell" rowHeight="75" id="NZ3-Hy-gTI" customClass="WiFiExamDescCell">
+            <rect key="frame" x="0.0" y="0.0" width="352" height="75"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NZ3-Hy-gTI" id="Yl7-uL-6oS">
+                <rect key="frame" x="0.0" y="0.0" width="352" height="74"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnH-1f-BEF">
+                        <rect key="frame" x="12" y="27" width="40" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.23137254900000001" green="0.23137254900000001" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3X-oQ-R5t">
+                        <rect key="frame" x="309" y="30" width="31" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="vnH-1f-BEF" firstAttribute="centerY" secondItem="Yl7-uL-6oS" secondAttribute="centerY" id="4PC-TX-JKz"/>
+                    <constraint firstItem="vnH-1f-BEF" firstAttribute="leading" secondItem="Yl7-uL-6oS" secondAttribute="leading" constant="12" id="7Bb-Gf-rQ3"/>
+                    <constraint firstItem="c3X-oQ-R5t" firstAttribute="centerY" secondItem="Yl7-uL-6oS" secondAttribute="centerY" id="J9z-yd-JvJ"/>
+                    <constraint firstAttribute="trailing" secondItem="c3X-oQ-R5t" secondAttribute="trailing" constant="12" id="ZrB-tt-QDb"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="_descLbl" destination="c3X-oQ-R5t" id="KNs-jb-udc"/>
+                <outlet property="_titleLbl" destination="vnH-1f-BEF" id="7dI-If-E1s"/>
+            </connections>
+            <point key="canvasLocation" x="-370" y="-60.5"/>
+        </tableViewCell>
+    </objects>
+</document>
