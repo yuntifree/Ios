@@ -8,6 +8,10 @@
 
 #import "DGViewController.h"
 
+typedef void(^badgeBlock)(NSInteger deviceCount);
+
 @interface WiFiExaminationViewController : DGViewController
+
+@property (nonatomic, copy) badgeBlock badgeblock;
 
 @end

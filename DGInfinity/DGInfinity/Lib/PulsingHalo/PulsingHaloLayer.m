@@ -23,6 +23,12 @@
 @implementation PulsingHaloLayer
 @dynamic repeatCount;
 
+- (void)dealloc
+{
+    [self.effect removeFromSuperlayer];
+    [self removeFromSuperlayer];
+}
+
 - (instancetype)init
 {
     self = [super init];
@@ -34,6 +40,7 @@
         [self addSublayer:self.effect];
         
         [self _setupDefaults];
+        [self _setupAnimationGroup];
     }
     return self;
 }
@@ -43,7 +50,6 @@
 #pragma mark - Accessor
 
 - (void)start {
-    [self _setupAnimationGroup];
     [self.effect addAnimation:self.animationGroup forKey:@"pulse"];
 }
 
@@ -51,8 +57,6 @@
     if ([self.effect.animationKeys count]) {
         [self.effect removeAllAnimations];
     }
-    [self.effect removeFromSuperlayer];
-    [self removeFromSuperlayer];
 }
 
 - (void)setFrame:(CGRect)frame {

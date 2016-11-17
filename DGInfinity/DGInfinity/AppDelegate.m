@@ -91,6 +91,7 @@
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, SystemFont(18), NSFontAttributeName,nil]];
     [[UINavigationBar appearance] setBarTintColor:COLOR(0, 156, 251, 1)];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
 - (void)setRootViewController
@@ -107,6 +108,11 @@
         root = [[LoginViewController alloc] init];
     }
     self.window.rootViewController = root;
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

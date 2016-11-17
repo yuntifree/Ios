@@ -11,6 +11,7 @@
 #import "WiFiExamCell.h"
 #import "Device.h"
 #import "WiFiExamSectionHeader.h"
+#import "NetworkManager.h"
 
 @interface WiFiExaminationViewController () <UITableViewDelegate, UITableViewDataSource, MainPresenterDelegate>
 {
@@ -18,17 +19,44 @@
     
     NSMutableArray *_deviceArray;
     NSArray *_descArray;
+    NSString *_localIP;
 }
 
 @property (nonatomic, strong) MainPresenter *presenter;
+@property (nonatomic, strong) UIProgressView *progressView;
 
 @end
 
 @implementation WiFiExaminationViewController
 
+#pragma mark - lazy-init
+- (MainPresenter *)presenter
+{
+    if (_presenter == nil) {
+        _presenter = [[MainPresenter alloc] initWithDelegate:self];
+        [self addObserversForKVO];
+    }
+    return _presenter;
+}
+
+- (UIProgressView *)progressView
+{
+    if (_progressView == nil) {
+        _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+        _progressView.frame = CGRectMake(0, 0, kScreenWidth, 4);
+        _progressView.progress = 0;
+        _progressView.hidden = YES;
+        _progressView.trackTintColor = [UIColor whiteColor];
+        [self.view addSubview:_progressView];
+    }
+    return _progressView;
+}
+
 - (void)dealloc
 {
-    [self removeObserversForKVO];
+    if (_presenter) {
+        [self removeObserversForKVO];
+    }
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -36,8 +64,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _deviceArray = [NSMutableArray arrayWithCapacity:10];
-        self.presenter = [[MainPresenter alloc] initWithDelegate:self];
-        [self addObserversForKVO];
     }
     return self;
 }
@@ -57,12 +83,24 @@
 
 - (NSString *)title
 {
-    return [Tools getCurrentSSID];
+    NSString *ssid = [Tools getCurrentSSID];
+    return ssid.length ? ssid : @"非WiFi环境";
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    if (![[NetworkManager shareManager] isWiFi]) {
+        __weak typeof(self) wself = self;
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前网络非WiFi环境，请打开WiFi后继续操作" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [wself.navigationController popViewControllerAnimated:YES];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    [SVProgressHUD showWithStatus:@"扫描中，请稍后..."];
     [self.presenter scanButtonClicked];
 }
 
@@ -73,6 +111,7 @@
     [self setUpTableView];
     
     // init network desc
+    _localIP = [Tools getWlanIPAddress];
     _descArray = @[[WiFiExamDescModel createWithTitle:@"IP地址" desc:[NSString stringWithFormat:@"IP：%@",[Tools getServerWiFiIPAddress]]],
                    [WiFiExamDescModel createWithTitle:@"MAC地址" desc:[Tools getBSSID]],
                    [WiFiExamDescModel createWithTitle:@"子网掩码" desc:[Tools getWlanSubnetMask]]];
@@ -100,11 +139,21 @@
             for (Device *device in temArray) {
                 if ([device.ipAddress isEqualToString:[Tools getServerWiFiIPAddress]]) continue;
                 WiFiExamDeviceModel *model = [WiFiExamDeviceModel createWithBrand:device.brand ip:device.ipAddress];
+                if ([device.ipAddress isEqualToString:_localIP]) {
+                    model.brand = [NSString stringWithFormat:@"%@（本机）",model.brand];
+                }
                 [_deviceArray addObject:model];
             }
             [_listView reloadData];
         } else if ([keyPath isEqualToString:@"progressValue"]) {
-            
+            CGFloat progress = self.presenter.progressValue;
+            if (progress == 1) {
+                [self.progressView setProgress:0 animated:NO];
+                self.progressView.hidden = YES;
+            } else {
+                [self.progressView setProgress:progress animated:YES];
+                self.progressView.hidden = NO;
+            }
         }
     }
 }
@@ -112,12 +161,16 @@
 #pragma mark - MainPresenterDelegate
 - (void)mainPresenterIPSearchFinished
 {
-    
+    [SVProgressHUD dismiss];
+    self.progressView.hidden = YES;
+    if (_badgeblock) {
+        _badgeblock(self.presenter.connectedDevices.count);
+    }
 }
 
 - (void)mainPresenterIPSearchFailed
 {
-    
+    [SVProgressHUD dismiss];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource

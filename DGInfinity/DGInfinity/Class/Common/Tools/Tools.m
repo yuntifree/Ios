@@ -117,7 +117,7 @@
         }
     }
     
-    return formatSSID;
+    return [formatSSID uppercaseString];
 }
 
 + (void)openSetting
@@ -300,6 +300,10 @@
 
 + (NSString *)getServerWiFiIPAddress
 {
+    if (![[NetworkManager shareManager] isWiFi]) {
+        return nil;
+    }
+    
     in_addr_t addr = 0;
     getdefaultgateway(&addr);
     addr = ntohl(addr);
@@ -314,6 +318,19 @@
     }
     
     return ip;
+}
+
++ (TimeType)getTimeType
+{
+    NSString *hourStr = [NSDate stringWithDate:[NSDate date] formatStr:@"HH"];
+    NSInteger hour = [hourStr integerValue];
+    TimeType type;
+    if (hour >= 6 && hour < 19) { // 早上6点-晚上7点算白天
+        type = TimeTypeDay;
+    } else {
+        type = TimeTypeNight;
+    }
+    return type;
 }
 
 @end

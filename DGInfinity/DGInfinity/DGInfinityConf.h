@@ -51,6 +51,18 @@ typedef NS_ENUM(NSInteger, ReportClickType) {
     RCT_ADCLICK = 3
 };
 
+typedef NS_ENUM(NSInteger, WeatherType) {
+    WeatherTypeSun = 0,
+    WeatherTypeCloud = 1,
+    WeatherTypeRain = 2,
+    WeatherTypeSnow = 3
+};
+
+typedef NS_ENUM(NSInteger, TimeType) {
+    TimeTypeDay = 0,
+    TimeTypeNight = 1
+};
+
 // Server
 #define ServerURL @"http://120.25.133.234/" // 测试环境
 #define AppVersion 1 // 客户端内部版本
@@ -73,5 +85,6 @@ typedef NS_ENUM(NSInteger, ReportClickType) {
 
 // tip
 #define NoDataTip @"没有相关数据"
+#define LoadingTip @"加载中..."
 
 #endif /* DGInfinityConf_h */

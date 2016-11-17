@@ -19,8 +19,22 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rvn-c3-FFE">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="317"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="8DQ-T2-OqM">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8DQ-T2-OqM">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="317"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cloudy.png" translatesAutoresizingMaskIntoConstraints="NO" id="v9i-56-Vdl">
+                            <rect key="frame" x="-10" y="164" width="83" height="83"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="83" id="EmW-Tv-aeN"/>
+                                <constraint firstAttribute="height" constant="83" id="i45-x7-vDc"/>
+                            </constraints>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cloudy.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ah2-cX-q3a">
+                            <rect key="frame" x="322" y="25" width="83" height="83"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="83" id="pXs-Qd-GU3"/>
+                                <constraint firstAttribute="width" constant="83" id="s2d-3O-Gap"/>
+                            </constraints>
                         </imageView>
                         <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZHF-di-tNg">
                             <rect key="frame" x="131" y="63" width="113" height="113"/>
@@ -65,14 +79,18 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="6ug-TH-yA9" secondAttribute="bottom" constant="47" id="1ZS-ru-siW"/>
                         <constraint firstAttribute="bottom" secondItem="EJL-Uv-jC0" secondAttribute="bottom" constant="13" id="78U-Sc-Gx6"/>
+                        <constraint firstAttribute="trailing" secondItem="Ah2-cX-q3a" secondAttribute="trailing" constant="-30" id="Brd-RG-TEb"/>
                         <constraint firstAttribute="bottom" secondItem="8DQ-T2-OqM" secondAttribute="bottom" id="KXn-IM-Ipo"/>
+                        <constraint firstItem="Ah2-cX-q3a" firstAttribute="top" secondItem="Rvn-c3-FFE" secondAttribute="top" constant="25" id="SXn-MH-ik0"/>
                         <constraint firstAttribute="trailing" secondItem="8DQ-T2-OqM" secondAttribute="trailing" id="Tkw-gk-n29"/>
                         <constraint firstItem="ZHF-di-tNg" firstAttribute="centerX" secondItem="Rvn-c3-FFE" secondAttribute="centerX" id="Uui-wv-Qyj"/>
                         <constraint firstItem="8DQ-T2-OqM" firstAttribute="top" secondItem="Rvn-c3-FFE" secondAttribute="top" id="VIr-eQ-wYd"/>
+                        <constraint firstAttribute="bottom" secondItem="v9i-56-Vdl" secondAttribute="bottom" constant="70" id="ZjX-Ft-JUi"/>
                         <constraint firstAttribute="bottom" secondItem="3qL-46-AD3" secondAttribute="bottom" constant="10" id="Zxf-6z-unA"/>
                         <constraint firstAttribute="width" secondItem="Rvn-c3-FFE" secondAttribute="height" multiplier="375:317" id="blW-vw-OcF"/>
                         <constraint firstItem="EJL-Uv-jC0" firstAttribute="leading" secondItem="3qL-46-AD3" secondAttribute="trailing" id="em4-eu-DxI"/>
                         <constraint firstItem="3qL-46-AD3" firstAttribute="leading" secondItem="Rvn-c3-FFE" secondAttribute="leading" constant="12" id="f5m-fu-aAC"/>
+                        <constraint firstItem="v9i-56-Vdl" firstAttribute="leading" secondItem="Rvn-c3-FFE" secondAttribute="leading" constant="-10" id="gtO-DR-hGL"/>
                         <constraint firstItem="ZHF-di-tNg" firstAttribute="top" secondItem="Rvn-c3-FFE" secondAttribute="top" constant="63" id="kEC-34-kJO"/>
                         <constraint firstItem="6ug-TH-yA9" firstAttribute="centerX" secondItem="Rvn-c3-FFE" secondAttribute="centerX" id="lNR-Rb-kkT"/>
                         <constraint firstItem="8DQ-T2-OqM" firstAttribute="leading" secondItem="Rvn-c3-FFE" secondAttribute="leading" id="nvq-ii-LE1"/>
@@ -147,7 +165,7 @@
                                     <color key="textColor" red="0.39215686274509803" green="0.39215686274509803" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDF-dK-0rJ">
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDF-dK-0rJ">
                                     <rect key="frame" x="137" y="37" width="22" height="14"/>
                                     <color key="backgroundColor" red="0.9882352941176471" green="0.75686274509803919" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -331,15 +349,24 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="_backView" destination="8DQ-T2-OqM" id="7UP-kB-3tO"/>
+                <outlet property="_badgeLbl" destination="xDF-dK-0rJ" id="iRE-wr-Lj6"/>
+                <outlet property="_badgeLblWidth" destination="EV7-c2-DG1" id="HJ0-Gz-49M"/>
                 <outlet property="_connectBtn" destination="ZHF-di-tNg" id="Z07-h1-g7w"/>
                 <outlet property="_connectBtnTop" destination="kEC-34-kJO" id="pCE-qI-eBR"/>
+                <outlet property="_examIconLeft" destination="gSn-me-epW" id="pHA-AF-RZX"/>
                 <outlet property="_hotLbl" destination="AF4-jb-U74" id="IqI-Mf-SKA"/>
+                <outlet property="_leftWeatherView" destination="v9i-56-Vdl" id="9jZ-VJ-iuw"/>
+                <outlet property="_mapIconLeft" destination="O5W-yr-fib" id="sms-o2-jGY"/>
+                <outlet property="_rightWeatherView" destination="Ah2-cX-q3a" id="ZwR-qH-sDR"/>
                 <outlet property="_statusLbl" destination="6ug-TH-yA9" id="1ER-vb-E9g"/>
                 <outlet property="_statusLblBottom" destination="1ZS-ru-siW" id="482-Lp-6Dg"/>
                 <outlet property="_temperatureLbl" destination="3qL-46-AD3" id="ych-DS-jzs"/>
+                <outlet property="_testIconLeft" destination="HGC-Ok-9KK" id="LMx-Ml-5NL"/>
                 <outlet property="_weatherLbl" destination="EJL-Uv-jC0" id="GWY-mQ-PkY"/>
+                <outlet property="_welfareIconLeft" destination="SVq-zC-vHu" id="Z5p-ha-YKS"/>
             </connections>
-            <point key="canvasLocation" x="-247" y="-162"/>
+            <point key="canvasLocation" x="-482" y="-163"/>
         </view>
         <tapGestureRecognizer id="o02-dx-MzN">
             <connections>
@@ -368,11 +395,11 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
+        <image name="Cloudy.png" width="83" height="83"/>
         <image name="btn_wifi map.png" width="46" height="46"/>
         <image name="btn_wifi welfare .png" width="46" height="46"/>
         <image name="btn_wifisetting.png" width="46" height="46"/>
         <image name="btn_wifitest.png" width="46" height="46"/>
         <image name="horn.png" width="14" height="14"/>
-        <image name="img_bg.png" width="375" height="317"/>
     </resources>
 </document>

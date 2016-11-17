@@ -21,5 +21,6 @@
 + (NSString *)getWlanSubnetMask;
 + (NSString *)getWlanIPAddress;
 + (NSString *)getServerWiFiIPAddress;
++ (TimeType)getTimeType;
 
 @end

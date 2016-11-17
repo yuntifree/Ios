@@ -160,19 +160,19 @@
 {
     
     CAKeyframeAnimation *animation  = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
-    animation.duration = 0.75;
-    animation.values = @[@0.7, @1.2, @1];
+    animation.duration = 0.25;
+    animation.values = @[@0.7, @1.1, @1];
     
     CABasicAnimation *fadeIn = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    fadeIn.duration = 0.75;
-    fadeIn.fromValue = [NSNumber numberWithFloat:0.f];
+    fadeIn.duration = 0.25;
+    fadeIn.fromValue = [NSNumber numberWithFloat:0.5f];
     fadeIn.toValue = [NSNumber numberWithFloat:1.f];
     fadeIn.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     fadeIn.fillMode = kCAFillModeForwards;
     
     CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
     animationGroup.animations = @[animation, fadeIn];
-    animationGroup.duration = 0.75;
+    animationGroup.duration = 0.25;
     animationGroup.fillMode = kCAFillModeForwards;
     return animationGroup;
 }

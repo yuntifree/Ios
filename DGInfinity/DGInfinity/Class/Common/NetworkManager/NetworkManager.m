@@ -14,6 +14,9 @@
 {
     Reachability *_reachability;
     NSMutableArray *_observers;
+    
+    NetworkStatus _currentStatus;
+    NSString *_lastSSID;
 }
 @end
 
@@ -40,7 +43,9 @@ static NetworkManager *manager = nil;
     self = [super init];
     if (self) {
         _reachability = [Reachability reachabilityWithHostName:@"www.yunxingzh.com"];
+        _currentStatus = [_reachability currentReachabilityStatus];
         _observers = [NSMutableArray array];
+        _lastSSID = nil;
     }
     return self;
 }
@@ -60,6 +65,15 @@ static NetworkManager *manager = nil;
 - (void)networkReachabilityChanged
 {
     NetworkStatus ns = [self currentReachabilityStatus];
+    NSString *currentSSID = [Tools getCurrentSSID];
+    if (_currentStatus == ns) {
+        if (!(ns == ReachableViaWiFi && ![_lastSSID isEqualToString:currentSSID])) {
+            //修复wifi切换时，切换过快时，从A到B不派发change事件的问题
+            return;
+        }
+    }
+    _currentStatus = ns;
+    _lastSSID = currentSSID;
     @synchronized (_observers) {
         for (id<NetWorkMgrDelegate> delegate in _observers) {
             if ([delegate respondsToSelector:@selector(didNetworkStateChanged:)]) {
@@ -76,7 +90,7 @@ static NetworkManager *manager = nil;
 
 - (BOOL)isWiFi
 {
-    return [self currentReachabilityStatus] == ReachableViaWiFi;
+    return _currentStatus == ReachableViaWiFi;
 }
 
 - (void)addNetworkObserver:(id<NetWorkMgrDelegate>)delegate

@@ -112,7 +112,7 @@
     [super viewWillAppear:animated];
     
     self.presentView.hidden = YES;
-    [SVProgressHUD showWithStatus:@"加载中..."];
+    [SVProgressHUD showWithStatus:LoadingTip];
 }
 
 - (void)viewDidAppear:(BOOL)animated

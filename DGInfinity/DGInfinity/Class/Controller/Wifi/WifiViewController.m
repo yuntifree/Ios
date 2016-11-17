@@ -19,6 +19,7 @@
 #import "NewsViewController.h"
 #import "WiFiScanQrcodeViewController.h"
 #import "WiFiExaminationViewController.h"
+#import "WiFiConnectTipView.h"
 
 #define Height (kScreenHeight - 20 - 44 - 49)
 
@@ -29,6 +30,7 @@
     WiFiTipView *_tipView;
     UITableView *_tableView;
     WiFiFooterView *_footerView;
+    WiFiConnectTipView *_connectTipView;
     
     NSMutableArray *_newsArray;
     NSDictionary *_frontInfo;
@@ -45,6 +47,25 @@
         _newsArray = [NSMutableArray arrayWithCapacity:3];
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [_menuView setBackViewImage];
+    [_menuView startAnimation];
+    if ([Tools getTimeType] == TimeTypeNight) {
+        [self.navigationController.navigationBar setBarTintColor:RGB(0x236EC5, 1)];
+    } else {
+        [self.navigationController.navigationBar setBarTintColor:COLOR(0, 156, 251, 1)];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [_menuView stopAnimation];
+    [self.navigationController.navigationBar setBarTintColor:COLOR(0, 156, 251, 1)];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -399,8 +420,21 @@
             break;
         case WiFiMenuTypeExamination:
         {
+            __weak typeof(_menuView) wmenu = _menuView;
             WiFiExaminationViewController *vc = [[WiFiExaminationViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
+            vc.badgeblock = ^ (NSInteger deviceCount) {
+                [wmenu setDeviceBadge:deviceCount];
+            };
+        }
+            break;
+        case WiFiMenuTypeConnect:
+        {
+            UIWindow *window = [UIApplication sharedApplication].keyWindow;
+            if (!_connectTipView) {
+                _connectTipView = [[WiFiConnectTipView alloc] initWithFrame:window.bounds];
+            }
+            [_connectTipView showInView:window];
         }
             break;
         default:
@@ -412,7 +446,7 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     if (scrollView == _scrollView) {
-        if (scrollView == _scrollView && scrollView.contentOffset.y) {
+        if (scrollView.contentOffset.y) {
             if (_tipView) {
                 [_tipView dismiss];
                 _tipView = nil;
@@ -422,6 +456,10 @@
             }
             if (scrollView.contentOffset.y == Height) {
                 scrollView.scrollEnabled = NO;
+            }
+        } else {
+            if (!_newsArray.count) {
+                [self getWeatherAndNews];
             }
         }
     }

@@ -29,5 +29,9 @@ typedef NS_ENUM(NSInteger, WiFiMenuType) {
 
 - (void)setWeather:(NSDictionary *)weather;
 - (void)setHotNews:(NSString *)title;
+- (void)setDeviceBadge:(NSInteger)badge;
+- (void)setBackViewImage;
+- (void)startAnimation;
+- (void)stopAnimation;
 
 @end
