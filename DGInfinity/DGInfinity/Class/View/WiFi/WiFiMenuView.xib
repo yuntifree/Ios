@@ -37,16 +37,17 @@
                             </constraints>
                         </imageView>
                         <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZHF-di-tNg">
-                            <rect key="frame" x="131" y="63" width="113" height="113"/>
+                            <rect key="frame" x="131.5" y="63" width="113" height="113"/>
                             <color key="backgroundColor" red="0.85882352941176465" green="0.94901960784313721" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="113" id="1Cu-Vs-QSp"/>
                                 <constraint firstAttribute="width" constant="113" id="O5r-mv-0iL"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
-                            <state key="normal" title="一键连接">
+                            <state key="normal">
                                 <color key="titleColor" red="0.0" green="0.61176470588235299" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <state key="selected" image="Connect.png"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                     <real key="value" value="56.5"/>
@@ -56,8 +57,8 @@
                                 <action selector="connectBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="lXs-JX-z7q"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发现东莞城市免费WiFi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ug-TH-yA9">
-                            <rect key="frame" x="86" y="246" width="203" height="24"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="       " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ug-TH-yA9">
+                            <rect key="frame" x="170" y="246" width="35" height="24"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -396,6 +397,7 @@
     </objects>
     <resources>
         <image name="Cloudy.png" width="83" height="83"/>
+        <image name="Connect.png" width="66" height="66"/>
         <image name="btn_wifi map.png" width="46" height="46"/>
         <image name="btn_wifi welfare .png" width="46" height="46"/>
         <image name="btn_wifisetting.png" width="46" height="46"/>

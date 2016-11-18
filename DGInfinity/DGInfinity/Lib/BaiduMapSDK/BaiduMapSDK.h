@@ -52,7 +52,7 @@ UIKIT_EXTERN int MetersTwoCoordinate2D(CLLocationCoordinate2D a, CLLocationCoord
 /**
  *  获取用户当前位置
  */
-- (CLLocationCoordinate2D)getUserLocation;
+- (BMKUserLocation *)getUserLocation;
 
 /**
  *  打开地图客户端，默认打开百度地图，如果没有百度地图，则打开系统地图

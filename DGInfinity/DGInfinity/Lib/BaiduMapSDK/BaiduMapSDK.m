@@ -95,9 +95,9 @@ UIKIT_STATIC_INLINE CLLocationDistance FMetersTwoCoordinate2D(CLLocationCoordina
     [_locationService stopUserLocationService];
 }
 
-- (CLLocationCoordinate2D)getUserLocation
+- (BMKUserLocation *)getUserLocation
 {
-    return _locationService.userLocation.location.coordinate;
+    return _locationService.userLocation;
 }
 
 // 是否有安装百度地图

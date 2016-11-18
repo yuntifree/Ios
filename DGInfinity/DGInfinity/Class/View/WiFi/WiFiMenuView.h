@@ -33,5 +33,6 @@ typedef NS_ENUM(NSInteger, WiFiMenuType) {
 - (void)setBackViewImage;
 - (void)startAnimation;
 - (void)stopAnimation;
+- (void)checkConnectBtnStatus;
 
 @end

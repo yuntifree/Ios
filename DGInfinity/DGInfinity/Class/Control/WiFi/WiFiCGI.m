@@ -30,4 +30,34 @@
     }];
 }
 
++ (void)reportWifi:(NSString *)ssid
+          password:(NSString *)password
+         longitudu:(double)longitude
+          latitude:(double)latitude
+          complete:(void (^)(DGCgiResult *res))complete
+{
+    NSMutableDictionary *params = [RequestManager httpParams];
+    params[@"data"] = @{@"ssid": ssid,
+                        @"password": password,
+                        @"longitude": @(longitude),
+                        @"latitude": @(latitude)};
+    [[RequestManager shareManager] loadAsync:params cgi:@"report_wifi" complete:^(DGCgiResult *res) {
+        if (complete) {
+            complete(res);
+        }
+    }];
+}
+
++ (void)reportApMac:(NSString *)apmac
+           complete:(void (^)(DGCgiResult *res))complete
+{
+    NSMutableDictionary *params = [RequestManager httpParams];
+    params[@"data"] = @{@"apmac": apmac};
+    [[RequestManager shareManager] loadAsync:params cgi:@"report_apmac" complete:^(DGCgiResult *res) {
+        if (complete) {
+            complete(res);
+        }
+    }];
+}
+
 @end

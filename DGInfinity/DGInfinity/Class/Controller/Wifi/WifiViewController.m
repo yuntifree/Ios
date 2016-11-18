@@ -20,10 +20,19 @@
 #import "WiFiScanQrcodeViewController.h"
 #import "WiFiExaminationViewController.h"
 #import "WiFiConnectTipView.h"
+#import "WiFiWelfareViewController.h"
+#import "NetworkManager.h"
 
 #define Height (kScreenHeight - 20 - 44 - 49)
 
-@interface WifiViewController () <WiFiMenuViewDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface WifiViewController ()
+<
+WiFiMenuViewDelegate,
+UIScrollViewDelegate,
+UITableViewDataSource,
+UITableViewDelegate,
+NetWorkMgrDelegate
+>
 {
     UIScrollView *_scrollView;
     WiFiMenuView *_menuView;
@@ -40,11 +49,17 @@
 
 @implementation WifiViewController
 
+- (void)dealloc
+{
+    [[NetworkManager shareManager] removeNetworkObserver:self];
+}
+
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _newsArray = [NSMutableArray arrayWithCapacity:3];
+        [[NetworkManager shareManager] addNetworkObserver:self];
     }
     return self;
 }
@@ -437,6 +452,12 @@
             [_connectTipView showInView:window];
         }
             break;
+        case WiFiMenuTypeWelfare:
+        {
+            WiFiWelfareViewController *vc = [[WiFiWelfareViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
         default:
             break;
     }
@@ -508,6 +529,12 @@
             [SApp reportClick:rcm];
         }
     }
+}
+
+#pragma mark - NetWorkMgrDelegate
+- (void)didNetworkStateChanged:(NetworkStatus)ns
+{
+    [_menuView checkConnectBtnStatus];
 }
 
 @end

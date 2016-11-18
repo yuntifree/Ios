@@ -68,7 +68,7 @@ static NetworkManager *manager = nil;
     NSString *currentSSID = [Tools getCurrentSSID];
     if (_currentStatus == ns) {
         if (!(ns == ReachableViaWiFi && ![_lastSSID isEqualToString:currentSSID])) {
-            //修复wifi切换时，切换过快时，从A到B不派发change事件的问题
+            //修复wifi切换时，切换过快时，从A到B派发两次change事件的问题
             return;
         }
     }

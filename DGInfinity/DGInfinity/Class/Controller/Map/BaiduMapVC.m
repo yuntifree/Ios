@@ -152,11 +152,9 @@
         self.bounds = iv.bounds;
         [self addSubview:iv];
         
-        if (!anno.isMyLocation) { // 如果是终点，则弹出自定义泡泡
-            LocationActionPaopaoView *paopaoView = [[LocationActionPaopaoView alloc] initWithTitle:anno.title distance:MetersTwoCoordinate2D([BaiduMapSDK shareBaiduMapSDK].getUserLocation, anno.coordinate)];
-            BMKActionPaopaoView *paopao = [[BMKActionPaopaoView alloc] initWithCustomView:paopaoView];
-            self.paopaoView = paopao;
-        }
+        LocationActionPaopaoView *paopaoView = [[LocationActionPaopaoView alloc] initWithTitle:anno.title distance:MetersTwoCoordinate2D([[BaiduMapSDK shareBaiduMapSDK] getUserLocation].location.coordinate, anno.coordinate)];
+        BMKActionPaopaoView *paopao = [[BMKActionPaopaoView alloc] initWithCustomView:paopaoView];
+        self.paopaoView = paopao;
     }
     return self;
 }
@@ -170,7 +168,7 @@
 @interface BaiduMapVC () <BMKMapViewDelegate>
 {
     BMKMapView *_mapView;
-    LocationAnnotation *_myAnnotation;
+    BMKUserLocation *_myLocation;
     
     NSMutableSet *_annotitaionSet;
 }
@@ -196,25 +194,16 @@
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
         _annotitaionSet = [NSMutableSet setWithCapacity:20];
-        [self setUpMyAnnotation];
+        _myLocation = [[BaiduMapSDK shareBaiduMapSDK] getUserLocation];
     }
     return self;
-}
-
-- (void)setUpMyAnnotation
-{
-    _myAnnotation = [LocationAnnotation new];
-//    _myAnnotation.coordinate = [[BaiduMapSDK shareBaiduMapSDK] getUserLocation];
-    _myAnnotation.coordinate = CLLocationCoordinate2DMake(22.930574, 113.890796);
-    _myAnnotation.title = @"我的位置";
-    _myAnnotation.isMyLocation = YES;
 }
 
 - (void)willEnterForeground
 {
     if ([[BaiduMapSDK shareBaiduMapSDK] locationServicesEnabled] && !_mapView.annotations.count) {
-        [self setUpMyAnnotation];
-        [_mapView addAnnotation:_myAnnotation];
+        _myLocation = [[BaiduMapSDK shareBaiduMapSDK] getUserLocation];
+        [_mapView updateLocationData:_myLocation];
         [self navBtnClick];
     }
 }
@@ -251,8 +240,13 @@
     
     _mapView = [[BMKMapView alloc] init];
     _mapView.translatesAutoresizingMaskIntoConstraints = NO;
-    _mapView.centerCoordinate = _myAnnotation.coordinate;
+    _mapView.showsUserLocation = YES;
     _mapView.zoomLevel = 16.1;
+    _mapView.centerCoordinate = _myLocation.location.coordinate;
+    BMKLocationViewDisplayParam *param = [[BMKLocationViewDisplayParam alloc] init];
+    param.isAccuracyCircleShow = NO;
+    param.locationViewImgName = @"target";
+    [_mapView updateLocationViewWithParam:param];
     [_mapView setNeedsUpdateConstraints];
     [self.view addSubview:_mapView];
     
@@ -268,7 +262,7 @@
     if (![[BaiduMapSDK shareBaiduMapSDK] locationServicesEnabled]) return;
     BMKMapStatus *status = [BMKMapStatus new];
     status.fLevel = _mapView.zoomLevel - 0.00001;
-    status.targetGeoPt = _myAnnotation.coordinate;
+    status.targetGeoPt = _myLocation.location.coordinate;
     [_mapView setMapStatus:status withAnimation:YES];
 }
 
@@ -327,7 +321,7 @@
         [self presentViewController:alert animated:YES completion:nil];
         return;
     }
-    [_mapView addAnnotation:_myAnnotation];
+    [_mapView updateLocationData:_myLocation];
 }
 
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id<BMKAnnotation>)annotation

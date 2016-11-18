@@ -50,7 +50,9 @@
 #pragma mark - Accessor
 
 - (void)start {
-    [self.effect addAnimation:self.animationGroup forKey:@"pulse"];
+    if (![self.effect.animationKeys count]) {
+        [self.effect addAnimation:self.animationGroup forKey:@"pulse"];
+    }
 }
 
 - (void)stop {

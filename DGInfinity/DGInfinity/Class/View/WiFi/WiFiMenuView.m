@@ -64,6 +64,8 @@
     _currentType = TimeTypeDay;
     NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"img_bg_day.png"];
     _backView.image = [UIImage imageWithContentsOfFile:imagePath];
+    
+    [self checkConnectBtnStatus];
 }
 
 - (void)setWeather:(NSDictionary *)weather
@@ -140,6 +142,33 @@
     [_halo stop];
     [_leftWeatherView.layer removeAnimationForKey:@"weather"];
     [_rightWeatherView.layer removeAnimationForKey:@"weather"];
+}
+
+- (void)checkConnectBtnStatus
+{
+#if !(TARGET_IPHONE_SIMULATOR)
+    [[UserAuthManager manager] checkEnvironmentBlock:^(ENV_STATUS status) {
+        if (status == ENV_LOGIN) {
+            _connectBtn.selected = YES;
+            _connectBtn.userInteractionEnabled = NO;
+            [_connectBtn setTitle:@"" forState:UIControlStateNormal];
+            _statusLbl.text = @"已连接东莞无线";
+            [_halo stop];
+        } else {
+            _connectBtn.selected = NO;
+            _connectBtn.userInteractionEnabled = YES;
+            [_connectBtn setTitle:@"一键连接" forState:UIControlStateNormal];
+            _statusLbl.text = @"发现东莞城市免费WiFi";
+            [_halo start];
+        }
+    }];
+#else
+    _connectBtn.selected = NO;
+    _connectBtn.userInteractionEnabled = YES;
+    [_connectBtn setTitle:@"一键连接" forState:UIControlStateNormal];
+    _statusLbl.text = @"发现东莞城市免费WiFi";
+    [_halo start];
+#endif
 }
 
 - (IBAction)menuViewTap:(UITapGestureRecognizer *)sender {
