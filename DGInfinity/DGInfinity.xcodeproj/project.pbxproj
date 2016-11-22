@@ -207,6 +207,13 @@
 		6F3F32D41DDB22180024095A /* secong_hand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3F32C81DDB22180024095A /* secong_hand@2x.png */; };
 		6F3F32D51DDB22180024095A /* secong_hand@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3F32C91DDB22180024095A /* secong_hand@3x.png */; };
 		6F3F32D81DDB30700024095A /* ServiceSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F32D71DDB30700024095A /* ServiceSectionModel.m */; };
+		6F3FF8361DE43D59002791DB /* img_Loading1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3FF8301DE43D59002791DB /* img_Loading1@2x.png */; };
+		6F3FF8371DE43D59002791DB /* img_Loading1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3FF8311DE43D59002791DB /* img_Loading1@3x.png */; };
+		6F3FF8381DE43D59002791DB /* img_Loading2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3FF8321DE43D59002791DB /* img_Loading2@2x.png */; };
+		6F3FF8391DE43D59002791DB /* img_Loading2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3FF8331DE43D59002791DB /* img_Loading2@3x.png */; };
+		6F3FF83A1DE43D59002791DB /* img_Loading3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3FF8341DE43D59002791DB /* img_Loading3@2x.png */; };
+		6F3FF83B1DE43D59002791DB /* img_Loading3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3FF8351DE43D59002791DB /* img_Loading3@3x.png */; };
+		6F3FF83F1DE442EA002791DB /* LaunchGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3FF83E1DE442EA002791DB /* LaunchGuideViewController.m */; };
 		6F5033E91DD0706C001EBC97 /* img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5033DB1DD0706C001EBC97 /* img@2x.png */; };
 		6F5033EA1DD0706C001EBC97 /* img@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5033DC1DD0706C001EBC97 /* img@3x.png */; };
 		6F5033EB1DD0706C001EBC97 /* Input_hollow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5033DD1DD0706C001EBC97 /* Input_hollow@2x.png */; };
@@ -530,6 +537,14 @@
 		6F3F32C91DDB22180024095A /* secong_hand@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "secong_hand@3x.png"; sourceTree = "<group>"; };
 		6F3F32D61DDB30700024095A /* ServiceSectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceSectionModel.h; sourceTree = "<group>"; };
 		6F3F32D71DDB30700024095A /* ServiceSectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceSectionModel.m; sourceTree = "<group>"; };
+		6F3FF8301DE43D59002791DB /* img_Loading1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_Loading1@2x.png"; sourceTree = "<group>"; };
+		6F3FF8311DE43D59002791DB /* img_Loading1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_Loading1@3x.png"; sourceTree = "<group>"; };
+		6F3FF8321DE43D59002791DB /* img_Loading2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_Loading2@2x.png"; sourceTree = "<group>"; };
+		6F3FF8331DE43D59002791DB /* img_Loading2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_Loading2@3x.png"; sourceTree = "<group>"; };
+		6F3FF8341DE43D59002791DB /* img_Loading3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_Loading3@2x.png"; sourceTree = "<group>"; };
+		6F3FF8351DE43D59002791DB /* img_Loading3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_Loading3@3x.png"; sourceTree = "<group>"; };
+		6F3FF83D1DE442EA002791DB /* LaunchGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchGuideViewController.h; sourceTree = "<group>"; };
+		6F3FF83E1DE442EA002791DB /* LaunchGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchGuideViewController.m; sourceTree = "<group>"; };
 		6F5033DB1DD0706C001EBC97 /* img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img@2x.png"; sourceTree = "<group>"; };
 		6F5033DC1DD0706C001EBC97 /* img@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img@3x.png"; sourceTree = "<group>"; };
 		6F5033DD1DD0706C001EBC97 /* Input_hollow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Input_hollow@2x.png"; sourceTree = "<group>"; };
@@ -688,6 +703,7 @@
 		6F2E57B91DB78B2B00C39F27 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				6F3FF82F1DE43D59002791DB /* Guide */,
 				6F2F9BB11DDC22110055DAF9 /* Search */,
 				6F3F32911DDAF97F0024095A /* WiFiScan */,
 				6F30672B1DD32B8000FA841E /* WiFi */,
@@ -1133,6 +1149,28 @@
 			path = WiFiScan;
 			sourceTree = "<group>";
 		};
+		6F3FF82F1DE43D59002791DB /* Guide */ = {
+			isa = PBXGroup;
+			children = (
+				6F3FF8301DE43D59002791DB /* img_Loading1@2x.png */,
+				6F3FF8311DE43D59002791DB /* img_Loading1@3x.png */,
+				6F3FF8321DE43D59002791DB /* img_Loading2@2x.png */,
+				6F3FF8331DE43D59002791DB /* img_Loading2@3x.png */,
+				6F3FF8341DE43D59002791DB /* img_Loading3@2x.png */,
+				6F3FF8351DE43D59002791DB /* img_Loading3@3x.png */,
+			);
+			path = Guide;
+			sourceTree = "<group>";
+		};
+		6F3FF83C1DE44296002791DB /* Guide */ = {
+			isa = PBXGroup;
+			children = (
+				6F3FF83D1DE442EA002791DB /* LaunchGuideViewController.h */,
+				6F3FF83E1DE442EA002791DB /* LaunchGuideViewController.m */,
+			);
+			path = Guide;
+			sourceTree = "<group>";
+		};
 		6F5033D81DD0706C001EBC97 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -1318,6 +1356,7 @@
 		6F6FDAC21DB4B79300E50D9B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6F3FF83C1DE44296002791DB /* Guide */,
 				6F2F9BBA1DDC22280055DAF9 /* Search */,
 				6F307BD21DCB1F9C0015F9EC /* Login */,
 				6FCA54741DC9EA91000ED52A /* Map */,
@@ -1562,7 +1601,7 @@
 					6F6FDAA01DB4B3DE00E50D9B = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = VN4WHFNWZZ;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 0;
@@ -1633,12 +1672,14 @@
 				6F3067491DD32B8000FA841E /* Connect@2x.png in Resources */,
 				6F2DF2CB1DD1D72C00A8F0EC /* tab_ico_headlines_blue@3x.png in Resources */,
 				6F3E56401DD968C100F16A23 /* btn_test@2x.png in Resources */,
+				6F3FF8371DE43D59002791DB /* img_Loading1@3x.png in Resources */,
 				6F30674C1DD32B8000FA841E /* horn@3x.png in Resources */,
 				6FF5C7FC1DC1F13D00B1A84A /* NewsVideoCell.xib in Resources */,
 				6F32158C1DDD879D00B7D5DA /* img_bg_day@3x.png in Resources */,
 				6F5033F11DD0706C001EBC97 /* Start button_normal@2x.png in Resources */,
 				6F2E57D41DB78B2B00C39F27 /* icon_back@2x.png in Resources */,
 				6F30A1D71DD5AD5100149D73 /* ico_Recommend@2x.png in Resources */,
+				6F3FF83A1DE43D59002791DB /* img_Loading3@2x.png in Resources */,
 				6F5033EA1DD0706C001EBC97 /* img@3x.png in Resources */,
 				6F30A1DA1DD5AD5100149D73 /* icon_more@3x.png in Resources */,
 				6F5033F41DD0706C001EBC97 /* Start button_press@3x.png in Resources */,
@@ -1662,6 +1703,7 @@
 				6F3E56441DD968C100F16A23 /* full_Compass@2x.png in Resources */,
 				6F2DF2D61DD1D72C00A8F0EC /* tab_icon_wifi_gray@2x.png in Resources */,
 				6F5033EE1DD0706C001EBC97 /* loading_icon_key@3x.png in Resources */,
+				6F3FF8381DE43D59002791DB /* img_Loading2@2x.png in Resources */,
 				6F3F329A1DDAF97F0024095A /* wif_qrcode_fail@2x.png in Resources */,
 				6F5033E91DD0706C001EBC97 /* img@2x.png in Resources */,
 				6F2F9BC61DDC64230055DAF9 /* WiFiExaminationViewController.xib in Resources */,
@@ -1693,11 +1735,13 @@
 				6F3067421DD32B8000FA841E /* btn_wifi welfare @3x.png in Resources */,
 				6F2DF2D41DD1D72C00A8F0EC /* tab_icon_wifi_blue@2x.png in Resources */,
 				6F5033F71DD07145001EBC97 /* logo@2x.png in Resources */,
+				6F3FF8391DE43D59002791DB /* img_Loading2@3x.png in Resources */,
 				6F2DF2D51DD1D72C00A8F0EC /* tab_icon_wifi_blue@3x.png in Resources */,
 				6F3F32B21DDAFB8F0024095A /* icon_WiFi@2x.png in Resources */,
 				6F3F32D41DDB22180024095A /* secong_hand@2x.png in Resources */,
 				6F3F32CD1DDB22180024095A /* Housekeeping@3x.png in Resources */,
 				6F6FDAED1DB4C83000E50D9B /* ServiceViewController.xib in Resources */,
+				6F3FF8361DE43D59002791DB /* img_Loading1@2x.png in Resources */,
 				6F307BD71DCB20780015F9EC /* LoginViewController.xib in Resources */,
 				6F32158D1DDD879D00B7D5DA /* img_bg_night@2x.png in Resources */,
 				6F2DF2D71DD1D72C00A8F0EC /* tab_icon_wifi_gray@3x.png in Resources */,
@@ -1733,6 +1777,7 @@
 				6F3F32CF1DDB22180024095A /* housing@3x.png in Resources */,
 				6F3E56431DD968C100F16A23 /* empty_Compass@3x.png in Resources */,
 				6F3F32D01DDB22180024095A /* ico_search@2x.png in Resources */,
+				6F3FF83B1DE43D59002791DB /* img_Loading3@3x.png in Resources */,
 				6F3215A41DDDB29A00B7D5DA /* ico_cancel@3x.png in Resources */,
 				6F6FDAE31DB4C81100E50D9B /* WifiViewController.xib in Resources */,
 				6F3F32AF1DDAFB8F0024095A /* ico_location@3x.png in Resources */,
@@ -1820,6 +1865,7 @@
 			files = (
 				6F2F9BE01DDC670C0055DAF9 /* Device.m in Sources */,
 				6F2F9BBD1DDC224A0055DAF9 /* SearchViewController.m in Sources */,
+				6F3FF83F1DE442EA002791DB /* LaunchGuideViewController.m in Sources */,
 				6F3185181DB8A25700017D47 /* NewsReportCell.m in Sources */,
 				6F2F9BE61DDC670C0055DAF9 /* NetworkCalculator.m in Sources */,
 				6F2F9BE31DDC670C0055DAF9 /* MACOperation.m in Sources */,
@@ -2015,6 +2061,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VN4WHFNWZZ;
 				ENABLE_BITCODE = NO;
@@ -2033,8 +2080,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunxingzh.wireless;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "7861a7fe-79f3-456d-860e-bb5fccc4ac79";
+				PROVISIONING_PROFILE_SPECIFIER = "com.yunxingzh.wireless-dev";
 			};
 			name = Debug;
 		};
@@ -2045,8 +2092,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = VN4WHFNWZZ;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

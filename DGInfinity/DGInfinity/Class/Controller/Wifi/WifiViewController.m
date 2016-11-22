@@ -52,6 +52,7 @@ NetWorkMgrDelegate
 - (void)dealloc
 {
     [[NetworkManager shareManager] removeNetworkObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -60,8 +61,77 @@ NetWorkMgrDelegate
     if (self) {
         _newsArray = [NSMutableArray arrayWithCapacity:3];
         [[NetworkManager shareManager] addNetworkObserver:self];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     }
     return self;
+}
+
+- (void)willEnterForeground
+{
+#if (!TARGET_IPHONE_SIMULATOR)
+    [[UserAuthManager manager] checkEnvironmentBlock:^(ENV_STATUS status) {
+        if (status == ENV_NOT_WIFI) {
+            if ([[Tools getCurrentSSID] isEqualToString:WIFISDK_SSID]) {
+                // 已经portal认证
+            } else {
+                // 别的网络
+            }
+        } else if (status == ENV_LOGIN) {
+            // 已经通过SDK认证
+        } else if (status == ENV_NOT_LOGIN) {
+            if (SApp.wifiAccount && SApp.wifipass) {
+                // 调用SDK认证
+                [self doLogon];
+            } else {
+                // 调用SDK注册，然后再调用认证
+                [self doRegister];
+            }
+        }
+    }];
+#endif
+}
+
+- (void)doRegister
+{
+#if (!TARGET_IPHONE_SIMULATOR)
+    [SVProgressHUD show];
+    [[UserAuthManager manager] doRegisterWithUserName:SApp.username andPassWord:SApp.wifipass andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
+        [SVProgressHUD dismiss];
+        if (!error) {
+            NSString *retflag = response[@"retflag"];
+            if ([retflag isEqualToString:@"0"]) {
+                SApp.wifiAccount = SApp.username;
+                [self doLogon];
+            } else {
+                [self makeToast:response[@"reason"]];
+            }
+        } else {
+            [self makeToast:[NSString stringWithFormat:@"请求失败 %@", error.description]];
+        }
+    }];
+#endif
+}
+
+- (void)doLogon
+{
+#if (!TARGET_IPHONE_SIMULATOR)
+    [SVProgressHUD show];
+    [[UserAuthManager manager] doLogon:SApp.wifiAccount andPassWord:SApp.wifipass andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
+        [SVProgressHUD dismiss];
+        if (!error) {
+            NSString *retflag = response[@"retflag"];
+            if ([retflag isEqualToString:@"0"]) {
+                [self makeToast:@"认证成功"];
+                [_menuView setConnectBtnStatus:ConnectStatusConnected];
+                [WiFiCGI reportApMac:[Tools getBSSID] complete:nil];
+            } else {
+                [self makeToast:response[@"reason"]];
+            }
+        } else {
+            [self makeToast:[NSString stringWithFormat:@"请求失败 %@", error.description]];
+        }
+    }];
+#endif
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -119,6 +189,10 @@ NetWorkMgrDelegate
     [Tools permissionOfCamera:^{
         WiFiScanQrcodeViewController *vc = [WiFiScanQrcodeViewController new];
         [self.navigationController pushViewController:vc animated:YES];
+        __weak typeof(self) wself = self;
+        vc.success = ^ {
+            [wself WiFiMenuViewClick:WiFiMenuTypeConnect];
+        };
     } noPermission:^(NSString *tip) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:tip preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"忽略" style:UIAlertActionStyleCancel handler:nil]];
@@ -189,13 +263,13 @@ NetWorkMgrDelegate
 - (void)handleFooterViewAction:(WiFiFooterType)type
 {
     UITabBarController *root = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-    UINavigationController *nav = root.viewControllers[1];
-    NewsViewController *vc = (NewsViewController *)nav.topViewController;
     switch (type) {
         case WiFiFooterTypeLookForNews:
         case WiFiFooterTypeNews:
         case WiFiFooterTypeVideo:
         {
+            UINavigationController *nav = root.viewControllers[1];
+            NewsViewController *vc = (NewsViewController *)nav.topViewController;
             root.selectedIndex = 1;
             if (type == WiFiFooterTypeLookForNews || type == WiFiFooterTypeNews) {
                 [vc setCurrentPage:0];
@@ -209,6 +283,22 @@ NetWorkMgrDelegate
             WebViewController *vc = [[WebViewController alloc] init];
             vc.url = _frontInfo[@"banner"][@"dst"];
             [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case WiFiFooterTypeService:
+        case WiFiFooterTypeGoverment:
+        {
+            root.selectedIndex = 2;
+        }
+            break;
+        case WiFiFooterTypeLive:
+        {
+            
+        }
+            break;
+        case WiFiFooterTypeShopping:
+        {
+            
         }
             break;
         default:
@@ -259,143 +349,6 @@ NetWorkMgrDelegate
     }];
 }
 
-/*
-- (IBAction)getCode:(id)sender {
-    if (!_nameField.text.length) return;
-    [SVProgressHUD show];
-    [AccountCGI getPhoneCode:_nameField.text type:0 complete:^(DGCgiResult *res) {
-        [SVProgressHUD dismiss];
-        if (E_OK == res._errno) {
-            [self showHint:@"获取成功"];
-        } else {
-            [self showHint:res.desc];
-        }
-    }];
-}
-
-- (IBAction)doRegister:(id)sender {
-//    DDDLog(@"username = %@,wifipass = %@",SApp.username, SApp.wifipass);
-//#if !(TARGET_IPHONE_SIMULATOR)
-//    [[UserAuthManager manager] doRegisterWithUserName:SApp.username andPassWord:SApp.wifipass andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
-//        if (!error) {
-//            NSString *retflag = response[@"retflag"];
-//            if ([retflag isEqualToString:@"0"]) {
-//                [self showHint:@"注册成功"];
-//            } else {
-//                [self showHint:response[@"reason"]];
-//            }
-//        } else {
-//            [self showHint:[NSString stringWithFormat:@"请求失败 %@", error.description]];
-//        }
-//    }];
-//#endif
-    if (!_nameField.text.length || !_passwordField.text.length || !_codeField.text.length) return;
-    [SVProgressHUD show];
-    [AccountCGI doRegister:_nameField.text password:_passwordField.text code:_codeField.text.integerValue complete:^(DGCgiResult *res) {
-        [SVProgressHUD dismiss];
-        if (E_OK == res._errno) {
-            NSDictionary *data = res.data[@"data"];
-            if ([data isKindOfClass:[NSDictionary class]]) {
-                SApp.username = _nameField.text;
-                [MSApp setUserInfo:data];
-#if !(TARGET_IPHONE_SIMULATOR)
-                [[UserAuthManager manager] doRegisterWithUserName:SApp.username andPassWord:SApp.wifipass andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
-                    if (!error) {
-                        NSString *retflag = response[@"retflag"];
-                        if ([retflag isEqualToString:@"0"]) {
-                            [self showHint:@"注册成功"];
-                        } else {
-                            [self showHint:response[@"reason"]];
-                        }
-                    } else {
-                        [self showHint:[NSString stringWithFormat:@"请求失败 %@", error.description]];
-                    }
-                }];
-#else
-                [self showHint:@"注册成功"];
-#endif
-            }
-        } else {
-            [self showHint:res.desc];
-        }
-    }];
-}
-
-- (void)gotoLogon
-{
-    DDDLog(@"username = %@, wifipass = %@",SApp.username, SApp.wifipass);
-#if !(TARGET_IPHONE_SIMULATOR)
-    [[UserAuthManager manager] doLogon:SApp.username andPassWord:SApp.wifipass andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
-        if (!error) {
-            NSString *retflag = response[@"retflag"];
-            if ([retflag isEqualToString:@"0"]) {
-                [self showHint:@"认证成功"];
-            } else {
-                [self showHint:response[@"reason"]];
-            }
-        } else {
-            [self showHint:[NSString stringWithFormat:@"请求失败 %@", error.description]];
-        }
-    }];
-#endif
-}
-
-- (IBAction)doLogon:(id)sender {
-    if (!_nameField.text.length || !_passwordField.text.length) return;
-    [SVProgressHUD show];
-    [AccountCGI login:_nameField.text password:_passwordField.text complete:^(DGCgiResult *res) {
-        [SVProgressHUD dismiss];
-        if (E_OK == res._errno) {
-            NSDictionary *data = res.data[@"data"];
-            if ([data isKindOfClass:[NSDictionary class]]) {
-                SApp.username = _nameField.text;
-                [MSApp setUserInfo:data];
-#if !(TARGET_IPHONE_SIMULATOR)
-                [[UserAuthManager manager] checkEnvironmentBlock:^(ENV_STATUS status) {
-                    DDDLog(@"-----%i",status);
-                    [self gotoLogon];
-                }];
-#else
-                [self showHint:@"登录成功"];
-#endif
-            }
-        } else {
-            [self showHint:res.desc];
-        }
-    }];
-}
-
-- (IBAction)doLogout:(id)sender {
-    if (!SApp.username.length) return;
-    [SVProgressHUD show];
-    [AccountCGI logout:^(DGCgiResult *res) {
-        [SVProgressHUD dismiss];
-        if (E_OK == res._errno) {
-#if !(TARGET_IPHONE_SIMULATOR)
-            [[UserAuthManager manager] doLogout:SApp.username andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
-                if (!error) {
-                    NSString *retflag = response[@"retflag"];
-                    if ([retflag isEqualToString:@"0"]) {
-                        [self showHint:@"登出成功"];
-                        [MSApp destory];
-                    } else {
-                        [self showHint:response[@"reason"]];
-                    }
-                } else {
-                    [self showHint:[NSString stringWithFormat:@"请求失败 %@", error.description]];
-                }
-            }];
-#else
-            [self showHint:@"登出成功"];
-            [MSApp destory];
-#endif
-        } else {
-            [self showHint:res.desc];
-        }
-    }];
-}
-*/
-
 - (void)openWebWithModel:(NewsReportModel *)model
 {
     WebViewController *vc = [[WebViewController alloc] init];
@@ -445,11 +398,34 @@ NetWorkMgrDelegate
             break;
         case WiFiMenuTypeConnect:
         {
+#if (!TARGET_IPHONE_SIMULATOR)
+            [SVProgressHUD show];
+            [[UserAuthManager manager] checkEnvironmentBlock:^(ENV_STATUS status) {
+                [SVProgressHUD dismiss];
+                if (status == ENV_NOT_LOGIN) {
+                    if (SApp.wifiAccount && SApp.wifipass) {
+                        [self doLogon];
+                    } else {
+                        [self doRegister];
+                    }
+                } else if (status == ENV_LOGIN) {
+                    [self makeToast:@"已连接上东莞免费WiFi"];
+                    [_menuView setConnectBtnStatus:ConnectStatusConnected];
+                } else {
+                    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+                    if (!_connectTipView) {
+                        _connectTipView = [[WiFiConnectTipView alloc] initWithFrame:window.bounds];
+                    }
+                    [_connectTipView showInView:window];
+                }
+            }];
+#else
             UIWindow *window = [UIApplication sharedApplication].keyWindow;
             if (!_connectTipView) {
                 _connectTipView = [[WiFiConnectTipView alloc] initWithFrame:window.bounds];
             }
             [_connectTipView showInView:window];
+#endif
         }
             break;
         case WiFiMenuTypeWelfare:

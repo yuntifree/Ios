@@ -8,6 +8,10 @@
 
 #import "DGViewController.h"
 
+typedef void(^successBlock)(void);
+
 @interface WiFiScanQrcodeViewController : DGViewController
+
+@property (nonatomic, copy) successBlock success;
 
 @end

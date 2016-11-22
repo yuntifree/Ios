@@ -41,15 +41,6 @@
  */
 #import <Foundation/Foundation.h>
 
-typedef enum {
-    ENV_NOT_WIFI = -1,      //无需认证的网络
-    ENV_NOT_LOGIN = 0,      //需要认证的网络
-    ENV_ERROR = 1,          //无网络
-    ENV_LOGIN = 2,          //已经认证成功
-
-}ENV_STATUS;
-
-
 @interface UserAuthManager : NSObject
 {
     

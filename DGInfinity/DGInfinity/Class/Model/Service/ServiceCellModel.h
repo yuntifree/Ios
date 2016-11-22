@@ -12,6 +12,7 @@
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *dst;
+@property (nonatomic, assign) NSInteger sid;
 
 + (instancetype)createWithInfo:(NSDictionary *)info;
 

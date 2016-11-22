@@ -67,14 +67,14 @@
     [self.view addSubview: label];
 }
 
-- (void)tappedBackButton:(id)sender
+- (void)backBtnClick:(id)sender
 {
-    [self.navigationController popToRootViewControllerAnimated: YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)tappedRetryButton:(id)sender
 {
-    [self.navigationController popViewControllerAnimated: YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

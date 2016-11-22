@@ -16,6 +16,8 @@
 #define KUD_PRIVDATA                @"KUD_PRIVDATA"
 #define KUD_EXPIRE                  @"KUD_EXPIRE"
 #define KUD_WIFIPASS                @"KUD_WIFIPASS"
+#define KUD_WIFIACCOUNT             @"KUD_WIFIACCOUNT"
+#define KUD_APPVERSION              @"KUD_APPVERSION"
 
 @implementation MSApp
 
@@ -37,6 +39,7 @@ static MSApp *mSapp = nil;
     mSapp.privdata = nil;
     mSapp.expire = 0;
     mSapp.wifipass = nil;
+    mSapp.wifiAccount = nil;
 }
 
 - (instancetype)init
@@ -150,6 +153,28 @@ static MSApp *mSapp = nil;
 - (NSString *)wifipass
 {
     return [NSUSERDEFAULTS objectForKey:KUD_WIFIPASS];
+}
+
+- (void)setWifiAccount:(NSString *)wifiAccount
+{
+    [NSUSERDEFAULTS setObject:wifiAccount forKey:KUD_WIFIACCOUNT];
+    [NSUSERDEFAULTS synchronize];
+}
+
+- (NSString *)wifiAccount
+{
+    return [NSUSERDEFAULTS objectForKey:KUD_WIFIACCOUNT];
+}
+
+- (void)setAppVersion:(NSString *)appVersion
+{
+    [NSUSERDEFAULTS setObject:appVersion forKey:KUD_APPVERSION];
+    [NSUSERDEFAULTS synchronize];
+}
+
+- (NSString *)appVersion
+{
+    return [NSUSERDEFAULTS objectForKey:KUD_APPVERSION];
 }
 
 #pragma mark - ReportClick

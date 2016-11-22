@@ -12,6 +12,7 @@
 #import "NetworkManager.h"
 #import "LoginViewController.h"
 #import "AnimationManager.h"
+#import "LaunchGuideViewController.h"
 
 @interface AppDelegate () <NetWorkMgrDelegate, BMKGeneralDelegate>
 {
@@ -48,7 +49,7 @@
     // wifiSDK
 #if !(TARGET_IPHONE_SIMULATOR)
     [[UserAuthManager manager] initEnv:WIFISDK_SSID withWurl:WIFISDK_URL withVNO:WIFISDK_VNOCODE];
-    [[UserAuthManager manager] logEnable:YES];
+    [[UserAuthManager manager] logEnable:NO];
 #endif
     
     // keyboardManager
@@ -102,10 +103,19 @@
         [self.window.layer addAnimation:animation forKey:@"changeRoot"];
     }
     UIViewController *root;
-    if (SApp.uid) {
-        root = [[DGTabBarController alloc] init];
+    if (!SApp.appVersion || ![SApp.appVersion isEqualToString:XcodeAppVersion]) {
+        __weak typeof(self) wself = self;
+        root = [[LaunchGuideViewController alloc] init];
+        ((LaunchGuideViewController *)root).block = ^ {
+            SApp.appVersion = XcodeAppVersion;
+            [wself setRootViewController];
+        };
     } else {
-        root = [[LoginViewController alloc] init];
+        if (SApp.uid) {
+            root = [[DGTabBarController alloc] init];
+        } else {
+            root = [[LoginViewController alloc] init];
+        }
     }
     self.window.rootViewController = root;
 }

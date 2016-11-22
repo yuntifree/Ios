@@ -100,6 +100,10 @@ const NSInteger headerHeight = 105.f;
     ServiceHeaderView *header = [[ServiceHeaderView alloc] initWithFrame:CGRectMake(0, -headerHeight, kScreenWidth, headerHeight)];
     __weak typeof(self) wself = self;
     header.headClick = ^(NSInteger tag) {
+        ReportClickModel *model = [ReportClickModel new];
+        model.id_ = tag + 1;
+        model.type = RCT_SERVICE;
+        [SApp reportClick:model];
         [wself openWebVC:url[tag]];
     };
     [_listView addSubview:header];
@@ -202,6 +206,10 @@ const NSInteger headerHeight = 105.f;
         ServiceSectionModel *sModel = _dataArray[indexPath.section];
         if (indexPath.row < sModel.items.count) {
             ServiceCellModel *model = sModel.items[indexPath.row];
+            ReportClickModel *rcModel = [ReportClickModel new];
+            rcModel.id_ = model.sid;
+            rcModel.type = RCT_SERVICE;
+            [SApp reportClick:rcModel];
             [self openWebVC:model.dst];
         }
     }
@@ -228,7 +236,7 @@ const NSInteger headerHeight = 105.f;
     [cell setBackgroundColor:RGB(0xf2f2f2, 1)];
 }
 
-- (void)collectionView:(UICollectionView *)colView  didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)colView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [colView cellForItemAtIndexPath:indexPath];
     [cell setBackgroundColor:[UIColor whiteColor]];

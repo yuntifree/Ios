@@ -15,6 +15,7 @@
     ServiceCellModel *model = [ServiceCellModel new];
     model.title = info[@"title"];
     model.dst = info[@"dst"];
+    model.sid = [info[@"sid"] integerValue];
     return model;
 }
 

@@ -48,7 +48,8 @@ typedef NS_ENUM(NSInteger, ReportClickType) {
     RCT_VIDEOPLAY = 0,
     RCT_NEWSCLICK = 1,
     RCT_ADSHOW = 2,
-    RCT_ADCLICK = 3
+    RCT_ADCLICK = 3,
+    RCT_SERVICE = 4
 };
 
 typedef NS_ENUM(NSInteger, WeatherType) {
@@ -62,6 +63,14 @@ typedef NS_ENUM(NSInteger, TimeType) {
     TimeTypeDay = 0,
     TimeTypeNight = 1
 };
+
+typedef enum {
+    ENV_NOT_WIFI = -1,      //无需认证的网络
+    ENV_NOT_LOGIN = 0,      //需要认证的网络
+    ENV_ERROR = 1,          //无网络
+    ENV_LOGIN = 2,          //已经认证成功
+    
+}ENV_STATUS;
 
 // Server
 #define ServerURL @"http://120.25.133.234/" // 测试环境

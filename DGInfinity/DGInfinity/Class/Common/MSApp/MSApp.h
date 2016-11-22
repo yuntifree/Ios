@@ -18,6 +18,10 @@
 @property (nonatomic, copy) NSString *privdata;
 @property (nonatomic, assign) NSTimeInterval expire;
 @property (nonatomic, copy) NSString *wifipass;
+@property (nonatomic, copy) NSString *wifiAccount;
+
+// app info
+@property (nonatomic, copy) NSString *appVersion;
 
 // temp data
 @property (nonatomic, strong) NSMutableArray *reportArray;

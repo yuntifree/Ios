@@ -36,7 +36,7 @@
                                 <constraint firstAttribute="width" constant="83" id="s2d-3O-Gap"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZHF-di-tNg">
+                        <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZHF-di-tNg">
                             <rect key="frame" x="131.5" y="63" width="113" height="113"/>
                             <color key="backgroundColor" red="0.85882352941176465" green="0.94901960784313721" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                             <constraints>

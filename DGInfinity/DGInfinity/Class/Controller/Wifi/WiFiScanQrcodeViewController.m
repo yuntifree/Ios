@@ -146,26 +146,32 @@
         for (AVMetadataMachineReadableCodeObject *code in codes) {
             NSString *resultString = code.stringValue;
             NSURL *url = [NSURL URLWithString:resultString];
-            NSURLComponents *componets = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
-            NSArray *queryItems = componets.queryItems;
-            if (queryItems.count) {
-                bool isExist = NO;
-                for (NSURLQueryItem *item in queryItems) {
-                    if ([item.name isEqualToString:@"ssid"]) {
-                        if ([item.value isEqualToString:WIFISDK_SSID]) {
-                            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"识别成功" preferredStyle:UIAlertControllerStyleAlert];
-                            [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-                            [weakSelf presentViewController:alert animated:YES completion:nil];
-                        } else {
-                            [weakSelf showFailPage];
-                        }
-                        isExist = YES;
-                        break;
-                    }
-                }
-                isExist ? : [weakSelf showFailPage];
-            } else {
+            if (!url) {
                 [weakSelf showFailPage];
+            } else {
+                NSURLComponents *componets = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
+                NSArray *queryItems = componets.queryItems;
+                if (queryItems.count) {
+                    bool isExist = NO;
+                    for (NSURLQueryItem *item in queryItems) {
+                        if ([item.name isEqualToString:@"ssid"]) {
+                            if ([item.value isEqualToString:WIFISDK_SSID]) {
+                                // 识别成功
+                                if (weakSelf.success) {
+                                    weakSelf.success();
+                                }
+                                [weakSelf.navigationController popViewControllerAnimated:YES];
+                            } else {
+                                [weakSelf showFailPage];
+                            }
+                            isExist = YES;
+                            break;
+                        }
+                    }
+                    isExist ? : [weakSelf showFailPage];
+                } else {
+                    [weakSelf showFailPage];
+                }
             }
             /** 只对第一个扫描结果进行处理 */
             break;

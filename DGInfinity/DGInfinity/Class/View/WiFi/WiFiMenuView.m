@@ -33,6 +33,7 @@
     __weak IBOutlet NSLayoutConstraint *_statusLblBottom;
     
     TimeType _currentType;
+    ENV_STATUS _currentStatus;
     CAAnimation *_leftAnimation;
     CAAnimation *_rightAnimation;
 }
@@ -62,10 +63,28 @@
     [self.layer addSublayer:_halo];
     
     _currentType = TimeTypeDay;
+    _currentStatus = -2;
     NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"img_bg_day.png"];
     _backView.image = [UIImage imageWithContentsOfFile:imagePath];
     
     [self checkConnectBtnStatus];
+}
+
+- (void)setConnectBtnStatus:(ConnectStatus)status
+{
+    if (status == ConnectStatusNotConnect) {
+        _connectBtn.selected = NO;
+        _connectBtn.userInteractionEnabled = YES;
+        [_connectBtn setTitle:@"一键连接" forState:UIControlStateNormal];
+        _statusLbl.text = @"发现东莞城市免费WiFi";
+        [_halo start];
+    } else {
+        _connectBtn.selected = YES;
+        _connectBtn.userInteractionEnabled = NO;
+        [_connectBtn setTitle:@"" forState:UIControlStateNormal];
+        _statusLbl.text = @"已连接东莞无线";
+        [_halo stop];
+    }
 }
 
 - (void)setWeather:(NSDictionary *)weather
@@ -122,7 +141,9 @@
 
 - (void)startAnimation
 {
-    [_halo start];
+    if (_currentStatus != ENV_LOGIN) {
+        [_halo start];
+    }
     if (!_leftAnimation) {
         _leftAnimation = [AnimationManager positionAnimationFromPosition:_leftWeatherView.center toPosition:CGPointMake(_leftWeatherView.center.x - 50, _leftWeatherView.center.y) duration:6];
         _leftAnimation.repeatCount = INFINITY;
@@ -139,7 +160,9 @@
 
 - (void)stopAnimation
 {
-    [_halo stop];
+    if (_currentStatus != ENV_LOGIN) {
+        [_halo stop];
+    }
     [_leftWeatherView.layer removeAnimationForKey:@"weather"];
     [_rightWeatherView.layer removeAnimationForKey:@"weather"];
 }
@@ -148,26 +171,28 @@
 {
 #if !(TARGET_IPHONE_SIMULATOR)
     [[UserAuthManager manager] checkEnvironmentBlock:^(ENV_STATUS status) {
-        if (status == ENV_LOGIN) {
-            _connectBtn.selected = YES;
-            _connectBtn.userInteractionEnabled = NO;
-            [_connectBtn setTitle:@"" forState:UIControlStateNormal];
-            _statusLbl.text = @"已连接东莞无线";
-            [_halo stop];
-        } else {
-            _connectBtn.selected = NO;
-            _connectBtn.userInteractionEnabled = YES;
-            [_connectBtn setTitle:@"一键连接" forState:UIControlStateNormal];
-            _statusLbl.text = @"发现东莞城市免费WiFi";
-            [_halo start];
+        if (_currentStatus != status) {
+            _currentStatus = status;
+            if (status == ENV_LOGIN) {
+                [self setConnectBtnStatus:ConnectStatusConnected];
+            } else {
+                if (status == ENV_NOT_WIFI) {
+                    if ([[Tools getCurrentSSID] isEqualToString:WIFISDK_SSID]) {
+                        // 已经portal认证
+                        _currentStatus = ENV_LOGIN;
+                        [self setConnectBtnStatus:ConnectStatusConnected];
+                    } else {
+                        // 别的网络
+                        [self setConnectBtnStatus:ConnectStatusNotConnect];
+                    }
+                } else {
+                    [self setConnectBtnStatus:ConnectStatusNotConnect];
+                }
+            }
         }
     }];
 #else
-    _connectBtn.selected = NO;
-    _connectBtn.userInteractionEnabled = YES;
-    [_connectBtn setTitle:@"一键连接" forState:UIControlStateNormal];
-    _statusLbl.text = @"发现东莞城市免费WiFi";
-    [_halo start];
+    [self setConnectBtnStatus:ConnectStatusNotConnect];
 #endif
 }
 

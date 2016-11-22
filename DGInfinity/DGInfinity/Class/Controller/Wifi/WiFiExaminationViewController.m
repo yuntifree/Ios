@@ -100,6 +100,12 @@
         [self presentViewController:alert animated:YES completion:nil];
         return;
     }
+    
+    if (![[Tools getWlanIPAddress] hasPrefix:@"192.168"]) {
+        [self makeToast:@"当前网络不是局域网"];
+        return;
+    }
+    
     [SVProgressHUD showWithStatus:@"扫描中，请稍后..."];
     [self.presenter scanButtonClicked];
 }

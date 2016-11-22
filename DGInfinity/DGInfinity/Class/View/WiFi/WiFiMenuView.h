@@ -17,6 +17,11 @@ typedef NS_ENUM(NSInteger, WiFiMenuType) {
     WiFiMenuTypeHot = 1005
 };
 
+typedef NS_ENUM(NSInteger, ConnectStatus) {
+    ConnectStatusNotConnect = 0,
+    ConnectStatusConnected = 1
+};
+
 @protocol WiFiMenuViewDelegate <NSObject>
 
 - (void)WiFiMenuViewClick:(WiFiMenuType)type;
@@ -34,5 +39,6 @@ typedef NS_ENUM(NSInteger, WiFiMenuType) {
 - (void)startAnimation;
 - (void)stopAnimation;
 - (void)checkConnectBtnStatus;
+- (void)setConnectBtnStatus:(ConnectStatus)status;
 
 @end

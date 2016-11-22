@@ -117,7 +117,7 @@
         }
     }
     
-    return [formatSSID uppercaseString];
+    return formatSSID.length ? [formatSSID uppercaseString] : @"";
 }
 
 + (void)openSetting
