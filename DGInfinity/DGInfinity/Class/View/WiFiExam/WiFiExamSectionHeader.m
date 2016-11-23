@@ -20,7 +20,6 @@
 {
     self = [super initWithReuseIdentifier:reuseIdentifier];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
         self.contentView.backgroundColor = [UIColor whiteColor];
         
         _titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(12, 12, 200, 17)];

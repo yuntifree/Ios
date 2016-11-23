@@ -257,6 +257,11 @@ NetWorkMgrDelegate
         _scrollView.scrollEnabled = YES;
         [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         [_tableView.mj_header endRefreshing];
+        if (!_newsArray.count) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self getWeatherAndNews];
+            });
+        }
     }
 }
 
@@ -434,6 +439,14 @@ NetWorkMgrDelegate
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
+        case WiFiMenuTypeTemperature:
+        case WiFiMenuTypeWeather:
+        {
+            WebViewController *vc = [[WebViewController alloc] init];
+            vc.url = WeatherURL;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
         default:
             break;
     }
@@ -451,12 +464,11 @@ NetWorkMgrDelegate
             if (_frontInfo == nil) {
                 [self getFrontInfo];
             }
-            if (scrollView.contentOffset.y == Height) {
-                scrollView.scrollEnabled = NO;
-            }
-        } else {
             if (!_newsArray.count) {
                 [self getWeatherAndNews];
+            }
+            if (scrollView.contentOffset.y == Height) {
+                scrollView.scrollEnabled = NO;
             }
         }
     }
@@ -465,7 +477,6 @@ NetWorkMgrDelegate
 #pragma mark - UITableViewDataSource, UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    [tableView displayWitMsg:NoDataTip ForDataCount:_newsArray.count];
     return _newsArray.count;
 }
 

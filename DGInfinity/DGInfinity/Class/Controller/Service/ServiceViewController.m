@@ -32,6 +32,7 @@ const NSInteger headerHeight = 105.f;
 @interface ServiceViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 {
     __weak IBOutlet UICollectionView *_listView;
+    ServiceHeaderView *_header;
     
     NSMutableArray *_dataArray;
 }
@@ -97,16 +98,17 @@ const NSInteger headerHeight = 105.f;
     layout.minimumInteritemSpacing = 0;
     layout.itemSize = CGSizeMake(kScreenWidth / 3.0, 44.0);
     
-    ServiceHeaderView *header = [[ServiceHeaderView alloc] initWithFrame:CGRectMake(0, -headerHeight, kScreenWidth, headerHeight)];
+    _header = [[ServiceHeaderView alloc] initWithFrame:CGRectMake(0, -headerHeight, kScreenWidth, headerHeight)];
+    _header.hidden = YES;
     __weak typeof(self) wself = self;
-    header.headClick = ^(NSInteger tag) {
+    _header.headClick = ^(NSInteger tag) {
         ReportClickModel *model = [ReportClickModel new];
         model.id_ = tag + 1;
         model.type = RCT_SERVICE;
         [SApp reportClick:model];
         [wself openWebVC:url[tag]];
     };
-    [_listView addSubview:header];
+    [_listView addSubview:_header];
     _listView.contentInset = UIEdgeInsetsMake(headerHeight, 0, 0, 0);
     
     [_listView registerNib:[UINib nibWithNibName:@"ServiceSectionHeader" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ServiceSectionHeader"];
@@ -125,6 +127,7 @@ const NSInteger headerHeight = 105.f;
     [ServiceCGI getServices:^(DGCgiResult *res) {
         [_listView.mj_header endRefreshing];
         if (E_OK == res._errno) {
+            _header.hidden = NO;
             NSDictionary *data = res.data[@"data"];
             if ([data isKindOfClass:[NSDictionary class]]) {
                 NSArray *services = data[@"services"];
@@ -140,7 +143,17 @@ const NSInteger headerHeight = 105.f;
                 [_listView reloadData];
             }
         } else {
+            _header.hidden = YES;
             [self makeToast:res.desc];
+            if (E_CGI_FAILED == res._errno) {
+                __weak typeof(self) wself = self;
+                [_listView configureNoNetStyleWithdidTapButtonBlock:^{
+                    [wself headerRefresh];
+                } didTapViewBlock:^{
+                    
+                }];
+                [_listView reloadEmptyDataSet];
+            }
         }
     }];
 }
@@ -160,7 +173,6 @@ const NSInteger headerHeight = 105.f;
 #pragma mark - UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    [collectionView displayWitMsg:NoDataTip ForDataCount:_dataArray.count];
     return _dataArray.count;
 }
 

@@ -27,7 +27,7 @@
         self.backgroundColor = [UIColor clearColor];
         
         _backView = [[UIImageView alloc] initWithFrame:self.bounds];
-        NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Rectangle 9.png"];
+        NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"img_connect.png"];
         _backView.image = [UIImage imageWithContentsOfFile:imagePath];
         [self addSubview:_backView];
         

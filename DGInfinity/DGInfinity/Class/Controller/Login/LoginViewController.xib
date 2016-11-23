@@ -175,6 +175,36 @@
                         <action selector="doRegister:" destination="-1" eventType="touchUpInside" id="H8a-w6-gM2"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ico-z2-e3b">
+                    <rect key="frame" x="86.5" y="382" width="202.5" height="13.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录即代表已同意" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmp-x7-bei">
+                            <rect key="frame" x="0.0" y="0.0" width="90" height="13.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <color key="textColor" red="0.70980392156862748" green="0.70980392156862748" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="《东莞无线用户协议》" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJ2-Jp-AXy">
+                            <rect key="frame" x="90" y="0.0" width="112.5" height="13.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <color key="textColor" red="0.0" green="0.62745098039215685" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="Jgo-YR-ipN" appends="YES" id="dY3-gi-MMl"/>
+                            </connections>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="mJ2-Jp-AXy" firstAttribute="top" secondItem="Ico-z2-e3b" secondAttribute="top" id="0Fg-l6-zsh"/>
+                        <constraint firstItem="mJ2-Jp-AXy" firstAttribute="leading" secondItem="mmp-x7-bei" secondAttribute="trailing" id="BEN-iS-zKq"/>
+                        <constraint firstAttribute="bottom" secondItem="mJ2-Jp-AXy" secondAttribute="bottom" id="RUp-Np-pJL"/>
+                        <constraint firstItem="mmp-x7-bei" firstAttribute="top" secondItem="Ico-z2-e3b" secondAttribute="top" id="Zvz-Cd-in5"/>
+                        <constraint firstItem="mmp-x7-bei" firstAttribute="leading" secondItem="Ico-z2-e3b" secondAttribute="leading" id="jcN-ub-Izz"/>
+                        <constraint firstAttribute="trailing" secondItem="mJ2-Jp-AXy" secondAttribute="trailing" id="pux-85-dkg"/>
+                        <constraint firstAttribute="bottom" secondItem="mmp-x7-bei" secondAttribute="bottom" id="vcr-0J-9bZ"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -182,6 +212,7 @@
                 <constraint firstItem="0L4-Vl-AWC" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="7mW-rZ-hr7"/>
                 <constraint firstItem="G6w-1w-dNx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="87" id="9Q6-GK-xU7"/>
                 <constraint firstItem="MnO-Ch-bcU" firstAttribute="top" secondItem="ytA-HJ-VdO" secondAttribute="bottom" constant="54" id="AEF-bW-u9M"/>
+                <constraint firstItem="Ico-z2-e3b" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Cav-tG-f9S"/>
                 <constraint firstAttribute="trailing" secondItem="hsZ-FZ-fe7" secondAttribute="trailing" constant="57" id="Ie7-oL-EW0"/>
                 <constraint firstItem="hsZ-FZ-fe7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="57" id="OPw-Tf-W8c"/>
                 <constraint firstItem="LxC-fZ-Mbk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="57" id="P9z-ZU-W1Z"/>
@@ -190,6 +221,7 @@
                 <constraint firstItem="hsZ-FZ-fe7" firstAttribute="top" secondItem="LxC-fZ-Mbk" secondAttribute="bottom" constant="12" id="ex9-Ak-blq"/>
                 <constraint firstAttribute="trailing" secondItem="LxC-fZ-Mbk" secondAttribute="trailing" constant="57" id="gIP-H0-1bg"/>
                 <constraint firstItem="0L4-Vl-AWC" firstAttribute="top" secondItem="G6w-1w-dNx" secondAttribute="bottom" constant="23" id="gqo-aq-WQE"/>
+                <constraint firstItem="Ico-z2-e3b" firstAttribute="top" secondItem="ytA-HJ-VdO" secondAttribute="bottom" constant="12" id="hkD-3T-WPJ"/>
                 <constraint firstItem="G6w-1w-dNx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="jB8-Fn-12z"/>
                 <constraint firstAttribute="trailing" secondItem="ytA-HJ-VdO" secondAttribute="trailing" constant="57" id="mcJ-dk-BRU"/>
                 <constraint firstItem="LxC-fZ-Mbk" firstAttribute="top" secondItem="0L4-Vl-AWC" secondAttribute="bottom" constant="40" id="w8P-dp-Bwn"/>
@@ -197,6 +229,11 @@
             </constraints>
             <point key="canvasLocation" x="-94.5" y="48.5"/>
         </view>
+        <tapGestureRecognizer id="Jgo-YR-ipN">
+            <connections>
+                <action selector="onTapAgreement:" destination="-1" id="jbe-Rz-JMH"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="img.png" width="279" height="196"/>

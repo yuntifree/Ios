@@ -63,17 +63,23 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18°C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3qL-46-AD3">
+                        <label opaque="NO" tag="1006" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18°C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3qL-46-AD3">
                             <rect key="frame" x="12" y="285" width="40" height="22"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                             <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="uXb-La-JXu" appends="YES" id="BuZ-HI-wdj"/>
+                            </connections>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="多云" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJL-Uv-jC0">
+                        <label opaque="NO" tag="1007" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="多云" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJL-Uv-jC0">
                             <rect key="frame" x="52" y="289" width="25" height="15"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                             <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="EJo-em-5bH" appends="YES" id="6nV-QJ-Z9c"/>
+                            </connections>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -392,6 +398,16 @@
         <tapGestureRecognizer id="amY-bg-nYf">
             <connections>
                 <action selector="menuViewTap:" destination="iN0-l3-epB" id="JS9-bO-Pdy"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="uXb-La-JXu">
+            <connections>
+                <action selector="menuViewTap:" destination="iN0-l3-epB" id="L3n-CU-GKP"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="EJo-em-5bH">
+            <connections>
+                <action selector="menuViewTap:" destination="iN0-l3-epB" id="r1j-0e-5zo"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

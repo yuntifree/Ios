@@ -13,6 +13,7 @@
 #import "LoginViewController.h"
 #import "AnimationManager.h"
 #import "LaunchGuideViewController.h"
+#import "DGNavigationViewController.h"
 
 @interface AppDelegate () <NetWorkMgrDelegate, BMKGeneralDelegate>
 {
@@ -114,7 +115,7 @@
         if (SApp.uid) {
             root = [[DGTabBarController alloc] init];
         } else {
-            root = [[LoginViewController alloc] init];
+            root = [[DGNavigationViewController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
         }
     }
     self.window.rootViewController = root;

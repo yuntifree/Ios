@@ -55,6 +55,7 @@
     _scrollView.bounces = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.showsHorizontalScrollIndicator = NO;
+    _scrollView.delaysContentTouches = NO;
     [self.view addSubview:_scrollView];
     [self.view sendSubviewToBack:_scrollView];
     

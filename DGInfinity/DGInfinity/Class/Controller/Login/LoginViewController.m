@@ -10,6 +10,7 @@
 #import "AccountCGI.h"
 #import "CheckUtil.h"
 #import "UIButton+ResizableImage.h"
+#import "WebViewController.h"
 
 #define SECONDS 60
 
@@ -54,6 +55,18 @@
 {
     [self.timer invalidate];
     self.timer = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewDidLoad {
@@ -132,6 +145,12 @@
             [self makeToast:res.desc];
         }
     }];
+}
+
+- (IBAction)onTapAgreement:(id)sender {
+    WebViewController *vc = [[WebViewController alloc] init];
+    vc.url = AgreementURL;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

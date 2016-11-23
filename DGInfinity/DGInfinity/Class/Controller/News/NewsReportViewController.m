@@ -47,7 +47,6 @@
     _listView.estimatedRowHeight = 100;
     _listView.rowHeight = UITableViewAutomaticDimension;
     _listView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-    _listView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(getNews)];
 }
 
 - (void)headerRefresh
@@ -71,6 +70,10 @@
                 BOOL hasmore = [data[@"hasmore"] boolValue];
                 if (!hasmore) {
                     [_listView.mj_footer endRefreshingWithNoMoreData];
+                } else {
+                    if (!_listView.mj_footer) {
+                        _listView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(getNews)];
+                    }
                 }
                 NSArray *infos = data[@"infos"];
                 if ([infos isKindOfClass:[NSArray class]]) {
@@ -89,6 +92,15 @@
             }
         } else {
             [self makeToast:res.desc];
+            if (E_CGI_FAILED == res._errno && !_newsArray.count) {
+                __weak typeof(self) wself = self;
+                [_listView configureNoNetStyleWithdidTapButtonBlock:^{
+                    [wself headerRefresh];
+                } didTapViewBlock:^{
+                    
+                }];
+                [_listView reloadEmptyDataSet];
+            }
         }
     }];
 }
@@ -101,7 +113,6 @@
 #pragma mark - UITableViewDataSource, UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    [tableView displayWitMsg:NoDataTip ForDataCount:_newsArray.count];
     return _newsArray.count;
 }
 

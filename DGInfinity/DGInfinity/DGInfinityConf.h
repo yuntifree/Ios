@@ -95,4 +95,8 @@ typedef enum {
 #define NoDataTip @"没有相关数据"
 #define LoadingTip @"加载中..."
 
+// 服务URL
+#define WeatherURL @"http://shenbao.dg.gov.cn/dgcsfw_zfb/csfw/dg_qxj/weixinportal.jsp"
+#define AgreementURL @"http://www.yunxingzh.com/app/agreement.html"
+
 #endif /* DGInfinityConf_h */

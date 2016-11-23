@@ -170,7 +170,7 @@
     [SVProgressHUD dismiss];
     self.progressView.hidden = YES;
     if (_badgeblock) {
-        _badgeblock(self.presenter.connectedDevices.count);
+        _badgeblock(self.presenter.connectedDevices.count - 1);
     }
 }
 

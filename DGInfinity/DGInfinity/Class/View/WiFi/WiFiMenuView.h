@@ -14,7 +14,9 @@ typedef NS_ENUM(NSInteger, WiFiMenuType) {
     WiFiMenuTypeSpeedTest = 1002,
     WiFiMenuTypeMap = 1003,
     WiFiMenuTypeWelfare = 1004,
-    WiFiMenuTypeHot = 1005
+    WiFiMenuTypeHot = 1005,
+    WiFiMenuTypeTemperature = 1006,
+    WiFiMenuTypeWeather = 1007
 };
 
 typedef NS_ENUM(NSInteger, ConnectStatus) {

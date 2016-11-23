@@ -121,7 +121,7 @@
 {
     _badgeLbl.text = [NSString stringWithFormat:@"%ld",badge];
     _badgeLblWidth.constant = [_badgeLbl.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12 weight:UIFontWeightMedium]}].width + 10;
-    _badgeLbl.hidden = !badge;
+    _badgeLbl.hidden = !(badge > 0);
 }
 
 - (void)setBackViewImage
