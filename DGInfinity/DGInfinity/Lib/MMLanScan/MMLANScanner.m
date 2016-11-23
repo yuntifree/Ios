@@ -40,8 +40,8 @@
         
         //Initializing the NSOperationQueue
         self.queue = [[NSOperationQueue alloc] init];
-        //Setting the concurrent operations to 20
-        [self.queue setMaxConcurrentOperationCount:20];
+        //Setting the concurrent operations to 50
+        [self.queue setMaxConcurrentOperationCount:50];
         
         //Add observer to notify the delegate when queue is empty.
         [self.queue addObserver:self forKeyPath:@"operations" options:0 context:nil];
@@ -120,7 +120,7 @@
             //Letting now the delegate the process  (on Main Thread)
             dispatch_async (dispatch_get_main_queue(), ^{
                 if ([weakSelf.delegate respondsToSelector:@selector(lanScanProgressPinged:from:)]) {
-                    [weakSelf.delegate lanScanProgressPinged:self.currentHost from:[self.ipsToPing count]];
+                    [weakSelf.delegate lanScanProgressPinged:weakSelf.currentHost from:[weakSelf.ipsToPing count]];
                 }
             });
         }];

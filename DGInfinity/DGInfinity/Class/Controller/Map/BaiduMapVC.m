@@ -261,7 +261,6 @@
 {
     if (![[BaiduMapSDK shareBaiduMapSDK] locationServicesEnabled]) return;
     BMKMapStatus *status = [BMKMapStatus new];
-    status.fLevel = _mapView.zoomLevel - 0.00001;
     status.targetGeoPt = _myLocation.location.coordinate;
     [_mapView setMapStatus:status withAnimation:YES];
 }
@@ -343,6 +342,13 @@
 {
     if (![[BaiduMapSDK shareBaiduMapSDK] locationServicesEnabled]) return;
     [self addAnnotations:mapView.centerCoordinate];
+}
+
+- (void)mapView:(BMKMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view
+{
+    BMKMapStatus *status = [BMKMapStatus new];
+    status.targetGeoPt = view.annotation.coordinate;
+    [_mapView setMapStatus:status withAnimation:YES];
 }
 
 @end
