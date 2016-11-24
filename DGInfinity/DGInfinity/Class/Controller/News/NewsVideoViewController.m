@@ -33,6 +33,11 @@
     return self;
 }
 
+- (void)setScrollsToTop:(BOOL)scrollsToTop
+{
+    _listView.scrollsToTop = scrollsToTop;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -45,6 +50,7 @@
     [_listView registerNib:[UINib nibWithNibName:@"NewsVideoCell" bundle:nil] forCellReuseIdentifier:@"NewsVideoCell"];
     _listView.tableFooterView = [UIView new];
     _listView.rowHeight = (kScreenWidth - 40) * 168 / 334 + 52;
+    _listView.scrollsToTop = NO;
     _listView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
 }
 

@@ -10,4 +10,6 @@
 
 @interface NewsVideoViewController : DGViewController
 
+@property (nonatomic, assign) BOOL scrollsToTop;
+
 @end

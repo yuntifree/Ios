@@ -33,6 +33,11 @@
     return self;
 }
 
+- (void)setScrollsToTop:(BOOL)scrollsToTop
+{
+    _listView.scrollsToTop = scrollsToTop;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -46,6 +51,7 @@
     _listView.tableFooterView = [UIView new];
     _listView.estimatedRowHeight = 100;
     _listView.rowHeight = UITableViewAutomaticDimension;
+    _listView.scrollsToTop = YES;
     _listView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
 }
 

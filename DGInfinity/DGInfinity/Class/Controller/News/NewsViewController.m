@@ -15,8 +15,10 @@
 {
     NewsTitleView *_titleView;
     UIScrollView *_scrollView;
-    
     UIButton *_selectedBtn;
+    
+    NewsReportViewController *_reportVC;
+    NewsVideoViewController *_videoVC;
 }
 @end
 
@@ -40,8 +42,10 @@
     _titleView = [[NewsTitleView alloc] initWithFrame:CGRectMake(0, 0, 148, 44)];
     self.navigationItem.titleView = _titleView;
     __weak typeof(_scrollView) ws = _scrollView;
+    __weak typeof(self) wself = self;
     _titleView.block = ^ (NSInteger tag) {
         [ws setContentOffset:CGPointMake(tag * kScreenWidth, 0) animated:YES];
+        [wself setScrollsToTopWithTag:tag];
     };
 }
 
@@ -56,18 +60,19 @@
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.delaysContentTouches = NO;
+    _scrollView.scrollsToTop = NO;
     [self.view addSubview:_scrollView];
     [self.view sendSubviewToBack:_scrollView];
     
-    NewsReportViewController *reportVC = [[NewsReportViewController alloc] init];
-    reportVC.view.frame = CGRectMake(0, 0, kScreenWidth, height);
-    [self addChildViewController:reportVC];
-    [_scrollView addSubview:reportVC.view];
+    _reportVC = [[NewsReportViewController alloc] init];
+    _reportVC.view.frame = CGRectMake(0, 0, kScreenWidth, height);
+    [self addChildViewController:_reportVC];
+    [_scrollView addSubview:_reportVC.view];
     
-    NewsVideoViewController *videoVC = [[NewsVideoViewController alloc] init];
-    videoVC.view.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, height);
-    [self addChildViewController:videoVC];
-    [_scrollView addSubview:videoVC.view];
+    _videoVC = [[NewsVideoViewController alloc] init];
+    _videoVC.view.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, height);
+    [self addChildViewController:_videoVC];
+    [_scrollView addSubview:_videoVC.view];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,10 +87,18 @@
     [_titleView changeBtn:index + 1000];
 }
 
+- (void)setScrollsToTopWithTag:(NSInteger)tag
+{
+    _reportVC.scrollsToTop = !tag;
+    _videoVC.scrollsToTop = tag > 0;
+}
+
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    [_titleView changeBtn:scrollView.contentOffset.x / scrollView.width + 1000];
+    NSInteger tag = scrollView.contentOffset.x / scrollView.width;
+    [_titleView changeBtn:tag + 1000];
+    [self setScrollsToTopWithTag:tag];
 }
 
 @end

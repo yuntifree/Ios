@@ -115,7 +115,7 @@
 {
     [self endEditing];
     WebViewController *vc = [[WebViewController alloc] init];
-    NSString *url = [NSString stringWithFormat:@"https://m.baidu.com/s?word=%@",[_inputField.text stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+    NSString *url = [NSString stringWithFormat:@"%@%@", SearchURL, [_inputField.text stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
     vc.url = url;
     [self.navigationController pushViewController:vc animated:YES];
 }

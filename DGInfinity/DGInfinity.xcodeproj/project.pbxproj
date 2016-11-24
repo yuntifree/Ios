@@ -241,7 +241,6 @@
 		6F6FDAA61DB4B3DE00E50D9B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAA51DB4B3DE00E50D9B /* main.m */; };
 		6F6FDAA91DB4B3DE00E50D9B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAA81DB4B3DE00E50D9B /* AppDelegate.m */; };
 		6F6FDAB11DB4B3DE00E50D9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F6FDAB01DB4B3DE00E50D9B /* Assets.xcassets */; };
-		6F6FDAB41DB4B3DE00E50D9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F6FDAB21DB4B3DE00E50D9B /* LaunchScreen.storyboard */; };
 		6F6FDAC81DB4B7E700E50D9B /* DGTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAC71DB4B7E700E50D9B /* DGTabBarController.m */; };
 		6F6FDACC1DB4BB9800E50D9B /* DGNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDACB1DB4BB9800E50D9B /* DGNavigationViewController.m */; };
 		6F6FDACF1DB4BBCA00E50D9B /* DGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDACE1DB4BBCA00E50D9B /* DGViewController.m */; };
@@ -583,7 +582,6 @@
 		6F6FDAA71DB4B3DE00E50D9B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6F6FDAA81DB4B3DE00E50D9B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6F6FDAB01DB4B3DE00E50D9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6F6FDAB31DB4B3DE00E50D9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F6FDAB51DB4B3DE00E50D9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F6FDAC61DB4B7E700E50D9B /* DGTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DGTabBarController.h; sourceTree = "<group>"; };
 		6F6FDAC71DB4B7E700E50D9B /* DGTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DGTabBarController.m; sourceTree = "<group>"; };
@@ -1252,7 +1250,6 @@
 				6F6FDAA71DB4B3DE00E50D9B /* AppDelegate.h */,
 				6F6FDAA81DB4B3DE00E50D9B /* AppDelegate.m */,
 				6F6FDAB01DB4B3DE00E50D9B /* Assets.xcassets */,
-				6F6FDAB21DB4B3DE00E50D9B /* LaunchScreen.storyboard */,
 				6F6FDAB51DB4B3DE00E50D9B /* Info.plist */,
 				6F6FDAA41DB4B3DE00E50D9B /* Supporting Files */,
 			);
@@ -1632,7 +1629,7 @@
 					6F6FDAA01DB4B3DE00E50D9B = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = VN4WHFNWZZ;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 0;
@@ -1751,7 +1748,6 @@
 				6F3F32AD1DDAFB8F0024095A /* btn_Label@3x.png in Resources */,
 				6F3F32811DDAA9720024095A /* Pointer@2x.png in Resources */,
 				6FF5C7EF1DC1DA5B00B1A84A /* NewsReportViewController.xib in Resources */,
-				6F6FDAB41DB4B3DE00E50D9B /* LaunchScreen.storyboard in Resources */,
 				6F30A1DD1DD5AD5100149D73 /* live@2x.png in Resources */,
 				6F3E56421DD968C100F16A23 /* empty_Compass@2x.png in Resources */,
 				6F3215911DDD879D00B7D5DA /* Rain@2x.png in Resources */,
@@ -1990,17 +1986,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		6F6FDAB21DB4B3DE00E50D9B /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6F6FDAB31DB4B3DE00E50D9B /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		6F6FDAB61DB4B3DE00E50D9B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2097,6 +2082,7 @@
 			baseConfigurationReference = 4988436FDFFAAA74256A74E6 /* Pods-DGInfinity.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2118,8 +2104,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunxingzh.wireless;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7861a7fe-79f3-456d-860e-bb5fccc4ac79";
-				PROVISIONING_PROFILE_SPECIFIER = "com.yunxingzh.wireless-dev";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -2128,11 +2114,12 @@
 			baseConfigurationReference = 210BA9B55C1B0E492E2A8407 /* Pods-DGInfinity.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = VN4WHFNWZZ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

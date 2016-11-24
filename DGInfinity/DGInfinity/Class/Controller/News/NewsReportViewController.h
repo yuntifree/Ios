@@ -10,4 +10,6 @@
 
 @interface NewsReportViewController : DGViewController
 
+@property (nonatomic, assign) BOOL scrollsToTop;
+
 @end

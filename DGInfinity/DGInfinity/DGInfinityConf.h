@@ -98,5 +98,6 @@ typedef enum {
 // 服务URL
 #define WeatherURL @"http://shenbao.dg.gov.cn/dgcsfw_zfb/csfw/dg_qxj/weixinportal.jsp"
 #define AgreementURL @"http://www.yunxingzh.com/app/agreement.html"
+#define SearchURL @"https://m.baidu.com/s?word="
 
 #endif /* DGInfinityConf_h */
