@@ -140,12 +140,6 @@ const float EPSINON = 0.00001;
         case TestBtnStatusTesting:
         {
             [self stopSpeedDetectionAnimation];
-            _speedLbl.text = _record.speed;
-            _descLbl.text = _record.desc;
-            [button setTitle:@"开始测速" forState:UIControlStateNormal];
-            button.tag = _record.speed.length ? TestBtnStatusTested : TestBtnStatusNone;
-            _maskLayer.strokeEnd = 0.f;
-            _indicatorView.transform = CGAffineTransformIdentity;
         }
             break;
         default:
@@ -168,7 +162,7 @@ const float EPSINON = 0.00001;
             [self calculateSpeed:speed];
             [self stopSpeedDetectionAnimation];
         });
-    }else{
+    } else {
         [self stopSpeedDetectionAnimation];
     }
 }
@@ -208,16 +202,26 @@ const float EPSINON = 0.00001;
 
 - (void)stopSpeedDetectionAnimation
 {
+    _speedLbl.text = _record.speed;
+    _descLbl.text = _record.desc;
+    if (_testBtn.tag == TestBtnStatusTesting && [WFNetworkSpeedDetector sharedSpeedDetector].isSpeedDetecting) {
+        _maskLayer.strokeEnd = 0.f;
+        _indicatorView.transform = CGAffineTransformIdentity;
+    }
+    if (_record.speed.length) {
+        [_testBtn setTitle:@"重新测速" forState:UIControlStateNormal];
+        _testBtn.tag = TestBtnStatusTested;
+    } else {
+        [_testBtn setTitle:@"开始测速" forState:UIControlStateNormal];
+        _testBtn.tag = TestBtnStatusNone;
+    }
     [[WFNetworkSpeedDetector sharedSpeedDetector] stopSpeedDetector];
-    _testBtn.tag = TestBtnStatusTested;
-    [_testBtn setTitle:@"重新测速" forState:UIControlStateNormal];
 }
 
 //用中间的label进行显示当前速度
 - (void)showCurrentSpeed:(CGFloat )speedKB
 {
     NSString *formatedSpeed = [self formatSpeed:speedKB];
-    _speedLbl.text = formatedSpeed;
     _record.speed = formatedSpeed;
 }
 
@@ -311,7 +315,6 @@ const float EPSINON = 0.00001;
     }
     [self showCurrentSpeed:speedkb];
     NSString *desc = [NSString stringWithFormat:@"当前网速适合:%@",text];
-    _descLbl.text = desc;
     _record.desc = desc;
 }
 

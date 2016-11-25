@@ -208,8 +208,8 @@ static WFNetworkSpeedDetector * wfnetworkSpeedDetector;
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(randomFakeSpeedCalculate:) object:speedNum];
     if (self.delegate && [self.delegate respondsToSelector:@selector(didFinishDetectWithAverageSpeed:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.delegate didFinishDetectWithAverageSpeed:[speedNum floatValue]];
             _speedDetecting = NO;
+            [self.delegate didFinishDetectWithAverageSpeed:[speedNum floatValue]];
         });
     }
 }
