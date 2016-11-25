@@ -166,6 +166,7 @@
 		6F3A1D911DCC77D500BC22EC /* CheckUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3A1D901DCC77D500BC22EC /* CheckUtil.m */; };
 		6F3A1D951DCC8B9B00BC22EC /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3A1D941DCC8B9B00BC22EC /* CloudKit.framework */; };
 		6F3A1D971DCC8BE300BC22EC /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3A1D961DCC8BE300BC22EC /* ExternalAccessory.framework */; };
+		6F3C114E1DE81B1C00734F8C /* UIViewController+makeToastOrAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3C114D1DE81B1C00734F8C /* UIViewController+makeToastOrAlert.m */; };
 		6F3E56401DD968C100F16A23 /* btn_test@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3E56381DD968C100F16A23 /* btn_test@2x.png */; };
 		6F3E56411DD968C100F16A23 /* btn_test@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3E56391DD968C100F16A23 /* btn_test@3x.png */; };
 		6F3E56421DD968C100F16A23 /* empty_Compass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3E563A1DD968C100F16A23 /* empty_Compass@2x.png */; };
@@ -497,6 +498,8 @@
 		6F3A1D901DCC77D500BC22EC /* CheckUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckUtil.m; sourceTree = "<group>"; };
 		6F3A1D941DCC8B9B00BC22EC /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		6F3A1D961DCC8BE300BC22EC /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
+		6F3C114C1DE81B1C00734F8C /* UIViewController+makeToastOrAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+makeToastOrAlert.h"; sourceTree = "<group>"; };
+		6F3C114D1DE81B1C00734F8C /* UIViewController+makeToastOrAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+makeToastOrAlert.m"; sourceTree = "<group>"; };
 		6F3E56381DD968C100F16A23 /* btn_test@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_test@2x.png"; sourceTree = "<group>"; };
 		6F3E56391DD968C100F16A23 /* btn_test@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_test@3x.png"; sourceTree = "<group>"; };
 		6F3E563A1DD968C100F16A23 /* empty_Compass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "empty_Compass@2x.png"; sourceTree = "<group>"; };
@@ -1351,6 +1354,8 @@
 				6F30A1EB1DD5B4BD00149D73 /* UIButton+Vertical.m */,
 				6F2F66931DE5936100511818 /* UIScrollView+EmptyData.h */,
 				6F2F66941DE5936100511818 /* UIScrollView+EmptyData.m */,
+				6F3C114C1DE81B1C00734F8C /* UIViewController+makeToastOrAlert.h */,
+				6F3C114D1DE81B1C00734F8C /* UIViewController+makeToastOrAlert.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1968,6 +1973,7 @@
 				6F3E564A1DD96D5600F16A23 /* WiFiSpeedTestViewController.m in Sources */,
 				6F2E57F01DB78E0400C39F27 /* ServiceCell.m in Sources */,
 				6FFA16881DB606E10077E7C3 /* SSKeychainQuery.m in Sources */,
+				6F3C114E1DE81B1C00734F8C /* UIViewController+makeToastOrAlert.m in Sources */,
 				6F2DF2DA1DD1DA8900A8F0EC /* NewsTitleView.m in Sources */,
 				6F3A1D911DCC77D500BC22EC /* CheckUtil.m in Sources */,
 				6FF5C7FB1DC1F13D00B1A84A /* NewsVideoCell.m in Sources */,

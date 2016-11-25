@@ -21,9 +21,7 @@
 {
     [super viewDidAppear:animated];
     if (![[NetworkManager shareManager] isWiFi]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您正在使用移动网络，WiFi测速会产生一定的流量消耗" preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:nil]];
-        [self presentViewController:alert animated:YES completion:nil];
+        [self showAlertWithTitle:@"提示" message:@"您正在使用移动网络，WiFi测速会产生一定的流量消耗" cancelTitle:@"知道了" cancelHandler:nil defaultTitle:nil defaultHandler:nil];
     }
 }
 

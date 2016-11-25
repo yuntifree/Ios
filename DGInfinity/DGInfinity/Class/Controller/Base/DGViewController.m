@@ -100,11 +100,6 @@
     
 }
 
-- (void)makeToast:(NSString *)message;
-{
-    [self.view makeToast:message];
-}
-
 - (BOOL)shouldAutorotate
 {
     return NO;

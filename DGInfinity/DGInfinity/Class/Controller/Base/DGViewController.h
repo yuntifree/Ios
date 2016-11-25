@@ -13,7 +13,6 @@
 @property (nonatomic, strong) UIButton *backBtn;
 @property (nonatomic, strong) UIButton *closeBtn;
 
-- (void)makeToast:(NSString *)message;
 - (void)setUpBackItem;
 - (void)setUpCloseItem;
 - (void)backBtnClick:(id)sender;

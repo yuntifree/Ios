@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol  MainPresenterDelegate
+@protocol  MainPresenterDelegate <NSObject>
 @optional
 -(void)mainPresenterIPSearchFinished;
 -(void)mainPresenterIPSearchCancelled;

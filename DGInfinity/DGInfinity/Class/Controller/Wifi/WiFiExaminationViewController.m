@@ -91,23 +91,30 @@
 {
     [super viewDidAppear:animated];
     
+    __weak typeof(self) wself = self;
     if (![[NetworkManager shareManager] isWiFi]) {
-        __weak typeof(self) wself = self;
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前网络非WiFi环境，请打开WiFi后继续操作" preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self showAlertWithTitle:@"提示" message:@"当前网络非WiFi环境，请打开WiFi后继续操作" cancelTitle:@"知道了" cancelHandler:^(UIAlertAction *action) {
             [wself.navigationController popViewControllerAnimated:YES];
-        }]];
-        [self presentViewController:alert animated:YES completion:nil];
+        } defaultTitle:nil defaultHandler:nil];
         return;
     }
     
     if (![[Tools getWlanIPAddress] hasPrefix:@"192.168"]) {
-        [self makeToast:@"当前网络不是局域网"];
+        [self showAlertWithTitle:@"提示" message:@"当前网络无法扫描局域网设备" cancelTitle:@"知道了" cancelHandler:^(UIAlertAction *action) {
+            [wself.navigationController popViewControllerAnimated:YES];
+        } defaultTitle:nil defaultHandler:nil];
         return;
     }
     
-    [SVProgressHUD showWithStatus:@"扫描中，请稍后..."];
     [self.presenter scanButtonClicked];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    if (self.presenter.isScanRunning) {
+        [self.presenter scanButtonClicked];
+    }
 }
 
 - (void)viewDidLoad {
@@ -167,7 +174,6 @@
 #pragma mark - MainPresenterDelegate
 - (void)mainPresenterIPSearchFinished
 {
-    [SVProgressHUD dismiss];
     self.progressView.hidden = YES;
     if (_badgeblock) {
         _badgeblock(self.presenter.connectedDevices.count - 1);
@@ -176,7 +182,7 @@
 
 - (void)mainPresenterIPSearchFailed
 {
-    [SVProgressHUD dismiss];
+    [self makeToast:@"扫描失败"];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource

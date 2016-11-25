@@ -100,11 +100,15 @@
     //Checks the status of finished. Then call the appropriate method
     if (status == MMLanScannerStatusFinished) {
         
-        [self.delegate mainPresenterIPSearchFinished];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(mainPresenterIPSearchFinished)]) {
+            [self.delegate mainPresenterIPSearchFinished];
+        }
     }
     else if (status==MMLanScannerStatusCancelled) {
        
-        [self.delegate mainPresenterIPSearchCancelled];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(mainPresenterIPSearchCancelled)]) {
+            [self.delegate mainPresenterIPSearchCancelled];
+        }
     }
 }
 
@@ -118,7 +122,9 @@
    
     self.isScanRunning=NO;
 
-    [self.delegate mainPresenterIPSearchFailed];
+    if (self.delegate && [self respondsToSelector:@selector(mainPresenterIPSearchFailed)]) {
+        [self.delegate mainPresenterIPSearchFailed];
+    }
 }
 
 @end

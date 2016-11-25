@@ -32,12 +32,9 @@
 - (IBAction)commitBtnClick:(id)sender {
     if (!_ssidField.text.length || !_passwordField.text.length) return;
     if (![[BaiduMapSDK shareBaiduMapSDK] locationServicesEnabled]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"无法获取位置信息，建议开启定位服务" preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"忽略" style:UIAlertActionStyleCancel handler:nil]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"开启" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self showAlertWithTitle:@"提示" message:@"无法获取位置信息，建议开启定位服务" cancelTitle:@"忽略" cancelHandler:nil defaultTitle:@"开启" defaultHandler:^(UIAlertAction *action) {
             [Tools openSetting];
-        }]];
-        [self presentViewController:alert animated:YES completion:nil];
+        }];
         return;
     }
     

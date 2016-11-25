@@ -157,10 +157,13 @@
                         if ([item.name isEqualToString:@"ssid"]) {
                             if ([item.value isEqualToString:WIFISDK_SSID]) {
                                 // 识别成功
-                                if (weakSelf.success) {
-                                    weakSelf.success();
-                                }
-                                [weakSelf.navigationController popViewControllerAnimated:YES];
+                                [SVProgressHUD showSuccessWithStatus:@"识别成功"];
+                                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                    if (weakSelf.success) {
+                                        weakSelf.success();
+                                    }
+                                    [weakSelf.navigationController popViewControllerAnimated:YES];
+                                });
                             } else {
                                 [weakSelf showFailPage];
                             }

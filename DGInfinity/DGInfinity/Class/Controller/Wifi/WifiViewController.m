@@ -194,12 +194,9 @@ NetWorkMgrDelegate
             [wself WiFiMenuViewClick:WiFiMenuTypeConnect];
         };
     } noPermission:^(NSString *tip) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:tip preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"忽略" style:UIAlertActionStyleCancel handler:nil]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"开启" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self showAlertWithTitle:@"提示" message:tip cancelTitle:@"忽略" cancelHandler:nil defaultTitle:@"开启" defaultHandler:^(UIAlertAction *action) {
             [Tools openSetting];
-        }]];
-        [self presentViewController:alert animated:YES completion:nil];
+        }];
     }];
 }
 
@@ -326,9 +323,6 @@ NetWorkMgrDelegate
                     for (NSDictionary *info in news) {
                         NewsReportModel *model = [NewsReportModel createWithInfo:info];
                         [_newsArray addObject:model];
-                        if (![_newsArray indexOfObject:model]) {
-                            [_menuView setHotNews:model.title];
-                        }
                     }
                 }
                 [_tableView reloadData];

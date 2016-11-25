@@ -71,7 +71,9 @@
     
     //If IP is null then return
     if (!self.device) {
-        [self.delegate lanScanDidFailedToScan];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(lanScanDidFailedToScan)]) {
+            [self.delegate lanScanDidFailedToScan];
+        }
         return;
     }
     
@@ -111,7 +113,7 @@
                 
                 //Letting know the delegate that found a new device (on Main Thread)
                 dispatch_async (dispatch_get_main_queue(), ^{
-                    if ([weakSelf.delegate respondsToSelector:@selector(lanScanDidFindNewDevice:)]) {
+                    if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(lanScanDidFindNewDevice:)]) {
                         [weakSelf.delegate lanScanDidFindNewDevice:device];
                     }
                 });
@@ -119,7 +121,7 @@
             
             //Letting now the delegate the process  (on Main Thread)
             dispatch_async (dispatch_get_main_queue(), ^{
-                if ([weakSelf.delegate respondsToSelector:@selector(lanScanProgressPinged:from:)]) {
+                if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(lanScanProgressPinged:from:)]) {
                     [weakSelf.delegate lanScanProgressPinged:weakSelf.currentHost from:[weakSelf.ipsToPing count]];
                 }
             });
@@ -139,7 +141,9 @@
     
     isCancelled = YES;
     [self.queue cancelAllOperations];
-    [self.queue waitUntilAllOperationsAreFinished];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self.queue waitUntilAllOperationsAreFinished];
+    });
     self.isScanning = NO;
 }
 
@@ -158,7 +162,7 @@
             
             //Letting know the delegate that the request is finished
             dispatch_async (dispatch_get_main_queue(), ^{
-                if ([self.delegate respondsToSelector:@selector(lanScanDidFinishScanningWithStatus:)]) {
+                if (self.delegate && [self.delegate respondsToSelector:@selector(lanScanDidFinishScanningWithStatus:)]) {
                     [self.delegate lanScanDidFinishScanningWithStatus:currentStatus];
                 }
             });
@@ -169,5 +173,6 @@
 -(void)dealloc {
     //Removing the observer on dealloc
     [self.queue removeObserver:self forKeyPath:@"operations"];
+    self.queue = nil;
 }
 @end

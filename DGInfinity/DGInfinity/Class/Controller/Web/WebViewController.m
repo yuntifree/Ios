@@ -35,7 +35,11 @@
         WKWebViewConfiguration *config = [WKWebViewConfiguration new];
         config.preferences = [WKPreferences new];
         config.userContentController = [WKUserContentController new];
-        config.requiresUserActionForMediaPlayback = NO;
+        if (!IOS9) {
+            config.mediaPlaybackRequiresUserAction = NO;
+        } else {
+            config.requiresUserActionForMediaPlayback = NO;
+        }
         CGFloat systemBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height + self.navigationController.navigationBar.height;
         _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - systemBarHeight) configuration:config];
         _webView.navigationDelegate = self;
