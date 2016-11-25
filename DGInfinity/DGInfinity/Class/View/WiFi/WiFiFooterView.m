@@ -26,7 +26,7 @@
     [super awakeFromNib];
     
     for (UIButton *button in _sectionBtns) {
-        [button verticalImageAndTitle:2];
+        [button verticalImageAndTitle:7];
     }
 }
 
