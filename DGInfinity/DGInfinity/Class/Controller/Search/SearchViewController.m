@@ -117,6 +117,7 @@
     WebViewController *vc = [[WebViewController alloc] init];
     NSString *url = [NSString stringWithFormat:@"%@%@", SearchURL, [_inputField.text stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
     vc.url = url;
+    vc.title = @"百度";
     [self.navigationController pushViewController:vc animated:YES];
 }
 

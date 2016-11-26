@@ -264,24 +264,21 @@ NetWorkMgrDelegate
 
 - (void)handleFooterViewAction:(WiFiFooterType)type
 {
-    UITabBarController *root = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     switch (type) {
         case WiFiFooterTypeLookForNews:
         case WiFiFooterTypeNews:
         case WiFiFooterTypeVideo:
         {
-            UINavigationController *nav = root.viewControllers[1];
-            NewsViewController *vc = (NewsViewController *)nav.topViewController;
-            root.selectedIndex = 1;
             if (type == WiFiFooterTypeLookForNews || type == WiFiFooterTypeNews) {
-                [vc setCurrentPage:0];
+                [self gotoNewsTabWithPage:0];
             } else {
-                [vc setCurrentPage:1];
+                [self gotoNewsTabWithPage:1];
             }
         }
             break;
         case WiFiFooterTypeBanner:
         {
+            // 缺少title，考虑从服务器返？
             WebViewController *vc = [[WebViewController alloc] init];
             vc.url = _frontInfo[@"banner"][@"dst"];
             [self.navigationController pushViewController:vc animated:YES];
@@ -290,6 +287,7 @@ NetWorkMgrDelegate
         case WiFiFooterTypeService:
         case WiFiFooterTypeGoverment:
         {
+            UITabBarController *root = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
             root.selectedIndex = 2;
         }
             break;
@@ -355,6 +353,15 @@ NetWorkMgrDelegate
     vc.newsType = NT_REPORT;
     vc.title = model.title;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)gotoNewsTabWithPage:(NSInteger)page
+{
+    UITabBarController *root = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    UINavigationController *nav = root.viewControllers[1];
+    NewsViewController *vc = (NewsViewController *)nav.topViewController;
+    root.selectedIndex = 1;
+    [vc setCurrentPage:page];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -438,7 +445,13 @@ NetWorkMgrDelegate
         {
             WebViewController *vc = [[WebViewController alloc] init];
             vc.url = WeatherURL;
+            vc.title = @"东莞天气";
             [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case WiFiMenuTypeConnected:
+        {
+            [self gotoNewsTabWithPage:0];
         }
             break;
         default:

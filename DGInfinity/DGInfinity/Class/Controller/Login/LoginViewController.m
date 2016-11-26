@@ -122,6 +122,7 @@
             _codeBtn.enabled = NO;
             _seconds = SECONDS;
             [self.timer setFireDate:[NSDate date]];
+            [_codeField becomeFirstResponder];
         } else {
             [self makeToast:res.desc];
         }
@@ -150,6 +151,7 @@
 - (IBAction)onTapAgreement:(id)sender {
     WebViewController *vc = [[WebViewController alloc] init];
     vc.url = AgreementURL;
+    vc.title = @"软件许可及服务协议";
     [self.navigationController pushViewController:vc animated:YES];
 }
 

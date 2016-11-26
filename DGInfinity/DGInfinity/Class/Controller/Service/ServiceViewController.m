@@ -27,6 +27,15 @@ static NSString *url[] = {
     @"http://jump.luna.58.com/i/29Zs"
 };
 
+// title
+static NSString *title[] = {
+    @"招聘",
+    @"二手",
+    @"租房",
+    @"家政",
+    @"更多"
+};
+
 const NSInteger headerHeight = 105.f;
 
 @interface ServiceViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
@@ -106,7 +115,7 @@ const NSInteger headerHeight = 105.f;
         model.id_ = tag + 1;
         model.type = RCT_SERVICE;
         [SApp reportClick:model];
-        [wself openWebVC:url[tag]];
+        [wself openWebVCWithTitle:title[tag] url:url[tag]];
     };
     [_listView addSubview:_header];
     _listView.contentInset = UIEdgeInsetsMake(headerHeight, 0, 0, 0);
@@ -158,9 +167,10 @@ const NSInteger headerHeight = 105.f;
     }];
 }
 
-- (void)openWebVC:(NSString *)url
+- (void)openWebVCWithTitle:(NSString *)title url:(NSString *)url
 {
     WebViewController *webVC = [[WebViewController alloc] init];
+    webVC.title = title;
     webVC.url = url;
     [self.navigationController pushViewController:webVC animated:YES];
 }
@@ -222,7 +232,7 @@ const NSInteger headerHeight = 105.f;
             rcModel.id_ = model.sid;
             rcModel.type = RCT_SERVICE;
             [SApp reportClick:rcModel];
-            [self openWebVC:model.dst];
+            [self openWebVCWithTitle:model.title url:model.dst];
         }
     }
 }

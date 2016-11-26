@@ -10,6 +10,7 @@
 #import "MTBBarcodeScanner.h"
 #import "PartialTransparentView.h"
 #import "WiFiQrcodeFailViewController.h"
+#import "WebViewController.h"
 
 @interface WiFiScanQrcodeViewController ()
 
@@ -152,7 +153,7 @@
                 NSURLComponents *componets = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
                 NSArray *queryItems = componets.queryItems;
                 if (queryItems.count) {
-                    bool isExist = NO;
+                    BOOL isExist = NO;
                     for (NSURLQueryItem *item in queryItems) {
                         if ([item.name isEqualToString:@"ssid"]) {
                             if ([item.value isEqualToString:WIFISDK_SSID]) {
@@ -164,16 +165,14 @@
                                     }
                                     [weakSelf.navigationController popViewControllerAnimated:YES];
                                 });
-                            } else {
-                                [weakSelf showFailPage];
+                                isExist = YES;
                             }
-                            isExist = YES;
                             break;
                         }
                     }
-                    isExist ? : [weakSelf showFailPage];
+                    isExist ? : [weakSelf searchSSIDFailed:url];
                 } else {
-                    [weakSelf showFailPage];
+                    [weakSelf searchSSIDFailed:url];
                 }
             }
             /** 只对第一个扫描结果进行处理 */
@@ -212,6 +211,17 @@
 {
     WiFiQrcodeFailViewController *qrcodeFailViewController = [WiFiQrcodeFailViewController new];
     [self.navigationController pushViewController:qrcodeFailViewController animated:YES];
+}
+
+- (void)searchSSIDFailed:(NSURL *)url
+{
+    if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
+        WebViewController *vc = [[WebViewController alloc] init];
+        vc.url = url.absoluteString;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        [self showFailPage];
+    }
 }
 
 - (void)startScanningImageAnimation

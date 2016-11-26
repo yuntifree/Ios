@@ -9,6 +9,7 @@
 #import "WiFiMenuView.h"
 #import "PulsingHaloLayer.h"
 #import "AnimationManager.h"
+#import "NetworkManager.h"
 
 @interface WiFiMenuView ()
 {
@@ -74,15 +75,18 @@
 {
     if (status == ConnectStatusNotConnect) {
         _connectBtn.selected = NO;
-        _connectBtn.userInteractionEnabled = YES;
         [_connectBtn setTitle:@"一键连接" forState:UIControlStateNormal];
         _statusLbl.text = @"发现东莞城市免费WiFi";
         [_halo start];
     } else {
         _connectBtn.selected = YES;
-        _connectBtn.userInteractionEnabled = NO;
         [_connectBtn setTitle:@"" forState:UIControlStateNormal];
-        _statusLbl.text = @"已连接东莞无线";
+        NSString *ssid = [Tools getCurrentSSID];
+        if ([ssid isEqualToString:WIFISDK_SSID]) {
+            _statusLbl.text = @"已连接东莞城市免费WiFi";
+        } else {
+            _statusLbl.text = [NSString stringWithFormat:@"已连接%@",ssid];
+        }
         [_halo stop];
     }
 }
@@ -182,8 +186,13 @@
                         _currentStatus = ENV_LOGIN;
                         [self setConnectBtnStatus:ConnectStatusConnected];
                     } else {
-                        // 别的网络
-                        [self setConnectBtnStatus:ConnectStatusNotConnect];
+                        // 别的网络（WiFi或者4G）
+                        if ([[NetworkManager shareManager] isWiFi]) {
+                            _currentStatus = ENV_LOGIN;
+                            [self setConnectBtnStatus:ConnectStatusConnected];
+                        } else {
+                            [self setConnectBtnStatus:ConnectStatusNotConnect];
+                        }
                     }
                 } else {
                     [self setConnectBtnStatus:ConnectStatusNotConnect];
@@ -204,7 +213,11 @@
 
 - (IBAction)connectBtnClick:(UIButton *)sender {
     if (_delegate && [_delegate respondsToSelector:@selector(WiFiMenuViewClick:)]) {
-        [_delegate WiFiMenuViewClick:sender.tag];
+        if (_currentStatus == ENV_LOGIN) {
+            [_delegate WiFiMenuViewClick:WiFiMenuTypeConnected];
+        } else {
+            [_delegate WiFiMenuViewClick:WiFiMenuTypeConnect];
+        }
     }
 }
 

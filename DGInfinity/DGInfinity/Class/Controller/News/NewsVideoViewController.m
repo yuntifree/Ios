@@ -139,7 +139,7 @@
         WebViewController *vc = [[WebViewController alloc] init];
         vc.url = model.dst;
         vc.newsType = NT_VIDEO;
-        vc.title = @"视频";
+        vc.title = model.title;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
