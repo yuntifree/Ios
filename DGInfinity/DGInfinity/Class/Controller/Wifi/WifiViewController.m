@@ -176,12 +176,8 @@ NetWorkMgrDelegate
 
 - (void)setUpNavItem
 {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 74, 20)];
-    label.text = @"东莞无线";
-    label.textColor = [UIColor whiteColor];
-    label.font = SystemFont(18);
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:label];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage originalImage:@"wireless_ico_QRcode"] style:UIBarButtonItemStylePlain target:self action:@selector(scanQRcode)];
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:ImageNamed(@"text")];
 }
 
 - (void)scanQRcode

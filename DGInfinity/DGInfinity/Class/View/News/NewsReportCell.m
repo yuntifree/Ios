@@ -24,13 +24,13 @@
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineCap(context, kCGLineCapRound);
-    CGContextSetLineWidth(context, 2);  //线宽
+    CGContextSetLineWidth(context, 0.5);  //线宽
     CGContextSetAllowsAntialiasing(context, true);
-    CGContextSetRGBStrokeColor(context, 245.0 / 255.0, 245.0 / 255.0, 245.0 / 255.0, 1.0);  //线的颜色
+    CGContextSetRGBStrokeColor(context, 230.0 / 255.0, 230.0 / 255.0, 230.0 / 255.0, 1.0);  //线的颜色
     CGContextBeginPath(context);
     
-    CGContextMoveToPoint(context, 12, rect.size.height - 1);  //起点坐标
-    CGContextAddLineToPoint(context, rect.size.width - 12, rect.size.height - 1);   //终点坐标
+    CGContextMoveToPoint(context, 12, rect.size.height - 0.5);  //起点坐标
+    CGContextAddLineToPoint(context, rect.size.width - 12, rect.size.height - 0.5);   //终点坐标
     
     CGContextStrokePath(context);
     

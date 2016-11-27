@@ -13,14 +13,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WiFiFooterView">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="570"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="595"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yDX-nE-jer">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="70.5"/>
                     <subviews>
                         <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEO-A5-NxF">
-                            <rect key="frame" x="12" y="8" width="351" height="32"/>
+                            <rect key="frame" x="12" y="14.5" width="351" height="32"/>
                             <color key="backgroundColor" red="0.38823529411764707" green="0.7803921568627451" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="查看更多东莞新闻 ＞">
@@ -35,13 +35,14 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="UEO-A5-NxF" secondAttribute="trailing" constant="12" id="HhW-lx-PFL"/>
                         <constraint firstItem="UEO-A5-NxF" firstAttribute="leading" secondItem="yDX-nE-jer" secondAttribute="leading" constant="12" id="LNT-lg-3tL"/>
-                        <constraint firstAttribute="bottom" secondItem="UEO-A5-NxF" secondAttribute="bottom" constant="8" id="LeN-d5-gbq"/>
-                        <constraint firstAttribute="height" constant="48" id="dv0-Jz-EQo"/>
-                        <constraint firstItem="UEO-A5-NxF" firstAttribute="top" secondItem="yDX-nE-jer" secondAttribute="top" constant="8" id="p0W-aE-WFs"/>
+                        <constraint firstAttribute="bottom" secondItem="UEO-A5-NxF" secondAttribute="bottom" constant="24" id="LeN-d5-gbq"/>
+                        <constraint firstAttribute="height" constant="70.5" id="dv0-Jz-EQo"/>
+                        <constraint firstItem="UEO-A5-NxF" firstAttribute="top" secondItem="yDX-nE-jer" secondAttribute="top" constant="14.5" id="p0W-aE-WFs"/>
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" tag="1001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qZi-Nd-L3K">
-                    <rect key="frame" x="0.0" y="60" width="375" height="100"/>
+                    <rect key="frame" x="0.0" y="82.5" width="375" height="100"/>
+                    <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="qZi-Nd-L3K" secondAttribute="height" multiplier="375:100" id="J5H-kI-AyU"/>
                     </constraints>
@@ -50,7 +51,7 @@
                     </connections>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="twa-G3-Zn0">
-                    <rect key="frame" x="0.0" y="172" width="375" height="21"/>
+                    <rect key="frame" x="0.0" y="194.5" width="375" height="21"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_Recommend.png" translatesAutoresizingMaskIntoConstraints="NO" id="42E-Hi-j3m">
                             <rect key="frame" x="12" y="4" width="14" height="14"/>
@@ -77,7 +78,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="stW-2f-j8N">
-                    <rect key="frame" x="0.0" y="193" width="375" height="201"/>
+                    <rect key="frame" x="0.0" y="215.5" width="375" height="201"/>
                     <subviews>
                         <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5Z-SY-Hz8">
                             <rect key="frame" x="0.0" y="20" width="125" height="70.5"/>
@@ -173,13 +174,13 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  东莞无线  智慧城市第一品牌  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Td1-eY-d7a">
-                    <rect key="frame" x="104" y="419.5" width="167" height="37.5"/>
+                    <rect key="frame" x="104" y="439.5" width="167" height="42.5"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                     <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TU0-pe-HYR">
-                    <rect key="frame" x="117" y="475" width="141" height="28"/>
+                    <rect key="frame" x="117" y="500" width="141" height="28"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您已连接东莞无线" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obo-vr-HH9">
                             <rect key="frame" x="0.0" y="8" width="99" height="15"/>
@@ -212,7 +213,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGW-m0-aYn">
-                    <rect key="frame" x="117" y="508" width="141" height="28"/>
+                    <rect key="frame" x="117" y="533" width="141" height="28"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="为您节省流量费用" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QfQ-yq-J1L">
                             <rect key="frame" x="0.0" y="8" width="99" height="15"/>
@@ -245,14 +246,14 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lnt-7C-NCr">
-                    <rect key="frame" x="40" y="438" width="64" height="1"/>
+                    <rect key="frame" x="40" y="460.5" width="64" height="1"/>
                     <color key="backgroundColor" red="0.70588235294117641" green="0.70588235294117641" blue="0.70588235294117641" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="Cpa-xe-wp2"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nKj-AB-Z4x">
-                    <rect key="frame" x="271" y="438" width="64" height="1"/>
+                    <rect key="frame" x="271" y="460.5" width="64" height="1"/>
                     <color key="backgroundColor" red="0.70588235294117641" green="0.70588235294117641" blue="0.70588235294117641" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="x4F-LK-EoE"/>
@@ -299,7 +300,7 @@
                 <outletCollection property="_sectionBtns" destination="z0J-eC-lG3" id="d3r-SP-bc7"/>
                 <outletCollection property="_sectionBtns" destination="aCY-sQ-aI5" id="xO5-vl-mVz"/>
             </connections>
-            <point key="canvasLocation" x="-340.5" y="59"/>
+            <point key="canvasLocation" x="-340.5" y="71.5"/>
         </view>
         <tapGestureRecognizer id="44a-4E-iRU">
             <connections>

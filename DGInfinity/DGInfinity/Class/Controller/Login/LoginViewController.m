@@ -82,8 +82,6 @@
 - (void)setUpSubviews
 {
     // button
-    [_codeBtn dg_setBackgroundImage:ImageNamed(@"Code_normal") forState:UIControlStateNormal];
-    [_codeBtn dg_setBackgroundImage:ImageNamed(@"Code_press") forState:UIControlStateHighlighted];
     [_okBtn dg_setBackgroundImage:ImageNamed(@"Start button_normal") forState:UIControlStateNormal];
     [_okBtn dg_setBackgroundImage:ImageNamed(@"Start button_press") forState:UIControlStateHighlighted];
     
