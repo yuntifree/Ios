@@ -79,6 +79,7 @@
         _statusLbl.text = @"发现东莞城市免费WiFi";
         [_halo start];
     } else {
+        _currentStatus = ENV_LOGIN;
         _connectBtn.selected = YES;
         [_connectBtn setTitle:@"" forState:UIControlStateNormal];
         NSString *ssid = [Tools getCurrentSSID];
@@ -179,24 +180,24 @@
             _currentStatus = status;
             if (status == ENV_LOGIN) {
                 [self setConnectBtnStatus:ConnectStatusConnected];
-            } else {
-                if (status == ENV_NOT_WIFI) {
-                    if ([[Tools getCurrentSSID] isEqualToString:WIFISDK_SSID]) {
-                        // 已经portal认证
-                        _currentStatus = ENV_LOGIN;
+            } else if (status == ENV_NOT_LOGIN) {
+                if (_connect) {
+                    _connect();
+                }
+            } else if (status == ENV_NOT_WIFI) {
+                if ([[Tools getCurrentSSID] isEqualToString:WIFISDK_SSID]) {
+                    // 已经portal认证
+                    [self setConnectBtnStatus:ConnectStatusConnected];
+                } else {
+                    // 别的网络（WiFi或者4G）
+                    if ([[NetworkManager shareManager] isWiFi]) {
                         [self setConnectBtnStatus:ConnectStatusConnected];
                     } else {
-                        // 别的网络（WiFi或者4G）
-                        if ([[NetworkManager shareManager] isWiFi]) {
-                            _currentStatus = ENV_LOGIN;
-                            [self setConnectBtnStatus:ConnectStatusConnected];
-                        } else {
-                            [self setConnectBtnStatus:ConnectStatusNotConnect];
-                        }
+                        [self setConnectBtnStatus:ConnectStatusNotConnect];
                     }
-                } else {
-                    [self setConnectBtnStatus:ConnectStatusNotConnect];
                 }
+            } else {
+                [self setConnectBtnStatus:ConnectStatusNotConnect];
             }
         }
     }];

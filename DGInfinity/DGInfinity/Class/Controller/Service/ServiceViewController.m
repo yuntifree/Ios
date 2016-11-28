@@ -239,7 +239,7 @@ const NSInteger headerHeight = 105.f;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(kScreenWidth, 56);
+    return CGSizeMake(kScreenWidth, 55);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section

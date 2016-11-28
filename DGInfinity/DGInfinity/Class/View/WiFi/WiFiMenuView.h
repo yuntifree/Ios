@@ -25,6 +25,8 @@ typedef NS_ENUM(NSInteger, ConnectStatus) {
     ConnectStatusConnected = 1
 };
 
+typedef void(^Connect)(void);
+
 @protocol WiFiMenuViewDelegate <NSObject>
 
 - (void)WiFiMenuViewClick:(WiFiMenuType)type;
@@ -34,6 +36,7 @@ typedef NS_ENUM(NSInteger, ConnectStatus) {
 @interface WiFiMenuView : UIView
 
 @property (nonatomic, weak) id <WiFiMenuViewDelegate> delegate;
+@property (nonatomic, copy) Connect connect;
 
 - (void)setWeather:(NSDictionary *)weather;
 - (void)setHotNews:(NSString *)title;

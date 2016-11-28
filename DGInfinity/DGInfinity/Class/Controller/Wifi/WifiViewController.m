@@ -79,16 +79,21 @@ NetWorkMgrDelegate
         } else if (status == ENV_LOGIN) {
             // 已经通过SDK认证
         } else if (status == ENV_NOT_LOGIN) {
-            if (SApp.wifiAccount && SApp.wifipass) {
-                // 调用SDK认证
-                [self doLogon];
-            } else {
-                // 调用SDK注册，然后再调用认证
-                [self doRegister];
-            }
+            [self connectWiFi];
         }
     }];
 #endif
+}
+
+- (void)connectWiFi
+{
+    if (SApp.wifiAccount && SApp.wifipass) {
+        // 调用SDK认证
+        [self doLogon];
+    } else {
+        // 调用SDK注册，然后再调用认证
+        [self doRegister];
+    }
 }
 
 - (void)doRegister
@@ -211,9 +216,14 @@ NetWorkMgrDelegate
 
 - (void)setUpSubViews
 {
+    __weak typeof(self) wself = self;
+    
     _menuView = [[NSBundle mainBundle] loadNibNamed:@"WiFiMenuView" owner:nil options:nil][0];
     _menuView.frame = CGRectMake(0, 0, kScreenWidth, Height);
     _menuView.delegate = self;
+    _menuView.connect = ^ {
+        [wself connectWiFi];
+    };
     [_scrollView addSubview:_menuView];
     
     _tipView = [[WiFiTipView alloc] initWithFrame:CGRectMake(kScreenWidth - 96, Height - 36, 88, 24)];
@@ -227,7 +237,6 @@ NetWorkMgrDelegate
     _tableView.backgroundColor = COLOR(245, 245, 245, 1);
     [_scrollView addSubview:_tableView];
     
-    __weak typeof(self) wself = self;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [wself returnToFirstPage];
     }];

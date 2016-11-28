@@ -27,8 +27,8 @@
         _titleLbl.textColor = COLOR(0, 156, 251, 1);
         [self addSubview:_titleLbl];
         
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(12, 39, kScreenWidth - 24, 2)];
-        line.backgroundColor = COLOR(245, 245, 245, 1);
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(12, 40.5, kScreenWidth - 24, 0.5)];
+        line.backgroundColor = COLOR(230, 230, 230, 1);
         [self addSubview:line];
     }
     return self;
