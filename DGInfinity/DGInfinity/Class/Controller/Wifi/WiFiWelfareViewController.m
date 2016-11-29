@@ -13,6 +13,10 @@
 {
     __weak IBOutlet UITextField *_ssidField;
     __weak IBOutlet UITextField *_passwordField;
+    __weak IBOutlet UIButton *_commitBtn;
+    
+    __weak IBOutlet NSLayoutConstraint *_firstLblTop;
+    __weak IBOutlet NSLayoutConstraint *_formTop;
     
 }
 @end
@@ -27,6 +31,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [self updateConstraint];
+}
+
+- (void)updateConstraint
+{
+    if (IPHONE4) {
+        _firstLblTop.constant = 14.0f;
+        _formTop.constant = 16.0f;
+    } else {
+        _firstLblTop.constant *= [Tools layoutFactor];
+        _formTop.constant *= [Tools layoutFactor];
+    }
+}
+
+- (IBAction)textFieldEditingChanged:(id)sender {
+    if (_ssidField.text.length && _passwordField.text.length) {
+        _commitBtn.enabled = YES;
+    } else {
+        _commitBtn.enabled = NO;
+    }
 }
 
 - (IBAction)commitBtnClick:(id)sender {
@@ -43,7 +68,10 @@
     [WiFiCGI reportWifi:_ssidField.text password:_passwordField.text longitudu:coordinate.longitude latitude:coordinate.latitude complete:^(DGCgiResult *res) {
         [SVProgressHUD dismiss];
         if (E_OK == res._errno) {
-            [self makeToast:@"上报成功，感谢您的无私奉献"];
+            _ssidField.text = nil;
+            _passwordField.text = nil;
+            _commitBtn.enabled = NO;
+            [self makeToast:@"上报成功，东莞有你更精彩"];
         } else {
             [self makeToast:res.desc];
         }

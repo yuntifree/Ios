@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WiFiWelfareViewController">
             <connections>
+                <outlet property="_commitBtn" destination="ock-C6-TcE" id="oI9-ob-8Qb"/>
+                <outlet property="_firstLblTop" destination="xyG-xU-4q1" id="rTK-nt-c3p"/>
+                <outlet property="_formTop" destination="fsh-r7-CDL" id="xEe-Gf-7Qy"/>
                 <outlet property="_passwordField" destination="YEY-vY-LIJ" id="2gp-sS-NMf"/>
                 <outlet property="_ssidField" destination="Qgm-3g-fab" id="Cnu-JJ-eBF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -21,31 +24,155 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ssid" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qgm-3g-fab">
-                    <rect key="frame" x="95" y="178" width="185" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <nil key="textColor"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3万个免费WiFi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ar-4q-pRz">
+                    <rect key="frame" x="141" y="60" width="94" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YEY-vY-LIJ">
-                    <rect key="frame" x="95" y="248" width="185" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="打造全民WiFi服务" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9g-Uq-zlB">
+                    <rect key="frame" x="131" y="87" width="114" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ock-C6-TcE">
-                    <rect key="frame" x="172" y="326" width="31" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="提交"/>
-                    <connections>
-                        <action selector="commitBtnClick:" destination="-1" eventType="touchUpInside" id="1RU-FD-pX3"/>
-                    </connections>
-                </button>
+                    <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你的生活，将因为我的到来，而万分精彩" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZ8-NW-vAp">
+                    <rect key="frame" x="58" y="114" width="258" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYV-Wy-PYZ">
+                    <rect key="frame" x="42" y="193" width="292" height="286"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu.png" translatesAutoresizingMaskIntoConstraints="NO" id="UAw-aw-mMc">
+                            <rect key="frame" x="0.0" y="0.0" width="292" height="286"/>
+                        </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VOh-0Z-TdL">
+                            <rect key="frame" x="35" y="176" width="222" height="0.5"/>
+                            <color key="backgroundColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.5" id="GeT-Wb-lsg"/>
+                            </constraints>
+                        </view>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_wificode.png" translatesAutoresizingMaskIntoConstraints="NO" id="NuH-ve-bqh">
+                            <rect key="frame" x="14" y="144" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="20" id="Epj-RI-hDG"/>
+                                <constraint firstAttribute="height" constant="20" id="ZTK-LO-cct"/>
+                            </constraints>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_addwifi.png" translatesAutoresizingMaskIntoConstraints="NO" id="klc-B3-2kD">
+                            <rect key="frame" x="124" y="21" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="7B4-NI-Ssu"/>
+                                <constraint firstAttribute="height" constant="44" id="9PX-RK-oR9"/>
+                            </constraints>
+                        </imageView>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Qgm-3g-fab">
+                            <rect key="frame" x="92" y="91" width="165" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="NGZ-fL-EZW"/>
+                            </constraints>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="textFieldEditingChanged:" destination="-1" eventType="editingChanged" id="8JN-dV-P4d"/>
+                            </connections>
+                        </textField>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_wifiname.png" translatesAutoresizingMaskIntoConstraints="NO" id="kvO-JN-4Zm">
+                            <rect key="frame" x="14" y="98" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="20" id="Hhb-Zs-1kr"/>
+                                <constraint firstAttribute="height" constant="20" id="hiv-UB-3dc"/>
+                            </constraints>
+                        </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cWT-o6-1kr">
+                            <rect key="frame" x="35" y="130" width="222" height="0.5"/>
+                            <color key="backgroundColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.5" id="Fw3-LI-daw"/>
+                            </constraints>
+                        </view>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="YEY-vY-LIJ">
+                            <rect key="frame" x="92" y="137" width="165" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="gUd-18-Qhb"/>
+                            </constraints>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="textFieldEditingChanged:" destination="-1" eventType="editingChanged" id="6bH-fJ-yyJ"/>
+                            </connections>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ock-C6-TcE">
+                            <rect key="frame" x="15" y="212" width="262" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="aSR-qg-nrm"/>
+                            </constraints>
+                            <state key="normal" title="参与公益" backgroundImage="btn_sure_nor.png">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="btn_sure_press.png"/>
+                            <connections>
+                                <action selector="commitBtnClick:" destination="-1" eventType="touchUpInside" id="1RU-FD-pX3"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="VOh-0Z-TdL" firstAttribute="leading" secondItem="IYV-Wy-PYZ" secondAttribute="leading" constant="35" id="5KZ-xW-TpL"/>
+                        <constraint firstAttribute="width" constant="292" id="9Hw-IW-6Xp"/>
+                        <constraint firstAttribute="height" constant="286" id="C9c-Ri-tSw"/>
+                        <constraint firstItem="NuH-ve-bqh" firstAttribute="top" secondItem="kvO-JN-4Zm" secondAttribute="bottom" constant="26" id="EbS-jU-xm0"/>
+                        <constraint firstAttribute="trailing" secondItem="YEY-vY-LIJ" secondAttribute="trailing" constant="35" id="Ezq-hK-Dns"/>
+                        <constraint firstAttribute="trailing" secondItem="ock-C6-TcE" secondAttribute="trailing" constant="15" id="MDq-QT-a0S"/>
+                        <constraint firstAttribute="trailing" secondItem="UAw-aw-mMc" secondAttribute="trailing" id="MZQ-aM-DeL"/>
+                        <constraint firstItem="UAw-aw-mMc" firstAttribute="top" secondItem="IYV-Wy-PYZ" secondAttribute="top" id="NPR-wf-au3"/>
+                        <constraint firstAttribute="trailing" secondItem="Qgm-3g-fab" secondAttribute="trailing" constant="35" id="OZY-k4-nGM"/>
+                        <constraint firstItem="VOh-0Z-TdL" firstAttribute="top" secondItem="IYV-Wy-PYZ" secondAttribute="top" constant="176" id="Opu-9k-siw"/>
+                        <constraint firstItem="klc-B3-2kD" firstAttribute="top" secondItem="IYV-Wy-PYZ" secondAttribute="top" constant="21" id="PlJ-u0-60g"/>
+                        <constraint firstItem="ock-C6-TcE" firstAttribute="top" secondItem="IYV-Wy-PYZ" secondAttribute="top" constant="212" id="Qhh-Vl-88A"/>
+                        <constraint firstItem="Qgm-3g-fab" firstAttribute="leading" secondItem="kvO-JN-4Zm" secondAttribute="trailing" constant="58" id="WZK-No-JUQ"/>
+                        <constraint firstItem="cWT-o6-1kr" firstAttribute="top" secondItem="IYV-Wy-PYZ" secondAttribute="top" constant="130" id="Y2H-40-qdh"/>
+                        <constraint firstItem="Qgm-3g-fab" firstAttribute="centerY" secondItem="kvO-JN-4Zm" secondAttribute="centerY" id="YNH-44-NHv"/>
+                        <constraint firstItem="ock-C6-TcE" firstAttribute="leading" secondItem="IYV-Wy-PYZ" secondAttribute="leading" constant="15" id="aOn-Hy-9Za"/>
+                        <constraint firstAttribute="trailing" secondItem="cWT-o6-1kr" secondAttribute="trailing" constant="35" id="bNm-WY-3bn"/>
+                        <constraint firstAttribute="bottom" secondItem="UAw-aw-mMc" secondAttribute="bottom" id="br2-j5-P4e"/>
+                        <constraint firstItem="NuH-ve-bqh" firstAttribute="leading" secondItem="IYV-Wy-PYZ" secondAttribute="leading" constant="14" id="dDs-LR-WWk"/>
+                        <constraint firstItem="kvO-JN-4Zm" firstAttribute="top" secondItem="IYV-Wy-PYZ" secondAttribute="top" constant="98" id="rC9-02-tkW"/>
+                        <constraint firstItem="kvO-JN-4Zm" firstAttribute="leading" secondItem="IYV-Wy-PYZ" secondAttribute="leading" constant="14" id="rTQ-1o-fh2"/>
+                        <constraint firstItem="YEY-vY-LIJ" firstAttribute="centerY" secondItem="NuH-ve-bqh" secondAttribute="centerY" id="rc7-QF-c13"/>
+                        <constraint firstAttribute="trailing" secondItem="VOh-0Z-TdL" secondAttribute="trailing" constant="35" id="s3B-Sz-1Ta"/>
+                        <constraint firstItem="cWT-o6-1kr" firstAttribute="leading" secondItem="IYV-Wy-PYZ" secondAttribute="leading" constant="35" id="ta0-QQ-Uzj"/>
+                        <constraint firstItem="YEY-vY-LIJ" firstAttribute="leading" secondItem="NuH-ve-bqh" secondAttribute="trailing" constant="58" id="ue5-Hx-6ew"/>
+                        <constraint firstItem="klc-B3-2kD" firstAttribute="centerX" secondItem="IYV-Wy-PYZ" secondAttribute="centerX" id="vgW-Zf-Xu6"/>
+                        <constraint firstItem="UAw-aw-mMc" firstAttribute="leading" secondItem="IYV-Wy-PYZ" secondAttribute="leading" id="wXC-4I-lL6"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="25.5" y="51.5"/>
+            <constraints>
+                <constraint firstItem="c9g-Uq-zlB" firstAttribute="top" secondItem="3ar-4q-pRz" secondAttribute="bottom" constant="10" id="QQ6-ug-PVc"/>
+                <constraint firstItem="IYV-Wy-PYZ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Ues-nN-lcw"/>
+                <constraint firstItem="c9g-Uq-zlB" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Y5p-DW-rl6"/>
+                <constraint firstItem="HZ8-NW-vAp" firstAttribute="top" secondItem="c9g-Uq-zlB" secondAttribute="bottom" constant="10" id="a2r-TO-Yj5"/>
+                <constraint firstItem="HZ8-NW-vAp" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="emL-0i-FvH"/>
+                <constraint firstItem="IYV-Wy-PYZ" firstAttribute="top" secondItem="HZ8-NW-vAp" secondAttribute="bottom" constant="62" id="fsh-r7-CDL"/>
+                <constraint firstItem="3ar-4q-pRz" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="u2U-TP-zf6"/>
+                <constraint firstItem="3ar-4q-pRz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="60" id="xyG-xU-4q1"/>
+            </constraints>
+            <point key="canvasLocation" x="-342" y="25"/>
         </view>
     </objects>
+    <resources>
+        <image name="btn_sure_nor.png" width="262" height="44"/>
+        <image name="btn_sure_press.png" width="262" height="44"/>
+        <image name="ico_addwifi.png" width="44" height="44"/>
+        <image name="ico_wificode.png" width="20" height="20"/>
+        <image name="ico_wifiname.png" width="20" height="20"/>
+        <image name="menu.png" width="292" height="286"/>
+    </resources>
 </document>
