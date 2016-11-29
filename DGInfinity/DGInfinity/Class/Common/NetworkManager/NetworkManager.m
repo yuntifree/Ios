@@ -13,12 +13,10 @@
 @interface NetworkManager ()
 {
     Reachability *_reachability;
-    
+    NSHashTable *_observers;
     NetworkStatus _currentStatus;
     NSString *_lastSSID;
 }
-
-@property (nonatomic, weak) NSMutableArray *observers;
 
 @end
 
@@ -46,7 +44,7 @@ static NetworkManager *manager = nil;
     if (self) {
         _reachability = [Reachability reachabilityWithHostName:@"www.yunxingzh.com"];
         _currentStatus = [_reachability currentReachabilityStatus];
-        _observers = [NSMutableArray array];
+        _observers = [NSHashTable weakObjectsHashTable];
         _lastSSID = nil;
     }
     return self;
@@ -97,8 +95,7 @@ static NetworkManager *manager = nil;
 
 - (void)addNetworkObserver:(id<NetWorkMgrDelegate>)delegate
 {
-    NSUInteger index = [_observers indexOfObjectIdenticalTo:delegate];
-    if (index != NSNotFound) {
+    if ([_observers containsObject:delegate]) {
         return;
     }
     @synchronized (_observers) {
@@ -108,12 +105,11 @@ static NetworkManager *manager = nil;
 
 - (void)removeNetworkObserver:(id<NetWorkMgrDelegate>)delegate
 {
-    NSUInteger index = [_observers indexOfObjectIdenticalTo:delegate];
-    if (index == NSNotFound) {
+    if (![_observers containsObject:delegate]) {
         return;
     }
     @synchronized (_observers) {
-        [_observers removeObjectAtIndex:index];
+        [_observers removeObject:delegate];
     }
 }
 
