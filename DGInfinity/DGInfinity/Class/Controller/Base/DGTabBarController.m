@@ -33,11 +33,13 @@
         [serviceNav.tabBarItem setImage:@"tab_ico_service_gray" selectedImage:@"tab_ico_service_green"];
         serviceNav.tabBarItem.title = @"服务";
         
+#ifdef DEBUG
         DGNavigationViewController *shoppingNav = [[DGNavigationViewController alloc] initWithRootViewController:[ShoppingViewController new]];
         [shoppingNav.tabBarItem setImage:@"tab_ico_buy_gray" selectedImage:@"tab_icon_buy_blue"];
         self.viewControllers = @[wifiNav, newsNav, serviceNav, shoppingNav];
-         
-//        self.viewControllers = @[wifiNav, newsNav, serviceNav];
+#else
+        self.viewControllers = @[wifiNav, newsNav, serviceNav];
+#endif
     }
     return self;
 }
