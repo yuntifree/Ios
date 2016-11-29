@@ -42,7 +42,6 @@ NetWorkMgrDelegate
     WiFiConnectTipView *_connectTipView;
     
     NSMutableArray *_newsArray;
-    NSDictionary *_frontInfo;
 }
 
 @end
@@ -73,45 +72,20 @@ NetWorkMgrDelegate
         if (status == ENV_NOT_WIFI) {
             if ([[Tools getCurrentSSID] isEqualToString:WIFISDK_SSID]) {
                 // 已经portal认证
+                [_menuView setConnectBtnStatus:ConnectStatusConnected];
             } else {
-                // 别的网络
+                // 别的网络（WiFi或者4G）
+                if ([[NetworkManager shareManager] isWiFi]) {
+                    [_menuView setConnectBtnStatus:ConnectStatusConnected];
+                } else {
+                    [_menuView setConnectBtnStatus:ConnectStatusNotConnect];
+                }
             }
         } else if (status == ENV_LOGIN) {
             // 已经通过SDK认证
+            [_menuView setConnectBtnStatus:ConnectStatusConnected];
         } else if (status == ENV_NOT_LOGIN) {
-            [self connectWiFi];
-        }
-    }];
-#endif
-}
-
-- (void)connectWiFi
-{
-    if (SApp.wifiAccount && SApp.wifipass) {
-        // 调用SDK认证
-        [self doLogon];
-    } else {
-        // 调用SDK注册，然后再调用认证
-        [self doRegister];
-    }
-}
-
-- (void)doRegister
-{
-#if (!TARGET_IPHONE_SIMULATOR)
-    [SVProgressHUD show];
-    [[UserAuthManager manager] doRegisterWithUserName:SApp.username andPassWord:SApp.wifipass andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
-        [SVProgressHUD dismiss];
-        if (!error) {
-            NSString *retflag = response[@"retflag"];
-            if ([retflag isEqualToString:@"0"]) {
-                SApp.wifiAccount = SApp.username;
-                [self doLogon];
-            } else {
-                [self makeToast:response[@"reason"]];
-            }
-        } else {
-            [self makeToast:[NSString stringWithFormat:@"请求失败 %@", error.description]];
+            [self doLogon];
         }
     }];
 #endif
@@ -121,16 +95,19 @@ NetWorkMgrDelegate
 {
 #if (!TARGET_IPHONE_SIMULATOR)
     [SVProgressHUD show];
-    [[UserAuthManager manager] doLogon:SApp.wifiAccount andPassWord:SApp.wifipass andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
+    [[UserAuthManager manager] doLogon:SApp.username andPassWord:@"" andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
         [SVProgressHUD dismiss];
         if (!error) {
-            NSString *retflag = response[@"retflag"];
-            if ([retflag isEqualToString:@"0"]) {
-                [self makeToast:@"认证成功"];
-                [_menuView setConnectBtnStatus:ConnectStatusConnected];
-                [WiFiCGI reportApMac:[Tools getBSSID] complete:nil];
-            } else {
-                [self makeToast:response[@"reason"]];
+            NSDictionary *head = response[@"head"];
+            if ([head isKindOfClass:[NSDictionary class]]) {
+                NSString *retflag = head[@"retflag"];
+                if ([retflag isEqualToString:@"0"]) {
+                    [self makeToast:@"认证成功"];
+                    [_menuView setConnectBtnStatus:ConnectStatusConnected];
+                    [WiFiCGI reportApMac:[Tools getBSSID] complete:nil];
+                } else {
+                    [self makeToast:head[@"reason"]];
+                }
             }
         } else {
             [self makeToast:[NSString stringWithFormat:@"请求失败 %@", error.description]];
@@ -221,9 +198,6 @@ NetWorkMgrDelegate
     _menuView = [[NSBundle mainBundle] loadNibNamed:@"WiFiMenuView" owner:nil options:nil][0];
     _menuView.frame = CGRectMake(0, 0, kScreenWidth, Height);
     _menuView.delegate = self;
-    _menuView.connect = ^ {
-        [wself connectWiFi];
-    };
     [_scrollView addSubview:_menuView];
     
     _tipView = [[WiFiTipView alloc] initWithFrame:CGRectMake(kScreenWidth - 96, Height - 36, 88, 24)];
@@ -247,9 +221,18 @@ NetWorkMgrDelegate
     _tableView.mj_header = header;
     
     _footerView = [[NSBundle mainBundle] loadNibNamed:@"WiFiFooterView" owner:nil options:nil][0];
-    _tableView.tableFooterView = _footerView;
+    UIView *tableFooterView = [UIView new];
+    tableFooterView.size = CGSizeMake(kScreenWidth, 391.5 + kScreenWidth * 100 / 375);
+    _footerView.frame = tableFooterView.bounds;
+    [tableFooterView addSubview:_footerView];
+    _tableView.tableFooterView = tableFooterView;
     _footerView.block = ^(WiFiFooterType type) {
         [wself handleFooterViewAction:type];
+    };
+    _footerView.tap = ^(NSString *url) {
+        WebViewController *vc = [[WebViewController alloc] init];
+        vc.url = url;
+        [wself.navigationController pushViewController:vc animated:YES];
     };
 }
 
@@ -279,14 +262,6 @@ NetWorkMgrDelegate
             } else {
                 [self gotoNewsTabWithPage:1];
             }
-        }
-            break;
-        case WiFiFooterTypeBanner:
-        {
-            // 缺少title，考虑从服务器返？
-            WebViewController *vc = [[WebViewController alloc] init];
-            vc.url = _frontInfo[@"banner"][@"dst"];
-            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case WiFiFooterTypeService:
@@ -342,8 +317,7 @@ NetWorkMgrDelegate
         if (E_OK == res._errno) {
             NSDictionary *data = res.data[@"data"];
             if ([data isKindOfClass:[NSDictionary class]]) {
-                _frontInfo = data;
-                [_footerView setFrontInfo:_frontInfo];
+                [_footerView setFrontInfo:data];
             }
         } else {
             [self makeToast:res.desc];
@@ -414,11 +388,7 @@ NetWorkMgrDelegate
             [[UserAuthManager manager] checkEnvironmentBlock:^(ENV_STATUS status) {
                 [SVProgressHUD dismiss];
                 if (status == ENV_NOT_LOGIN) {
-                    if (SApp.wifiAccount && SApp.wifipass) {
-                        [self doLogon];
-                    } else {
-                        [self doRegister];
-                    }
+                    [self doLogon];
                 } else if (status == ENV_LOGIN) {
                     [self makeToast:@"已连接上东莞免费WiFi"];
                     [_menuView setConnectBtnStatus:ConnectStatusConnected];
@@ -473,9 +443,7 @@ NetWorkMgrDelegate
                 [_tipView dismiss];
                 _tipView = nil;
             }
-            if (_frontInfo == nil) {
-                [self getFrontInfo];
-            }
+            [self getFrontInfo];
             if (!_newsArray.count) {
                 [self getWeatherAndNews];
             }

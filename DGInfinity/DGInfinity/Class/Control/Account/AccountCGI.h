@@ -23,11 +23,9 @@
  *  register
  *  @param username 用户名
  *  @param password 密码
- *  @param code 验证码
  */
 + (void)doRegister:(NSString *)username
           password:(NSString *)password
-              code:(NSInteger)code
           complete:(void (^)(DGCgiResult *res))complete;
 
 /**

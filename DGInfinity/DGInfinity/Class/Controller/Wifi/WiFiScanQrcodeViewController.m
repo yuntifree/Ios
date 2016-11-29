@@ -220,7 +220,11 @@
         vc.url = url.absoluteString;
         [self.navigationController pushViewController:vc animated:YES];
     } else {
-        [self showFailPage];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        } else {
+            [self showFailPage];
+        }
     }
 }
 

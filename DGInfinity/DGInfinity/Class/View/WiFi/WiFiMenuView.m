@@ -180,10 +180,6 @@
             _currentStatus = status;
             if (status == ENV_LOGIN) {
                 [self setConnectBtnStatus:ConnectStatusConnected];
-            } else if (status == ENV_NOT_LOGIN) {
-                if (_connect) {
-                    _connect();
-                }
             } else if (status == ENV_NOT_WIFI) {
                 if ([[Tools getCurrentSSID] isEqualToString:WIFISDK_SSID]) {
                     // 已经portal认证

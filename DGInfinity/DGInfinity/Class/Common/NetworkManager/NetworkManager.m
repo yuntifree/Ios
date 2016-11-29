@@ -13,11 +13,13 @@
 @interface NetworkManager ()
 {
     Reachability *_reachability;
-    NSMutableArray *_observers;
     
     NetworkStatus _currentStatus;
     NSString *_lastSSID;
 }
+
+@property (nonatomic, weak) NSMutableArray *observers;
+
 @end
 
 @implementation NetworkManager

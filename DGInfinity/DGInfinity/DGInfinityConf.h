@@ -75,11 +75,12 @@ typedef enum {
 // Server
 #define ServerURL @"http://120.76.236.185/" // 测试环境
 //#define SerVerURL @"http://api.yunxingzh.com/" // 正式环境
+//#define ServerURL @"http://120.25.133.234/" // AC白名单
 #define AppVersion 1 // 客户端内部版本
 
 // WifiSDK
 #define WIFISDK_TIMEOUT  5 * 1000
-#define WIFISDK_URL @"http://192.168.100.4:880/wsmp/interface"
+#define WIFISDK_URL @"http://120.234.130.196:880/wsmp/interface"
 #define WIFISDK_SSID @"无线东莞DG-FREE"
 #define WIFISDK_VNOCODE @"ROOT_VNO"
 

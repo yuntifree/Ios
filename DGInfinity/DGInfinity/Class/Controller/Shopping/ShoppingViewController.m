@@ -37,6 +37,21 @@
             [self makeToast:res.desc];
         }
     }];
+//    [[UserAuthManager manager] doLogout:SApp.username andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
+//        if (!error) {
+//            NSDictionary *head = response[@"head"];
+//            if ([head isKindOfClass:[NSDictionary class]]) {
+//                NSString *retflag = head[@"retflag"];
+//                if ([retflag isEqualToString:@"0"]) {
+//                    [self makeToast:@"下线成功"];
+//                } else {
+//                    [self makeToast:head[@"reason"]];
+//                }
+//            }
+//        } else {
+//            [self makeToast:error.description];
+//        }
+//    }];
 }
 
 - (void)didReceiveMemoryWarning {

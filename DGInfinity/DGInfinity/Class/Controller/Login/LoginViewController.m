@@ -44,6 +44,7 @@
 {
     if (_seconds == 0) {
         _codeBtn.enabled = YES;
+        _phoneField.enabled = YES;
         [_codeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
         [self.timer setFireDate:[NSDate distantFuture]];
     } else {
@@ -113,29 +114,54 @@
         [self makeToast:@"请输入正确的手机号"];
         return;
     }
+#if (!TARGET_IPHONE_SIMULATOR)
     [SVProgressHUD show];
-    [AccountCGI getPhoneCode:_phoneField.text type:0 complete:^(DGCgiResult *res) {
+    [[UserAuthManager manager] doRegisterWithUserName:_phoneField.text andPassWord:@"" andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
         [SVProgressHUD dismiss];
-        if (E_OK == res._errno) {
-            _codeBtn.enabled = NO;
-            _seconds = SECONDS;
-            [self.timer setFireDate:[NSDate date]];
-            [_codeField becomeFirstResponder];
+        if (!error) {
+            NSDictionary *head = response[@"head"];
+            if ([head isKindOfClass:[NSDictionary class]]) {
+                NSString *retflag = head[@"retflag"];
+                if ([retflag isEqualToString:@"0"]) {
+                    NSDictionary *body = response[@"body"];
+                    if ([body isKindOfClass:[NSDictionary class]]) {
+                        SApp.wifipass = body[@"pwd"];
+                        SApp.username = body[@"custcode"];
+                    }
+                    _codeBtn.enabled = NO;
+                    _phoneField.enabled = NO;
+                    _seconds = SECONDS;
+                    [self.timer setFireDate:[NSDate date]];
+                    [_codeField becomeFirstResponder];
+                } else {
+                    [self makeToast:head[@"reason"]];
+                }
+            }
         } else {
-            [self makeToast:res.desc];
+            [self makeToast:@"请求失败"];
         }
     }];
+#endif
 }
 
 - (IBAction)doRegister:(id)sender {
     if (!_phoneField.text.length || !_codeField.text.length) return;
+    if (![_phoneField.text isEqualToString:SApp.username]) {
+        [self makeToast:@"手机号不正确"];
+        return;
+    }
+#if (!TARGET_IPHONE_SIMULATOR)
+    if (![_codeField.text isEqualToString:SApp.wifipass]) {
+        [self makeToast:@"验证码不正确"];
+        return;
+    }
+#endif
     [SVProgressHUD show];
-    [AccountCGI doRegister:_phoneField.text password:_codeField.text code:_codeField.text.integerValue complete:^(DGCgiResult *res) {
+    [AccountCGI doRegister:_phoneField.text password:_codeField.text complete:^(DGCgiResult *res) {
         [SVProgressHUD dismiss];
         if (E_OK == res._errno) {
             NSDictionary *data = res.data[@"data"];
             if ([data isKindOfClass:[NSDictionary class]]) {
-                SApp.username = _phoneField.text;
                 [MSApp setUserInfo:data];
                 [self invalidateTimer];
                 [[NSNotificationCenter defaultCenter] postNotificationName:KNC_LOGIN object:nil];

@@ -13,17 +13,19 @@ typedef NS_ENUM(NSInteger, WiFiFooterType) {
     WiFiFooterTypeBanner = 1001,
     WiFiFooterTypeNews = 1002,
     WiFiFooterTypeVideo = 1003,
-    WiFiFooterTypeService = 1004,
-    WiFiFooterTypeGoverment = 1005,
+    WiFiFooterTypeGoverment = 1004,
+    WiFiFooterTypeService = 1005,
     WiFiFooterTypeLive = 1006,
     WiFiFooterTypeShopping = 1007
 };
 
 typedef void(^FooterBlock)(NSInteger type);
+typedef void(^BannerTap)(NSString *url);
 
 @interface WiFiFooterView : UIView
 
 @property (nonatomic, copy) FooterBlock block;
+@property (nonatomic, copy) BannerTap tap;
 
 - (void)setFrontInfo:(NSDictionary *)frontInfo;
 

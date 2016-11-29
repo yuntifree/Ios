@@ -27,13 +27,11 @@
 
 + (void)doRegister:(NSString *)username
           password:(NSString *)password
-              code:(NSInteger)code
           complete:(void (^)(DGCgiResult *res))complete
 {
     NSMutableDictionary *params = [RequestManager httpParams];
     params[@"data"] = @{@"username": username,
                         @"password": [[password dataUsingEncoding:NSUTF8StringEncoding] md5Hash],
-                        @"code": @(code),
                         @"channel": @"App Store",
                         @"model": [DeviceManager getiPhoneModel],
                         @"udid": [DeviceManager getDeviceId]};

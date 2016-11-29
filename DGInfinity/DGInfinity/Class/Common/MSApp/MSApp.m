@@ -16,7 +16,6 @@
 #define KUD_PRIVDATA                @"KUD_PRIVDATA"
 #define KUD_EXPIRE                  @"KUD_EXPIRE"
 #define KUD_WIFIPASS                @"KUD_WIFIPASS"
-#define KUD_WIFIACCOUNT             @"KUD_WIFIACCOUNT"
 #define KUD_APPVERSION              @"KUD_APPVERSION"
 
 @implementation MSApp
@@ -39,7 +38,6 @@ static MSApp *mSapp = nil;
     mSapp.privdata = nil;
     mSapp.expire = 0;
     mSapp.wifipass = nil;
-    mSapp.wifiAccount = nil;
 }
 
 - (instancetype)init
@@ -57,7 +55,6 @@ static MSApp *mSapp = nil;
     NSString *token = data[@"token"];
     NSString *privdata = data[@"privdata"];
     NSTimeInterval expire = [data[@"expire"] doubleValue];
-    NSString *wifipass = data[@"wifipass"];
     if (uid) {
         SApp.uid = uid;
     }
@@ -69,9 +66,6 @@ static MSApp *mSapp = nil;
     }
     if (expire > 0) {
         SApp.expire = expire + [[NSDate date] timeIntervalSince1970];
-    }
-    if (wifipass.length) {
-        SApp.wifipass = wifipass;
     }
 }
 
@@ -153,17 +147,6 @@ static MSApp *mSapp = nil;
 - (NSString *)wifipass
 {
     return [NSUSERDEFAULTS objectForKey:KUD_WIFIPASS];
-}
-
-- (void)setWifiAccount:(NSString *)wifiAccount
-{
-    [NSUSERDEFAULTS setObject:wifiAccount forKey:KUD_WIFIACCOUNT];
-    [NSUSERDEFAULTS synchronize];
-}
-
-- (NSString *)wifiAccount
-{
-    return [NSUSERDEFAULTS objectForKey:KUD_WIFIACCOUNT];
 }
 
 - (void)setAppVersion:(NSString *)appVersion
