@@ -32,7 +32,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self setUpSubViews];
     [self updateConstraint];
+}
+
+- (void)setUpSubViews
+{
+    // textfield
+    NSDictionary *attriDic = @{NSFontAttributeName: [UIFont systemFontOfSize:12 weight:UIFontWeightMedium],
+                               NSForegroundColorAttributeName: COLOR(180, 180, 180, 1)};
+    _ssidField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入无线网络名称" attributes:attriDic];
+    _passwordField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入无线网络密码" attributes:attriDic];
 }
 
 - (void)updateConstraint
