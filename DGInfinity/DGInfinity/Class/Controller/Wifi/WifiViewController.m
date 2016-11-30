@@ -392,20 +392,19 @@ NetWorkMgrDelegate
                 } else if (status == ENV_LOGIN) {
                     [self makeToast:@"已连接上东莞免费WiFi"];
                     [_menuView setConnectBtnStatus:ConnectStatusConnected];
-                } else {
-                    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-                    if (!_connectTipView) {
-                        _connectTipView = [[WiFiConnectTipView alloc] initWithFrame:window.bounds];
+                } else if (status == ENV_NOT_WIFI) {
+                    if ([[Tools getCurrentSSID] isEqualToString:WIFISDK_SSID]) {
+                        [self makeToast:@"已连接上东莞免费WiFi"];
+                        [_menuView setConnectBtnStatus:ConnectStatusConnected];
+                    } else {
+                        [self showConnectTipView];
                     }
-                    [_connectTipView showInView:window];
+                } else {
+                    [self showConnectTipView];
                 }
             }];
 #else
-            UIWindow *window = [UIApplication sharedApplication].keyWindow;
-            if (!_connectTipView) {
-                _connectTipView = [[WiFiConnectTipView alloc] initWithFrame:window.bounds];
-            }
-            [_connectTipView showInView:window];
+            [self showConnectTipView];
 #endif
         }
             break;
@@ -432,6 +431,15 @@ NetWorkMgrDelegate
         default:
             break;
     }
+}
+
+- (void)showConnectTipView
+{
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    if (!_connectTipView) {
+        _connectTipView = [[WiFiConnectTipView alloc] initWithFrame:window.bounds];
+    }
+    [_connectTipView showInView:window];
 }
 
 #pragma mark - UIScrollViewDelegate
