@@ -81,7 +81,7 @@
             _ssidField.text = nil;
             _passwordField.text = nil;
             _commitBtn.enabled = NO;
-            [self makeToast:@"上报成功，东莞有你更精彩"];
+            [self makeToast:@"感谢您的参与，东莞有您更精彩"];
         } else {
             [self makeToast:res.desc];
         }
