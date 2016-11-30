@@ -105,7 +105,6 @@
                 } didTapViewBlock:^{
                     
                 }];
-                [_listView reloadEmptyDataSet];
             }
         }
     }];

@@ -21,6 +21,6 @@
 - (void)configureNoNetStyleWithdidTapButtonBlock:(void(^)(void))didTapButtonBlock
                                  didTapViewBlock:(void(^)(void))didTapViewBlock;
 
-- (void)reloadEmptyDataSet;
+- (void)dg_reloadEmptyDataSet;
 
 @end

@@ -143,6 +143,7 @@
                                                   didTapButtonBlock:(void(^)(void))didTapButtonBlock
                                                     didTapViewBlock:(void(^)(void))didTapViewBlock];
     }
+    [self dg_reloadEmptyDataSet];
 }
 
 - (void)configureNoNetStyleWithdidTapButtonBlock:(void (^)(void))didTapButtonBlock didTapViewBlock:(void (^)(void))didTapViewBlock
@@ -156,7 +157,7 @@
                               didTapViewBlock:didTapViewBlock];
 }
 
-- (void)reloadEmptyDataSet
+- (void)dg_reloadEmptyDataSet
 {
     [self reloadEmptyDataSet];
 }

@@ -161,7 +161,6 @@ const NSInteger headerHeight = 105.f;
                 } didTapViewBlock:^{
                     
                 }];
-                [_listView reloadEmptyDataSet];
             }
         }
     }];
