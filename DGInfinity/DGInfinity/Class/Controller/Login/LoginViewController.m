@@ -149,11 +149,11 @@
     if (!_phoneField.text.length || !_codeField.text.length) return;
     NSString *phone = [_phoneField.text deleteHeadEndSpace];
     NSString *code = [_codeField.text deleteHeadEndSpace];
+#if (!TARGET_IPHONE_SIMULATOR)
     if (![phone isEqualToString:SApp.username] && ![phone isEqualToString:TestAccount]) {
         [self makeToast:@"手机号不正确"];
         return;
     }
-#if (!TARGET_IPHONE_SIMULATOR)
     if (![code isEqualToString:SApp.wifipass] && ![code isEqualToString:TestPassword]) {
         [self makeToast:@"验证码不正确"];
         return;
