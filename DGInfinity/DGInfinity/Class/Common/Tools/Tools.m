@@ -331,4 +331,13 @@
     return type;
 }
 
++ (BOOL)isAllowedNotification
+{
+    UIUserNotificationSettings *setting = [[UIApplication sharedApplication] currentUserNotificationSettings];
+    if (UIUserNotificationTypeNone != setting.types) {
+        return YES;
+    }
+    return NO;
+}
+
 @end

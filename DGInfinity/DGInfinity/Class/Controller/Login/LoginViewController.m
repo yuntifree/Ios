@@ -110,13 +110,14 @@
 }
 
 - (IBAction)getCode:(id)sender {
-    if (![CheckUtil checkPhoneNumber:_phoneField.text]) {
+    NSString *phone = [_phoneField.text deleteHeadEndSpace];
+    if (![CheckUtil checkPhoneNumber:phone]) {
         [self makeToast:@"请输入正确的手机号"];
         return;
     }
 #if (!TARGET_IPHONE_SIMULATOR)
     [SVProgressHUD show];
-    [[UserAuthManager manager] doRegisterWithUserName:_phoneField.text andPassWord:@"" andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
+    [[UserAuthManager manager] doRegisterWithUserName:phone andPassWord:@"" andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
         [SVProgressHUD dismiss];
         if (!error) {
             NSDictionary *head = response[@"head"];
@@ -146,18 +147,20 @@
 
 - (IBAction)doRegister:(id)sender {
     if (!_phoneField.text.length || !_codeField.text.length) return;
-    if (![_phoneField.text isEqualToString:SApp.username]) {
+    NSString *phone = [_phoneField.text deleteHeadEndSpace];
+    NSString *code = [_codeField.text deleteHeadEndSpace];
+    if (![phone isEqualToString:SApp.username] && ![phone isEqualToString:TestAccount]) {
         [self makeToast:@"手机号不正确"];
         return;
     }
 #if (!TARGET_IPHONE_SIMULATOR)
-    if (![_codeField.text isEqualToString:SApp.wifipass]) {
+    if (![code isEqualToString:SApp.wifipass] && ![code isEqualToString:TestPassword]) {
         [self makeToast:@"验证码不正确"];
         return;
     }
 #endif
     [SVProgressHUD show];
-    [AccountCGI doRegister:_phoneField.text password:_codeField.text complete:^(DGCgiResult *res) {
+    [AccountCGI doRegister:phone password:code complete:^(DGCgiResult *res) {
         [SVProgressHUD dismiss];
         if (E_OK == res._errno) {
             NSDictionary *data = res.data[@"data"];

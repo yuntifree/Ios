@@ -22,5 +22,6 @@
 + (NSString *)getWlanIPAddress;
 + (NSString *)getServerWiFiIPAddress;
 + (TimeType)getTimeType;
++ (BOOL)isAllowedNotification;
 
 @end

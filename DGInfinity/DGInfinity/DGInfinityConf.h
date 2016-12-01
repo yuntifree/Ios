@@ -102,4 +102,8 @@ typedef enum {
 #define AgreementURL @"http://www.yunxingzh.com/app/agreement.html"
 #define SearchURL @"https://m.baidu.com/s?word="
 
+// APP审核账号及密码
+#define TestAccount @"12345678910"
+#define TestPassword @"8888"
+
 #endif /* DGInfinityConf_h */

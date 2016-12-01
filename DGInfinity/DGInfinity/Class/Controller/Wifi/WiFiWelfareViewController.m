@@ -65,7 +65,8 @@
 }
 
 - (IBAction)commitBtnClick:(id)sender {
-    if (!_ssidField.text.length || !_passwordField.text.length) return;
+    NSString *ssid = [_ssidField.text deleteHeadEndSpace];
+    if (!ssid.length || !_passwordField.text.length) return;
     if (![[BaiduMapSDK shareBaiduMapSDK] locationServicesEnabled]) {
         [self showAlertWithTitle:@"提示" message:@"无法获取位置信息，建议开启定位服务" cancelTitle:@"忽略" cancelHandler:nil defaultTitle:@"开启" defaultHandler:^(UIAlertAction *action) {
             [Tools openSetting];
@@ -75,7 +76,7 @@
     
     [SVProgressHUD show];
     CLLocationCoordinate2D coordinate = [[BaiduMapSDK shareBaiduMapSDK] getUserLocation].location.coordinate;
-    [WiFiCGI reportWifi:_ssidField.text password:_passwordField.text longitudu:coordinate.longitude latitude:coordinate.latitude complete:^(DGCgiResult *res) {
+    [WiFiCGI reportWifi:ssid password:_passwordField.text longitudu:coordinate.longitude latitude:coordinate.latitude complete:^(DGCgiResult *res) {
         [SVProgressHUD dismiss];
         if (E_OK == res._errno) {
             _ssidField.text = nil;

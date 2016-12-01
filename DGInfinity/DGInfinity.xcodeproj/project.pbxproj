@@ -280,6 +280,7 @@
 		6FF5C7FC1DC1F13D00B1A84A /* NewsVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FF5C7FA1DC1F13D00B1A84A /* NewsVideoCell.xib */; };
 		6FF75EDF1DC09A6400166725 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF75EDE1DC09A6400166725 /* Tools.m */; };
 		6FF75EE31DC0BB0100166725 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF75EE21DC0BB0100166725 /* NetworkManager.m */; };
+		6FF97FAF1DEFD89B00EF091C /* NSString+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF97FAE1DEFD89B00EF091C /* NSString+Format.m */; };
 		6FF9FA741DEAA01100620A6B /* ico_login_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FF9FA721DEAA01100620A6B /* ico_login_logo@2x.png */; };
 		6FF9FA751DEAA01100620A6B /* ico_login_logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FF9FA731DEAA01100620A6B /* ico_login_logo@3x.png */; };
 		6FF9FA781DEAAF5600620A6B /* text@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FF9FA761DEAAF5600620A6B /* text@2x.png */; };
@@ -659,6 +660,8 @@
 		6FF75EDE1DC09A6400166725 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		6FF75EE11DC0BB0100166725 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		6FF75EE21DC0BB0100166725 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
+		6FF97FAD1DEFD89B00EF091C /* NSString+Format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Format.h"; sourceTree = "<group>"; };
+		6FF97FAE1DEFD89B00EF091C /* NSString+Format.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Format.m"; sourceTree = "<group>"; };
 		6FF9FA721DEAA01100620A6B /* ico_login_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_login_logo@2x.png"; sourceTree = "<group>"; };
 		6FF9FA731DEAA01100620A6B /* ico_login_logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_login_logo@3x.png"; sourceTree = "<group>"; };
 		6FF9FA761DEAAF5600620A6B /* text@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "text@2x.png"; sourceTree = "<group>"; };
@@ -1406,6 +1409,8 @@
 				6F2F66941DE5936100511818 /* UIScrollView+EmptyData.m */,
 				6F3C114C1DE81B1C00734F8C /* UIViewController+makeToastOrAlert.h */,
 				6F3C114D1DE81B1C00734F8C /* UIViewController+makeToastOrAlert.m */,
+				6FF97FAD1DEFD89B00EF091C /* NSString+Format.h */,
+				6FF97FAE1DEFD89B00EF091C /* NSString+Format.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2010,6 +2015,7 @@
 				6F2F66951DE5936100511818 /* UIScrollView+EmptyData.m in Sources */,
 				6F307C011DCB36980015F9EC /* WFNetworkSpeedDetector.m in Sources */,
 				6F2F9BE81DDC670C0055DAF9 /* SimplePing.m in Sources */,
+				6FF97FAF1DEFD89B00EF091C /* NSString+Format.m in Sources */,
 				6FF75EDF1DC09A6400166725 /* Tools.m in Sources */,
 				6F5033FB1DD07D34001EBC97 /* UIButton+ResizableImage.m in Sources */,
 				6F31851F1DB8C97B00017D47 /* NullSafe.m in Sources */,

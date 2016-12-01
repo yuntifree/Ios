@@ -28,6 +28,7 @@
 #import "NSDate+Format.h"
 #import "UIScrollView+EmptyData.h"
 #import "UIViewController+makeToastOrAlert.h"
+#import "NSString+Format.h"
 
 #if !(TARGET_IPHONE_SIMULATOR)
 #import "UserAuthManager.h"

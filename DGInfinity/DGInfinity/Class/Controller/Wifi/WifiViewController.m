@@ -154,6 +154,9 @@ NetWorkMgrDelegate
     [self setUpScrollView];
     [self setUpSubViews];
     [self getWeatherAndNews];
+    
+    // 推送权限检查
+    [self checkNotificationPermission];
 }
 
 - (void)setUpNavItem
@@ -247,6 +250,15 @@ NetWorkMgrDelegate
                 [self getWeatherAndNews];
             });
         }
+    }
+}
+
+- (void)checkNotificationPermission
+{
+    if (![Tools isAllowedNotification]) {
+        [self showAlertWithTitle:@"提示" message:@"关闭推送可能会影响免费WiFi的使用，建议打开" cancelTitle:@"忽略" cancelHandler:nil defaultTitle:@"开启" defaultHandler:^(UIAlertAction *action) {
+            [Tools openSetting];
+        }];
     }
 }
 

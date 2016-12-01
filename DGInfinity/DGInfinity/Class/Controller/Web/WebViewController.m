@@ -8,6 +8,7 @@
 
 #import "WebViewController.h"
 #import <WebKit/WebKit.h>
+#import "NetworkManager.h"
 
 @interface WebViewController () <WKNavigationDelegate, WKUIDelegate>
 {
@@ -16,6 +17,9 @@
 
 @property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) UIProgressView *progressView;
+@property (nonatomic, strong) UIScrollView *backgroundView;
+
+@property (nonatomic, strong) NSURLRequest *currentRequest;
 
 @end
 
@@ -27,6 +31,7 @@
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
     self.webView = nil;
     self.progressView = nil;
+    self.backgroundView = nil;
 }
 
 - (WKWebView *)webView
@@ -62,6 +67,21 @@
         [self.view addSubview:_progressView];
     }
     return _progressView;
+}
+
+- (UIScrollView *)backgroundView
+{
+    if (_backgroundView == nil) {
+        _backgroundView = [[UIScrollView alloc] initWithFrame:self.webView.bounds];
+        _backgroundView.backgroundColor = [UIColor whiteColor];
+        __weak typeof(self) wself = self;
+        [_backgroundView configureNoNetStyleWithdidTapButtonBlock:^{
+            [wself.webView loadRequest:wself.currentRequest];
+        } didTapViewBlock:^{
+            
+        }];
+    }
+    return _backgroundView;
 }
 
 - (instancetype)init
@@ -160,6 +180,7 @@
 #pragma mark - WKNavigationDelegate
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
+    self.currentRequest = navigationAction.request;
     if(navigationAction.targetFrame == nil)
     {
         [webView loadRequest:navigationAction.request];
@@ -181,6 +202,9 @@
             }
         }];
     }
+    if (_backgroundView.superview) {
+        [self.backgroundView removeFromSuperview];
+    }
     if ([webView canGoBack]) {
         if (_type != ITEMTYPE_CLOSE) {
             _type = ITEMTYPE_CLOSE;
@@ -196,7 +220,13 @@
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
 {
-    [self makeToast:@"网页加载失败"];
+    if ([[NetworkManager shareManager] currentReachabilityStatus] == NotReachable) {
+        if (!_backgroundView.superview) {
+            [self.view addSubview:self.backgroundView];
+        }
+    } else {
+        [self makeToast:@"网页加载失败"];
+    }
 }
 
 #pragma mark - WKUIDelegate
