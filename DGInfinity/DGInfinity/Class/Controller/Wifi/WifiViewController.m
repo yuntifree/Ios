@@ -110,7 +110,7 @@ NetWorkMgrDelegate
                 }
             }
         } else {
-            [self makeToast:[NSString stringWithFormat:@"请求失败 %@", error.description]];
+            [self makeToast:@"认证失败"];
         }
     }];
 #endif
