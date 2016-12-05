@@ -8,6 +8,7 @@
 
 #import "ShoppingViewController.h"
 #import "AccountCGI.h"
+#import <AFHTTPSessionManager.h>
 
 @interface ShoppingViewController ()
 
@@ -54,6 +55,45 @@
         }
     }];
 #endif
+}
+
+- (IBAction)payTest:(UIButton *)sender {
+    NSString *channel = nil;
+    if (sender.tag == 1000) {
+        channel = @"wx";
+    } else if (sender.tag == 1001) {
+        channel = @"alipay";
+    } else {
+        return;
+    }
+    
+    [SVProgressHUD show];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    // 测试1分钱
+    NSDictionary *params = @{@"channel": channel,
+                             @"amount": @"1"};
+    
+    [manager POST:PingppUrl parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [SVProgressHUD dismiss];
+        if (responseObject && [responseObject isKindOfClass:[NSData class]]) {
+            NSString *charge = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            [Pingpp createPayment:charge appURLScheme:PingppUrlScheme withCompletion:^(NSString *result, PingppError *error) {
+                if ([result isEqualToString:@"success"]) {
+                    [self makeToast:@"支付成功"];
+                } else {
+                    [self makeToast:[error getMsg]];
+                }
+            }];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [SVProgressHUD dismiss];
+        [self makeToast:error.description];
+    }];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
 }
 
 - (void)didReceiveMemoryWarning {

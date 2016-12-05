@@ -33,6 +33,8 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.yunxingzh.wireless</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>dgwireless</string>
@@ -44,6 +46,11 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>baidumap</string>
+		<string>weixin</string>
+		<string>wechat</string>
+		<string>alipay</string>
+		<string>alipays</string>
+		<string>mqq</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

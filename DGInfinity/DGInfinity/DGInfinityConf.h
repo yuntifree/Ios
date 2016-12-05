@@ -93,6 +93,10 @@ typedef enum {
 // 百度地图SDK
 #define BaiduMapAppKey @"kvGmE3GGGkaBotP6N6jWSBVCRLGkrwkM"
 
+// Ping++
+#define PingppUrl @"http://218.244.151.190/demo/charge"
+#define PingppUrlScheme @"dgwireless"
+
 // tip
 #define NoDataTip @"没有相关数据"
 #define LoadingTip @"加载中..."
