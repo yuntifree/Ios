@@ -71,17 +71,16 @@
         [_banners addObjectsFromArray:banners];
         _pageControl.numberOfPages = banners.count;
         _pageControl.hidden = banners.count == 1;
+        [_pageControl setCurrentPage:0];
         if (banners.count > 1) {
             [_banners insertObject:banners.lastObject atIndex:0];
             [_banners addObject:banners.firstObject];
             [_banner setContentSize:CGSizeMake(_banners.count * _banner.width, _banner.height)];
             [_banner setContentOffset:CGPointMake(_banner.width, 0) animated:NO];
-            [_pageControl setCurrentPage:1];
             [self fireTimer];
         } else {
             [_banner setContentSize:CGSizeMake(_banner.width, _banner.height)];
             [_banner setContentOffset:CGPointZero animated:NO];
-            [_pageControl setCurrentPage:0];
         }
         for (int i = 0; i < _banners.count; i++) {
             NSDictionary *info = _banners[i];

@@ -152,7 +152,9 @@ const NSInteger headerHeight = 105.f;
                 [_listView reloadData];
             }
         } else {
-            _header.hidden = YES;
+            if (!_dataArray.count) {
+                _header.hidden = YES;
+            }
             [self makeToast:res.desc];
             if (E_CGI_FAILED == res._errno) {
                 __weak typeof(self) wself = self;

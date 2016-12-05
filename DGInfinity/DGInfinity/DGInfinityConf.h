@@ -91,7 +91,7 @@ typedef enum {
 #define UMengAppKey @"58183f77c62dca59990026e0"
 
 // 百度地图SDK
-#define BaiduMapAppKey @"kvGmE3GGGkaBotP6N6jWSBVCRLGkrwkoM"
+#define BaiduMapAppKey @"kvGmE3GGGkaBotP6N6jWSBVCRLGkrwkM"
 
 // tip
 #define NoDataTip @"没有相关数据"
