@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'C83B3A041A0FD613F15DFBF3A884AAEE'
+               BlueprintIdentifier = '24928FFE55C9A3DC5B718CC0D3A69408'
                BlueprintName = 'Pods-DGInfinity'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libPods-DGInfinity.a'>

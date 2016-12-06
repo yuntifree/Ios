@@ -10,4 +10,5 @@ pod 'MJRefresh'
 pod 'tingyunApp'
 pod 'UMengAnalytics-NO-IDFA'
 pod 'DZNEmptyDataSet'
+pod 'AliyunOSSiOS'
 end

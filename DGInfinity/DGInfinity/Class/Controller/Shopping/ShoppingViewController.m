@@ -8,9 +8,10 @@
 
 #import "ShoppingViewController.h"
 #import "AccountCGI.h"
-#import <AFHTTPSessionManager.h>
+#import "PayCGI.h"
+#import "AliyunOssService.h"
 
-@interface ShoppingViewController ()
+@interface ShoppingViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end
 
@@ -69,36 +70,59 @@
     
     [SVProgressHUD show];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
     // 测试1分钱
-    NSDictionary *params = @{@"channel": channel,
-                             @"amount": @"1"};
-    
-    [manager POST:PingppUrl parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [PayCGI PingppPay:1 channel:channel complete:^(DGCgiResult *res) {
         [SVProgressHUD dismiss];
-        if (responseObject && [responseObject isKindOfClass:[NSData class]]) {
-            NSString *charge = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            [Pingpp createPayment:charge appURLScheme:PingppUrlScheme withCompletion:^(NSString *result, PingppError *error) {
-                if ([result isEqualToString:@"success"]) {
-                    [self makeToast:@"支付成功"];
-                } else {
-                    [self makeToast:[error getMsg]];
-                }
-            }];
+        if (E_OK == res._errno) {
+            NSDictionary *charge = res.data;
+            if ([charge isKindOfClass:[NSDictionary class]]) {
+                [Pingpp createPayment:charge appURLScheme:PingppUrlScheme withCompletion:^(NSString *result, PingppError *error) {
+                    if ([result isEqualToString:@"success"]) {
+                        [self makeToast:@"支付成功"];
+                    } else {
+                        [self makeToast:[error getMsg]];
+                    }
+                }];
+            }
+        } else {
+            [self makeToast:res.desc];
         }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [SVProgressHUD dismiss];
-        [self makeToast:error.description];
     }];
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
+}
+
+- (IBAction)uploadTest:(UIButton *)sender {
+    UIImagePickerController *picker = [UIImagePickerController new];
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.navigationBar.tintColor = [UIColor whiteColor];
+    picker.delegate = self;
+    [self presentViewController:picker animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:^{
+        [SVProgressHUD show];
+        UIImage *image = info[UIImagePickerControllerOriginalImage];
+        [[AliyunOssService sharedAliyunOssService] applyImage:image complete:^(UploadPictureState state, NSString *picture) {
+            [SVProgressHUD dismiss];
+            if (UploadPictureState_Success == state) {
+                [self makeToast:@"上传成功"];
+                DDDLog(@"图片地址为：%@",picture);
+            } else {
+                [self makeToast:@"上传失败"];
+            }
+        }];
+    }];
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

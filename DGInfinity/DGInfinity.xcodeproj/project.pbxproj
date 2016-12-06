@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		6F02BAA61DCCA90F00C72833 /* UITableView+EmptyData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F02BAA51DCCA90F00C72833 /* UITableView+EmptyData.m */; };
 		6F02BAA91DCCA9C900C72833 /* UICollectionView+EmptyData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F02BAA81DCCA9C900C72833 /* UICollectionView+EmptyData.m */; };
+		6F2D175B1DF6A08100590AEC /* AliyunOssService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D175A1DF6A08100590AEC /* AliyunOssService.m */; };
+		6F2D175F1DF6A2CB00590AEC /* UploadCGI.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D175E1DF6A2CB00590AEC /* UploadCGI.m */; };
+		6F2D17621DF6A51800590AEC /* UIImage+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D17611DF6A51800590AEC /* UIImage+Format.m */; };
+		6F2D17661DF6BA8A00590AEC /* PayCGI.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D17651DF6BA8A00590AEC /* PayCGI.m */; };
 		6F2DF2B31DD1B67900A8F0EC /* Code_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2DF2B11DD1B67900A8F0EC /* Code_normal@2x.png */; };
 		6F2DF2B41DD1B67900A8F0EC /* Code_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2DF2B21DD1B67900A8F0EC /* Code_normal@3x.png */; };
 		6F2DF2B71DD1BABB00A8F0EC /* NSDate+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2DF2B61DD1BABB00A8F0EC /* NSDate+Format.m */; };
@@ -312,6 +316,14 @@
 		6F02BAA51DCCA90F00C72833 /* UITableView+EmptyData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+EmptyData.m"; sourceTree = "<group>"; };
 		6F02BAA71DCCA9C900C72833 /* UICollectionView+EmptyData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+EmptyData.h"; sourceTree = "<group>"; };
 		6F02BAA81DCCA9C900C72833 /* UICollectionView+EmptyData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+EmptyData.m"; sourceTree = "<group>"; };
+		6F2D17591DF6A08100590AEC /* AliyunOssService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliyunOssService.h; sourceTree = "<group>"; };
+		6F2D175A1DF6A08100590AEC /* AliyunOssService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AliyunOssService.m; sourceTree = "<group>"; };
+		6F2D175D1DF6A2CB00590AEC /* UploadCGI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadCGI.h; sourceTree = "<group>"; };
+		6F2D175E1DF6A2CB00590AEC /* UploadCGI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadCGI.m; sourceTree = "<group>"; };
+		6F2D17601DF6A51800590AEC /* UIImage+Format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Format.h"; sourceTree = "<group>"; };
+		6F2D17611DF6A51800590AEC /* UIImage+Format.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Format.m"; sourceTree = "<group>"; };
+		6F2D17641DF6BA8A00590AEC /* PayCGI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayCGI.h; sourceTree = "<group>"; };
+		6F2D17651DF6BA8A00590AEC /* PayCGI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayCGI.m; sourceTree = "<group>"; };
 		6F2DF2B11DD1B67900A8F0EC /* Code_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Code_normal@2x.png"; sourceTree = "<group>"; };
 		6F2DF2B21DD1B67900A8F0EC /* Code_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Code_normal@3x.png"; sourceTree = "<group>"; };
 		6F2DF2B51DD1BABB00A8F0EC /* NSDate+Format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Format.h"; sourceTree = "<group>"; };
@@ -746,6 +758,33 @@
 				210BA9B55C1B0E492E2A8407 /* Pods-DGInfinity.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		6F2D17581DF6A08100590AEC /* AliyunOSS */ = {
+			isa = PBXGroup;
+			children = (
+				6F2D17591DF6A08100590AEC /* AliyunOssService.h */,
+				6F2D175A1DF6A08100590AEC /* AliyunOssService.m */,
+			);
+			path = AliyunOSS;
+			sourceTree = "<group>";
+		};
+		6F2D175C1DF6A2BA00590AEC /* Upload */ = {
+			isa = PBXGroup;
+			children = (
+				6F2D175D1DF6A2CB00590AEC /* UploadCGI.h */,
+				6F2D175E1DF6A2CB00590AEC /* UploadCGI.m */,
+			);
+			path = Upload;
+			sourceTree = "<group>";
+		};
+		6F2D17631DF6BA7E00590AEC /* Pay */ = {
+			isa = PBXGroup;
+			children = (
+				6F2D17641DF6BA8A00590AEC /* PayCGI.h */,
+				6F2D17651DF6BA8A00590AEC /* PayCGI.m */,
+			);
+			path = Pay;
 			sourceTree = "<group>";
 		};
 		6F2E334C1DC6F72600D9E502 /* Service */ = {
@@ -1453,6 +1492,7 @@
 		6F6FDABD1DB4B73500E50D9B /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				6F2D17581DF6A08100590AEC /* AliyunOSS */,
 				6F4D363E1DF54AE000483A66 /* Pingpp */,
 				6F2F9BF31DDC84CD0055DAF9 /* getgateway */,
 				6F2F9BC71DDC670C0055DAF9 /* MMLanScan */,
@@ -1507,6 +1547,8 @@
 				6F3C114D1DE81B1C00734F8C /* UIViewController+makeToastOrAlert.m */,
 				6FF97FAD1DEFD89B00EF091C /* NSString+Format.h */,
 				6FF97FAE1DEFD89B00EF091C /* NSString+Format.m */,
+				6F2D17601DF6A51800590AEC /* UIImage+Format.h */,
+				6F2D17611DF6A51800590AEC /* UIImage+Format.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1528,6 +1570,8 @@
 		6F6FDAC11DB4B79300E50D9B /* Control */ = {
 			isa = PBXGroup;
 			children = (
+				6F2D17631DF6BA7E00590AEC /* Pay */,
+				6F2D175C1DF6A2BA00590AEC /* Upload */,
 				6F2E50781DD498EF00663148 /* WiFi */,
 				6F2E654A1DC9C28A00AF84BB /* Map */,
 				6F3185111DB89C3000017D47 /* News */,
@@ -2084,6 +2128,7 @@
 				6FFA16871DB606E10077E7C3 /* SSKeychain.m in Sources */,
 				6F6FDAA91DB4B3DE00E50D9B /* AppDelegate.m in Sources */,
 				6F3067281DD3292C00FA841E /* WiFiMenuView.m in Sources */,
+				6F2D175F1DF6A2CB00590AEC /* UploadCGI.m in Sources */,
 				6FFA16791DB5FCE40077E7C3 /* MSApp.m in Sources */,
 				6F3F32D81DDB30700024095A /* ServiceSectionModel.m in Sources */,
 				6F6FDACC1DB4BB9800E50D9B /* DGNavigationViewController.m in Sources */,
@@ -2092,6 +2137,7 @@
 				6F6FDAA61DB4B3DE00E50D9B /* main.m in Sources */,
 				6F2E65711DC9C76000AF84BB /* BaiduMapSDK.m in Sources */,
 				6F2F9BE41DDC670C0055DAF9 /* MainPresenter.m in Sources */,
+				6F2D17661DF6BA8A00590AEC /* PayCGI.m in Sources */,
 				6F30A1EC1DD5B4BD00149D73 /* UIButton+Vertical.m in Sources */,
 				6F3185141DB89C4300017D47 /* NewsCGI.m in Sources */,
 				6F3067241DD30CEF00FA841E /* ReportClickModel.m in Sources */,
@@ -2105,6 +2151,7 @@
 				6F6FDAE21DB4C81100E50D9B /* WifiViewController.m in Sources */,
 				6F307BD61DCB20780015F9EC /* LoginViewController.m in Sources */,
 				6F2E65781DC9C86F00AF84BB /* UIImage+LeftAndRightStretch.mm in Sources */,
+				6F2D17621DF6A51800590AEC /* UIImage+Format.m in Sources */,
 				6F2ED0F01DDEB7E1009112C5 /* WiFiWelfareViewController.m in Sources */,
 				6FF5C7EE1DC1DA5B00B1A84A /* NewsReportViewController.m in Sources */,
 				6F2F9BFA1DDC89230055DAF9 /* WiFiExamSectionHeader.m in Sources */,
@@ -2145,6 +2192,7 @@
 				6F2DF2DA1DD1DA8900A8F0EC /* NewsTitleView.m in Sources */,
 				6F3A1D911DCC77D500BC22EC /* CheckUtil.m in Sources */,
 				6FF5C7FB1DC1F13D00B1A84A /* NewsVideoCell.m in Sources */,
+				6F2D175B1DF6A08100590AEC /* AliyunOssService.m in Sources */,
 				6F3F32901DDAE9BA0024095A /* MTBBarcodeScanner.m in Sources */,
 				6FF5C7F31DC1EDDD00B1A84A /* NewsVideoViewController.m in Sources */,
 				6F6FDAEC1DB4C83000E50D9B /* ServiceViewController.m in Sources */,

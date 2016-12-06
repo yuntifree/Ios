@@ -72,6 +72,11 @@ typedef enum {
     
 }ENV_STATUS;
 
+typedef NS_ENUM(NSUInteger, UploadPictureState) { // 上传头像状态
+    UploadPictureState_Success = 0,
+    UploadPictureState_Fail,
+};
+
 // Server
 #define ServerURL @"http://120.76.236.185/" // 测试环境
 //#define ServerURL @"http://api.yunxingzh.com/" // 正式环境
@@ -94,8 +99,12 @@ typedef enum {
 #define BaiduMapAppKey @"kvGmE3GGGkaBotP6N6jWSBVCRLGkrwkM"
 
 // Ping++
-#define PingppUrl @"http://218.244.151.190/demo/charge"
+#define PingppUrl @"http://120.76.236.185/pingpp_pay"
 #define PingppUrlScheme @"dgwireless"
+
+// 阿里云
+#define AliyunEndPoint @"http://oss-cn-shenzhen.aliyuncs.com"
+#define AliyunImage @"http://img.yunxingzh.com"
 
 // tip
 #define NoDataTip @"没有相关数据"

@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>AliyunOSSiOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>DZNEmptyDataSet.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,17 +57,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>09E4A25C82C18EFD60811301A80F423C</key>
+		<key>24928FFE55C9A3DC5B718CC0D3A69408</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>24A1767CBA63ABCBAAFF00FF57505CC7</key>
+		<key>539723C9F26543F29E564FA22BF8528F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>706F16FAF781D18E859F34702F3B03A6</key>
+		<key>55D0CC0E5AC8AB67681A6DD909B4DB0B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,17 +87,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B5292495C991C3E27BAEDB14B016F6E7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C83B3A041A0FD613F15DFBF3A884AAEE</key>
+		<key>97B2ACF3AA4080D1991B55C3E50A10F5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>D0D0C9D20C43FA94D4C88FBFE2601B8E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E893127C7B095C7F90008C1DDAD61AF3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FB451B5860F1EFD45832CCC1E022CD3F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
