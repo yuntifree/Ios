@@ -72,7 +72,7 @@ typedef enum {
     
 }ENV_STATUS;
 
-typedef NS_ENUM(NSUInteger, UploadPictureState) { // 上传头像状态
+typedef NS_ENUM(NSUInteger, UploadPictureState) { // 上传图片状态
     UploadPictureState_Success = 0,
     UploadPictureState_Fail,
 };
