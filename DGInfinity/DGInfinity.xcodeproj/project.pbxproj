@@ -153,6 +153,9 @@
 		6F30A1E71DD5AE2200149D73 /* WiFiFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F30A1E61DD5AE2200149D73 /* WiFiFooterView.m */; };
 		6F30A1E91DD5AE3E00149D73 /* WiFiFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F30A1E81DD5AE3E00149D73 /* WiFiFooterView.xib */; };
 		6F30A1EC1DD5B4BD00149D73 /* UIButton+Vertical.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F30A1EB1DD5B4BD00149D73 /* UIButton+Vertical.m */; };
+		6F30DE511DF7E9A500134B52 /* libMiPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F30DE4F1DF7E9A500134B52 /* libMiPushSDK.a */; };
+		6F30DE531DF7E9F200134B52 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F30DE521DF7E9F200134B52 /* UserNotifications.framework */; };
+		6F30DE551DF7E9FD00134B52 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F30DE541DF7E9FD00134B52 /* libxml2.tbd */; };
 		6F31850A1DB8601900017D47 /* ServiceSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3185081DB8601900017D47 /* ServiceSectionHeader.m */; };
 		6F31850B1DB8601900017D47 /* ServiceSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3185091DB8601900017D47 /* ServiceSectionHeader.xib */; };
 		6F31850F1DB86DAB00017D47 /* ServiceCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F31850E1DB86DAB00017D47 /* ServiceCellModel.m */; };
@@ -509,6 +512,10 @@
 		6F30A1E81DD5AE3E00149D73 /* WiFiFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WiFiFooterView.xib; sourceTree = "<group>"; };
 		6F30A1EA1DD5B4BD00149D73 /* UIButton+Vertical.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Vertical.h"; sourceTree = "<group>"; };
 		6F30A1EB1DD5B4BD00149D73 /* UIButton+Vertical.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Vertical.m"; sourceTree = "<group>"; };
+		6F30DE4F1DF7E9A500134B52 /* libMiPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMiPushSDK.a; sourceTree = "<group>"; };
+		6F30DE501DF7E9A500134B52 /* MiPushSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiPushSDK.h; sourceTree = "<group>"; };
+		6F30DE521DF7E9F200134B52 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		6F30DE541DF7E9FD00134B52 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		6F3185071DB8601900017D47 /* ServiceSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceSectionHeader.h; sourceTree = "<group>"; };
 		6F3185081DB8601900017D47 /* ServiceSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceSectionHeader.m; sourceTree = "<group>"; };
 		6F3185091DB8601900017D47 /* ServiceSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceSectionHeader.xib; sourceTree = "<group>"; };
@@ -721,6 +728,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F30DE551DF7E9FD00134B52 /* libxml2.tbd in Frameworks */,
+				6F30DE531DF7E9F200134B52 /* UserNotifications.framework in Frameworks */,
 				6F4D36591DF54B9C00483A66 /* CoreMotion.framework in Frameworks */,
 				6F4D36521DF54AE000483A66 /* libpingpp+alipay.a in Frameworks */,
 				6F2E65681DC9C47B00AF84BB /* libstdc++.6.0.9.tbd in Frameworks */,
@@ -741,6 +750,7 @@
 				6F4D36561DF54AE000483A66 /* libpingpp+one.a in Frameworks */,
 				6F2E65561DC9C2FA00AF84BB /* BaiduMapAPI_Utils.framework in Frameworks */,
 				6FFA168C1DB6131B0077E7C3 /* libDongGuanSdk.a in Frameworks */,
+				6F30DE511DF7E9A500134B52 /* libMiPushSDK.a in Frameworks */,
 				6F3A1D951DCC8B9B00BC22EC /* CloudKit.framework in Frameworks */,
 				6F2E65551DC9C2FA00AF84BB /* BaiduMapAPI_Map.framework in Frameworks */,
 				6F2E65541DC9C2FA00AF84BB /* BaiduMapAPI_Location.framework in Frameworks */,
@@ -1174,6 +1184,15 @@
 			path = WiFiSpeedView;
 			sourceTree = "<group>";
 		};
+		6F30DE4E1DF7E9A500134B52 /* MiPush */ = {
+			isa = PBXGroup;
+			children = (
+				6F30DE4F1DF7E9A500134B52 /* libMiPushSDK.a */,
+				6F30DE501DF7E9A500134B52 /* MiPushSDK.h */,
+			);
+			path = MiPush;
+			sourceTree = "<group>";
+		};
 		6F31850C1DB86D8D00017D47 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -1459,6 +1478,8 @@
 		6F6FDABB1DB4B70C00E50D9B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6F30DE541DF7E9FD00134B52 /* libxml2.tbd */,
+				6F30DE521DF7E9F200134B52 /* UserNotifications.framework */,
 				6F4D36581DF54B9C00483A66 /* CoreMotion.framework */,
 				6F3A1D961DCC8BE300BC22EC /* ExternalAccessory.framework */,
 				6F3A1D941DCC8B9B00BC22EC /* CloudKit.framework */,
@@ -1492,6 +1513,7 @@
 		6F6FDABD1DB4B73500E50D9B /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				6F30DE4E1DF7E9A500134B52 /* MiPush */,
 				6F2D17581DF6A08100590AEC /* AliyunOSS */,
 				6F4D363E1DF54AE000483A66 /* Pingpp */,
 				6F2F9BF31DDC84CD0055DAF9 /* getgateway */,
@@ -2306,7 +2328,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = DGInfinity/DGInfinity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VN4WHFNWZZ;
@@ -2329,6 +2351,7 @@
 					"$(PROJECT_DIR)/DGInfinity/Lib/Pingpp/Dependencies/WebView",
 					"$(PROJECT_DIR)/DGInfinity/Lib/Pingpp",
 					"$(PROJECT_DIR)/DGInfinity/Lib/Pingpp/One",
+					"$(PROJECT_DIR)/DGInfinity/Lib/MiPush",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -2386,7 +2409,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = DGInfinity/DGInfinity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VN4WHFNWZZ;
@@ -2409,6 +2432,7 @@
 					"$(PROJECT_DIR)/DGInfinity/Lib/Pingpp/Dependencies/WebView",
 					"$(PROJECT_DIR)/DGInfinity/Lib/Pingpp",
 					"$(PROJECT_DIR)/DGInfinity/Lib/Pingpp/One",
+					"$(PROJECT_DIR)/DGInfinity/Lib/MiPush",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",

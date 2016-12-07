@@ -9,6 +9,7 @@
 #import "MSApp.h"
 #import "AccountCGI.h"
 #import "NewsCGI.h"
+#import "MiPushSDK.h"
 
 #define KUD_UID                     @"KUD_UID"
 #define KUD_TOKEN                   @"KUD_TOKEN"
@@ -33,6 +34,7 @@ static MSApp *mSapp = nil;
 
 + (void)destory
 {
+    [SApp unSetMiPush];
     mSapp.uid = 0;
     mSapp.token = nil;
     mSapp.privdata = nil;
@@ -67,6 +69,7 @@ static MSApp *mSapp = nil;
     if (expire > 0) {
         SApp.expire = expire + [[NSDate date] timeIntervalSince1970];
     }
+    [SApp setMiPush];
 }
 
 + (void)autoLogin
@@ -80,6 +83,20 @@ static MSApp *mSapp = nil;
                 }
             }
         }];
+    }
+}
+
+- (void)setMiPush
+{
+    if (SApp.uid) {
+        [MiPushSDK setAlias:[NSString stringWithFormat:@"%ld",SApp.uid]];
+    }
+}
+
+- (void)unSetMiPush
+{
+    if (SApp.uid) {
+        [MiPushSDK unsetAlias:[NSString stringWithFormat:@"%ld",SApp.uid]];
     }
 }
 
