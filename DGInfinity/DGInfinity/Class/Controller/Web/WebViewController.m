@@ -9,8 +9,11 @@
 #import "WebViewController.h"
 #import <WebKit/WebKit.h>
 #import "NetworkManager.h"
+#import "WeakScriptMessageDelegate.h"
 
-@interface WebViewController () <WKNavigationDelegate, WKUIDelegate>
+NSString *const JSHOST = @"JSHost";
+
+@interface WebViewController () <WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler>
 {
     WebItemType _type;
 }
@@ -29,6 +32,7 @@
 {
     [self.webView removeObserver:self forKeyPath:@"title"];
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
+    [self.webView.configuration.userContentController removeScriptMessageHandlerForName:JSHOST];
     self.webView = nil;
     self.progressView = nil;
     self.backgroundView = nil;
@@ -40,6 +44,7 @@
         WKWebViewConfiguration *config = [WKWebViewConfiguration new];
         config.preferences = [WKPreferences new];
         config.userContentController = [WKUserContentController new];
+        [config.userContentController addScriptMessageHandler:[[WeakScriptMessageDelegate alloc] initWithDelegate:self] name:JSHOST];
         if (!IOS9) {
             config.mediaPlaybackRequiresUserAction = NO;
         } else {
@@ -261,6 +266,17 @@
     }]];
     
     [self presentViewController:alert animated:YES completion:NULL];
+}
+
+#pragma mark - WKScriptMessageHandler
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
+{
+    if ([message.name isEqualToString:JSHOST]) {
+        NSDictionary *body = message.body;
+        if ([body isKindOfClass:[NSDictionary class]]) {
+            DDDLog(@"JS Response Data: %@",body);
+        }
+    }
 }
 
 @end

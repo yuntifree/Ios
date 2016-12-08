@@ -76,6 +76,7 @@
 		6F2F10031DF914D100BBB742 /* ico_code@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F0FFD1DF914D100BBB742 /* ico_code@3x.png */; };
 		6F2F10041DF914D100BBB742 /* text_wifiwelfare@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F0FFE1DF914D100BBB742 /* text_wifiwelfare@2x.png */; };
 		6F2F10051DF914D100BBB742 /* text_wifiwelfare@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F0FFF1DF914D100BBB742 /* text_wifiwelfare@3x.png */; };
+		6F2F10091DF96BCC00BBB742 /* WeakScriptMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F10081DF96BCC00BBB742 /* WeakScriptMessageDelegate.m */; };
 		6F2F668D1DE58A9B00511818 /* btn_open_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F66871DE58A9B00511818 /* btn_open_nor@2x.png */; };
 		6F2F668E1DE58A9B00511818 /* btn_open_nor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F66881DE58A9B00511818 /* btn_open_nor@3x.png */; };
 		6F2F66911DE58A9B00511818 /* no net@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F668B1DE58A9B00511818 /* no net@2x.png */; };
@@ -404,6 +405,8 @@
 		6F2F0FFD1DF914D100BBB742 /* ico_code@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_code@3x.png"; sourceTree = "<group>"; };
 		6F2F0FFE1DF914D100BBB742 /* text_wifiwelfare@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "text_wifiwelfare@2x.png"; sourceTree = "<group>"; };
 		6F2F0FFF1DF914D100BBB742 /* text_wifiwelfare@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "text_wifiwelfare@3x.png"; sourceTree = "<group>"; };
+		6F2F10071DF96BCC00BBB742 /* WeakScriptMessageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeakScriptMessageDelegate.h; sourceTree = "<group>"; };
+		6F2F10081DF96BCC00BBB742 /* WeakScriptMessageDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeakScriptMessageDelegate.m; sourceTree = "<group>"; };
 		6F2F66871DE58A9B00511818 /* btn_open_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_open_nor@2x.png"; sourceTree = "<group>"; };
 		6F2F66881DE58A9B00511818 /* btn_open_nor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_open_nor@3x.png"; sourceTree = "<group>"; };
 		6F2F668B1DE58A9B00511818 /* no net@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no net@2x.png"; sourceTree = "<group>"; };
@@ -965,6 +968,15 @@
 				6F2EEAA11DEDA61D00F5203C /* ico_addwifi@3x.png */,
 			);
 			path = WiFiWelfare;
+			sourceTree = "<group>";
+		};
+		6F2F10061DF96BCC00BBB742 /* WeakScriptMessageDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				6F2F10071DF96BCC00BBB742 /* WeakScriptMessageDelegate.h */,
+				6F2F10081DF96BCC00BBB742 /* WeakScriptMessageDelegate.m */,
+			);
+			path = WeakScriptMessageDelegate;
 			sourceTree = "<group>";
 		};
 		6F2F66861DE58A9B00511818 /* NoNet */ = {
@@ -1578,6 +1590,7 @@
 		6F6FDAC01DB4B79300E50D9B /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6F2F10061DF96BCC00BBB742 /* WeakScriptMessageDelegate */,
 				6F3A1D8E1DCC77C400BC22EC /* CheckUtil */,
 				6F307BD81DCB24D60015F9EC /* AnimationManager */,
 				6FF75EE01DC0BAF600166725 /* NetworkManager */,
@@ -2177,6 +2190,7 @@
 				6F2ED0F01DDEB7E1009112C5 /* WiFiWelfareViewController.m in Sources */,
 				6FF5C7EE1DC1DA5B00B1A84A /* NewsReportViewController.m in Sources */,
 				6F2F9BFA1DDC89230055DAF9 /* WiFiExamSectionHeader.m in Sources */,
+				6F2F10091DF96BCC00BBB742 /* WeakScriptMessageDelegate.m in Sources */,
 				6FF75EE31DC0BB0100166725 /* NetworkManager.m in Sources */,
 				6F6FDAF71DB4D42F00E50D9B /* WebViewController.m in Sources */,
 				6F2F66951DE5936100511818 /* UIScrollView+EmptyData.m in Sources */,
