@@ -19,13 +19,11 @@ UIKIT_EXTERN int MetersTwoCoordinate2D(CLLocationCoordinate2D a, CLLocationCoord
 @protocol BaiduMapSDKDelegate <NSObject>
 
 @optional
-- (void)didUpdateUserLocation:(CLLocationCoordinate2D)coordinate2D;
+- (void)didUpdateUserLocation:(BMKUserLocation *)userLocation;
 
 @end
 
 @interface BaiduMapSDK : NSObject
-
-@property (nonatomic, weak) id <BaiduMapSDKDelegate> delegate;
 
 + (BaiduMapSDK *)shareBaiduMapSDK;
 
@@ -35,9 +33,14 @@ UIKIT_EXTERN int MetersTwoCoordinate2D(CLLocationCoordinate2D a, CLLocationCoord
 - (BOOL)locationServicesEnabled;
 
 /**
+ *  添加代理
+ */
+- (void)addDelegate:(id<BaiduMapSDKDelegate>)delegate;
+
+/**
  *  删除代理
  */
-- (void)removeDelegate:(id) delegate;
+- (void)removeDelegate:(id<BaiduMapSDKDelegate>)delegate;
 
 /**
  *  开始定位

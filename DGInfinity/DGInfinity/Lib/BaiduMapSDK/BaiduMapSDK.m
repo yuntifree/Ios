@@ -30,7 +30,7 @@ UIKIT_STATIC_INLINE CLLocationDistance FMetersTwoCoordinate2D(CLLocationCoordina
 @interface BaiduMapSDK () <BMKLocationServiceDelegate>
 {
     BMKLocationService *_locationService;
-    NSMutableArray *_delegates;
+    NSHashTable *_delegates;
     NSTimeInterval _oldTime;
 }
 
@@ -53,26 +53,28 @@ UIKIT_STATIC_INLINE CLLocationDistance FMetersTwoCoordinate2D(CLLocationCoordina
     self = [super init];
     if (self) {
         _locationService = [[BMKLocationService alloc] init];
-        _delegates = [NSMutableArray arrayWithCapacity:1];
+        _delegates = [NSHashTable weakObjectsHashTable];
     }
     return self;
 }
 
-- (void)setDelegate:(id<BaiduMapSDKDelegate>)delegate
+- (void)addDelegate:(id<BaiduMapSDKDelegate>)delegate
 {
-    if ([delegate isKindOfClass:[NSObject class]]) {
-        @synchronized (_delegates) {
-            [_delegates addObject:delegate];
-        }
+    if ([_delegates containsObject:delegate]) {
+        return;
+    }
+    @synchronized (_delegates) {
+        [_delegates addObject:delegate];
     }
 }
 
 - (void)removeDelegate:(id<BaiduMapSDKDelegate>)delegate
 {
-    if ([delegate isKindOfClass:[NSObject class]]) {
-        @synchronized (_delegates) {
-            [_delegates removeObject:delegate];
-        }
+    if (![_delegates containsObject:delegate]) {
+        return;
+    }
+    @synchronized (_delegates) {
+        [_delegates removeObject:delegate];
     }
 }
 
@@ -177,7 +179,7 @@ UIKIT_STATIC_INLINE CLLocationDistance FMetersTwoCoordinate2D(CLLocationCoordina
         @synchronized (_delegates) {
             for (id <BaiduMapSDKDelegate> delegate in _delegates) {
                 if ([delegate respondsToSelector:@selector(didUpdateUserLocation:)]) {
-                    [delegate didUpdateUserLocation:userLocation.location.coordinate];
+                    [delegate didUpdateUserLocation:userLocation];
                 }
             }
         }

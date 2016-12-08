@@ -165,7 +165,7 @@
 /**
  *  BaiduMapVC类
  */
-@interface BaiduMapVC () <BMKMapViewDelegate>
+@interface BaiduMapVC () <BMKMapViewDelegate, BaiduMapSDKDelegate>
 {
     BMKMapView *_mapView;
     BMKUserLocation *_myLocation;
@@ -180,6 +180,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[BaiduMapSDK shareBaiduMapSDK] removeDelegate:self];
     _mapView = nil;
 }
 
@@ -249,6 +250,8 @@
     [_mapView updateLocationViewWithParam:param];
     [_mapView setNeedsUpdateConstraints];
     [self.view addSubview:_mapView];
+    
+    [[BaiduMapSDK shareBaiduMapSDK] addDelegate:self];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     button.frame = CGRectMake(kScreenWidth - 36 - 20, 20, 36, 36);
@@ -346,6 +349,13 @@
     BMKMapStatus *status = [BMKMapStatus new];
     status.targetGeoPt = view.annotation.coordinate;
     [_mapView setMapStatus:status withAnimation:YES];
+}
+
+#pragma mark - BaiduMapSDKDelegate
+- (void)didUpdateUserLocation:(BMKUserLocation *)userLocation;
+{
+    [_mapView updateLocationData:userLocation];
+    [self addAnnotations:_mapView.centerCoordinate];
 }
 
 @end
