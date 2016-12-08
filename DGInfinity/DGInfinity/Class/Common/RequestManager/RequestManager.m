@@ -54,6 +54,10 @@ static RequestManager *manager = nil;
         
         // set timeoutInterval
         _mgr.requestSerializer.timeoutInterval = MAX_REQUEST_TIMEOUT;
+        
+        // Allowing Invalid SSL Certificates
+        _mgr.securityPolicy.allowInvalidCertificates = YES;
+        _mgr.securityPolicy.validatesDomainName = NO;
     }
     return self;
 }

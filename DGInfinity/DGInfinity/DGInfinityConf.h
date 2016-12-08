@@ -79,7 +79,7 @@ typedef NS_ENUM(NSUInteger, UploadPictureState) { // 上传图片状态
 
 // Server
 #define ServerURL @"http://120.76.236.185/" // 测试环境
-//#define ServerURL @"http://api.yunxingzh.com/" // 正式环境
+//#define ServerURL @"https://api.yunxingzh.com/" // 正式环境
 //#define ServerURL @"http://120.25.133.234/" // AC白名单
 #define AppVersion 1 // 客户端内部版本
 

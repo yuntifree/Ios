@@ -310,6 +310,9 @@ NetWorkMgrDelegate
                 }
                 NSArray *news = data[@"news"];
                 if ([news isKindOfClass:[NSArray class]]) {
+                    if (news.count) {
+                        [_newsArray removeAllObjects];
+                    }
                     for (NSDictionary *info in news) {
                         NewsReportModel *model = [NewsReportModel createWithInfo:info];
                         [_newsArray addObject:model];
