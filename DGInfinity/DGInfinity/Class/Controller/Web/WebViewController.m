@@ -12,6 +12,17 @@
 #import "WeakScriptMessageDelegate.h"
 
 NSString *const JSHOST = @"JSHost";
+NSString *const JavaScriptBackgroundColor = @"document.body.style.backgroundColor = '#000';";
+NSString *const JavaScriptClosePage = @"javascript:(function() { \
+                                            var videos = document.getElementsByTagName('video'); \
+                                            for (var i = 0; i < videos.length; i++) { \
+                                                videos[i].play(); \
+                                                videos[i].addEventListener('ended', function () { \
+                                                    var message = {'cmd': 'closePage'}; \
+                                                    window.webkit.messageHandlers.JSHost.postMessage(message); \
+                                                }, false); \
+                                            } \
+                                        })()";
 
 @interface WebViewController () <WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler>
 {
@@ -201,12 +212,18 @@ NSString *const JSHOST = @"JSHost";
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation
 {
     if (_newsType == NT_VIDEO) {
-        [webView evaluateJavaScript:@"document.body.style.backgroundColor = '#000';" completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+        [webView evaluateJavaScript:JavaScriptBackgroundColor completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+            if (error) {
+                DDDLog(@"---%@",error);
+            }
+        }];
+        [webView evaluateJavaScript:JavaScriptClosePage completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
             if (error) {
                 DDDLog(@"---%@",error);
             }
         }];
     }
+
     if (_backgroundView.superview) {
         [self.backgroundView removeFromSuperview];
     }
@@ -275,8 +292,23 @@ NSString *const JSHOST = @"JSHost";
         NSDictionary *body = message.body;
         if ([body isKindOfClass:[NSDictionary class]]) {
             DDDLog(@"JS Response Data: %@",body);
+            [self handleMessage:body];
         }
     }
+}
+
+#pragma mark - HOST
+- (void)handleMessage:(NSDictionary *)body
+{
+    NSString *cmd = body[@"cmd"];
+    if ([cmd isEqualToString:@"closePage"]) {
+        [self handleClosePage];
+    }
+}
+
+- (void)handleClosePage
+{
+    [self backBtnClick:nil];
 }
 
 @end
