@@ -158,7 +158,7 @@ const float EPSINON = 0.00001;
 {
     if (!FLOAT_IS_ZERO(speed)) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self evalueSpeed:speed/1024.f];
+            [self evalueSpeed:speed / 1024.f];
             [self calculateSpeed:speed];
             [self stopSpeedDetectionAnimation];
         });
@@ -219,7 +219,7 @@ const float EPSINON = 0.00001;
 }
 
 //用中间的label进行显示当前速度
-- (void)showCurrentSpeed:(CGFloat )speedKB
+- (void)showCurrentSpeed:(CGFloat)speedKB
 {
     NSString *formatedSpeed = [self formatSpeed:speedKB];
     _record.speed = formatedSpeed;
@@ -232,8 +232,7 @@ const float EPSINON = 0.00001;
  */
 - (void)calculateSpeed:(CGFloat)speed
 {
-    CGFloat speedKB = speed/1024;
-    [self strokeCurrentSpeed:speedKB];
+    [self strokeCurrentSpeed:speed];
 }
 
 /**
@@ -244,7 +243,7 @@ const float EPSINON = 0.00001;
 
 - (void)strokeCurrentSpeed:(CGFloat)speed
 {
-    CGFloat degree = [self degreeFromSpeed:speed];
+    CGFloat degree = [self speedToAngle:speed];
     CGFloat radians = degreesToRadians(degree);
     [UIView animateWithDuration:0.1 animations:^{
         _indicatorView.layer.transform = CATransform3DMakeRotation(radians, 0, 0, 1);
@@ -275,7 +274,7 @@ const float EPSINON = 0.00001;
  *  @param speedkb 测试出的速度
  *  @return 需要转动的角度
  */
-
+/*
 - (CGFloat)degreeFromSpeed:(CGFloat)speedkb
 {
     if (speedkb > 5 * 1024.0) {
@@ -293,6 +292,33 @@ const float EPSINON = 0.00001;
         return 0 + speedkb/ 20.0 * 45;
     }
     return 0;
+}
+ */
+
+/**
+ *  根据速度转化为现在的图形的函数
+ *  @param speed 测试出的速度
+ *  @return 需要转动的角度
+ */
+
+- (CGFloat)speedToAngle:(CGFloat)speed
+{
+    CGFloat angle = 0;
+    if (speed < 1024) {
+        angle = 0;
+    } else if (speed < 1024 * 1024 && speed >= 1024) {
+        // 0~1M，每100K 11.25度
+        angle = speed / (1024 * 100) * 11.25;
+    } else if (speed < 5120 * 1024 && speed >= 1024 * 1024) {
+        // 1M~5M，每1M 11.25度
+        angle = (speed / (1024 * 1024) - 1) * 11.25 + 112.5;
+    } else if (speed < 10240 * 1024 && speed >= 5120 * 1024) {
+        // 5M~10M，每2.5M 11.25度
+        angle = (speed / (2560 * 1024) - 2) * 11.25 + 157.5;
+    } else if (speed >= 10240 * 1024) {
+        angle = 180;
+    }
+    return angle;
 }
 
 /**
