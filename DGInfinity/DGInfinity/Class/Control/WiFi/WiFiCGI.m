@@ -60,4 +60,14 @@
     }];
 }
 
++ (void)getFlashAd:(void (^)(DGCgiResult *res))complete
+{
+    NSMutableDictionary *params = [RequestManager httpParams];
+    [[RequestManager shareManager] loadAsync:params cgi:@"get_flash_ad" complete:^(DGCgiResult *res) {
+        if (complete) {
+            complete(res);
+        }
+    }];
+}
+
 @end

@@ -22,6 +22,7 @@
 #import "WiFiConnectTipView.h"
 #import "WiFiWelfareViewController.h"
 #import "NetworkManager.h"
+#import "DGSplashView.h"
 
 #define Height (kScreenHeight - 20 - 44 - 49)
 
@@ -44,6 +45,8 @@ NetWorkMgrDelegate
     NSMutableArray *_newsArray;
 }
 
+@property (nonatomic, assign) BOOL isHiddenStatusBar;
+
 @end
 
 @implementation WifiViewController
@@ -58,6 +61,7 @@ NetWorkMgrDelegate
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        _isHiddenStatusBar = NO;
         _newsArray = [NSMutableArray arrayWithCapacity:3];
         [[NetworkManager shareManager] addNetworkObserver:self];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
@@ -126,6 +130,32 @@ NetWorkMgrDelegate
     } else {
         [self.navigationController.navigationBar setBarTintColor:COLOR(0, 156, 251, 1)];
     }
+    [self showSplashView];
+}
+
+- (void)showSplashView
+{
+    if ([[YYImageCache sharedCache] containsImageForKey:SApp.splashImage]) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            UIWindow *window = [UIApplication sharedApplication].keyWindow;
+            DGSplashView *splash = [[DGSplashView alloc] initWithFrame:window.bounds];
+            [window addSubview:splash];
+            _isHiddenStatusBar = YES;
+            [self setNeedsStatusBarAppearanceUpdate];
+            __weak typeof(self) wself = self;
+            splash.action = ^(enum SplashActionType type) {
+                if (type == SplashActionTypeDismiss) {
+                    wself.isHiddenStatusBar = NO;
+                    [wself setNeedsStatusBarAppearanceUpdate];
+                } else if (type == SplashActionTypeGet) {
+                    WebViewController *vc = [[WebViewController alloc] init];
+                    vc.url = SApp.splashUrl;
+                    [wself.navigationController pushViewController:vc animated:YES];
+                }
+            };
+        });
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -154,9 +184,6 @@ NetWorkMgrDelegate
     [self setUpScrollView];
     [self setUpSubViews];
     [self getWeatherAndNews];
-    
-    // 推送权限检查
-    [self checkNotificationPermission];
 }
 
 - (void)setUpNavItem
@@ -250,15 +277,6 @@ NetWorkMgrDelegate
                 [self getWeatherAndNews];
             });
         }
-    }
-}
-
-- (void)checkNotificationPermission
-{
-    if (![Tools isAllowedNotification]) {
-        [self showAlertWithTitle:@"提示" message:@"关闭推送可能会影响免费WiFi的使用，建议打开" cancelTitle:@"忽略" cancelHandler:nil defaultTitle:@"开启" defaultHandler:^(UIAlertAction *action) {
-            [Tools openSetting];
-        }];
     }
 }
 
@@ -356,6 +374,11 @@ NetWorkMgrDelegate
     NewsViewController *vc = (NewsViewController *)nav.topViewController;
     root.selectedIndex = 1;
     [vc setCurrentPage:page];
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return _isHiddenStatusBar;
 }
 
 - (void)didReceiveMemoryWarning {

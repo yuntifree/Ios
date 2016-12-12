@@ -21,6 +21,8 @@
 
 // app info
 @property (nonatomic, copy) NSString *appVersion;
+@property (nonatomic, copy) NSString *splashImage;
+@property (nonatomic, copy) NSString *splashUrl;
 
 // temp data
 @property (nonatomic, strong) NSMutableArray *reportArray;
@@ -33,5 +35,6 @@
 - (void)reportClick:(ReportClickModel *)model;
 - (void)setMiPush;
 - (void)unSetMiPush;
+- (void)getFlashAD;
 
 @end

@@ -10,6 +10,7 @@
 #import "AccountCGI.h"
 #import "NewsCGI.h"
 #import "MiPushSDK.h"
+#import "WiFiCGI.h"
 
 #define KUD_UID                     @"KUD_UID"
 #define KUD_TOKEN                   @"KUD_TOKEN"
@@ -18,6 +19,8 @@
 #define KUD_EXPIRE                  @"KUD_EXPIRE"
 #define KUD_WIFIPASS                @"KUD_WIFIPASS"
 #define KUD_APPVERSION              @"KUD_APPVERSION"
+#define KUD_SPLASHIMAGE             @"KUD_SPLASHIMAGE"
+#define KUD_SPLASHURL               @"KUD_SPLASHURL"
 
 @implementation MSApp
 
@@ -100,6 +103,28 @@ static MSApp *mSapp = nil;
     }
 }
 
+- (void)getFlashAD
+{
+    if (!SApp.uid) return;
+    [WiFiCGI getFlashAd:^(DGCgiResult *res) {
+        if (E_OK == res._errno) {
+            NSDictionary *data = res.data[@"data"];
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                NSString *img = data[@"img"];
+                SApp.splashUrl = data[@"target"];
+                if (img.length) {
+                    [[YYWebImageManager sharedManager] requestImageWithURL:[NSURL URLWithString:img] options:0 progress:nil transform:nil completion:^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
+                        if (image) {
+                            SApp.splashImage = url.absoluteString;
+                            [[YYImageCache sharedCache] setImage:image forKey:SApp.splashImage];
+                        }
+                    }];
+                }
+            }
+        }
+    }];
+}
+
 - (void)setUid:(NSInteger)uid
 {
     [NSUSERDEFAULTS setObject:[NSNumber numberWithInteger:uid] forKey:KUD_UID];
@@ -175,6 +200,28 @@ static MSApp *mSapp = nil;
 - (NSString *)appVersion
 {
     return [NSUSERDEFAULTS objectForKey:KUD_APPVERSION];
+}
+
+- (void)setSplashImage:(NSString *)splashImage
+{
+    [NSUSERDEFAULTS setObject:splashImage forKey:KUD_SPLASHIMAGE];
+    [NSUSERDEFAULTS synchronize];
+}
+
+- (NSString *)splashImage
+{
+    return [NSUSERDEFAULTS objectForKey:KUD_SPLASHIMAGE];
+}
+
+- (void)setSplashUrl:(NSString *)splashUrl
+{
+    [NSUSERDEFAULTS setObject:splashUrl forKey:KUD_SPLASHURL];
+    [NSUSERDEFAULTS synchronize];
+}
+
+- (NSString *)splashUrl
+{
+    return [NSUSERDEFAULTS objectForKey:KUD_SPLASHURL];
 }
 
 #pragma mark - ReportClick

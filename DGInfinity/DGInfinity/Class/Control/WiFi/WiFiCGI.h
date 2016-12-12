@@ -40,5 +40,9 @@
 + (void)reportApMac:(NSString *)apmac
            complete:(void (^)(DGCgiResult *res))complete;
 
+/**
+ *  get_flash_ad
+ */
++ (void)getFlashAd:(void (^)(DGCgiResult *res))complete;
 
 @end
