@@ -156,11 +156,15 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
         [self.webView goBack];
     } else {
         if (_newsType == NT_VIDEO) {
-            NSNumber *orientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
-            [[UIDevice currentDevice] setValue:orientationTarget forKey:@"orientation"];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if ([UIDevice currentDevice].orientation != UIDeviceOrientationPortrait) {
+                NSNumber *orientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+                [[UIDevice currentDevice] setValue:orientationTarget forKey:@"orientation"];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [super backBtnClick:sender];
+                });
+            } else {
                 [super backBtnClick:sender];
-            });
+            }
         } else {
             [super backBtnClick:sender];
         }

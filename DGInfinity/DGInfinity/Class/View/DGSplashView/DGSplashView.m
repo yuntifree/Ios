@@ -55,7 +55,7 @@
         [skipBtn addTarget:self action:@selector(skipBtnClick) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:skipBtn];
         
-        _secondLbl = [[UILabel alloc] initWithFrame:CGRectMake(5.5, 7, 15, 18)];
+        _secondLbl = [[UILabel alloc] initWithFrame:CGRectMake(7, 7, 15, 18)];
         _secondLbl.textColor = COLOR(0, 160, 251, 1);
         _secondLbl.font = SystemFont(13);
         _secondLbl.textAlignment = NSTextAlignmentCenter;
