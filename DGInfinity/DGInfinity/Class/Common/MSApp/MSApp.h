@@ -22,7 +22,7 @@
 // app info
 @property (nonatomic, copy) NSString *appVersion;
 @property (nonatomic, copy) NSString *splashImage;
-@property (nonatomic, copy) NSString *splashUrl;
+@property (nonatomic, copy) NSString *splashTarget;
 
 // temp data
 @property (nonatomic, strong) NSMutableArray *reportArray;

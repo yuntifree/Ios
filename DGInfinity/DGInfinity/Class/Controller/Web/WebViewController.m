@@ -308,7 +308,15 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
 
 - (void)handleClosePage
 {
-    [self backBtnClick:nil];
+    UIViewController *vc = [UIApplication sharedApplication].keyWindow.rootViewController.presentedViewController;
+    if ([NSStringFromClass([vc class]) isEqualToString:@"AVFullScreenViewController"]) {
+        [vc dismissViewControllerAnimated:NO completion:^{
+            [UIApplication sharedApplication].keyWindow.rootViewController = self.navigationController.tabBarController;
+            [self backBtnClick:nil];
+        }];
+    } else {
+        [self backBtnClick:nil];
+    }
 }
 
 @end

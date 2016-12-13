@@ -20,7 +20,7 @@
 #define KUD_WIFIPASS                @"KUD_WIFIPASS"
 #define KUD_APPVERSION              @"KUD_APPVERSION"
 #define KUD_SPLASHIMAGE             @"KUD_SPLASHIMAGE"
-#define KUD_SPLASHURL               @"KUD_SPLASHURL"
+#define KUD_SPLASHTARGET            @"KUD_SPLASHTARGET"
 
 @implementation MSApp
 
@@ -111,11 +111,11 @@ static MSApp *mSapp = nil;
             NSDictionary *data = res.data[@"data"];
             if ([data isKindOfClass:[NSDictionary class]]) {
                 NSString *img = data[@"img"];
-                SApp.splashUrl = data[@"target"];
                 if (img.length) {
                     [[YYWebImageManager sharedManager] requestImageWithURL:[NSURL URLWithString:img] options:0 progress:nil transform:nil completion:^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
                         if (image) {
                             SApp.splashImage = url.absoluteString;
+                            SApp.splashTarget = data[@"target"];
                             [[YYImageCache sharedCache] setImage:image forKey:SApp.splashImage];
                         }
                     }];
@@ -213,15 +213,15 @@ static MSApp *mSapp = nil;
     return [NSUSERDEFAULTS objectForKey:KUD_SPLASHIMAGE];
 }
 
-- (void)setSplashUrl:(NSString *)splashUrl
+- (void)setSplashTarget:(NSString *)splashTarget
 {
-    [NSUSERDEFAULTS setObject:splashUrl forKey:KUD_SPLASHURL];
+    [NSUSERDEFAULTS setObject:splashTarget forKey:KUD_SPLASHTARGET];
     [NSUSERDEFAULTS synchronize];
 }
 
-- (NSString *)splashUrl
+- (NSString *)splashTarget
 {
-    return [NSUSERDEFAULTS objectForKey:KUD_SPLASHURL];
+    return [NSUSERDEFAULTS objectForKey:KUD_SPLASHTARGET];
 }
 
 #pragma mark - ReportClick

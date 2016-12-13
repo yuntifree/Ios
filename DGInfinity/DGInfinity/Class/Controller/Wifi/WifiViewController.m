@@ -139,18 +139,18 @@ NetWorkMgrDelegate
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             UIWindow *window = [UIApplication sharedApplication].keyWindow;
-            DGSplashView *splash = [[DGSplashView alloc] initWithFrame:window.bounds];
+            DGSplashView *splash = [[DGSplashView alloc] initWithImage:[[YYImageCache sharedCache] getImageForKey:SApp.splashImage] target:SApp.splashTarget];
             [window addSubview:splash];
             _isHiddenStatusBar = YES;
             [self setNeedsStatusBarAppearanceUpdate];
             __weak typeof(self) wself = self;
-            splash.action = ^(enum SplashActionType type) {
+            splash.action = ^(enum SplashActionType type, NSString *target) {
                 if (type == SplashActionTypeDismiss) {
                     wself.isHiddenStatusBar = NO;
                     [wself setNeedsStatusBarAppearanceUpdate];
                 } else if (type == SplashActionTypeGet) {
                     WebViewController *vc = [[WebViewController alloc] init];
-                    vc.url = SApp.splashUrl;
+                    vc.url = target;
                     [wself.navigationController pushViewController:vc animated:YES];
                 }
             };

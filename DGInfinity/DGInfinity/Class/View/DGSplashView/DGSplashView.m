@@ -10,8 +10,11 @@
 
 @interface DGSplashView ()
 {
+    UIImageView *_backView;
     UILabel *_secondLbl;
     dispatch_source_t _timer;
+    
+    NSString *_target;
 }
 @end
 
@@ -22,15 +25,25 @@
     DDDLog(@"DGSplashView dealloc");
 }
 
+- (instancetype)initWithImage:(UIImage *)image target:(NSString *)target
+{
+    self = [self initWithFrame:kScreenFrame];
+    if (self) {
+        _backView.image = image;
+        _target = target;
+        [self fireTimer];
+    }
+    return self;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         
-        UIImageView *backView = [[UIImageView alloc] initWithFrame:self.bounds];
-        backView.image = [[YYImageCache sharedCache] getImageForKey:SApp.splashImage];
-        [self addSubview:backView];
+        _backView = [[UIImageView alloc] initWithFrame:self.bounds];
+        [self addSubview:_backView];
         
         UIImageView *leftIcon = [[UIImageView alloc] initWithImage:ImageNamed(@"text_ad")];
         leftIcon.origin = CGPointMake(10, 20);
@@ -54,8 +67,6 @@
         [goBtn setBackgroundImage:ImageNamed(@"text_getmore") forState:UIControlStateNormal];
         [goBtn addTarget:self action:@selector(goBtnClick) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:goBtn];
-        
-        [self fireTimer];
     }
     return self;
 }
@@ -63,7 +74,7 @@
 - (void)dismiss
 {
     if (_action) {
-        _action(SplashActionTypeDismiss);
+        _action(SplashActionTypeDismiss, nil);
     }
     [self cancelTimer];
     [UIView animateWithDuration:0.25 animations:^{
@@ -81,7 +92,7 @@
 - (void)goBtnClick
 {
     if (_action) {
-        _action(SplashActionTypeGet);
+        _action(SplashActionTypeGet, _target);
     }
     [self dismiss];
 }

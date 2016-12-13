@@ -13,10 +13,12 @@ enum SplashActionType {
     SplashActionTypeDismiss
 };
 
-typedef void(^SplashAction)(enum SplashActionType type);
+typedef void(^SplashAction)(enum SplashActionType type, NSString *target);
 
 @interface DGSplashView : UIView
 
 @property (nonatomic, copy) SplashAction action;
+
+- (instancetype)initWithImage:(UIImage *)image target:(NSString *)target;
 
 @end
