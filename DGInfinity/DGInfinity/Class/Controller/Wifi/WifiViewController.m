@@ -135,9 +135,9 @@ NetWorkMgrDelegate
 
 - (void)showSplashView
 {
-    if ([[YYImageCache sharedCache] containsImageForKey:SApp.splashImage withType:YYImageCacheTypeDisk]) {
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if ([[YYImageCache sharedCache] containsImageForKey:SApp.splashImage withType:YYImageCacheTypeDisk]) {
             UIWindow *window = [UIApplication sharedApplication].keyWindow;
             DGSplashView *splash = [[DGSplashView alloc] initWithImage:[[YYImageCache sharedCache] getImageForKey:SApp.splashImage] target:SApp.splashTarget];
             [window addSubview:splash];
@@ -154,8 +154,8 @@ NetWorkMgrDelegate
                     [wself.navigationController pushViewController:vc animated:YES];
                 }
             };
-        });
-    }
+        }
+    });
 }
 
 - (void)viewWillDisappear:(BOOL)animated
