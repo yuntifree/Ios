@@ -134,6 +134,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row < _videosArray.count) {
         NewsVideoModel *model = _videosArray[indexPath.row];
+        if (!model.read) {
+            model.read = YES;
+            model.play++;
+            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
         [SApp reportClick:[ReportClickModel createWithVideoModel:model]];
         WebViewController *vc = [[WebViewController alloc] init];
         vc.url = model.dst;

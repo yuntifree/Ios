@@ -19,6 +19,7 @@
 @property (nonatomic, assign) int stype;
 @property (nonatomic, assign) NSInteger seq;
 @property (nonatomic, assign) NSInteger play;
+@property (nonatomic, assign) BOOL read;
 
 + (instancetype)createWithInfo:(NSDictionary *)info;
 

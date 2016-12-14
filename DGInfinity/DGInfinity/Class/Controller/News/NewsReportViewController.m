@@ -135,8 +135,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row < _newsArray.count) {
         NewsReportModel *model = _newsArray[indexPath.row];
-        model.read = YES;
-        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        if (!model.read) {
+            model.read = YES;
+            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
         [SApp reportClick:[ReportClickModel createWithReportModel:model]];
         NSURL *url = [NSURL URLWithString:model.dst];
         if ([url.scheme isEqualToString:@"itms"] || [url.scheme isEqualToString:@"itms-apps"]) {

@@ -10,6 +10,15 @@
 
 @implementation NewsVideoModel
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _read = NO;
+    }
+    return self;
+}
+
 + (instancetype)createWithInfo:(NSDictionary *)info
 {
     NewsVideoModel *model = [NewsVideoModel new];

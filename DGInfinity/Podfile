@@ -11,4 +11,5 @@ pod 'tingyunApp'
 pod 'UMengAnalytics-NO-IDFA'
 pod 'DZNEmptyDataSet'
 pod 'AliyunOSSiOS'
+pod 'Masonry'
 end

@@ -38,6 +38,11 @@
     if (model.images.count) {
         [_imgView yy_setImageWithURL:[NSURL URLWithString:model.images[0]] options:YYWebImageOptionSetImageWithFadeAnimation];
     }
+    if (model.read) {
+        _titleLbl.textColor = COLOR(132, 132, 132, 1);
+    } else {
+        _titleLbl.textColor = COLOR(38, 38, 38, 1);
+    }
     _sourceLbl.text = model.source;
     _dateLbl.text = model.date;
     _playLbl.text = [NSString stringWithFormat:@"%ld次播放",model.play];

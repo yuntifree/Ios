@@ -48,9 +48,6 @@
     
     [self setUpAttribute];
     
-    // getFlashAD
-    [SApp getFlashAD];
-    
     // wifiSDK
 #if !(TARGET_IPHONE_SIMULATOR)
     [[UserAuthManager manager] initEnv:WIFISDK_SSID withWurl:WIFISDK_URL withVNO:WIFISDK_VNOCODE];

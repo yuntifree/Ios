@@ -135,7 +135,7 @@ NetWorkMgrDelegate
 
 - (void)showSplashView
 {
-    if ([[YYImageCache sharedCache] containsImageForKey:SApp.splashImage]) {
+    if ([[YYImageCache sharedCache] containsImageForKey:SApp.splashImage withType:YYImageCacheTypeDisk]) {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             UIWindow *window = [UIApplication sharedApplication].keyWindow;
@@ -184,6 +184,9 @@ NetWorkMgrDelegate
     [self setUpScrollView];
     [self setUpSubViews];
     [self getWeatherAndNews];
+    
+    // getFlashAD
+    [SApp getFlashAD];
 }
 
 - (void)setUpNavItem

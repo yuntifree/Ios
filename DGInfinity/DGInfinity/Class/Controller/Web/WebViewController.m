@@ -10,6 +10,7 @@
 #import <WebKit/WebKit.h>
 #import "NetworkManager.h"
 #import "WeakScriptMessageDelegate.h"
+#import <Masonry.h>
 
 NSString *const JSHOST = @"JSHost";
 NSString *const JavaScriptBackgroundColor = @"document.body.style.backgroundColor = '#000';";
@@ -23,6 +24,10 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
                                                 }, false); \
                                             } \
                                         })()";
+NSString *const JavaScriptScaleToFit = @"var meta = document.createElement('meta'); \
+                                         meta.setAttribute('name', 'viewport'); \
+                                         meta.setAttribute('content', 'width=device-width'); \
+                                         document.getElementsByTagName('head')[0].appendChild(meta);";
 
 @interface WebViewController () <WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler>
 {
@@ -52,17 +57,18 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
 - (WKWebView *)webView
 {
     if (_webView == nil) {
+        WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:JavaScriptScaleToFit injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
         WKWebViewConfiguration *config = [WKWebViewConfiguration new];
         config.preferences = [WKPreferences new];
         config.userContentController = [WKUserContentController new];
+        [config.userContentController addUserScript:wkUScript];
         [config.userContentController addScriptMessageHandler:[[WeakScriptMessageDelegate alloc] initWithDelegate:self] name:JSHOST];
         if (!IOS9) {
             config.mediaPlaybackRequiresUserAction = NO;
         } else {
             config.requiresUserActionForMediaPlayback = NO;
         }
-        CGFloat systemBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height + self.navigationController.navigationBar.height;
-        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - systemBarHeight) configuration:config];
+        _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:config];
         _webView.navigationDelegate = self;
         _webView.UIDelegate = self;
         [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
@@ -76,7 +82,6 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
 {
     if (_progressView == nil) {
         _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-        _progressView.frame = CGRectMake(0, 0, kScreenWidth, 4);
         _progressView.progress = 0;
         _progressView.hidden = YES;
         _progressView.trackTintColor = [UIColor whiteColor];
@@ -88,14 +93,16 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
 - (UIScrollView *)backgroundView
 {
     if (_backgroundView == nil) {
-        _backgroundView = [[UIScrollView alloc] initWithFrame:self.webView.bounds];
+        _backgroundView = [[UIScrollView alloc] init];
         _backgroundView.backgroundColor = [UIColor whiteColor];
+        _backgroundView.hidden = YES;
         __weak typeof(self) wself = self;
         [_backgroundView configureNoNetStyleWithdidTapButtonBlock:^{
             [wself.webView loadRequest:wself.currentRequest];
         } didTapViewBlock:^{
             
         }];
+        [self.view addSubview:_backgroundView];
     }
     return _backgroundView;
 }
@@ -112,18 +119,32 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    
+    [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.height.equalTo(@2);
+    }];
+    
+    [self.backgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
     
     if (_newsType == NT_VIDEO) {
+        self.view.backgroundColor = [UIColor blackColor];
+        
         NSNumber *orientationUnknown = [NSNumber numberWithInt:UIInterfaceOrientationUnknown];
         [[UIDevice currentDevice] setValue:orientationUnknown forKey:@"orientation"];
         
         NSNumber *orientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
         [[UIDevice currentDevice] setValue:orientationTarget forKey:@"orientation"];
-        
-        self.webView.backgroundColor = [UIColor blackColor];
     } else {
-        self.webView.backgroundColor = [UIColor whiteColor];
+        self.view.backgroundColor = [UIColor whiteColor];
     }
     
     if (_url.length) {
@@ -228,8 +249,8 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
         }];
     }
 
-    if (_backgroundView.superview) {
-        [self.backgroundView removeFromSuperview];
+    if (!self.backgroundView.hidden) {
+        self.backgroundView.hidden = YES;
     }
     if ([webView canGoBack]) {
         if (_type != ITEMTYPE_CLOSE) {
@@ -247,8 +268,8 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
 {
     if ([[NetworkManager shareManager] currentReachabilityStatus] == NotReachable) {
-        if (!_backgroundView.superview) {
-            [self.view addSubview:self.backgroundView];
+        if (self.backgroundView.hidden) {
+            self.backgroundView.hidden = NO;
         }
     } else {
         [self makeToast:@"网页加载失败"];
