@@ -354,6 +354,7 @@
 #pragma mark - BaiduMapSDKDelegate
 - (void)didUpdateUserLocation:(BMKUserLocation *)userLocation;
 {
+    _myLocation = userLocation;
     [_mapView updateLocationData:userLocation];
     [self addAnnotations:_mapView.centerCoordinate];
 }
