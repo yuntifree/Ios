@@ -155,18 +155,22 @@
         NSString *head = [NSString stringWithFormat:@"%@/%@", AliyunImage, data[@"name"]];
         if (!task.error) { // 上传成功
             DDDLog(@"上传成功");
-            if (complete) {
-                complete(UploadPictureState_Success, head);
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (complete) {
+                    complete(UploadPictureState_Success, head);
+                }
+            });
         } else { // 上传失败
             if (task.error.code == OSSClientErrorCodeTaskCancelled) {
                 DDDLog(@"任务取消");
             } else {
                 DDDLog(@"上传失败");
             }
-            if (complete) {
-                complete(UploadPictureState_Fail, head);
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (complete) {
+                    complete(UploadPictureState_Fail, head);
+                }
+            });
         }
         _putRequest = nil;
         return nil;

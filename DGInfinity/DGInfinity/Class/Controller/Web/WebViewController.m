@@ -239,12 +239,12 @@ NSString *const JavaScriptScaleToFit = @"var meta = document.createElement('meta
     if (_newsType == NT_VIDEO) {
         [webView evaluateJavaScript:JavaScriptBackgroundColor completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
             if (error) {
-                DDDLog(@"---%@",error);
+                DDDLog(@"javaScript error: %@",error);
             }
         }];
         [webView evaluateJavaScript:JavaScriptClosePage completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
             if (error) {
-                DDDLog(@"---%@",error);
+                DDDLog(@"javaScript error: %@",error);
             }
         }];
     }
@@ -328,6 +328,8 @@ NSString *const JavaScriptScaleToFit = @"var meta = document.createElement('meta
     NSString *cmd = body[@"cmd"];
     if ([cmd isEqualToString:@"closePage"]) {
         [self handleClosePage];
+    } else if ([cmd isEqualToString:@"ready"]) {
+        [self handleReady:body];
     }
 }
 
@@ -341,6 +343,20 @@ NSString *const JavaScriptScaleToFit = @"var meta = document.createElement('meta
         }];
     } else {
         [self backBtnClick:nil];
+    }
+}
+
+- (void)handleReady:(NSDictionary *)body
+{
+    if (SApp.uid && SApp.token) {
+        NSString *func = body[@"callback"];
+        NSDictionary *info = @{@"uid": @(SApp.uid), @"token": SApp.token};
+        NSString *javaScript = [NSString stringWithFormat:@"%@('%@')", func, [Tools dictionaryToJsonString:info]];
+        [self.webView evaluateJavaScript:javaScript completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+            if (error) {
+                DDDLog(@"javaScript error: %@",error);
+            }
+        }];
     }
 }
 

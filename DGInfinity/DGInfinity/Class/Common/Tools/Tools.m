@@ -340,4 +340,32 @@
     return NO;
 }
 
++ (NSString *)dictionaryToJsonString:(NSDictionary *)dictionary
+{
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    NSString *jsonString = @"";
+    if (error) {
+        DDDLog(@"Got an error: %@", error);
+    } else {
+        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    return jsonString;
+}
+
++ (NSDictionary *)jsonStringToDictionary:(NSString *)jsonString
+{
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error = nil;
+    NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                               options:NSJSONReadingMutableContainers
+                                                                 error:&error];
+    if (error) {
+        DDDLog(@"Got an error: %@", error);
+    }
+    return dictionary;
+}
+
 @end

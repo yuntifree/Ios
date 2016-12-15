@@ -10,8 +10,9 @@
 #import "AccountCGI.h"
 #import "PayCGI.h"
 #import "AliyunOssService.h"
+#import "PhotoManager.h"
 
-@interface ShoppingViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ShoppingViewController () <PhotoManagerDelegate>
 
 @end
 
@@ -28,7 +29,6 @@
 }
 
 - (IBAction)logout:(id)sender {
-    if (!SApp.username.length) return;
 //    [SVProgressHUD show];
 //    [AccountCGI logout:^(DGCgiResult *res) {
 //        [SVProgressHUD dismiss];
@@ -40,6 +40,7 @@
 //        }
 //    }];
 #if (!TARGET_IPHONE_SIMULATOR)
+    if (!SApp.username.length) return;
     [[UserAuthManager manager] doLogout:SApp.username andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
         if (!error) {
             NSDictionary *head = response[@"head"];
@@ -91,11 +92,7 @@
 }
 
 - (IBAction)uploadTest:(UIButton *)sender {
-    UIImagePickerController *picker = [UIImagePickerController new];
-    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    picker.navigationBar.tintColor = [UIColor whiteColor];
-    picker.delegate = self;
-    [self presentViewController:picker animated:YES completion:nil];
+    [[PhotoManager shareManager] showPhotoPicker:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -103,26 +100,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - UIImagePickerControllerDelegate
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+#pragma mark - PhotoManagerDelegate
+- (void)photoManager:(PhotoManager *)manager didFinishPickImage:(UIImage *)image
 {
-    [picker dismissViewControllerAnimated:YES completion:^{
-        [SVProgressHUD show];
-        UIImage *image = info[UIImagePickerControllerOriginalImage];
-        [[AliyunOssService sharedAliyunOssService] applyImage:image complete:^(UploadPictureState state, NSString *picture) {
-            [SVProgressHUD dismiss];
-            if (UploadPictureState_Success == state) {
-                [self makeToast:@"上传成功"];
-                DDDLog(@"图片地址为：%@",picture);
-            } else {
-                [self makeToast:@"上传失败"];
-            }
-        }];
+    [SVProgressHUD show];
+    [[AliyunOssService sharedAliyunOssService] applyImage:image complete:^(UploadPictureState state, NSString *picture) {
+        [SVProgressHUD dismiss];
+        if (UploadPictureState_Success == state) {
+            [self makeToast:@"上传成功"];
+            DDDLog(@"图片地址为：%@",picture);
+        } else {
+            [self makeToast:@"上传失败"];
+        }
     }];
-}
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

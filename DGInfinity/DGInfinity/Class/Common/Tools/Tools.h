@@ -23,5 +23,7 @@
 + (NSString *)getServerWiFiIPAddress;
 + (TimeType)getTimeType;
 + (BOOL)isAllowedNotification;
++ (NSString *)dictionaryToJsonString:(NSDictionary *)dictionary;
++ (NSDictionary *)jsonStringToDictionary:(NSString *)jsonString;
 
 @end

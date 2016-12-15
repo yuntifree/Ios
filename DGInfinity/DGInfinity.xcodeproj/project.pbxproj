@@ -193,6 +193,7 @@
 		6F3A1D911DCC77D500BC22EC /* CheckUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3A1D901DCC77D500BC22EC /* CheckUtil.m */; };
 		6F3A1D951DCC8B9B00BC22EC /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3A1D941DCC8B9B00BC22EC /* CloudKit.framework */; };
 		6F3A1D971DCC8BE300BC22EC /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3A1D961DCC8BE300BC22EC /* ExternalAccessory.framework */; };
+		6F3AD65B1E028064000A27E0 /* PhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3AD65A1E028064000A27E0 /* PhotoManager.m */; };
 		6F3C114E1DE81B1C00734F8C /* UIViewController+makeToastOrAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3C114D1DE81B1C00734F8C /* UIViewController+makeToastOrAlert.m */; };
 		6F3E56401DD968C100F16A23 /* btn_test@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3E56381DD968C100F16A23 /* btn_test@2x.png */; };
 		6F3E56411DD968C100F16A23 /* btn_test@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3E56391DD968C100F16A23 /* btn_test@3x.png */; };
@@ -571,6 +572,8 @@
 		6F3A1D901DCC77D500BC22EC /* CheckUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckUtil.m; sourceTree = "<group>"; };
 		6F3A1D941DCC8B9B00BC22EC /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		6F3A1D961DCC8BE300BC22EC /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
+		6F3AD6591E028064000A27E0 /* PhotoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoManager.h; sourceTree = "<group>"; };
+		6F3AD65A1E028064000A27E0 /* PhotoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoManager.m; sourceTree = "<group>"; };
 		6F3C114C1DE81B1C00734F8C /* UIViewController+makeToastOrAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+makeToastOrAlert.h"; sourceTree = "<group>"; };
 		6F3C114D1DE81B1C00734F8C /* UIViewController+makeToastOrAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+makeToastOrAlert.m"; sourceTree = "<group>"; };
 		6F3E56381DD968C100F16A23 /* btn_test@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_test@2x.png"; sourceTree = "<group>"; };
@@ -1337,6 +1340,15 @@
 			path = CheckUtil;
 			sourceTree = "<group>";
 		};
+		6F3AD6581E028030000A27E0 /* PhotoManager */ = {
+			isa = PBXGroup;
+			children = (
+				6F3AD6591E028064000A27E0 /* PhotoManager.h */,
+				6F3AD65A1E028064000A27E0 /* PhotoManager.m */,
+			);
+			path = PhotoManager;
+			sourceTree = "<group>";
+		};
 		6F3F32891DDAE92C0024095A /* WiFiScan */ = {
 			isa = PBXGroup;
 			children = (
@@ -1628,6 +1640,7 @@
 		6F6FDAC01DB4B79300E50D9B /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6F3AD6581E028030000A27E0 /* PhotoManager */,
 				6F2F10061DF96BCC00BBB742 /* WeakScriptMessageDelegate */,
 				6F3A1D8E1DCC77C400BC22EC /* CheckUtil */,
 				6F307BD81DCB24D60015F9EC /* AnimationManager */,
@@ -2278,6 +2291,7 @@
 				6F3F32901DDAE9BA0024095A /* MTBBarcodeScanner.m in Sources */,
 				6FF5C7F31DC1EDDD00B1A84A /* NewsVideoViewController.m in Sources */,
 				6F6FDAEC1DB4C83000E50D9B /* ServiceViewController.m in Sources */,
+				6F3AD65B1E028064000A27E0 /* PhotoManager.m in Sources */,
 				6F2F9BC51DDC64230055DAF9 /* WiFiExaminationViewController.m in Sources */,
 				6F307BDB1DCB24ED0015F9EC /* AnimationManager.m in Sources */,
 				6F6FDAC81DB4B7E700E50D9B /* DGTabBarController.m in Sources */,
