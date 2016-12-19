@@ -10,7 +10,6 @@
 #import <WebKit/WebKit.h>
 #import "NetworkManager.h"
 #import "WeakScriptMessageDelegate.h"
-#import <Masonry.h>
 
 NSString *const JSHOST = @"JSHost";
 NSString *const JavaScriptBackgroundColor = @"document.body.style.backgroundColor = '#000';";
@@ -111,6 +110,7 @@ NSString *const JavaScriptScaleToFit = @"var meta = document.createElement('meta
 {
     self = [super init];
     if (self) {
+        _changeTitle = YES;
         _type = ITEMTYPE_BACK;
     }
     return self;
@@ -181,20 +181,23 @@ NSString *const JavaScriptScaleToFit = @"var meta = document.createElement('meta
                 NSNumber *orientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
                 [[UIDevice currentDevice] setValue:orientationTarget forKey:@"orientation"];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [super backBtnClick:sender];
+                    [self closeBtnClick:nil];
                 });
             } else {
-                [super backBtnClick:sender];
+                [self closeBtnClick:nil];
             }
         } else {
-            [super backBtnClick:sender];
+            [self closeBtnClick:nil];
         }
     }
 }
 
 - (void)closeBtnClick:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:_pop ? NO : YES];
+    if (_pop) {
+        _pop();
+    }
 }
 
 #pragma mark - KVO
@@ -202,7 +205,7 @@ NSString *const JavaScriptScaleToFit = @"var meta = document.createElement('meta
 {
     if (object == self.webView) {
         if ([keyPath isEqualToString:@"title"]) {
-            if (self.webView.title.length) {
+            if (self.webView.title.length && _changeTitle) {
                 self.title = self.webView.title;
             }
         } else if ([keyPath isEqualToString:@"estimatedProgress"]) {

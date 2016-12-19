@@ -43,6 +43,7 @@ NetWorkMgrDelegate
     WiFiConnectTipView *_connectTipView;
     
     NSMutableArray *_newsArray;
+    NSString *_weatherUrl;
 }
 
 @property (nonatomic, assign) BOOL isHiddenStatusBar;
@@ -63,6 +64,7 @@ NetWorkMgrDelegate
     if (self) {
         _isHiddenStatusBar = NO;
         _newsArray = [NSMutableArray arrayWithCapacity:3];
+        _weatherUrl = WeatherURL;
         [[NetworkManager shareManager] addNetworkObserver:self];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     }
@@ -79,11 +81,12 @@ NetWorkMgrDelegate
                 [_menuView setConnectBtnStatus:ConnectStatusConnected];
             } else {
                 // 别的网络（WiFi或者4G）
-                if ([[NetworkManager shareManager] isWiFi]) {
-                    [_menuView setConnectBtnStatus:ConnectStatusConnected];
-                } else {
-                    [_menuView setConnectBtnStatus:ConnectStatusNotConnect];
-                }
+//                if ([[NetworkManager shareManager] isWiFi]) {
+//                    [_menuView setConnectBtnStatus:ConnectStatusConnected];
+//                } else {
+//                    [_menuView setConnectBtnStatus:ConnectStatusNotConnect];
+//                }
+                [_menuView setConnectBtnStatus:ConnectStatusNotConnect];
             }
         } else if (status == ENV_LOGIN) {
             // 已经通过SDK认证
@@ -328,6 +331,7 @@ NetWorkMgrDelegate
                 NSDictionary *weather = data[@"weather"];
                 if ([weather isKindOfClass:[NSDictionary class]]) {
                     [_menuView setWeather:weather];
+                    _weatherUrl = weather[@"dst"];
                 }
                 NSArray *news = data[@"news"];
                 if ([news isKindOfClass:[NSArray class]]) {
@@ -459,7 +463,7 @@ NetWorkMgrDelegate
         case WiFiMenuTypeWeather:
         {
             WebViewController *vc = [[WebViewController alloc] init];
-            vc.url = WeatherURL;
+            vc.url = _weatherUrl;
             vc.title = @"东莞天气";
             [self.navigationController pushViewController:vc animated:YES];
         }
@@ -523,8 +527,10 @@ NetWorkMgrDelegate
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row < _newsArray.count) {
         NewsReportModel *model = _newsArray[indexPath.row];
-        model.read = YES;
-        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        if (!model.read) {
+            model.read = YES;
+            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
         [SApp reportClick:[ReportClickModel createWithReportModel:model]];
         NSURL *url = [NSURL URLWithString:model.dst];
         if ([url.scheme isEqualToString:@"itms"] || [url.scheme isEqualToString:@"itms-apps"]) {

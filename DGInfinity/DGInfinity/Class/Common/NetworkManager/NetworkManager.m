@@ -118,7 +118,7 @@ static NetworkManager *manager = nil;
     if (!IOS9) {
         [self registerNetworkOnlyOneSSIDValidate:WIFISDK_SSID];
     } else {
-        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:@"✅东莞无线城市WiFi，请点击连接", kNEHotspotHelperOptionDisplayName, nil];
+        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:@"✅东莞无限城市WiFi，请点击连接", kNEHotspotHelperOptionDisplayName, nil];
         dispatch_queue_t queue = dispatch_queue_create("com.yunxingzh.ex", 0);
         BOOL success = [NEHotspotHelper registerWithOptions:options queue:queue handler:^(NEHotspotHelperCommand * cmd) {
             if(cmd.commandType == kNEHotspotHelperCommandTypeEvaluate || cmd.commandType == kNEHotspotHelperCommandTypeFilterScanList)

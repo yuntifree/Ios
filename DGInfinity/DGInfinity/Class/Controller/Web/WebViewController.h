@@ -13,9 +13,13 @@ typedef NS_ENUM(NSInteger, WebItemType) {
     ITEMTYPE_CLOSE = 1
 };
 
+typedef void(^Pop)(void);
+
 @interface WebViewController : DGViewController
 
 @property (nonatomic, copy) NSString *url;
 @property (nonatomic, assign) NewsType newsType;
+@property (nonatomic, copy) Pop pop;
+@property (nonatomic, assign) BOOL changeTitle;
 
 @end

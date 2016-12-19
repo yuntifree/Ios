@@ -30,6 +30,7 @@
 #import "UIViewController+makeToastOrAlert.h"
 #import "NSString+Format.h"
 #import "Pingpp.h"
+#import <Masonry.h>
 
 #if !(TARGET_IPHONE_SIMULATOR)
 #import "UserAuthManager.h"

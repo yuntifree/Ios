@@ -90,7 +90,7 @@
     label.font = [UIFont systemFontOfSize: 15];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = UICOLOR_ARGB(0xff56abff);
-    label.text = @"扫描东莞无线WiFi二维码标识";
+    label.text = @"扫描东莞无限WiFi二维码标识";
     [presentView addSubview: label];
     self.firstTextLabel = label;
     

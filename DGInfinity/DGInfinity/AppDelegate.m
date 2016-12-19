@@ -244,7 +244,7 @@
     static BOOL userNotifiedOfReachability = NO;
     if (ns == ReachableViaWiFi) {
         if (!userNotifiedOfReachability && [[Tools getCurrentSSID] isEqualToString:WIFISDK_SSID]) {
-            [Tools showNotificationMessages:@"点击这里，一键认证东莞无线城市WiFi"];
+            [Tools showNotificationMessages:@"点击这里，一键认证东莞无限城市WiFi"];
             userNotifiedOfReachability = YES;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 userNotifiedOfReachability = NO;

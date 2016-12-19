@@ -167,7 +167,7 @@
         } else { // 没有打开摄像头权限
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (noPermisson) {
-                    noPermisson(@"此应用程序没有权限访问您的相机，请到「设置->东莞无线」中打开相机权限。");
+                    noPermisson(@"此应用程序没有权限访问您的相机，请到「设置->东莞无限」中打开相机权限。");
                 }
             });
         }

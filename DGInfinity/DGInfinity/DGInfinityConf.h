@@ -111,7 +111,7 @@ typedef NS_ENUM(NSUInteger, UploadPictureState) { // 上传图片状态
 #define LoadingTip @"加载中..."
 
 // 服务URL
-#define WeatherURL @"http://shenbao.dg.gov.cn/dgcsfw_zfb/csfw/dg_qxj/weixinportal.jsp"
+#define WeatherURL @"http://www.dg121.com/mobile"
 #define AgreementURL @"http://www.yunxingzh.com/app/agreement.html"
 #define SearchURL @"https://m.baidu.com/s?word="
 

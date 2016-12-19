@@ -11,6 +11,7 @@
 #import "PayCGI.h"
 #import "AliyunOssService.h"
 #import "PhotoManager.h"
+#import "PickerViewController.h"
 
 @interface ShoppingViewController () <PhotoManagerDelegate>
 
@@ -93,6 +94,12 @@
 
 - (IBAction)uploadTest:(UIButton *)sender {
     [[PhotoManager shareManager] showPhotoPicker:self];
+}
+
+- (IBAction)pickerClick:(UIButton *)sender {
+    PickerViewController *picker = [[PickerViewController alloc] init];
+    picker.sourceType = PickerSourceTypeSex;
+    [self presentViewController:picker animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
