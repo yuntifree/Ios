@@ -112,6 +112,7 @@ NSString *const JavaScriptScaleToFit = @"var meta = document.createElement('meta
     if (self) {
         _changeTitle = YES;
         _type = ITEMTYPE_BACK;
+        self.title = @"东莞无限";
     }
     return self;
 }
