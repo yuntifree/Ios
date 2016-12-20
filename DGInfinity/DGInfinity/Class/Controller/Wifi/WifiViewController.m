@@ -142,18 +142,19 @@ NetWorkMgrDelegate
     dispatch_once(&onceToken, ^{
         if ([[YYImageCache sharedCache] containsImageForKey:SApp.splashImage withType:YYImageCacheTypeDisk]) {
             UIWindow *window = [UIApplication sharedApplication].keyWindow;
-            DGSplashView *splash = [[DGSplashView alloc] initWithImage:[[YYImageCache sharedCache] getImageForKey:SApp.splashImage] target:SApp.splashTarget];
+            DGSplashView *splash = [[DGSplashView alloc] initWithImage:[[YYImageCache sharedCache] getImageForKey:SApp.splashImage] dst:SApp.splashDst title:SApp.splashTitle];
             [window addSubview:splash];
             _isHiddenStatusBar = YES;
             [self setNeedsStatusBarAppearanceUpdate];
             __weak typeof(self) wself = self;
-            splash.action = ^(enum SplashActionType type, NSString *target) {
+            splash.action = ^(enum SplashActionType type, NSString *dst, NSString *title) {
                 if (type == SplashActionTypeDismiss) {
                     wself.isHiddenStatusBar = NO;
                     [wself setNeedsStatusBarAppearanceUpdate];
                 } else if (type == SplashActionTypeGet) {
                     WebViewController *vc = [[WebViewController alloc] init];
-                    vc.url = target;
+                    vc.url = dst;
+                    vc.title = title;
                     [wself.navigationController pushViewController:vc animated:YES];
                 }
             };

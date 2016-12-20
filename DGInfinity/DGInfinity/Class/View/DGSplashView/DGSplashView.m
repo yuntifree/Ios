@@ -16,7 +16,8 @@ const int SECONDS = 3;
     UILabel *_secondLbl;
     dispatch_source_t _timer;
     
-    NSString *_target;
+    NSString *_dst;
+    NSString *_title;
 }
 @end
 
@@ -27,12 +28,13 @@ const int SECONDS = 3;
     DDDLog(@"DGSplashView dealloc");
 }
 
-- (instancetype)initWithImage:(UIImage *)image target:(NSString *)target
+- (instancetype)initWithImage:(UIImage *)image dst:(NSString *)dst title:(NSString *)title
 {
     self = [self initWithFrame:kScreenFrame];
     if (self) {
         _backView.image = image;
-        _target = target;
+        _dst = dst;
+        _title = title;
         [self fireTimer];
     }
     return self;
@@ -77,7 +79,7 @@ const int SECONDS = 3;
 - (void)dismiss
 {
     if (_action) {
-        _action(SplashActionTypeDismiss, nil);
+        _action(SplashActionTypeDismiss, nil, nil);
     }
     [self cancelTimer];
     [UIView animateWithDuration:0.25 animations:^{
@@ -95,7 +97,7 @@ const int SECONDS = 3;
 - (void)goBtnClick
 {
     if (_action) {
-        _action(SplashActionTypeGet, _target);
+        _action(SplashActionTypeGet, _dst, _title);
     }
     [self dismiss];
 }

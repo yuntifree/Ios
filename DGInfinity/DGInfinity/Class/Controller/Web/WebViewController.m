@@ -116,6 +116,18 @@ NSString *const JavaScriptScaleToFit = @"var meta = document.createElement('meta
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.

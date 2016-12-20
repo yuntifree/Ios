@@ -186,11 +186,12 @@
                     [self setConnectBtnStatus:ConnectStatusConnected];
                 } else {
                     // 别的网络（WiFi或者4G）
-                    if ([[NetworkManager shareManager] isWiFi]) {
-                        [self setConnectBtnStatus:ConnectStatusConnected];
-                    } else {
-                        [self setConnectBtnStatus:ConnectStatusNotConnect];
-                    }
+//                    if ([[NetworkManager shareManager] isWiFi]) {
+//                        [self setConnectBtnStatus:ConnectStatusConnected];
+//                    } else {
+//                        [self setConnectBtnStatus:ConnectStatusNotConnect];
+//                    }
+                    [self setConnectBtnStatus:ConnectStatusNotConnect];
                 }
             } else {
                 [self setConnectBtnStatus:ConnectStatusNotConnect];
