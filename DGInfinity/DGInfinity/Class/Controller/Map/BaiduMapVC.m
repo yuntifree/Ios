@@ -13,33 +13,6 @@
 #import "MapCGI.h"
 
 /**
- *  自定义PointAnnotation类
- */
-@interface LocationAnnotation : BMKPointAnnotation
-
-@property (nonatomic, assign) BOOL isMyLocation;
-
-@end
-
-@implementation LocationAnnotation
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        _isMyLocation = NO;
-    }
-    return self;
-}
-
-- (void)dealloc
-{
-    DDDLog(@"LocationAnnotation Dealloc");
-}
-
-@end
-
-/**
  *  自定义BMKActionPaopaoView类
  */
 @interface LocationActionPaopaoView : UIImageView
@@ -146,13 +119,12 @@
 {
     self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
     if (self) {
-        LocationAnnotation *anno = (LocationAnnotation *)annotation;
-        UIImage *image = anno.isMyLocation ? ImageNamed(@"target") : ImageNamed(@"bar-wifi");
+        UIImage *image = ImageNamed(@"bar-wifi");
         UIImageView *iv = [[UIImageView alloc] initWithImage:image];
         self.bounds = iv.bounds;
         [self addSubview:iv];
         
-        LocationActionPaopaoView *paopaoView = [[LocationActionPaopaoView alloc] initWithTitle:anno.title distance:MetersTwoCoordinate2D([[BaiduMapSDK shareBaiduMapSDK] getUserLocation].location.coordinate, anno.coordinate)];
+        LocationActionPaopaoView *paopaoView = [[LocationActionPaopaoView alloc] initWithTitle:annotation.title distance:MetersTwoCoordinate2D([[BaiduMapSDK shareBaiduMapSDK] getUserLocation].location.coordinate, annotation.coordinate)];
         BMKActionPaopaoView *paopao = [[BMKActionPaopaoView alloc] initWithCustomView:paopaoView];
         self.paopaoView = paopao;
     }
@@ -288,7 +260,7 @@
                 if ([infos isKindOfClass:[NSArray class]]) {
                     for (NSDictionary *info in infos) {
                         @autoreleasepool {
-                            LocationAnnotation *annotation = [[LocationAnnotation alloc] init];
+                            BMKPointAnnotation *annotation = [[BMKPointAnnotation alloc] init];
                             annotation.title = info[@"address"];
                             annotation.coordinate = CLLocationCoordinate2DMake([info[@"latitude"] doubleValue], [info[@"longitude"] doubleValue]);
                             NSString *hashFlag = [NSString stringWithFormat:@"%lf%lf", annotation.coordinate.latitude, annotation.coordinate.longitude];
@@ -325,12 +297,11 @@
 
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id<BMKAnnotation>)annotation
 {
-    if (![annotation isKindOfClass:[LocationAnnotation class]]) {
+    if (![annotation isKindOfClass:[BMKPointAnnotation class]]) {
         return nil;
     }
     
-    LocationAnnotation *anno = (LocationAnnotation *)annotation;
-    NSString *reuseIdentifier = anno.isMyLocation ? @"MyIdentifier" : @"LocationIdentifier";
+    static NSString *reuseIdentifier = @"LocationIdentifier";
     BMKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:reuseIdentifier];
     if (annotationView == nil) {
         annotationView = [[LocationAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];

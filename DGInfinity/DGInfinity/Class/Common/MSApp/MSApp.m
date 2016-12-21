@@ -110,9 +110,13 @@ static MSApp *mSapp = nil;
     [WiFiCGI getFlashAd:^(DGCgiResult *res) {
         if (E_OK == res._errno) {
             NSDictionary *data = res.data[@"data"];
-            if ([data isKindOfClass:[NSDictionary class]]) {
+            if (!data) {
+                SApp.splashImage = nil;
+                SApp.splashDst = nil;
+                SApp.splashTitle = nil;
+            } else if ([data isKindOfClass:[NSDictionary class]]) {
                 NSString *img = data[@"img"];
-                if (img.length) {
+                if (img.length && ![[YYImageCache sharedCache] containsImageForKey:img withType:YYImageCacheTypeDisk]) {
                     [[YYWebImageManager sharedManager] requestImageWithURL:[NSURL URLWithString:img] options:0 progress:nil transform:nil completion:^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
                         if (image) {
                             SApp.splashImage = url.absoluteString;

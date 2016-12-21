@@ -28,6 +28,7 @@
 @interface RequestManager ()
 {
     AFHTTPSessionManager *_mgr;
+    NSString *_serverUrl;
 }
 @end
 
@@ -58,6 +59,9 @@ static RequestManager *manager = nil;
         // Allowing Invalid SSL Certificates
         _mgr.securityPolicy.allowInvalidCertificates = YES;
         _mgr.securityPolicy.validatesDomainName = NO;
+        
+        // serverURL
+        _serverUrl = ServerURL;
     }
     return self;
 }
@@ -82,7 +86,7 @@ static RequestManager *manager = nil;
 
 - (NSString *)urlPath:(NSString *)cgi
 {
-    return [NSString stringWithFormat:@"%@%@",ServerURL, cgi];
+    return [NSString stringWithFormat:@"%@%@", _serverUrl, cgi];
 }
 
 - (void)loadAsync:(NSDictionary *)params cgi:(NSString *)cgi complete:(void(^)(DGCgiResult *res))complete
@@ -122,6 +126,9 @@ static RequestManager *manager = nil;
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NetworkHide;
+        if ([error.domain isEqualToString:NSURLErrorDomain]) {
+            _serverUrl = IPServerURL;
+        }
         DGCgiResult *r = [[DGCgiResult alloc] init];
         r._errno = E_CGI_FAILED;
         if ([[error localizedFailureReason] length]) {

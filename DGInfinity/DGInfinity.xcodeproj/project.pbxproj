@@ -316,6 +316,8 @@
 		6FFA16871DB606E10077E7C3 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA16841DB606E10077E7C3 /* SSKeychain.m */; };
 		6FFA16881DB606E10077E7C3 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA16861DB606E10077E7C3 /* SSKeychainQuery.m */; };
 		6FFA168C1DB6131B0077E7C3 /* libDongGuanSdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FFA168A1DB6131B0077E7C3 /* libDongGuanSdk.a */; };
+		9961A3581E0A7B2300870103 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9961A3561E0A7B2300870103 /* libcrypto.a */; };
+		9961A3591E0A7B2300870103 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9961A3571E0A7B2300870103 /* libssl.a */; };
 		998E17391E07926800189DDD /* tab_ico_buy_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 998E17371E07926800189DDD /* tab_ico_buy_blue@2x.png */; };
 		998E173A1E07926800189DDD /* tab_ico_buy_blue@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 998E17381E07926800189DDD /* tab_ico_buy_blue@3x.png */; };
 		998E17531E08051E00189DDD /* ActivityCGI.m in Sources */ = {isa = PBXBuildFile; fileRef = 998E17521E08051E00189DDD /* ActivityCGI.m */; };
@@ -744,6 +746,8 @@
 		6FFA16861DB606E10077E7C3 /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychainQuery.m; sourceTree = "<group>"; };
 		6FFA168A1DB6131B0077E7C3 /* libDongGuanSdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libDongGuanSdk.a; sourceTree = "<group>"; };
 		6FFA168B1DB6131B0077E7C3 /* UserAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAuthManager.h; sourceTree = "<group>"; };
+		9961A3561E0A7B2300870103 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		9961A3571E0A7B2300870103 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		998E17371E07926800189DDD /* tab_ico_buy_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_ico_buy_blue@2x.png"; sourceTree = "<group>"; };
 		998E17381E07926800189DDD /* tab_ico_buy_blue@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_ico_buy_blue@3x.png"; sourceTree = "<group>"; };
 		998E17511E08051E00189DDD /* ActivityCGI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCGI.h; sourceTree = "<group>"; };
@@ -761,12 +765,14 @@
 				6F4D36521DF54AE000483A66 /* libpingpp+alipay.a in Frameworks */,
 				6F2E65681DC9C47B00AF84BB /* libstdc++.6.0.9.tbd in Frameworks */,
 				6F2E65661DC9C47300AF84BB /* CoreTelephony.framework in Frameworks */,
+				9961A3581E0A7B2300870103 /* libcrypto.a in Frameworks */,
 				6F2E65641DC9C46700AF84BB /* libsqlite3.0.tbd in Frameworks */,
 				6F4D36531DF54AE000483A66 /* libpingpp+network.a in Frameworks */,
 				6F4D36541DF54AE000483A66 /* libpingpp+webview.a in Frameworks */,
 				6F2E65621DC9C45800AF84BB /* Security.framework in Frameworks */,
 				6F2E65601DC9C44900AF84BB /* CoreGraphics.framework in Frameworks */,
 				6F2E655E1DC9C44000AF84BB /* SystemConfiguration.framework in Frameworks */,
+				9961A3591E0A7B2300870103 /* libssl.a in Frameworks */,
 				6F2E655C1DC9C42900AF84BB /* OpenGLES.framework in Frameworks */,
 				6F4D36551DF54AE000483A66 /* libpingppcore.a in Frameworks */,
 				6F2E655A1DC9C3CF00AF84BB /* QuartzCore.framework in Frameworks */,
@@ -942,6 +948,8 @@
 		6F2E654E1DC9C2FA00AF84BB /* BaiduMapSDK */ = {
 			isa = PBXGroup;
 			children = (
+				9961A3561E0A7B2300870103 /* libcrypto.a */,
+				9961A3571E0A7B2300870103 /* libssl.a */,
 				6F91846B1DDDE3C600DC0526 /* mapapi.bundle */,
 				6F2E65691DC9C76000AF84BB /* BaiduMapSDK.h */,
 				6F2E656A1DC9C76000AF84BB /* BaiduMapSDK.m */,
@@ -2454,6 +2462,7 @@
 					"$(PROJECT_DIR)/DGInfinity/Lib/Pingpp",
 					"$(PROJECT_DIR)/DGInfinity/Lib/Pingpp/One",
 					"$(PROJECT_DIR)/DGInfinity/Lib/MiPush",
+					"$(PROJECT_DIR)/DGInfinity/Lib/BaiduMapSDK",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -2535,6 +2544,7 @@
 					"$(PROJECT_DIR)/DGInfinity/Lib/Pingpp",
 					"$(PROJECT_DIR)/DGInfinity/Lib/Pingpp/One",
 					"$(PROJECT_DIR)/DGInfinity/Lib/MiPush",
+					"$(PROJECT_DIR)/DGInfinity/Lib/BaiduMapSDK",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
