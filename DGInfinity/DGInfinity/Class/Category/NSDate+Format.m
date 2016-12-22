@@ -18,7 +18,7 @@
 
 + (NSDate *)dateWithTimeStr:(NSString *)timeStr
 {
-    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     return [dateFormat dateFromString:timeStr];
 }
@@ -28,6 +28,13 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:format];
     return [dateFormatter stringFromDate:date];
+}
+
++ (NSString *)formatStringWithDate:(NSDate *)date
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    return [dateFormat stringFromDate:date];
 }
 
 @end

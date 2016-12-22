@@ -1,14 +1,14 @@
 //
-//  PickerViewController.m
+//  DGPicker.m
 //  DGInfinity
 //
-//  Created by myeah on 16/12/16.
+//  Created by 刘启飞 on 2016/12/22.
 //  Copyright © 2016年 myeah. All rights reserved.
 //
 
-#import "PickerViewController.h"
+#import "DGPicker.h"
 
-@interface PickerViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface DGPicker () <UIPickerViewDataSource, UIPickerViewDelegate>
 
 // view
 @property (nonatomic, strong) UIToolbar *toolBar;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation PickerViewController
+@implementation DGPicker
 
 #pragma mark - lazy init
 
@@ -27,10 +27,11 @@
 {
     if (_toolBar == nil) {
         _toolBar = [[UIToolbar alloc] init];
+        _toolBar.backgroundColor = [UIColor whiteColor];
         [_toolBar setItems:@[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelClick)],
                              [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
                              [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneClick)]]];
-        [self.view addSubview:_toolBar];
+        [self addSubview:_toolBar];
     }
     return _toolBar;
 }
@@ -42,7 +43,7 @@
         _pickerView.backgroundColor = [UIColor whiteColor];
         _pickerView.dataSource = self;
         _pickerView.delegate = self;
-        [self.view addSubview:_pickerView];
+        [self addSubview:_pickerView];
     }
     return _pickerView;
 }
@@ -55,42 +56,48 @@
     return _sexArray;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor clearColor];
-    
-    [self.pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view);
-        make.right.equalTo(self.view);
-        make.bottom.equalTo(self.view);
-        make.height.equalTo(@150);
-    }];
-    
-    [self.toolBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view);
-        make.right.equalTo(self.view);
-        make.height.equalTo(@44);
-        make.bottom.equalTo(self.pickerView.mas_top);
-    }];
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = RGB(0x000000, 0.2);
+        
+        [self.toolBar mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self);
+            make.right.equalTo(self);
+            make.height.equalTo(@44);
+            make.top.equalTo(self.mas_bottom);
+            make.bottom.equalTo(self.pickerView.mas_top);
+        }];
+        
+        [self.pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self);
+            make.right.equalTo(self);
+            make.top.equalTo(self.toolBar.mas_bottom);
+            make.height.equalTo(@150);
+        }];
+    }
+    return self;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)showInView:(UIView *)view
+{
+    [view addSubview:self];
+    [self.toolBar mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_bottom).offset(-194);
+    }];
+    [self updateConstraints];
 }
 
 #pragma mark - button action
 - (void)cancelClick
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 - (void)doneClick
 {
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+    
 }
 
 #pragma mark - UIPickerViewDataSource, UIPickerViewDelegate

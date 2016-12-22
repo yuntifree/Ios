@@ -9,6 +9,7 @@
 #import "NetworkManager.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import <NetworkExtension/NEHotspotHelper.h>
+#import "AppDelegate.h"
 
 @interface NetworkManager ()
 {
@@ -121,6 +122,8 @@ static NetworkManager *manager = nil;
         NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:@"✅东莞无限城市WiFi，请点击连接", kNEHotspotHelperOptionDisplayName, nil];
         dispatch_queue_t queue = dispatch_queue_create("com.yunxingzh.ex", 0);
         BOOL success = [NEHotspotHelper registerWithOptions:options queue:queue handler:^(NEHotspotHelperCommand * cmd) {
+            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            [[NetworkManager shareManager] addNetworkObserver:appDelegate];
             if(cmd.commandType == kNEHotspotHelperCommandTypeEvaluate || cmd.commandType == kNEHotspotHelperCommandTypeFilterScanList)
             {
                 for (NEHotspotNetwork *network in cmd.networkList)
@@ -130,13 +133,14 @@ static NetworkManager *manager = nil;
                     {
                         [network setConfidence:kNEHotspotHelperConfidenceHigh];
                         NEHotspotHelperResponse *response = [cmd createResponse:kNEHotspotHelperResultSuccess];
+                        [response setNetworkList:@[network]];
                         [response setNetwork:network];
                         [response deliver];
                     }
                 }
             }
         }];
-        DDDLog(@"success = %i",success);
+        DDDLog(@"获取wifi列表%@",success ? @"成功" : @"失败");
     }
 }
 

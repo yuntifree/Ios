@@ -11,7 +11,7 @@
 #import "PayCGI.h"
 #import "AliyunOssService.h"
 #import "PhotoManager.h"
-#import "PickerViewController.h"
+#import "DGPicker.h"
 
 @interface ShoppingViewController () <PhotoManagerDelegate>
 
@@ -97,9 +97,8 @@
 }
 
 - (IBAction)pickerClick:(UIButton *)sender {
-    PickerViewController *picker = [[PickerViewController alloc] init];
-    picker.sourceType = PickerSourceTypeSex;
-    [self presentViewController:picker animated:YES completion:nil];
+    DGPicker *picker = [[DGPicker alloc] initWithFrame:kScreenFrame];
+    [picker showInView:[UIApplication sharedApplication].keyWindow];
 }
 
 - (void)didReceiveMemoryWarning {

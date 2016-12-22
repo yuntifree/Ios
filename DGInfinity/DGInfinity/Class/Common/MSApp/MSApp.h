@@ -21,12 +21,16 @@
 
 // app info
 @property (nonatomic, copy) NSString *appVersion;
+
+// splash data
 @property (nonatomic, copy) NSString *splashImage;
 @property (nonatomic, copy) NSString *splashDst;
 @property (nonatomic, copy) NSString *splashTitle;
+@property (nonatomic, copy) NSString *splashExpire;
 
 // temp data
 @property (nonatomic, strong) NSMutableArray *reportArray;
+@property (nonatomic, assign) BOOL beWakened;
 
 + (instancetype)sharedMSApp;
 + (void)destory;

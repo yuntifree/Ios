@@ -13,5 +13,6 @@
 + (NSString *)stringWithDateStr:(NSString *)date formatStr:(NSString *)format;
 + (NSDate *)dateWithTimeStr:(NSString *)timeStr;
 + (NSString *)stringWithDate:(NSDate *)date formatStr:(NSString *)format;
++ (NSString *)formatStringWithDate:(NSDate *)date;
 
 @end

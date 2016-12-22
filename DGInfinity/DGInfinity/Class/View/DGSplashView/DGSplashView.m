@@ -8,8 +8,6 @@
 
 #import "DGSplashView.h"
 
-const int SECONDS = 3;
-
 @interface DGSplashView ()
 {
     UIImageView *_backView;
@@ -18,6 +16,7 @@ const int SECONDS = 3;
     
     NSString *_dst;
     NSString *_title;
+    int _seconds;
 }
 @end
 
@@ -44,6 +43,7 @@ const int SECONDS = 3;
 {
     self = [super initWithFrame:frame];
     if (self) {
+        _seconds = SApp.beWakened ? 5 : 3;
         self.backgroundColor = [UIColor whiteColor];
         
         _backView = [[UIImageView alloc] initWithFrame:self.bounds];
@@ -63,7 +63,7 @@ const int SECONDS = 3;
         _secondLbl.textColor = COLOR(0, 160, 251, 1);
         _secondLbl.font = SystemFont(13);
         _secondLbl.textAlignment = NSTextAlignmentCenter;
-        _secondLbl.text = [NSString stringWithFormat:@"%d",SECONDS];
+        _secondLbl.text = [NSString stringWithFormat:@"%d",_seconds];
         [skipBtn addSubview:_secondLbl];
         
         CGFloat height = frame.size.width * 78 / 375;
@@ -124,13 +124,12 @@ const int SECONDS = 3;
 
 - (void)timerRun
 {
-    static int seconds = SECONDS;
-    if (seconds) {
-        _secondLbl.text = [NSString stringWithFormat:@"%d",seconds];
+    if (_seconds) {
+        _secondLbl.text = [NSString stringWithFormat:@"%d",_seconds];
     } else {
         [self dismiss];
     }
-    seconds--;
+    _seconds--;
 }
 
 @end

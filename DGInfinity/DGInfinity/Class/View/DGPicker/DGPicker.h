@@ -1,19 +1,21 @@
 //
-//  PickerViewController.h
+//  DGPicker.h
 //  DGInfinity
 //
-//  Created by myeah on 16/12/16.
+//  Created by 刘启飞 on 2016/12/22.
 //  Copyright © 2016年 myeah. All rights reserved.
 //
 
-#import "DGViewController.h"
+#import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, PickerSourceType) {
     PickerSourceTypeSex = 0,
 };
 
-@interface PickerViewController : DGViewController
+@interface DGPicker : UIView
 
 @property (nonatomic, assign) PickerSourceType sourceType;
+
+- (void)showInView:(UIView *)view;
 
 @end

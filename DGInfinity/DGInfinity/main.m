@@ -11,8 +11,10 @@
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
+#if !DEBUG
         // TingYun
         [NBSAppAgent startWithAppID:TingYunAppKey];
+#endif
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }
 }

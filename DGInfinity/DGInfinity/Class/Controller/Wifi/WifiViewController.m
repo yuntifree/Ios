@@ -96,6 +96,10 @@ NetWorkMgrDelegate
         }
     }];
 #endif
+    if (SApp.beWakened) {
+        SApp.beWakened = NO;
+        [self showSplashView];
+    }
 }
 
 - (void)doLogon
@@ -133,33 +137,30 @@ NetWorkMgrDelegate
     } else {
         [self.navigationController.navigationBar setBarTintColor:COLOR(0, 156, 251, 1)];
     }
-    [self showSplashView];
 }
 
 - (void)showSplashView
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        if ([[YYImageCache sharedCache] containsImageForKey:SApp.splashImage withType:YYImageCacheTypeDisk]) {
-            UIWindow *window = [UIApplication sharedApplication].keyWindow;
-            DGSplashView *splash = [[DGSplashView alloc] initWithImage:[[YYImageCache sharedCache] getImageForKey:SApp.splashImage] dst:SApp.splashDst title:SApp.splashTitle];
-            [window addSubview:splash];
-            _isHiddenStatusBar = YES;
-            [self setNeedsStatusBarAppearanceUpdate];
-            __weak typeof(self) wself = self;
-            splash.action = ^(enum SplashActionType type, NSString *dst, NSString *title) {
-                if (type == SplashActionTypeDismiss) {
-                    wself.isHiddenStatusBar = NO;
-                    [wself setNeedsStatusBarAppearanceUpdate];
-                } else if (type == SplashActionTypeGet) {
-                    WebViewController *vc = [[WebViewController alloc] init];
-                    vc.url = dst;
-                    vc.title = title;
-                    [wself.navigationController pushViewController:vc animated:YES];
-                }
-            };
-        }
-    });
+    NSString *dateStr = [NSDate formatStringWithDate:[NSDate date]];
+    if (SApp.splashExpire && [SApp.splashExpire compare:dateStr] != NSOrderedAscending && [[YYImageCache sharedCache] containsImageForKey:SApp.splashImage withType:YYImageCacheTypeDisk]) {
+        UIWindow *window = [UIApplication sharedApplication].keyWindow;
+        DGSplashView *splash = [[DGSplashView alloc] initWithImage:[[YYImageCache sharedCache] getImageForKey:SApp.splashImage] dst:SApp.splashDst title:SApp.splashTitle];
+        [window addSubview:splash];
+        _isHiddenStatusBar = YES;
+        [self setNeedsStatusBarAppearanceUpdate];
+        __weak typeof(self) wself = self;
+        splash.action = ^(enum SplashActionType type, NSString *dst, NSString *title) {
+            if (type == SplashActionTypeDismiss) {
+                wself.isHiddenStatusBar = NO;
+                [wself setNeedsStatusBarAppearanceUpdate];
+            } else if (type == SplashActionTypeGet) {
+                WebViewController *vc = [[WebViewController alloc] init];
+                vc.url = dst;
+                vc.title = title;
+                [wself.navigationController pushViewController:vc animated:YES];
+            }
+        };
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -189,6 +190,9 @@ NetWorkMgrDelegate
     [self setUpSubViews];
     [self getWeatherAndNews];
     
+    if (!SApp.beWakened) {
+        [self showSplashView];
+    }
     // getFlashAD
     [SApp getFlashAD];
 }

@@ -76,18 +76,24 @@
 - (void)setUpBackItem
 {
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backBtn];
-    UIBarButtonItem *fixedSpaceBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFixedSpace target: nil action: nil];
-    fixedSpaceBarButtonItem.width = -15;
-    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:fixedSpaceBarButtonItem, backBarButtonItem, nil];
+    UIBarButtonItem *leftFixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    leftFixedSpace.width = -15;
+    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:leftFixedSpace, backBarButtonItem, nil];
+    UIBarButtonItem *rightFixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    rightFixedSpace.width = -15;
+    self.navigationItem.rightBarButtonItems = @[rightFixedSpace, [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil]];
 }
 
 - (void)setUpCloseItem
 {
-    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView: self.backBtn];
-    UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView: self.closeBtn];
-    UIBarButtonItem *fixedSpaceBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFixedSpace target: nil action: nil];
-    fixedSpaceBarButtonItem.width = -15;
-    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:fixedSpaceBarButtonItem, backBarButtonItem, closeBarButtonItem, nil];
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backBtn];
+    UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.closeBtn];
+    UIBarButtonItem *leftFixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    leftFixedSpace.width = -15;
+    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:leftFixedSpace, backBarButtonItem, closeBarButtonItem, nil];
+    UIBarButtonItem *rightFixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    rightFixedSpace.width = -15;
+    self.navigationItem.rightBarButtonItems = @[rightFixedSpace, [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil]];
 }
 
 - (void)backBtnClick:(id)sender

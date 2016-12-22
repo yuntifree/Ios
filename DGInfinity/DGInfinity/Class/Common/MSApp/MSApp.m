@@ -22,6 +22,7 @@
 #define KUD_SPLASHIMAGE             @"KUD_SPLASHIMAGE"
 #define KUD_SPLASHDST               @"KUD_SPLASHDST"
 #define KUD_SPLASHTITLE             @"KUD_SPLASHTITLE"
+#define KUD_SPLASHEXPIRE            @"KUD_SPLASHEXPIRE"
 
 @implementation MSApp
 
@@ -51,6 +52,7 @@ static MSApp *mSapp = nil;
     self = [super init];
     if (self) {
         _reportArray = [NSMutableArray array];
+        _beWakened = NO;
     }
     return self;
 }
@@ -114,17 +116,26 @@ static MSApp *mSapp = nil;
                 SApp.splashImage = nil;
                 SApp.splashDst = nil;
                 SApp.splashTitle = nil;
+                SApp.splashExpire = nil;
             } else if ([data isKindOfClass:[NSDictionary class]]) {
                 NSString *img = data[@"img"];
-                if (img.length && ![[YYImageCache sharedCache] containsImageForKey:img withType:YYImageCacheTypeDisk]) {
-                    [[YYWebImageManager sharedManager] requestImageWithURL:[NSURL URLWithString:img] options:0 progress:nil transform:nil completion:^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
-                        if (image) {
-                            SApp.splashImage = url.absoluteString;
-                            SApp.splashDst = data[@"dst"];
-                            SApp.splashTitle = data[@"title"];
-                            [[YYImageCache sharedCache] setImage:image forKey:SApp.splashImage];
-                        }
-                    }];
+                if (img.length) {
+                    if ([[YYImageCache sharedCache] containsImageForKey:img withType:YYImageCacheTypeDisk]) {
+                        SApp.splashImage = img;
+                        SApp.splashDst = data[@"dst"];
+                        SApp.splashTitle = data[@"title"];
+                        SApp.splashExpire = data[@"expire"];
+                    } else {
+                        [[YYWebImageManager sharedManager] requestImageWithURL:[NSURL URLWithString:img] options:0 progress:nil transform:nil completion:^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
+                            if (image) {
+                                SApp.splashImage = img;
+                                SApp.splashDst = data[@"dst"];
+                                SApp.splashTitle = data[@"title"];
+                                SApp.splashExpire = data[@"expire"];
+                                [[YYImageCache sharedCache] setImage:image forKey:SApp.splashImage];
+                            }
+                        }];
+                    }
                 }
             }
         }
@@ -239,6 +250,17 @@ static MSApp *mSapp = nil;
 - (NSString *)splashTitle
 {
     return [NSUSERDEFAULTS objectForKey:KUD_SPLASHTITLE];
+}
+
+- (void)setSplashExpire:(NSString *)splashExpire
+{
+    [NSUSERDEFAULTS setObject:splashExpire forKey:KUD_SPLASHEXPIRE];
+    [NSUSERDEFAULTS synchronize];
+}
+
+- (NSString *)splashExpire
+{
+    return [NSUSERDEFAULTS objectForKey:KUD_SPLASHEXPIRE];
 }
 
 #pragma mark - ReportClick

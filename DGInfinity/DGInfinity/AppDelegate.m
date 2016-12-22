@@ -9,14 +9,13 @@
 #import "AppDelegate.h"
 #import "DGTabBarController.h"
 #import <IQKeyboardManager.h>
-#import "NetworkManager.h"
 #import "LoginViewController.h"
 #import "AnimationManager.h"
 #import "LaunchGuideViewController.h"
 #import "DGNavigationViewController.h"
 #import "MiPushSDK.h"
 
-@interface AppDelegate () <NetWorkMgrDelegate, BMKGeneralDelegate, MiPushSDKDelegate, UNUserNotificationCenterDelegate>
+@interface AppDelegate () <BMKGeneralDelegate, MiPushSDKDelegate, UNUserNotificationCenterDelegate>
 {
     UIBackgroundTaskIdentifier _backgroundTaskID;
 }
@@ -81,6 +80,11 @@
     
     // autoLogin
     [MSApp autoLogin];
+    
+    // App 被 NetworkExtension 被动启动时，applicationState == UIApplicationStateBackground
+    if (application.applicationState == UIApplicationStateBackground) {
+        SApp.beWakened = YES;
+    }
     
     return YES;
 }
