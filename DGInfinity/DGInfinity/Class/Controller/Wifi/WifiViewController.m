@@ -23,6 +23,7 @@
 #import "WiFiWelfareViewController.h"
 #import "NetworkManager.h"
 #import "DGSplashView.h"
+#import "SettingViewController.h"
 
 #define Height (kScreenHeight - 20 - 44 - 49)
 
@@ -199,8 +200,15 @@ NetWorkMgrDelegate
 
 - (void)setUpNavItem
 {
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage originalImage:@"wireless_ico_setting"] style:UIBarButtonItemStylePlain target:self action:@selector(goSetting)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage originalImage:@"wireless_ico_QRcode"] style:UIBarButtonItemStylePlain target:self action:@selector(scanQRcode)];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:ImageNamed(@"text")];
+}
+
+- (void)goSetting
+{
+    SettingViewController *vc = [[SettingViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)scanQRcode

@@ -21,6 +21,11 @@
 
 @implementation DGPicker
 
+- (void)dealloc
+{
+    DDDLog(@"DGPicker Dealloc");
+}
+
 #pragma mark - lazy init
 
 - (UIToolbar *)toolBar
@@ -56,9 +61,9 @@
     return _sexArray;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)init
 {
-    self = [super initWithFrame:frame];
+    self = [super init];
     if (self) {
         self.backgroundColor = RGB(0x000000, 0.2);
         
@@ -73,7 +78,6 @@
         [self.pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self);
             make.right.equalTo(self);
-            make.top.equalTo(self.toolBar.mas_bottom);
             make.height.equalTo(@150);
         }];
     }
@@ -83,21 +87,45 @@
 - (void)showInView:(UIView *)view
 {
     [view addSubview:self];
+    [self mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(view);
+    }];
+    [self layoutIfNeeded];
+    
     [self.toolBar mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_bottom).offset(-194);
     }];
-    [self updateConstraints];
+    
+    self.alpha = 0;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.alpha = 1;
+        [self layoutIfNeeded];
+    }];
+}
+
+- (void)dismiss
+{
+    [self.toolBar mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_bottom);
+    }];
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        self.alpha = 0;
+        [self layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
 }
 
 #pragma mark - button action
 - (void)cancelClick
 {
-    
+    [self dismiss];
 }
 
 - (void)doneClick
 {
-    
+    [self dismiss];
 }
 
 #pragma mark - UIPickerViewDataSource, UIPickerViewDelegate
@@ -128,6 +156,26 @@
         return self.sexArray[row];
     }
     return @"";
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+{
+    //设置分割线的颜色
+    for(UIView *singleLine in pickerView.subviews)
+    {
+        if (singleLine.frame.size.height < 1)
+        {
+            singleLine.backgroundColor = RGB(0x000000, 0.2);
+        }
+    }
+    
+    //设置文字的属性
+    UILabel *genderLabel = [UILabel new];
+    genderLabel.textAlignment = NSTextAlignmentCenter;
+    genderLabel.text = self.sexArray[row];
+    genderLabel.font = SystemFont(20);
+    
+    return genderLabel;
 }
 
 @end

@@ -97,8 +97,8 @@
 }
 
 - (IBAction)pickerClick:(UIButton *)sender {
-    DGPicker *picker = [[DGPicker alloc] initWithFrame:kScreenFrame];
-    [picker showInView:[UIApplication sharedApplication].keyWindow];
+    DGPicker *picker = [[DGPicker alloc] init];
+    [picker showInView:self.view];
 }
 
 - (void)didReceiveMemoryWarning {
