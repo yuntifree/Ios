@@ -143,9 +143,9 @@ NetWorkMgrDelegate
 - (void)showSplashView
 {
     NSString *dateStr = [NSDate formatStringWithDate:[NSDate date]];
-    if (SApp.splashExpire && [SApp.splashExpire compare:dateStr] != NSOrderedAscending && [[YYImageCache sharedCache] containsImageForKey:SApp.splashImage withType:YYImageCacheTypeDisk]) {
+    if (SApp.splashExpire && [SApp.splashExpire compare:dateStr] != NSOrderedAscending && [Tools containsImageForKey:SApp.splashImage]) {
         UIWindow *window = [UIApplication sharedApplication].keyWindow;
-        DGSplashView *splash = [[DGSplashView alloc] initWithImage:[[YYImageCache sharedCache] getImageForKey:SApp.splashImage] dst:SApp.splashDst title:SApp.splashTitle];
+        DGSplashView *splash = [[DGSplashView alloc] initWithImage:[Tools getImageForKey:SApp.splashImage] dst:SApp.splashDst title:SApp.splashTitle];
         [window addSubview:splash];
         _isHiddenStatusBar = YES;
         [self setNeedsStatusBarAppearanceUpdate];

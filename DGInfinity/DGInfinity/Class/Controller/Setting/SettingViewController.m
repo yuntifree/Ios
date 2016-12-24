@@ -56,7 +56,6 @@
     _listView.tableHeaderView = header;
     CGFloat footerHeight = IPHONE4 ? 80 : kScreenHeight - 64 - header.height - 165;
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, footerHeight)];
-    _listView.tableFooterView = footerView;
     SettingFooterView *footer = [[SettingFooterView alloc] initWithFrame:footerView.bounds];
     __weak typeof(self) wself = self;
     footer.tap = ^ {
@@ -66,6 +65,7 @@
         [wself.navigationController pushViewController:vc animated:YES];
     };
     [footerView addSubview:footer];
+    _listView.tableFooterView = footerView;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -112,10 +112,10 @@
         {
             [[YYWebImageManager sharedManager].cache.diskCache removeAllObjectsWithProgressBlock:^(int removedCount, int totalCount) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [SVProgressHUD showWithStatus:@"请稍后..."];
+                    [SVProgressHUD showWithStatus:@"清理缓存中..."];
                 });
             } endBlock:^(BOOL error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [SVProgressHUD dismiss];
                     SettingModel *model = self.dataArray[indexPath.row];
                     model.desc = @"0.0M";

@@ -25,5 +25,8 @@
 + (BOOL)isAllowedNotification;
 + (NSString *)dictionaryToJsonString:(NSDictionary *)dictionary;
 + (NSDictionary *)jsonStringToDictionary:(NSString *)jsonString;
++ (void)saveImage:(UIImage *)image forKey:(NSString *)key;
++ (BOOL)containsImageForKey:(NSString *)key;
++ (UIImage *)getImageForKey:(NSString *)key;
 
 @end

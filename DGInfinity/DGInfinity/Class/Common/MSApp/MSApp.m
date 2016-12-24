@@ -120,7 +120,7 @@ static MSApp *mSapp = nil;
             } else if ([data isKindOfClass:[NSDictionary class]]) {
                 NSString *img = data[@"img"];
                 if (img.length) {
-                    if ([[YYImageCache sharedCache] containsImageForKey:img withType:YYImageCacheTypeDisk]) {
+                    if ([Tools containsImageForKey:img]) {
                         SApp.splashImage = img;
                         SApp.splashDst = data[@"dst"];
                         SApp.splashTitle = data[@"title"];
@@ -132,7 +132,7 @@ static MSApp *mSapp = nil;
                                 SApp.splashDst = data[@"dst"];
                                 SApp.splashTitle = data[@"title"];
                                 SApp.splashExpire = data[@"expire"];
-                                [[YYImageCache sharedCache] setImage:image forKey:SApp.splashImage];
+                                [Tools saveImage:image forKey:img];
                             }
                         }];
                     }

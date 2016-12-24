@@ -368,4 +368,33 @@
     return dictionary;
 }
 
++ (void)saveImage:(UIImage *)image forKey:(NSString *)key
+{
+    if (!image || !key) return;
+    NSData *imgData = UIImagePNGRepresentation(image);
+    if (!imgData) {
+        imgData = UIImageJPEGRepresentation(image, 1.0);
+    }
+    [NSUSERDEFAULTS setObject:imgData forKey:key];
+    [NSUSERDEFAULTS synchronize];
+}
+
++ (BOOL)containsImageForKey:(NSString *)key
+{
+    if (!key) return NO;
+    NSData *imgData = [NSUSERDEFAULTS objectForKey:key];
+    return imgData != nil;
+}
+
++ (UIImage *)getImageForKey:(NSString *)key
+{
+    if (!key) return nil;
+    UIImage *image = nil;
+    NSData *imgData = [NSUSERDEFAULTS objectForKey:key];
+    if (imgData) {
+        image = [[UIImage alloc] initWithData:imgData];
+    }
+    return image;
+}
+
 @end
