@@ -39,4 +39,13 @@
     
     return _brand;
 }
+
+- (NSString *)hostname
+{
+    if (_hostname == nil || _hostname == NULL || _hostname == (id)[NSNull null]) {
+        return @"";
+    }
+    return _hostname;
+}
+
 @end

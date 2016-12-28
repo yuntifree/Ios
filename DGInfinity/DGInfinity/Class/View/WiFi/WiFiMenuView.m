@@ -68,6 +68,7 @@
     NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"img_bg_day.png"];
     _backView.image = [UIImage imageWithContentsOfFile:imagePath];
     
+    [self setConnectBtnStatus:ConnectStatusNotConnect];
     [self checkConnectBtnStatus];
 }
 
@@ -82,12 +83,7 @@
         _currentStatus = ENV_LOGIN;
         _connectBtn.selected = YES;
         [_connectBtn setTitle:@"" forState:UIControlStateNormal];
-        NSString *ssid = [Tools getCurrentSSID];
-        if ([ssid isEqualToString:WIFISDK_SSID]) {
-            _statusLbl.text = @"已连接东莞城市免费WiFi";
-        } else {
-            _statusLbl.text = [NSString stringWithFormat:@"已连接%@",ssid];
-        }
+        _statusLbl.text = @"已连接东莞城市免费WiFi";
         [_halo stop];
     }
 }

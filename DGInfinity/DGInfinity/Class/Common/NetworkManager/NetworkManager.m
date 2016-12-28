@@ -91,7 +91,7 @@ static NetworkManager *manager = nil;
 
 - (BOOL)isWiFi
 {
-    return _currentStatus == ReachableViaWiFi;
+    return [self currentReachabilityStatus] == ReachableViaWiFi;
 }
 
 - (void)addNetworkObserver:(id<NetWorkMgrDelegate>)delegate
@@ -124,7 +124,7 @@ static NetworkManager *manager = nil;
         BOOL success = [NEHotspotHelper registerWithOptions:options queue:queue handler:^(NEHotspotHelperCommand * cmd) {
             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
             [[NetworkManager shareManager] addNetworkObserver:appDelegate];
-            if(cmd.commandType == kNEHotspotHelperCommandTypeEvaluate || cmd.commandType == kNEHotspotHelperCommandTypeFilterScanList)
+            if (cmd.commandType == kNEHotspotHelperCommandTypeEvaluate || cmd.commandType == kNEHotspotHelperCommandTypeFilterScanList)
             {
                 for (NEHotspotNetwork *network in cmd.networkList)
                 {

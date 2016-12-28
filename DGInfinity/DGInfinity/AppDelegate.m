@@ -99,6 +99,7 @@
     [[UINavigationBar appearance] setBarTintColor:COLOR(0, 156, 251, 1)];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    [SVProgressHUD setMinimumDismissTimeInterval:1.5];
 }
 
 - (void)setRootViewController

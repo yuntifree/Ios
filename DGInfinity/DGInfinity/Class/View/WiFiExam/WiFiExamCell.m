@@ -50,7 +50,7 @@
 
 - (void)setDeviceValue:(WiFiExamDeviceModel *)model
 {
-    _brandLbl.text = model.brand.length ? model.brand : @"未知设备";
+    _brandLbl.text = model.hostname;
     _ipLbl.text = [NSString stringWithFormat:@"IP：%@",model.ip];
 }
 

@@ -78,7 +78,28 @@
     }
     
     //Getting the available IPs to ping based on our network subnet.
-    self.ipsToPing = [LANProperties getAllHostsForIP:self.device.ipAddress andSubnet:self.device.subnetMask];
+//    self.ipsToPing = [LANProperties getAllHostsForIP:self.device.ipAddress andSubnet:self.device.subnetMask];
+    
+    //
+    NSArray *segments = [self.device.ipAddress componentsSeparatedByString:@"."];
+    NSString *result = nil;
+    if (segments.count == 4) {
+        result = [NSString stringWithFormat:@"%@.%@.%@.",segments[0], segments[1], segments[2]];
+    } else {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(lanScanDidFailedToScan)]) {
+            [self.delegate lanScanDidFailedToScan];
+        }
+        return;
+    }
+    
+    NSMutableArray *ipsToPing = [[NSMutableArray alloc] init];
+    for (int i = 1; i < 255; i++) {
+        @autoreleasepool {
+            [ipsToPing addObject:[NSString stringWithFormat:@"%@%i",result, i]];
+        }
+    }
+    self.ipsToPing = ipsToPing;
+    //
 
     //The counter of how much pings have been made
     self.currentHost=0;

@@ -110,18 +110,21 @@
     switch (indexPath.row) {
         case 0:
         {
-            [[YYWebImageManager sharedManager].cache.diskCache removeAllObjectsWithProgressBlock:^(int removedCount, int totalCount) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [SVProgressHUD showWithStatus:@"清理缓存中..."];
-                });
-            } endBlock:^(BOOL error) {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [SVProgressHUD dismiss];
-                    SettingModel *model = self.dataArray[indexPath.row];
-                    model.desc = @"0.0M";
-                    [_listView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                });
-            }];
+            YYDiskCache *diskCache = [YYWebImageManager sharedManager].cache.diskCache;
+            if (diskCache.totalCount) {
+                [diskCache removeAllObjectsWithProgressBlock:^(int removedCount, int totalCount) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [SVProgressHUD showWithStatus:@"清理缓存中..."];
+                    });
+                } endBlock:^(BOOL error) {
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [SVProgressHUD showSuccessWithStatus:@"缓存已清除"];
+                        SettingModel *model = self.dataArray[indexPath.row];
+                        model.desc = @"0.0M";
+                        [_listView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                    });
+                }];
+            }
         }
             break;
         case 1:

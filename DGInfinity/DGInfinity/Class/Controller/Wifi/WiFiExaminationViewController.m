@@ -20,6 +20,7 @@
     NSMutableArray *_deviceArray;
     NSArray *_descArray;
     NSString *_localIP;
+    NSString *_serverIP;
 }
 
 @property (nonatomic, strong) MainPresenter *presenter;
@@ -99,13 +100,6 @@
         return;
     }
     
-    if (![[Tools getWlanIPAddress] hasPrefix:@"192.168"]) {
-        [self showAlertWithTitle:@"提示" message:@"当前网络无法扫描局域网设备" cancelTitle:@"知道了" cancelHandler:^(UIAlertAction *action) {
-            [wself.navigationController popViewControllerAnimated:YES];
-        } defaultTitle:nil defaultHandler:nil];
-        return;
-    }
-    
     [self.presenter scanButtonClicked];
 }
 
@@ -125,7 +119,8 @@
     
     // init network desc
     _localIP = [Tools getWlanIPAddress];
-    _descArray = @[[WiFiExamDescModel createWithTitle:@"IP地址" desc:[NSString stringWithFormat:@"IP：%@",[Tools getServerWiFiIPAddress]]],
+    _serverIP = [Tools getServerWiFiIPAddress];
+    _descArray = @[[WiFiExamDescModel createWithTitle:@"网关地址" desc:[NSString stringWithFormat:@"IP：%@",_serverIP]],
                    [WiFiExamDescModel createWithTitle:@"MAC地址" desc:[Tools getBSSID]],
                    [WiFiExamDescModel createWithTitle:@"子网掩码" desc:[Tools getWlanSubnetMask]]];
 }
@@ -150,10 +145,10 @@
             }
             NSArray *temArray = [NSArray arrayWithArray:self.presenter.connectedDevices];
             for (Device *device in temArray) {
-                if ([device.ipAddress isEqualToString:[Tools getServerWiFiIPAddress]]) continue;
-                WiFiExamDeviceModel *model = [WiFiExamDeviceModel createWithBrand:device.brand ip:device.ipAddress];
+                if ([device.ipAddress isEqualToString:_serverIP]) continue;
+                WiFiExamDeviceModel *model = [WiFiExamDeviceModel createWithBrand:device.brand ip:device.ipAddress hostname:device.hostname];
                 if ([device.ipAddress isEqualToString:_localIP]) {
-                    model.brand = [NSString stringWithFormat:@"%@（本机）",model.brand];
+                    model.hostname = [NSString stringWithFormat:@"%@（本机）",model.hostname];
                 }
                 [_deviceArray addObject:model];
             }

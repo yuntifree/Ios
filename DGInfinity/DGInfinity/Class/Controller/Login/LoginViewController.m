@@ -151,7 +151,7 @@
     NSString *code = [_codeField.text deleteHeadEndSpace];
 #if (!TARGET_IPHONE_SIMULATOR)
     if (![phone isEqualToString:SApp.username] && ![phone isEqualToString:TestAccount]) {
-        [self makeToast:@"手机号不正确"];
+        [self makeToast:@"请先获取验证码"];
         return;
     }
     if (![code isEqualToString:SApp.wifipass] && ![code isEqualToString:TestPassword]) {

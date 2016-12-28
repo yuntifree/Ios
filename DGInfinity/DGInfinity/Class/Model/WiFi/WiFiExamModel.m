@@ -14,11 +14,11 @@
 
 @implementation WiFiExamDeviceModel
 
-+ (instancetype)createWithBrand:(NSString *)brand ip:(NSString *)ip
++ (instancetype)createWithBrand:(NSString *)brand ip:(NSString *)ip hostname:(NSString *)hostname
 {
     WiFiExamDeviceModel *model = [WiFiExamDeviceModel new];
-    model.brand = brand;
     model.ip = ip;
+    model.hostname = hostname.length ? [[hostname stringByReplacingOccurrencesOfString:@".lan" withString:@""] capitalizedString] : brand.length ? brand : @"未知设备";
     return model;
 }
 

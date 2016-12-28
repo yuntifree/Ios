@@ -21,7 +21,7 @@
 
 - (NSString *)title
 {
-    return @"抢购";
+    return @"测试";
 }
 
 - (void)viewDidLoad {

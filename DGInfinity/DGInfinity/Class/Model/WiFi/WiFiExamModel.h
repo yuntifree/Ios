@@ -14,10 +14,10 @@
 
 @interface WiFiExamDeviceModel : WiFiExamModel
 
-@property (nonatomic, copy) NSString *brand;
+@property (nonatomic, copy) NSString *hostname;
 @property (nonatomic, copy) NSString *ip;
 
-+ (instancetype)createWithBrand:(NSString *)brand ip:(NSString *)ip;
++ (instancetype)createWithBrand:(NSString *)brand ip:(NSString *)ip hostname:(NSString *)hostname;
 
 @end
 

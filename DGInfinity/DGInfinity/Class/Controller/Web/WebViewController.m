@@ -23,10 +23,6 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
                                                 }, false); \
                                             } \
                                         })()";
-NSString *const JavaScriptScaleToFit = @"var meta = document.createElement('meta'); \
-                                         meta.setAttribute('name', 'viewport'); \
-                                         meta.setAttribute('content', 'width=device-width'); \
-                                         document.getElementsByTagName('head')[0].appendChild(meta);";
 
 @interface WebViewController () <WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler>
 {
@@ -56,11 +52,9 @@ NSString *const JavaScriptScaleToFit = @"var meta = document.createElement('meta
 - (WKWebView *)webView
 {
     if (_webView == nil) {
-        WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:JavaScriptScaleToFit injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
         WKWebViewConfiguration *config = [WKWebViewConfiguration new];
         config.preferences = [WKPreferences new];
         config.userContentController = [WKUserContentController new];
-        [config.userContentController addUserScript:wkUScript];
         [config.userContentController addScriptMessageHandler:[[WeakScriptMessageDelegate alloc] initWithDelegate:self] name:JSHOST];
         if (!IOS9) {
             config.mediaPlaybackRequiresUserAction = NO;
@@ -120,13 +114,17 @@ NSString *const JavaScriptScaleToFit = @"var meta = document.createElement('meta
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    if (!_changeTitle || _newsType == NT_VIDEO) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    if (!self.navigationController.interactivePopGestureRecognizer.enabled) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
 }
 
 - (void)viewDidLoad {
