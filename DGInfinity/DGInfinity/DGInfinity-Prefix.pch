@@ -31,6 +31,7 @@
 #import "NSString+Format.h"
 #import "Pingpp.h"
 #import <Masonry.h>
+#import "UINavigationBar+ExclusiveTouch.h"
 
 #if !(TARGET_IPHONE_SIMULATOR)
 #import "UserAuthManager.h"
@@ -60,6 +61,14 @@
 #else
 #	define SCLog(...)   NSLog(@"<%@:%d>%s %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, __FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
 #endif
+
+#define SuppressPerformSelectorLeakWarning(Stuff) \
+do { \
+    _Pragma("clang diagnostic push") \
+    _Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
+    Stuff; \
+    _Pragma("clang diagnostic pop") \
+} while (0)
 
 #define NetworkShow [UIApplication sharedApplication].networkActivityIndicatorVisible=YES
 #define NetworkHide [UIApplication sharedApplication].networkActivityIndicatorVisible=NO

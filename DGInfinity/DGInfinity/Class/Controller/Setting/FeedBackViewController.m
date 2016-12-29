@@ -14,6 +14,7 @@
     __weak IBOutlet UITextView *_inputTextView;
     __weak IBOutlet UILabel *_placeholderLbl;
     __weak IBOutlet UIButton *_submitBtn;
+    __weak IBOutlet UITextField *_contactField;
     
 }
 @end
@@ -28,24 +29,44 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.view.backgroundColor = RGB(0xf0f0f0, 1);
+    
+    [self setUpSubViews];
+}
+
+- (void)setUpSubViews
+{
+    NSDictionary *attriDic = @{NSFontAttributeName: SystemFont(14),
+                               NSForegroundColorAttributeName: COLOR(180, 180, 180, 1)};
+    _contactField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入您的手机或QQ号码" attributes:attriDic];
 }
 
 - (IBAction)submitBtnClick:(UIButton *)sender {
-    if (![_inputTextView.text deleteHeadEndSpace].length) {
+    NSString *content = [_inputTextView.text deleteHeadEndSpace];
+    if (!content.length) {
         [self makeToast:@"内容不能为空"];
         return;
     }
-    if ([_inputTextView.text deleteHeadEndSpace].length > 120) {
+    if (content.length > 120) {
         [self makeToast:@"字数超出最大限制"];
         return;
+    }
+    NSString *contact = nil;
+    if (_contactField.text.length) {
+        contact = [_contactField.text deleteHeadEndSpace];
     }
     
     [self.view endEditing:YES];
     
-    NSString *content = [[_inputTextView.text deleteHeadEndSpace] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-    [SettingCGI feedBack:content complete:^(DGCgiResult *res) {
+    content = [content stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+    [SVProgressHUD show];
+    [SettingCGI feedBack:content contact:contact complete:^(DGCgiResult *res) {
+        [SVProgressHUD dismiss];
         if (E_OK == res._errno) {
             _inputTextView.text = nil;
+            if (contact && !contact.length) {
+                _contactField.text = nil;
+            }
             _placeholderLbl.hidden = NO;
             _submitBtn.enabled = NO;
             [self makeToast:@"提交成功，感谢您的反馈"];

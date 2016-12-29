@@ -314,6 +314,15 @@
 		6FFA16881DB606E10077E7C3 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA16861DB606E10077E7C3 /* SSKeychainQuery.m */; };
 		6FFA168C1DB6131B0077E7C3 /* libDongGuanSdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FFA168A1DB6131B0077E7C3 /* libDongGuanSdk.a */; };
 		990F0FBA1E0BFB630027DFBB /* DGPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 990F0FB91E0BFB630027DFBB /* DGPicker.m */; };
+		9943BFA41E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943BFA31E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.m */; };
+		9943BFB41E14F1E500531FE4 /* leftShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9943BFA71E14F1E500531FE4 /* leftShadow@2x.png */; };
+		9943BFB51E14F1E500531FE4 /* managerMenuButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9943BFA81E14F1E500531FE4 /* managerMenuButton@2x.png */; };
+		9943BFB61E14F1E500531FE4 /* rightShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9943BFA91E14F1E500531FE4 /* rightShadow@2x.png */; };
+		9943BFB71E14F1E500531FE4 /* UIScrollView+XHVisibleCenterScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943BFAB1E14F1E500531FE4 /* UIScrollView+XHVisibleCenterScroll.m */; };
+		9943BFB81E14F1E500531FE4 /* XHIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943BFAD1E14F1E500531FE4 /* XHIndicatorView.m */; };
+		9943BFB91E14F1E500531FE4 /* XHMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943BFAF1E14F1E500531FE4 /* XHMenu.m */; };
+		9943BFBA1E14F1E500531FE4 /* XHMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943BFB11E14F1E500531FE4 /* XHMenuButton.m */; };
+		9943BFBB1E14F1E500531FE4 /* XHScrollMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943BFB31E14F1E500531FE4 /* XHScrollMenu.m */; };
 		9961A3581E0A7B2300870103 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9961A3561E0A7B2300870103 /* libcrypto.a */; };
 		9961A3591E0A7B2300870103 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9961A3571E0A7B2300870103 /* libssl.a */; };
 		998E17391E07926800189DDD /* tab_ico_buy_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 998E17371E07926800189DDD /* tab_ico_buy_blue@2x.png */; };
@@ -766,6 +775,21 @@
 		6FFA168B1DB6131B0077E7C3 /* UserAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAuthManager.h; sourceTree = "<group>"; };
 		990F0FB81E0BFB630027DFBB /* DGPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DGPicker.h; sourceTree = "<group>"; };
 		990F0FB91E0BFB630027DFBB /* DGPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DGPicker.m; sourceTree = "<group>"; };
+		9943BFA21E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+ExclusiveTouch.h"; sourceTree = "<group>"; };
+		9943BFA31E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+ExclusiveTouch.m"; sourceTree = "<group>"; };
+		9943BFA71E14F1E500531FE4 /* leftShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leftShadow@2x.png"; sourceTree = "<group>"; };
+		9943BFA81E14F1E500531FE4 /* managerMenuButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "managerMenuButton@2x.png"; sourceTree = "<group>"; };
+		9943BFA91E14F1E500531FE4 /* rightShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rightShadow@2x.png"; sourceTree = "<group>"; };
+		9943BFAA1E14F1E500531FE4 /* UIScrollView+XHVisibleCenterScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+XHVisibleCenterScroll.h"; sourceTree = "<group>"; };
+		9943BFAB1E14F1E500531FE4 /* UIScrollView+XHVisibleCenterScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+XHVisibleCenterScroll.m"; sourceTree = "<group>"; };
+		9943BFAC1E14F1E500531FE4 /* XHIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHIndicatorView.h; sourceTree = "<group>"; };
+		9943BFAD1E14F1E500531FE4 /* XHIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHIndicatorView.m; sourceTree = "<group>"; };
+		9943BFAE1E14F1E500531FE4 /* XHMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHMenu.h; sourceTree = "<group>"; };
+		9943BFAF1E14F1E500531FE4 /* XHMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHMenu.m; sourceTree = "<group>"; };
+		9943BFB01E14F1E500531FE4 /* XHMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHMenuButton.h; sourceTree = "<group>"; };
+		9943BFB11E14F1E500531FE4 /* XHMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHMenuButton.m; sourceTree = "<group>"; };
+		9943BFB21E14F1E500531FE4 /* XHScrollMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHScrollMenu.h; sourceTree = "<group>"; };
+		9943BFB31E14F1E500531FE4 /* XHScrollMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHScrollMenu.m; sourceTree = "<group>"; };
 		9961A3561E0A7B2300870103 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		9961A3571E0A7B2300870103 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		998E17371E07926800189DDD /* tab_ico_buy_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_ico_buy_blue@2x.png"; sourceTree = "<group>"; };
@@ -1641,6 +1665,7 @@
 		6F6FDABD1DB4B73500E50D9B /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				9943BFA51E14F1E500531FE4 /* XHScrollMenu */,
 				6F30DE4E1DF7E9A500134B52 /* MiPush */,
 				6F2D17581DF6A08100590AEC /* AliyunOSS */,
 				6F4D363E1DF54AE000483A66 /* Pingpp */,
@@ -1699,6 +1724,8 @@
 				6FF97FAE1DEFD89B00EF091C /* NSString+Format.m */,
 				6F2D17601DF6A51800590AEC /* UIImage+Format.h */,
 				6F2D17611DF6A51800590AEC /* UIImage+Format.m */,
+				9943BFA21E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.h */,
+				9943BFA31E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1962,6 +1989,34 @@
 			path = DGPicker;
 			sourceTree = "<group>";
 		};
+		9943BFA51E14F1E500531FE4 /* XHScrollMenu */ = {
+			isa = PBXGroup;
+			children = (
+				9943BFA61E14F1E500531FE4 /* Resources */,
+				9943BFAA1E14F1E500531FE4 /* UIScrollView+XHVisibleCenterScroll.h */,
+				9943BFAB1E14F1E500531FE4 /* UIScrollView+XHVisibleCenterScroll.m */,
+				9943BFAC1E14F1E500531FE4 /* XHIndicatorView.h */,
+				9943BFAD1E14F1E500531FE4 /* XHIndicatorView.m */,
+				9943BFAE1E14F1E500531FE4 /* XHMenu.h */,
+				9943BFAF1E14F1E500531FE4 /* XHMenu.m */,
+				9943BFB01E14F1E500531FE4 /* XHMenuButton.h */,
+				9943BFB11E14F1E500531FE4 /* XHMenuButton.m */,
+				9943BFB21E14F1E500531FE4 /* XHScrollMenu.h */,
+				9943BFB31E14F1E500531FE4 /* XHScrollMenu.m */,
+			);
+			path = XHScrollMenu;
+			sourceTree = "<group>";
+		};
+		9943BFA61E14F1E500531FE4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9943BFA71E14F1E500531FE4 /* leftShadow@2x.png */,
+				9943BFA81E14F1E500531FE4 /* managerMenuButton@2x.png */,
+				9943BFA91E14F1E500531FE4 /* rightShadow@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		998E17501E08051E00189DDD /* Activity */ = {
 			isa = PBXGroup;
 			children = (
@@ -2134,6 +2189,7 @@
 				6F3F32AB1DDAFB8F0024095A /* bar-wifi@3x.png in Resources */,
 				9990CD1A1E0D1EEF0002BF63 /* set_btn_input_nor@2x.png in Resources */,
 				6F3E56411DD968C100F16A23 /* btn_test@3x.png in Resources */,
+				9943BFB51E14F1E500531FE4 /* managerMenuButton@2x.png in Resources */,
 				6F30A1E21DD5AD5100149D73 /* video@3x.png in Resources */,
 				9990CD1F1E0D1EEF0002BF63 /* set_ico_logo@3x.png in Resources */,
 				6F3067481DD32B8000FA841E /* circle_num@3x.png in Resources */,
@@ -2206,6 +2262,7 @@
 				6F3F32811DDAA9720024095A /* Pointer@2x.png in Resources */,
 				6FF5C7EF1DC1DA5B00B1A84A /* NewsReportViewController.xib in Resources */,
 				6F30A1DD1DD5AD5100149D73 /* live@2x.png in Resources */,
+				9943BFB41E14F1E500531FE4 /* leftShadow@2x.png in Resources */,
 				6F3E56421DD968C100F16A23 /* empty_Compass@2x.png in Resources */,
 				6F3215911DDD879D00B7D5DA /* Rain@2x.png in Resources */,
 				6F30A1D51DD5AD5100149D73 /* government@2x.png in Resources */,
@@ -2240,6 +2297,7 @@
 				6F3067411DD32B8000FA841E /* btn_wifi welfare @2x.png in Resources */,
 				6FF9FA741DEAA01100620A6B /* ico_login_logo@2x.png in Resources */,
 				6F2EEAAC1DEDA61D00F5203C /* ico_addwifi@2x.png in Resources */,
+				9943BFB61E14F1E500531FE4 /* rightShadow@2x.png in Resources */,
 				998E173A1E07926800189DDD /* tab_ico_buy_blue@3x.png in Resources */,
 				6F2F10021DF914D100BBB742 /* ico_code@2x.png in Resources */,
 				6F30798F1DFE9DC100477FE0 /* text_getmore@3x.png in Resources */,
@@ -2377,6 +2435,7 @@
 				6F2F9BE01DDC670C0055DAF9 /* Device.m in Sources */,
 				6F2F9BBD1DDC224A0055DAF9 /* SearchViewController.m in Sources */,
 				6F3FF83F1DE442EA002791DB /* LaunchGuideViewController.m in Sources */,
+				9943BFB91E14F1E500531FE4 /* XHMenu.m in Sources */,
 				6F3185181DB8A25700017D47 /* NewsReportCell.m in Sources */,
 				6F2F9BE61DDC670C0055DAF9 /* NetworkCalculator.m in Sources */,
 				6F2F9BE31DDC670C0055DAF9 /* MACOperation.m in Sources */,
@@ -2426,10 +2485,12 @@
 				6F6FDAF71DB4D42F00E50D9B /* WebViewController.m in Sources */,
 				6F2F66951DE5936100511818 /* UIScrollView+EmptyData.m in Sources */,
 				6F307C011DCB36980015F9EC /* WFNetworkSpeedDetector.m in Sources */,
+				9943BFB81E14F1E500531FE4 /* XHIndicatorView.m in Sources */,
 				9990CD311E0D29E20002BF63 /* SettingFooterView.m in Sources */,
 				6F2F9BE81DDC670C0055DAF9 /* SimplePing.m in Sources */,
 				9990CD261E0D1F7D0002BF63 /* SettingCell.m in Sources */,
 				6FF97FAF1DEFD89B00EF091C /* NSString+Format.m in Sources */,
+				9943BFBB1E14F1E500531FE4 /* XHScrollMenu.m in Sources */,
 				6FF75EDF1DC09A6400166725 /* Tools.m in Sources */,
 				6F5033FB1DD07D34001EBC97 /* UIButton+ResizableImage.m in Sources */,
 				6F31851F1DB8C97B00017D47 /* NullSafe.m in Sources */,
@@ -2442,10 +2503,12 @@
 				6F3215991DDDB17C00B7D5DA /* WiFiConnectTipView.m in Sources */,
 				6F31850F1DB86DAB00017D47 /* ServiceCellModel.m in Sources */,
 				6F2F9BF21DDC70AB0055DAF9 /* WiFiExamModel.m in Sources */,
+				9943BFBA1E14F1E500531FE4 /* XHMenuButton.m in Sources */,
 				6F02BAA61DCCA90F00C72833 /* UITableView+EmptyData.m in Sources */,
 				990F0FBA1E0BFB630027DFBB /* DGPicker.m in Sources */,
 				6F6FDAE71DB4C82100E50D9B /* NewsViewController.m in Sources */,
 				6FFA16811DB606030077E7C3 /* DeviceManager.m in Sources */,
+				9943BFA41E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.m in Sources */,
 				6FF5C7F71DC1F00200B1A84A /* NewsVideoModel.m in Sources */,
 				6FCA54781DC9EA91000ED52A /* BaiduMapVC.m in Sources */,
 				6F6FDAD71DB4C3CA00E50D9B /* NSData+Additions.m in Sources */,
@@ -2463,6 +2526,7 @@
 				6F3C114E1DE81B1C00734F8C /* UIViewController+makeToastOrAlert.m in Sources */,
 				6F2DF2DA1DD1DA8900A8F0EC /* NewsTitleView.m in Sources */,
 				6F3A1D911DCC77D500BC22EC /* CheckUtil.m in Sources */,
+				9943BFB71E14F1E500531FE4 /* UIScrollView+XHVisibleCenterScroll.m in Sources */,
 				6FF5C7FB1DC1F13D00B1A84A /* NewsVideoCell.m in Sources */,
 				6F2D175B1DF6A08100590AEC /* AliyunOssService.m in Sources */,
 				6F3F32901DDAE9BA0024095A /* MTBBarcodeScanner.m in Sources */,

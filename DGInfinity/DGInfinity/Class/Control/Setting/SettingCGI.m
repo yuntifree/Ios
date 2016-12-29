@@ -11,10 +11,16 @@
 @implementation SettingCGI
 
 + (void)feedBack:(NSString *)content
+         contact:(NSString *)contact
         complete:(void(^)(DGCgiResult *res))complete
 {
     NSMutableDictionary *params = [RequestManager httpParams];
-    params[@"data"] = @{@"content": content};
+    if (contact && contact.length) {
+        params[@"data"] = @{@"content": content,
+                            @"contact": contact};
+    } else {
+        params[@"data"] = @{@"content": content};
+    }
     [[RequestManager shareManager] loadAsync:params cgi:@"feedback" complete:^(DGCgiResult *res) {
         if (complete) {
             complete(res);

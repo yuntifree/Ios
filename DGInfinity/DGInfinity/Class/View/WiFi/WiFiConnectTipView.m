@@ -57,10 +57,7 @@
 - (void)goWiFiListBtnClick:(UIButton *)button
 {
     [self dismiss];
-    NSURL *openURL = [NSURL URLWithString:@"prefs:root=WIFI"];
-    if ([[UIApplication sharedApplication] canOpenURL:openURL]) {
-        [[UIApplication sharedApplication] openURL:openURL];
-    }
+    [Tools openWifiList];
 }
 
 - (void)showInView:(UIView *)view

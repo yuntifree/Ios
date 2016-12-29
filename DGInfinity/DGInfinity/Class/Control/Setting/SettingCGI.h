@@ -13,8 +13,10 @@
 /**
  *  feedback
  *  @param content 内容
+ *  @param contact 联系方式
  */
 + (void)feedBack:(NSString *)content
+         contact:(NSString *)contact
         complete:(void(^)(DGCgiResult *res))complete;
 
 @end
