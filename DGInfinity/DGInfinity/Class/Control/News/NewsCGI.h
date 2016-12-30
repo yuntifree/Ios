@@ -28,4 +28,9 @@
                type:(NSInteger)type
            complete:(void (^)(DGCgiResult *res))complete;
 
+/**
+ *  get_menu
+ */
++ (void)getMenu:(void (^)(DGCgiResult *res))complete;
+
 @end

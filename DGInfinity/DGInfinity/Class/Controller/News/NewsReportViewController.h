@@ -6,10 +6,8 @@
 //  Copyright © 2016年 myeah. All rights reserved.
 //
 
-#import "DGViewController.h"
+#import "NewsBaseViewController.h"
 
-@interface NewsReportViewController : DGViewController
-
-@property (nonatomic, assign) BOOL scrollsToTop;
+@interface NewsReportViewController : NewsBaseViewController
 
 @end

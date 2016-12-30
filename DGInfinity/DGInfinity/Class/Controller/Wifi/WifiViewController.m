@@ -307,9 +307,9 @@ NetWorkMgrDelegate
         case WiFiFooterTypeVideo:
         {
             if (type == WiFiFooterTypeLookForNews || type == WiFiFooterTypeNews) {
-                [self gotoNewsTabWithPage:0];
+                [self gotoNewsTabWithType:NT_REPORT];
             } else {
-                [self gotoNewsTabWithPage:1];
+                [self gotoNewsTabWithType:NT_VIDEO];
             }
         }
             break;
@@ -387,13 +387,13 @@ NetWorkMgrDelegate
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)gotoNewsTabWithPage:(NSInteger)page
+- (void)gotoNewsTabWithType:(NSInteger)type
 {
     UITabBarController *root = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     UINavigationController *nav = root.viewControllers[1];
     NewsViewController *vc = (NewsViewController *)nav.topViewController;
+    vc.defaultType = type;
     root.selectedIndex = 1;
-    [vc setCurrentPage:page];
 }
 
 - (BOOL)prefersStatusBarHidden
@@ -483,7 +483,7 @@ NetWorkMgrDelegate
             break;
         case WiFiMenuTypeConnected:
         {
-            [self gotoNewsTabWithPage:0];
+            [self gotoNewsTabWithType:NT_REPORT];
         }
             break;
         default:

@@ -24,7 +24,7 @@
         [self addSubview:agreementLbl];
         
         UILabel *descLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(agreementLbl.frame) + 4, frame.size.width, 17)];
-        descLbl.text = @"CopyRight2016 东莞无限";
+        descLbl.text = @"版权所有 © 2016-2017东莞无限";
         descLbl.textAlignment = NSTextAlignmentCenter;
         descLbl.font = SystemFont(12);
         descLbl.textColor = COLOR(180, 180, 180, 1);

@@ -11,13 +11,15 @@
 #import "XHMenu.h"
 #import "XHMenuButton.h"
 
-#define kXHMenuButtonPaddingX 30
-#define kXHMenuButtonStarX 8
+#define kXHMenuButtonPaddingX 32
+#define kXHMenuButtonStarX 12
 
 @class XHScrollMenu;
 
 @protocol XHScrollMenuDelegate <NSObject>
 
+@optional
+- (void)scrollMenuWillSelect:(XHScrollMenu *)scrollMenu menuIndex:(NSUInteger)selectIndex;
 - (void)scrollMenuDidSelected:(XHScrollMenu *)scrollMenu menuIndex:(NSUInteger)selectIndex;
 - (void)scrollMenuDidManagerSelected:(XHScrollMenu *)scrollMenu;
 
@@ -34,7 +36,7 @@
 // Default is NO
 @property (nonatomic, assign) BOOL hasManagerButton;
 
-// Default is YES
+// Default is NO
 @property (nonatomic, assign) BOOL hasShadowForBoth;
 
 // XHIndicatorView Color
@@ -48,6 +50,12 @@
 
 // 当menu数较少时，是否均匀摆放button使之占满整个宽度。默认是no;
 @property (nonatomic, assign) BOOL shouldUniformizeMenus;
+
+// Default is YES
+@property (nonatomic, assign) BOOL showIndicatorView;
+
+// Button's title EdgeInsets, Default is UIEdgeInsetsZero
+@property (nonatomic, assign) UIEdgeInsets buttonTitleEdgeInsets;
 
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)aniamted calledDelegate:(BOOL)calledDelgate;

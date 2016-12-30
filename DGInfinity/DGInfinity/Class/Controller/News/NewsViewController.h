@@ -10,6 +10,7 @@
 
 @interface NewsViewController : DGViewController
 
-- (void)setCurrentPage:(NSInteger)index;
+@property (nonatomic, assign) NSInteger defaultType;
+@property (nonatomic, strong) NSDictionary *data;
 
 @end

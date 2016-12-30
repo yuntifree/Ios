@@ -53,6 +53,9 @@
             menuButton.selected = NO;
         }
     }];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(scrollMenuWillSelect:menuIndex:)]) {
+        [self.delegate scrollMenuWillSelect:self menuIndex:sender.tag - kXHMenuButtonBaseTag];
+    }
     [self setSelectedIndex:sender.tag - kXHMenuButtonBaseTag animated:YES calledDelegate:YES];
 }
 
@@ -115,6 +118,7 @@
     if (self.indicatorTintColor) {
         _indicatorView.backgroundColor = self.indicatorTintColor;
     }
+    _indicatorView.hidden = !self.showIndicatorView;
     [_scrollView addSubview:self.indicatorView];
     
     [self addSubview:self.scrollView];
@@ -122,24 +126,30 @@
 }
 
 - (void)setupIndicatorFrame:(CGRect)menuButtonFrame animated:(BOOL)animated callDelegate:(BOOL)called {
+    if (called) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(scrollMenuDidSelected:menuIndex:)]) {
+            [self.delegate scrollMenuDidSelected:self menuIndex:self.selectedIndex];
+        }
+    }
     [UIView animateWithDuration:(animated ? 0.15 : 0) delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         _indicatorView.frame = CGRectMake(CGRectGetMinX(menuButtonFrame), CGRectGetHeight(self.bounds) - kXHIndicatorViewHeight, CGRectGetWidth(menuButtonFrame), kXHIndicatorViewHeight);
     } completion:^(BOOL finished) {
-        if (called) {
-            if (self.delegate && [self.delegate respondsToSelector:@selector(scrollMenuDidSelected:menuIndex:)]) {
-                [self.delegate scrollMenuDidSelected:self menuIndex:self.selectedIndex];
-            }
-        }
+//        if (called) {
+//            if (self.delegate && [self.delegate respondsToSelector:@selector(scrollMenuDidSelected:menuIndex:)]) {
+//                [self.delegate scrollMenuDidSelected:self menuIndex:self.selectedIndex];
+//            }
+//        }
     }];
 }
 
 - (UIButton *)getButtonWithMenu:(XHMenu *)menu {
 //    CGSize buttonSize = [menu.title sizeWithFont:menu.titleFont constrainedToSize:CGSizeMake(MAXFLOAT, CGRectGetHeight(self.bounds) - 10) lineBreakMode:NSLineBreakByCharWrapping];
-    CGSize buttonSize = [menu.title boundingRectWithSize:CGSizeMake(MAXFLOAT, CGRectGetHeight(self.bounds) - 10) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesDeviceMetrics attributes:@{NSFontAttributeName: menu.titleFont} context:nil].size;
+    CGSize buttonSize = [menu.title boundingRectWithSize:CGSizeMake(MAXFLOAT, CGRectGetHeight(self.bounds) - 10) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: menu.titleFont} context:nil].size;
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, buttonSize.width, CGRectGetHeight(self.bounds))];
     button.titleLabel.textAlignment = NSTextAlignmentCenter;
     button.titleLabel.font = menu.titleFont;
     [button setTitle:menu.title forState:UIControlStateNormal];
+    [button setTitleEdgeInsets:_buttonTitleEdgeInsets];
     if (menu.titleNormalColor)
         [button setTitleColor:menu.titleNormalColor forState:UIControlStateNormal];
     if (menu.titleHighlightedColor)
@@ -154,9 +164,21 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.hasShadowForBoth = YES;
+        self.hasShadowForBoth = NO;
+        self.hasManagerButton = NO;
+        self.showIndicatorView = YES;
+        self.buttonTitleEdgeInsets = UIEdgeInsetsZero;
     }
     return self;
+}
+
+- (void)setFrame:(CGRect)frame
+{
+    if ([self.superview isKindOfClass:[UINavigationBar class]]) {
+        [super setFrame:CGRectMake(0, 0, self.superview.width, self.superview.height)];
+    } else {
+        [super setFrame:frame];
+    }
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
@@ -187,10 +209,11 @@
    
     _selectedIndex = selectedIndex;
     UIButton *selectedMenuButton = [self menuButtonAtIndex:_selectedIndex];
+    [self setupIndicatorFrame:selectedMenuButton.frame animated:aniamted callDelegate:calledDelgate];
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         [self.scrollView scrollRectToVisibleCenteredOn:selectedMenuButton.frame animated:NO];
     } completion:^(BOOL finished) {
-        [self setupIndicatorFrame:selectedMenuButton.frame animated:aniamted callDelegate:calledDelgate];
+//        [self setupIndicatorFrame:selectedMenuButton.frame animated:aniamted callDelegate:calledDelgate];
     }];
 }
 
@@ -237,11 +260,13 @@
         // 判断总长度是否为均匀分布
         if (self.shouldUniformizeMenus && totalWidth < CGRectGetWidth(self.scrollView.bounds)) {
             
-            CGFloat newPadding = (CGRectGetWidth(self.scrollView.bounds) - totalButtonWidth) / (self.menus.count + 1);
+//            CGFloat newPadding = (CGRectGetWidth(self.scrollView.bounds) - totalButtonWidth) / (self.menus.count + 1);
             if (index) {
-                buttonX = newPadding + CGRectGetMaxX(((UIButton *)(self.menuButtons[index - 1])).frame);
+//                buttonX = newPadding + CGRectGetMaxX(((UIButton *)(self.menuButtons[index - 1])).frame);
+                buttonX = kXHMenuButtonPaddingX + CGRectGetMaxX(((UIButton *)(self.menuButtons[index - 1])).frame);
             } else {
-                buttonX = newPadding;
+//                buttonX = newPadding;
+                buttonX = (CGRectGetWidth(self.scrollView.bounds) - totalButtonWidth - (self.menus.count - 1) * kXHMenuButtonPaddingX) / 2;
             }
             
         } else {

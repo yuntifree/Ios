@@ -18,6 +18,7 @@
     
     NSMutableArray *_newsArray;
     NSInteger _minseq;
+    BOOL _isLoad;
 }
 @end
 
@@ -29,6 +30,7 @@
     if (self) {
         _newsArray = [NSMutableArray arrayWithCapacity:20];
         _minseq = 0;
+        _isLoad = NO;
     }
     return self;
 }
@@ -43,7 +45,6 @@
     // Do any additional setup after loading the view from its nib.
     
     [self setUpTableView];
-    [self getNews];
 }
 
 - (void)setUpTableView
@@ -51,7 +52,6 @@
     _listView.tableFooterView = [UIView new];
     _listView.estimatedRowHeight = 100;
     _listView.rowHeight = UITableViewAutomaticDimension;
-    _listView.scrollsToTop = YES;
     _listView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
 }
 
@@ -62,9 +62,17 @@
     [self getNews];
 }
 
+- (void)loadData
+{
+    if (!_isLoad) {
+        _isLoad = YES;
+        [self getNews];
+    }
+}
+
 - (void)getNews
 {
-    [NewsCGI getHot:NT_REPORT seq:_minseq complete:^(DGCgiResult *res) {
+    [NewsCGI getHot:self.type seq:_minseq complete:^(DGCgiResult *res) {
         if (_minseq) {
             [_listView.mj_footer endRefreshing];
         } else {

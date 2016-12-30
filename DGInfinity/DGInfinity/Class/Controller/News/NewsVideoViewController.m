@@ -18,6 +18,7 @@
     
     NSMutableArray *_videosArray;
     NSInteger _minseq;
+    BOOL _isLoad;
 }
 @end
 
@@ -29,6 +30,7 @@
     if (self) {
         _videosArray = [NSMutableArray arrayWithCapacity:20];
         _minseq = 0;
+        _isLoad = NO;
     }
     return self;
 }
@@ -41,8 +43,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
     [self setUpTableView];
-    [self getNews];
 }
 
 - (void)setUpTableView
@@ -50,7 +52,6 @@
     [_listView registerNib:[UINib nibWithNibName:@"NewsVideoCell" bundle:nil] forCellReuseIdentifier:@"NewsVideoCell"];
     _listView.tableFooterView = [UIView new];
     _listView.rowHeight = (kScreenWidth - 40) * 168 / 334 + 52;
-    _listView.scrollsToTop = NO;
     _listView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
 }
 
@@ -61,9 +62,17 @@
     [self getNews];
 }
 
+- (void)loadData
+{
+    if (!_isLoad) {
+        _isLoad = YES;
+        [self getNews];
+    }
+}
+
 - (void)getNews
 {
-    [NewsCGI getHot:NT_VIDEO seq:_minseq complete:^(DGCgiResult *res) {
+    [NewsCGI getHot:self.type seq:_minseq complete:^(DGCgiResult *res) {
         if (_minseq) {
             [_listView.mj_footer endRefreshing];
         } else {

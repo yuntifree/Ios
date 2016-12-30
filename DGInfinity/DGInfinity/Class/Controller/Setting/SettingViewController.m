@@ -39,7 +39,7 @@
 
 - (NSString *)title
 {
-    return @"通用设置";
+    return @"设置";
 }
 
 - (void)viewDidLoad {
@@ -111,7 +111,7 @@
         case 0:
         {
             YYDiskCache *diskCache = [YYWebImageManager sharedManager].cache.diskCache;
-            if (diskCache.totalCount) {
+            if (diskCache.totalCost / 1024.0 / 1024.0 >= 0.1f) { // 大于或等于102.4k
                 [diskCache removeAllObjectsWithProgressBlock:^(int removedCount, int totalCount) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [SVProgressHUD showWithStatus:@"清理缓存中..."];

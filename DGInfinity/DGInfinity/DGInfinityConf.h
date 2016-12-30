@@ -39,6 +39,12 @@ typedef NS_ENUM(NSInteger, NewsType) {
     NT_GAME = 3
 };
 
+typedef NS_ENUM(NSInteger, MenuCType) {
+    MenuCTypeNews = 0,
+    MenuCTypeVideo = 1,
+    MenuCTypeWeb = 2
+};
+
 typedef NS_ENUM(NSInteger, ReportType) {
     RT_NEWS = 0,
     RT_AD = 1
