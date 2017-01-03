@@ -21,8 +21,10 @@ typedef NS_ENUM(NSInteger, WiFiMenuType) {
 };
 
 typedef NS_ENUM(NSInteger, ConnectStatus) {
+    ConnectStatusDefault = -99,
     ConnectStatusNotConnect = 0,
-    ConnectStatusConnected = 1
+    ConnectStatusConnected = 1,
+    ConnectStatusConnecting = 2
 };
 
 @protocol WiFiMenuViewDelegate <NSObject>

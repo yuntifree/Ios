@@ -42,7 +42,8 @@ typedef NS_ENUM(NSInteger, NewsType) {
 typedef NS_ENUM(NSInteger, MenuCType) {
     MenuCTypeNews = 0,
     MenuCTypeVideo = 1,
-    MenuCTypeWeb = 2
+    MenuCTypeWeb = 2,
+    MenuCTypeJoke = 3
 };
 
 typedef NS_ENUM(NSInteger, ReportType) {
@@ -71,6 +72,7 @@ typedef NS_ENUM(NSInteger, TimeType) {
 };
 
 typedef enum {
+    ENV_DEFAULT = -99,      //默认值
     ENV_NOT_WIFI = -1,      //无需认证的网络
     ENV_NOT_LOGIN = 0,      //需要认证的网络
     ENV_ERROR = 1,          //无网络

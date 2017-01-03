@@ -106,22 +106,21 @@ NetWorkMgrDelegate
 - (void)doLogon
 {
 #if (!TARGET_IPHONE_SIMULATOR)
-    [SVProgressHUD show];
+    [_menuView setConnectBtnStatus:ConnectStatusConnecting];
     [[UserAuthManager manager] doLogon:SApp.username andPassWord:@"" andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
-        [SVProgressHUD dismiss];
         if (!error) {
             NSDictionary *head = response[@"head"];
             if ([head isKindOfClass:[NSDictionary class]]) {
                 NSString *retflag = head[@"retflag"];
                 if ([retflag isEqualToString:@"0"]) {
-                    [self makeToast:@"认证成功"];
-                    [_menuView setConnectBtnStatus:ConnectStatusConnected];
                     [WiFiCGI reportApMac:[Tools getBSSID] complete:nil];
                 } else {
+                    [_menuView setConnectBtnStatus:ConnectStatusNotConnect];
                     [self makeToast:head[@"reason"]];
                 }
             }
         } else {
+            [_menuView setConnectBtnStatus:ConnectStatusNotConnect];
             [self makeToast:@"认证失败"];
         }
     }];
@@ -200,8 +199,12 @@ NetWorkMgrDelegate
 
 - (void)setUpNavItem
 {
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage originalImage:@"wireless_ico_setting"] style:UIBarButtonItemStylePlain target:self action:@selector(goSetting)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage originalImage:@"wireless_ico_QRcode"] style:UIBarButtonItemStylePlain target:self action:@selector(scanQRcode)];
+    UIBarButtonItem *leftFixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    leftFixedSpace.width = -15;
+    self.navigationItem.leftBarButtonItems = @[leftFixedSpace, [[UIBarButtonItem alloc] initWithImage:[UIImage originalImage:@"wireless_ico_setting"] style:UIBarButtonItemStylePlain target:self action:@selector(goSetting)]];
+    UIBarButtonItem *rightFixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    rightFixedSpace.width = -15;
+    self.navigationItem.rightBarButtonItems = @[rightFixedSpace, [[UIBarButtonItem alloc] initWithImage:[UIImage originalImage:@"wireless_ico_QRcode"] style:UIBarButtonItemStylePlain target:self action:@selector(scanQRcode)]];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:ImageNamed(@"text")];
 }
 
@@ -452,8 +455,7 @@ NetWorkMgrDelegate
                     [_menuView setConnectBtnStatus:ConnectStatusConnected];
                 } else if (status == ENV_NOT_WIFI) {
                     if ([[Tools getCurrentSSID] isEqualToString:WIFISDK_SSID]) {
-                        [self makeToast:@"已连接上东莞免费WiFi"];
-                        [_menuView setConnectBtnStatus:ConnectStatusConnected];
+                        [_menuView setConnectBtnStatus:ConnectStatusConnecting];
                     } else {
                         [self showConnectTipView];
                     }
@@ -462,7 +464,8 @@ NetWorkMgrDelegate
                 }
             }];
 #else
-            [self showConnectTipView];
+//            [self showConnectTipView];
+            [_menuView setConnectBtnStatus:ConnectStatusConnecting];
 #endif
         }
             break;

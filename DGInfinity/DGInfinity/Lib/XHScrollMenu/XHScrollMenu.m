@@ -76,6 +76,12 @@
     return shadowImageView;
 }
 
+- (void)setShowIndicatorView:(BOOL)showIndicatorView
+{
+    _showIndicatorView = showIndicatorView;
+    _indicatorView.hidden = !_showIndicatorView;
+}
+
 - (void)setup {
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     _selectedIndex = 0;
@@ -118,7 +124,6 @@
     if (self.indicatorTintColor) {
         _indicatorView.backgroundColor = self.indicatorTintColor;
     }
-    _indicatorView.hidden = !self.showIndicatorView;
     [_scrollView addSubview:self.indicatorView];
     
     [self addSubview:self.scrollView];
@@ -168,6 +173,7 @@
         self.hasManagerButton = NO;
         self.showIndicatorView = YES;
         self.buttonTitleEdgeInsets = UIEdgeInsetsZero;
+        [self setup];
     }
     return self;
 }
@@ -181,11 +187,11 @@
     }
 }
 
-- (void)willMoveToSuperview:(UIView *)newSuperview {
-    if (newSuperview) {
-        [self setup];
-    }
-}
+//- (void)willMoveToSuperview:(UIView *)newSuperview {
+//    if (newSuperview) {
+//        [self setup];
+//    }
+//}
 
 #pragma mark - Public
 
