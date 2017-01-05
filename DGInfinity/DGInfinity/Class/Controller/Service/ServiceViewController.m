@@ -155,7 +155,6 @@ const NSInteger headerHeight = 105.f;
             if (!_dataArray.count) {
                 _header.hidden = YES;
             }
-            [self makeToast:res.desc];
             if (E_CGI_FAILED == res._errno) {
                 __weak typeof(self) wself = self;
                 [_listView configureNoNetStyleWithdidTapButtonBlock:^{
@@ -163,6 +162,8 @@ const NSInteger headerHeight = 105.f;
                 } didTapViewBlock:^{
                     
                 }];
+            } else {
+                [self makeToast:res.desc];
             }
         }
     }];

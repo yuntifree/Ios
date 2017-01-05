@@ -338,6 +338,8 @@ NetWorkMgrDelegate
     }
 }
 
+#pragma mark - GET DATA
+
 - (void)getWeatherAndNews
 {
     [WiFiCGI getWeatherNews:^(DGCgiResult *res) {
@@ -361,7 +363,7 @@ NetWorkMgrDelegate
                 }
                 [_tableView reloadData];
             }
-        } else {
+        } else if (E_CGI_FAILED != res._errno) {
             [self makeToast:res.desc];
         }
     }];
@@ -380,6 +382,8 @@ NetWorkMgrDelegate
         }
     }];
 }
+
+#pragma mark
 
 - (void)openWebWithModel:(NewsReportModel *)model
 {

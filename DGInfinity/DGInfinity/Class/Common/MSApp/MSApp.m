@@ -81,14 +81,33 @@ static MSApp *mSapp = nil;
 + (void)autoLogin
 {
     if (SApp.uid && SApp.privdata.length && SApp.expire <= [[NSDate date] timeIntervalSince1970]) {
-        [AccountCGI autoLogin:SApp.privdata complete:^(DGCgiResult *res) {
-            if (E_OK == res._errno) {
-                NSDictionary *data = res.data[@"data"];
-                if ([data isKindOfClass:[NSDictionary class]]) {
-                    [self setUserInfo:data];
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0); // 创建信号量
+        
+        NSURL *url = [NSURL URLWithString:[[RequestManager shareManager] urlPath:@"auto_login"]];
+        
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:1.5];
+        [request setHTTPMethod:@"POST"];
+        NSMutableDictionary *params = [RequestManager httpParams];
+        params[@"data"] = @{@"privdata": SApp.privdata};
+        NSData *data = [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil];
+        [request setHTTPBody:data];
+        
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if (!error && data) {
+                NSDictionary *res = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                if ([res isKindOfClass:[NSDictionary class]]) {
+                    NSDictionary *data = res[@"data"];
+                    if ([data isKindOfClass:[NSDictionary class]]) {
+                        [self setUserInfo:data];
+                    }
                 }
             }
+            dispatch_semaphore_signal(semaphore); // 发送信号
         }];
+        [task resume];
+        
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER); // 等待信号
     }
 }
 

@@ -25,9 +25,6 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
                                         })()";
 
 @interface WebViewController () <WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler>
-{
-    WebItemType _type;
-}
 
 @property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) UIProgressView *progressView;
@@ -43,6 +40,7 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
 {
     [self.webView removeObserver:self forKeyPath:@"title"];
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
+    [self.webView removeObserver:self forKeyPath:@"canGoBack"];
     [self.webView.configuration.userContentController removeScriptMessageHandlerForName:JSHOST];
     self.webView = nil;
     self.progressView = nil;
@@ -66,6 +64,7 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
         _webView.UIDelegate = self;
         [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
         [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
+        [_webView addObserver:self forKeyPath:@"canGoBack" options:NSKeyValueObservingOptionNew context:NULL];
         [self.view addSubview:_webView];
     }
     return _webView;
@@ -77,7 +76,9 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
         _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
         _progressView.progress = 0;
         _progressView.hidden = YES;
-        _progressView.trackTintColor = [UIColor whiteColor];
+        _progressView.trackTintColor = [UIColor clearColor];
+        _progressView.progressTintColor = RGB(0x68CDFF, 1);
+        _progressView.transform = CGAffineTransformMakeScale(1.0, 1.5);
         [self.view addSubview:_progressView];
     }
     return _progressView;
@@ -105,7 +106,6 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
     self = [super init];
     if (self) {
         _changeTitle = YES;
-        _type = ITEMTYPE_BACK;
         self.title = @"东莞无限";
     }
     return self;
@@ -136,7 +136,7 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
     }];
     
     [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top);
+        make.top.equalTo(self.view.mas_top).offset(0.5);
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
         make.height.equalTo(@2);
@@ -211,6 +211,12 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
     }
 }
 
+- (void)delayToHideProgress
+{
+    [self.progressView setProgress:0 animated:NO];
+    self.progressView.hidden = YES;
+}
+
 #pragma mark - KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
@@ -222,11 +228,18 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
         } else if ([keyPath isEqualToString:@"estimatedProgress"]) {
             double progress = self.webView.estimatedProgress;
             if (progress == 1) {
-                [self.progressView setProgress:0 animated:NO];
-                self.progressView.hidden = YES;
+                [self.progressView setProgress:progress animated:YES];
+                [self performSelector:@selector(delayToHideProgress) withObject:nil afterDelay:1];
             } else {
+                [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(delayToHideProgress) object:nil];
                 [self.progressView setProgress:progress animated:YES];
                 self.progressView.hidden = NO;
+            }
+        } else if ([keyPath isEqualToString:@"canGoBack"]) {
+            if ([self.webView canGoBack]) {
+                [self setUpCloseItem];
+            } else {
+                [self setUpBackItem];
             }
         }
     }
@@ -265,17 +278,6 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
 
     if (!self.backgroundView.hidden) {
         self.backgroundView.hidden = YES;
-    }
-    if ([webView canGoBack]) {
-        if (_type != ITEMTYPE_CLOSE) {
-            _type = ITEMTYPE_CLOSE;
-            [self setUpCloseItem];
-        }
-    } else {
-        if (_type != ITEMTYPE_BACK) {
-            _type = ITEMTYPE_BACK;
-            [self setUpBackItem];
-        }
     }
 }
 

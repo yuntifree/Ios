@@ -44,10 +44,12 @@
 {
     if (_progressView == nil) {
         _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-        _progressView.frame = CGRectMake(0, 0, kScreenWidth, 4);
+        _progressView.frame = CGRectMake(0, 0.5, kScreenWidth, 2);
         _progressView.progress = 0;
         _progressView.hidden = YES;
-        _progressView.trackTintColor = [UIColor whiteColor];
+        _progressView.trackTintColor = [UIColor clearColor];
+        _progressView.progressTintColor = RGB(0x68CDFF, 1);
+        _progressView.transform = CGAffineTransformMakeScale(1.0, 1.5);
         [self.view addSubview:_progressView];
     }
     return _progressView;
@@ -135,6 +137,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)delayToHideProgress
+{
+    [self.progressView setProgress:0 animated:NO];
+    self.progressView.hidden = YES;
+}
+
 #pragma mark - KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
@@ -155,13 +163,8 @@
             [_listView reloadData];
         } else if ([keyPath isEqualToString:@"progressValue"]) {
             CGFloat progress = self.presenter.progressValue;
-            if (progress == 1) {
-                [self.progressView setProgress:0 animated:NO];
-                self.progressView.hidden = YES;
-            } else {
-                [self.progressView setProgress:progress animated:YES];
-                self.progressView.hidden = NO;
-            }
+            [self.progressView setProgress:progress animated:YES];
+            self.progressView.hidden = NO;
         }
     }
 }
@@ -169,7 +172,7 @@
 #pragma mark - MainPresenterDelegate
 - (void)mainPresenterIPSearchFinished
 {
-    self.progressView.hidden = YES;
+    [self performSelector:@selector(delayToHideProgress) withObject:nil afterDelay:1];
     if (_badgeblock) {
         _badgeblock(self.presenter.connectedDevices.count - 1);
     }

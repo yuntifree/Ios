@@ -107,7 +107,7 @@
         _connectBtn.selected = NO;
         [_connectBtn setTitle:@"一键连接" forState:UIControlStateNormal];
         [_connectBtn setAttributedTitle:nil forState:UIControlStateNormal];
-        _statusLbl.text = @"发现东莞城市免费WiFi";
+        _statusLbl.text = @"发现东莞无限免费WiFi";
         [_halo start];
         [_aroundCircle.layer removeAnimationForKey:@"rotationAnimation"];
     } else if (status == ConnectStatusConnected) {
@@ -116,14 +116,14 @@
         _connectBtn.selected = YES;
         [_connectBtn setTitle:@"" forState:UIControlStateNormal];
         [_connectBtn setAttributedTitle:nil forState:UIControlStateNormal];
-        _statusLbl.text = @"已连接东莞城市免费WiFi";
+        _statusLbl.text = @"已连接东莞无限免费WiFi";
         [_halo stop];
         [_aroundCircle.layer removeAnimationForKey:@"rotationAnimation"];
     } else {
         _connectBtn.userInteractionEnabled = NO;
         _connectBtn.selected = NO;
         [_connectBtn setTitle:@"" forState:UIControlStateNormal];
-        _statusLbl.text = @"正在连接东莞城市免费WiFi";
+        _statusLbl.text = @"正在连接东莞无限免费WiFi";
         [_halo stop];
         if (!_aroundAnimation) {
             _aroundAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];

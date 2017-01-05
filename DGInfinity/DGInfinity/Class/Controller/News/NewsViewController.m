@@ -90,7 +90,7 @@
             [self cleanAllData];
             NSMutableArray *menus = [[NSMutableArray alloc] initWithCapacity:1];
             for (NSDictionary *info in infos) {
-//                if (![self isSupportedCtype:[info[@"ctype"] integerValue]]) continue;
+                if (![self isSupportedCtype:[info[@"ctype"] integerValue]]) continue;
                 NewsMenuModel *model = [NewsMenuModel createWithInfo:info];
                 [self.menuModels addObject:model];
                 XHMenu *menu = [[XHMenu alloc] init];
@@ -102,7 +102,6 @@
             }
             self.scrollMenu.menus = menus;
             self.scrollMenu.shouldUniformizeMenus = menus.count <= 5;
-            self.scrollMenu.selectedIndex = self.defaultType;
             [self.scrollMenu reloadData];
             
             int j = 0;
@@ -159,21 +158,34 @@
 {
     [super viewWillAppear:animated];
     if (!self.menuModels.count) {
-        [SVProgressHUD show];
-        [NewsCGI getMenu:^(DGCgiResult *res) {
-            [SVProgressHUD dismiss];
-            if (E_OK == res._errno) {
-                NSDictionary *data = res.data[@"data"];
-                if ([data isKindOfClass:[NSDictionary class]]) {
-                    self.data = data;
-                }
-            } else {
-                [self makeToast:res.desc];
-            }
-        }];
+        [self getMenu];
     } else {
         [self setCurrentPage:self.defaultType];
     }
+}
+
+- (void)getMenu
+{
+    [NewsCGI getMenu:^(DGCgiResult *res) {
+        if (E_OK == res._errno) {
+            NSDictionary *data = res.data[@"data"];
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                self.data = data;
+            }
+        } else {
+            self.title = @"头条";
+            if (E_CGI_FAILED != res._errno) {
+                [self makeToast:res.desc];
+            } else {
+                __weak typeof(self) wself = self;
+                [self.scrollView configureNoNetStyleWithdidTapButtonBlock:^{
+                    [wself getMenu];
+                } didTapViewBlock:^{
+                    
+                }];
+            }
+        }
+    }];
 }
 
 - (void)viewDidLoad {
@@ -209,17 +221,20 @@
 - (void)setCurrentPage:(NSInteger)type
 {
     if (type == -1) return;
+    self.scrollView.scrollEnabled = YES;
     self.defaultType = -1;
+    __block NSInteger index = 0;
     [self.menuModels enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NewsMenuModel *model = (NewsMenuModel *)obj;
         if (model.type == type) {
-            [_scrollView setContentOffset:CGPointMake(idx * kScreenWidth, 0) animated:NO];
-            [self.scrollMenu setSelectedIndex:idx animated:YES calledDelegate:NO];
-            [self setScrollsToTopWithTag:idx];
-            [self handleChildViewControllerLoadDataWithIndex:idx];
+            index = idx;
             *stop = YES;
         }
     }];
+    [self.scrollView setContentOffset:CGPointMake(index * kScreenWidth, 0) animated:NO];
+    [self.scrollMenu setSelectedIndex:index animated:YES calledDelegate:NO];
+    [self setScrollsToTopWithTag:index];
+    [self handleChildViewControllerLoadDataWithIndex:index];
 }
 
 - (void)setScrollsToTopWithTag:(NSInteger)tag

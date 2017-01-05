@@ -44,6 +44,7 @@
         serviceNav.tabBarItem.title = @"服务";
         
         DGNavigationViewController *activityNav = [[DGNavigationViewController alloc] initWithRootViewController:[DGViewController new]];
+        activityNav.topViewController.title = @"活动";
         [activityNav.tabBarItem setImage:@"tab_ico_buy_gray" selectedImage:@"tab_ico_buy_blue"];
         activityNav.tabBarItem.title = @"活动";
         
@@ -104,6 +105,7 @@
     switch (index) {
         case 3: // 活动
         {
+            DGNavigationViewController *nav = (DGNavigationViewController *)viewController;
             [SVProgressHUD show];
             [ActivityCGI getActivity:^(DGCgiResult *res) {
                 [SVProgressHUD dismiss];
@@ -114,7 +116,6 @@
                         vc.url = data[@"dst"];
                         vc.title = data[@"title"];
                         vc.changeTitle = NO;
-                        DGNavigationViewController *nav = (DGNavigationViewController *)viewController;
                         [nav pushViewController:vc animated:NO];
                         __weak typeof(self) wself = self;
                         vc.pop = ^ {
@@ -122,8 +123,7 @@
                         };
                     }
                 } else {
-                    self.selectedIndex = self.lastIndex;
-                    [self makeToast:res.desc];
+                    [nav.topViewController makeToast:res.desc];
                 }
             }];
         }

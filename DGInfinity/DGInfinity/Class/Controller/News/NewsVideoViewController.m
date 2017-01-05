@@ -105,7 +105,6 @@
                 [_listView reloadData];
             }
         } else {
-            [self makeToast:res.desc];
             if (E_CGI_FAILED == res._errno && !_videosArray.count) {
                 __weak typeof(self) wself = self;
                 [_listView configureNoNetStyleWithdidTapButtonBlock:^{
@@ -113,6 +112,8 @@
                 } didTapViewBlock:^{
                     
                 }];
+            } else {
+                [self makeToast:res.desc];
             }
         }
     }];

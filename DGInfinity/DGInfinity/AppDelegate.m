@@ -75,11 +75,11 @@
     // MiPush
     [MiPushSDK registerMiPush:self type:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound connect:YES];
     
-    // RootViewController
-    [self setRootViewController];
-    
     // autoLogin
     [MSApp autoLogin];
+    
+    // RootViewController
+    [self setRootViewController];
     
     // App 被 NetworkExtension 被动启动时，applicationState == UIApplicationStateBackground
     if (application.applicationState == UIApplicationStateBackground) {

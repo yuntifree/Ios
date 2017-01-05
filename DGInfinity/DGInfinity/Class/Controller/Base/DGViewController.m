@@ -34,12 +34,12 @@
 - (UIButton *)closeBtn
 {
     if (_closeBtn == nil) {
-        _closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _closeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         _closeBtn.frame = CGRectMake(0, 0, 44, 44);
+        _closeBtn.titleLabel.font = SystemFont(17);
         [_closeBtn addTarget:self action:@selector(closeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_closeBtn setTitle:@"关闭" forState:UIControlStateNormal];
         [_closeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_closeBtn setContentEdgeInsets:UIEdgeInsetsMake(-1, 0, 0, 0)];
     }
     return _closeBtn;
 }

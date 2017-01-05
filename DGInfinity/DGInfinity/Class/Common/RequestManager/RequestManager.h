@@ -20,6 +20,7 @@
 
 + (instancetype)shareManager;
 + (NSMutableDictionary *)httpParams;
+- (NSString *)urlPath:(NSString *)cgi;
 - (void)loadAsync:(NSDictionary *)params cgi:(NSString *)cgi complete:(void(^)(DGCgiResult *res))complete;
 
 @end

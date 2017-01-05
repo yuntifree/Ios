@@ -30,16 +30,6 @@
 }
 
 - (IBAction)logout:(id)sender {
-//    [SVProgressHUD show];
-//    [AccountCGI logout:^(DGCgiResult *res) {
-//        [SVProgressHUD dismiss];
-//        if (E_OK == res._errno) {
-//            [MSApp destory];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:KNC_LOGOUT object:nil];
-//        } else {
-//            [self makeToast:res.desc];
-//        }
-//    }];
 #if (!TARGET_IPHONE_SIMULATOR)
     if (!SApp.username.length) return;
     [[UserAuthManager manager] doLogout:SApp.username andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
@@ -57,6 +47,18 @@
             [self makeToast:error.description];
         }
     }];
+#else
+    [SVProgressHUD show];
+    [AccountCGI logout:^(DGCgiResult *res) {
+        [SVProgressHUD dismiss];
+        if (E_OK == res._errno) {
+            [MSApp destory];
+            [[NSNotificationCenter defaultCenter] postNotificationName:KNC_LOGOUT object:nil];
+        } else {
+            [self makeToast:res.desc];
+        }
+    }];
+
 #endif
 }
 

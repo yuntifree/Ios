@@ -115,13 +115,13 @@ static RequestManager *manager = nil;
             } else {
                 DGCgiResult *r = [[DGCgiResult alloc] init];
                 r._errno = E_INVALID_DATA;
-                r.desc = @"请求数据错误~";
+                r.desc = @"请求数据失败";
                 complete(r);
             }
         } else {
             DGCgiResult *r = [[DGCgiResult alloc] init];
             r._errno = E_INVALID_DATA;
-            r.desc = @"请求数据错误~";
+            r.desc = @"请求数据失败";
             complete(r);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -134,7 +134,7 @@ static RequestManager *manager = nil;
         if ([[error localizedFailureReason] length]) {
             r.desc = [error localizedFailureReason];
         } else {
-            r.desc = @"请检查您的网络~";
+            r.desc = @"网络不给力，请稍后再试";
         }
         complete(r);
     }];
