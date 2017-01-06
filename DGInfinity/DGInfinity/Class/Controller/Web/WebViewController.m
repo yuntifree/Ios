@@ -285,7 +285,7 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
             self.backgroundView.hidden = NO;
         }
     } else {
-        [self makeToast:@"网页加载失败"];
+        [self makeToast:@"网页加载失败，请稍后再试"];
     }
 }
 
@@ -313,7 +313,7 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:prompt preferredStyle:UIAlertControllerStyleAlert];
     [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        
+        textField.text = defaultText;
     }];
     
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

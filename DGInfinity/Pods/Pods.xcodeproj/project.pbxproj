@@ -491,7 +491,6 @@
 		8780A9C67A6D92B3AB2B72E57392258C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		87E33E078FA89BEECBDE7DDA537C62F7 /* MJRefreshStateHeader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MJRefreshStateHeader.m; path = MJRefresh/Custom/Header/MJRefreshStateHeader.m; sourceTree = "<group>"; };
 		88501B1E774F5BF4F1C47AFB5497D564 /* AFNetworking-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AFNetworking-dummy.m"; sourceTree = "<group>"; };
-		8877455F09D087A6711D27AB6C7327CC /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMMobClick.framework; path = "umsdk_IOS_analyics_no-idfa_v4.1.1/UMMobClick.framework"; sourceTree = "<group>"; };
 		887EABBFA8204478CC8F0FAD79D97D80 /* YYCache-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "YYCache-prefix.pch"; sourceTree = "<group>"; };
 		89BA3A5DAB4C16764DD934480E6F0E93 /* YYImageCoder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = YYImageCoder.m; path = YYImage/YYImageCoder.m; sourceTree = "<group>"; };
 		8A7F33C7518F52B3B6C34C7F131B8F24 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AFNetworking.m"; path = "UIKit+AFNetworking/UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
@@ -540,6 +539,7 @@
 		AF2724F9F0D0C8BB7DD87BBC91335C31 /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshAutoFooter.h; path = MJRefresh/Base/MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		AF750797A162BA4CDE74F27D112E2B35 /* UIRefreshControl+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIRefreshControl+AFNetworking.h"; path = "UIKit+AFNetworking/UIRefreshControl+AFNetworking.h"; sourceTree = "<group>"; };
 		B1830C5CFE223C9685E5D24F646A891A /* IQKeyboardManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IQKeyboardManager.m; path = IQKeyboardManager/IQKeyboardManager.m; sourceTree = "<group>"; };
+		B18D73E77F944301608D034FAA17756F /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMMobClick.framework; path = "umsdk_IOS_analyics_no-idfa_v4.1.9/UMMobClick.framework"; sourceTree = "<group>"; };
 		B18E82E37627A5AA3BBC98F17401D2E8 /* SVProgressAnimatedView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVProgressAnimatedView.m; path = SVProgressHUD/SVProgressAnimatedView.m; sourceTree = "<group>"; };
 		B2011F4B9FAB3059EFDA833F96578A3B /* OSSIPv6PrefixResolver.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OSSIPv6PrefixResolver.h; path = AliyunOSSiOS/OSSIPv6/OSSIPv6PrefixResolver.h; sourceTree = "<group>"; };
 		B36AC87E2F4516913ED1DA5A24736B97 /* OSSTaskCompletionSource.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OSSTaskCompletionSource.h; path = AliyunOSSiOS/OSSTask/OSSTaskCompletionSource.h; sourceTree = "<group>"; };
@@ -904,7 +904,7 @@
 		6440965BAF00D77476C0980641422FAF /* UMengAnalytics-NO-IDFA */ = {
 			isa = PBXGroup;
 			children = (
-				82EB2FCA8722A3133D3C07759069CE28 /* Frameworks */,
+				7AD093BEE5D4A25CBEB5D0C1CAAD00FF /* Frameworks */,
 			);
 			name = "UMengAnalytics-NO-IDFA";
 			path = "UMengAnalytics-NO-IDFA";
@@ -1006,6 +1006,14 @@
 			path = "../Target Support Files/IQKeyboardManager";
 			sourceTree = "<group>";
 		};
+		7AD093BEE5D4A25CBEB5D0C1CAAD00FF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B18D73E77F944301608D034FAA17756F /* UMMobClick.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7BCEADD47EA83D90B5BBB2B063FB2C9F /* Security */ = {
 			isa = PBXGroup;
 			children = (
@@ -1032,14 +1040,6 @@
 				03F0DF901B41DD65D83E61791B988E5D /* Pods-DGInfinity */,
 			);
 			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		82EB2FCA8722A3133D3C07759069CE28 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				8877455F09D087A6711D27AB6C7327CC /* UMMobClick.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		83827D94DF9028D2567E6E18219C582E /* Support Files */ = {
