@@ -14,7 +14,6 @@ typedef void(^Pop)(void);
 
 @property (nonatomic, copy) NSString *url;
 @property (nonatomic, assign) NewsType newsType;
-@property (nonatomic, copy) Pop pop;
 @property (nonatomic, assign) BOOL changeTitle;
 
 @end

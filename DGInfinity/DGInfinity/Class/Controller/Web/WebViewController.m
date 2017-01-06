@@ -114,7 +114,7 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (!_changeTitle || _newsType == NT_VIDEO) {
+    if (_newsType == NT_VIDEO) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
 }
@@ -205,10 +205,7 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
 
 - (void)closeBtnClick:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:_pop ? NO : YES];
-    if (_pop) {
-        _pop();
-    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)delayToHideProgress
