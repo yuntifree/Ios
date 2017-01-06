@@ -36,7 +36,10 @@ typedef NS_ENUM(NSInteger, NewsType) {
     NT_REPORT = 0,
     NT_VIDEO = 1,
     NT_APP = 2,
-    NT_GAME = 3
+    NT_GAME = 3,
+    NT_LOCAL = 4,
+    NT_ENTERTAIN = 5,
+    NT_JOKE = 6
 };
 
 typedef NS_ENUM(NSInteger, MenuCType) {

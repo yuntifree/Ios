@@ -310,7 +310,7 @@ NetWorkMgrDelegate
         case WiFiFooterTypeVideo:
         {
             if (type == WiFiFooterTypeLookForNews || type == WiFiFooterTypeNews) {
-                [self gotoNewsTabWithType:NT_REPORT];
+                [self gotoNewsTabWithType:NT_LOCAL];
             } else {
                 [self gotoNewsTabWithType:NT_VIDEO];
             }
