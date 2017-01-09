@@ -49,7 +49,7 @@ static WFNetworkSpeedDetector * wfnetworkSpeedDetector;
 {
     self = [super init];
     if (self) {
-        _detectTargetURLs = [[NSArray alloc] initWithObjects:@"http://download.weather.com.cn/3g/current/ChinaWeather_Android.apk", @"http://down.360safe.com/360mse/f/360fmse_js010001.apk", @"http://dl.360safe.com/wifispeed/wifispeed.test", nil];
+        _detectTargetURLs = [[NSArray alloc] initWithObjects:@"http://download.weather.com.cn/3g/current/ChinaWeather_Android.apk", @"http://down.360safe.com/360mse/f/360fmse_js010001.apk", nil];
         _detectCount = 0;
         _request = [NSMutableURLRequest new];
         _customSpeedDetectorQueue = dispatch_queue_create("com.yunxingzh.speeddetector", DISPATCH_QUEUE_CONCURRENT);

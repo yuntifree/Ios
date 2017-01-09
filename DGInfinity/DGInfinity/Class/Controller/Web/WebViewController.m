@@ -226,7 +226,7 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
             double progress = self.webView.estimatedProgress;
             if (progress == 1) {
                 [self.progressView setProgress:progress animated:YES];
-                [self performSelector:@selector(delayToHideProgress) withObject:nil afterDelay:1];
+                [self performSelector:@selector(delayToHideProgress) withObject:nil afterDelay:0.5];
             } else {
                 [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(delayToHideProgress) object:nil];
                 [self.progressView setProgress:progress animated:YES];

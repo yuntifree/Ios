@@ -172,7 +172,7 @@
 #pragma mark - MainPresenterDelegate
 - (void)mainPresenterIPSearchFinished
 {
-    [self performSelector:@selector(delayToHideProgress) withObject:nil afterDelay:1];
+    [self performSelector:@selector(delayToHideProgress) withObject:nil afterDelay:0.5];
     if (_badgeblock) {
         _badgeblock(self.presenter.connectedDevices.count - 1);
     }

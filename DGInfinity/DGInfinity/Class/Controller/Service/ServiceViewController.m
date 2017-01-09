@@ -105,9 +105,9 @@ const NSInteger headerHeight = 105.f;
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)_listView.collectionViewLayout;
     layout.minimumLineSpacing = 0;
     layout.minimumInteritemSpacing = 0;
-    layout.itemSize = CGSizeMake(kScreenWidth / 3.0, 44.0);
+    layout.itemSize = CGSizeMake((kScreenWidth - 60) / 3.0, 81.0);
     
-    _header = [[ServiceHeaderView alloc] initWithFrame:CGRectMake(0, -headerHeight, kScreenWidth, headerHeight)];
+    _header = [[ServiceHeaderView alloc] initWithFrame:CGRectMake(0, -headerHeight - 12, kScreenWidth, headerHeight)];
     _header.hidden = YES;
     __weak typeof(self) wself = self;
     _header.headClick = ^(NSInteger tag) {
@@ -118,12 +118,17 @@ const NSInteger headerHeight = 105.f;
         [wself openWebVCWithTitle:title[tag] url:url[tag]];
     };
     [_listView addSubview:_header];
-    _listView.contentInset = UIEdgeInsetsMake(headerHeight, 0, 0, 0);
+    
+    UIView *padingView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_header.frame), kScreenWidth, 12)];
+    padingView.backgroundColor = RGB(0xf5f5f5, 1);
+    [_listView addSubview:padingView];
+    
+    _listView.contentInset = UIEdgeInsetsMake(headerHeight + padingView.height, 0, 0, 0);
     
     [_listView registerNib:[UINib nibWithNibName:@"ServiceSectionHeader" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ServiceSectionHeader"];
     
     _listView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-    _listView.mj_header.ignoredScrollViewContentInsetTop = headerHeight;
+    _listView.mj_header.ignoredScrollViewContentInsetTop = headerHeight + padingView.height;
 }
 
 - (void)headerRefresh
@@ -204,7 +209,7 @@ const NSInteger headerHeight = 105.f;
         ServiceSectionModel *sModel = _dataArray[indexPath.section];
         if (indexPath.row < sModel.items.count) {
             ServiceCellModel *model = sModel.items[indexPath.row];
-            [cell setTitle:model.title];
+            [cell setTitle:model.title icon:model.icon];
         }
     }
     return cell;
@@ -217,7 +222,7 @@ const NSInteger headerHeight = 105.f;
         header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"ServiceSectionHeader" forIndexPath:indexPath];
         if (indexPath.section < _dataArray.count) {
             ServiceSectionModel *sModel = _dataArray[indexPath.section];
-            [header setTitle:sModel.title icon:sModel.icon];
+            [header setTitle:sModel.title];
         }
     }
     return header;
@@ -241,7 +246,7 @@ const NSInteger headerHeight = 105.f;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(kScreenWidth, 55);
+    return CGSizeMake(kScreenWidth, 56);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section

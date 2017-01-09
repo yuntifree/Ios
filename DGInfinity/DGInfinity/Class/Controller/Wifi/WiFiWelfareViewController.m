@@ -8,6 +8,7 @@
 
 #import "WiFiWelfareViewController.h"
 #import "WiFiCGI.h"
+#import "NetworkManager.h"
 
 @interface WiFiWelfareViewController ()
 {
@@ -37,6 +38,12 @@
                                NSParagraphStyleAttributeName: style};
     _ssidField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入无线网络名称" attributes:attriDic];
     _passwordField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入无线网络密码" attributes:attriDic];
+    
+    // default
+    NSString *ssid = [Tools getCurrentSSID];
+    if ([[NetworkManager shareManager] isWiFi] && ![ssid isEqualToString:WIFISDK_SSID]) {
+        _ssidField.text = ssid;
+    }
 }
 
 - (IBAction)textFieldEditingChanged:(id)sender {

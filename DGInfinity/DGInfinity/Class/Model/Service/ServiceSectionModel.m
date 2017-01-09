@@ -23,7 +23,6 @@
 + (instancetype)createWithInfo:(NSDictionary *)info
 {
     ServiceSectionModel *model = [ServiceSectionModel new];
-    model.icon = info[@"icon"];
     model.title = info[@"title"];
     NSArray *items = info[@"items"];
     if ([items isKindOfClass:[NSArray class]]) {

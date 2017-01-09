@@ -16,7 +16,7 @@
 @property (nonatomic, copy) NSString *token;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *privdata;
-@property (nonatomic, assign) NSTimeInterval expire;
+@property (nonatomic, copy) NSString *expiretime;
 @property (nonatomic, copy) NSString *wifipass;
 
 // app info

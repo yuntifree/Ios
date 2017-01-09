@@ -45,6 +45,8 @@ NetWorkMgrDelegate
     
     NSMutableArray *_newsArray;
     NSString *_weatherUrl;
+    NSString *_noticeContent;
+    NSString *_noticeUrl;
 }
 
 @property (nonatomic, assign) BOOL isHiddenStatusBar;
@@ -351,6 +353,12 @@ NetWorkMgrDelegate
                     [_menuView setWeather:weather];
                     _weatherUrl = weather[@"dst"];
                 }
+                NSDictionary *notice = data[@"notice"];
+                if ([notice isKindOfClass:[NSDictionary class]]) {
+                    [_menuView setNotice:notice[@"title"]];
+                    _noticeContent = notice[@"content"];
+                    _noticeUrl = notice[@"dst"];
+                }
                 NSArray *news = data[@"news"];
                 if ([news isKindOfClass:[NSArray class]]) {
                     if (news.count) {
@@ -491,6 +499,17 @@ NetWorkMgrDelegate
         case WiFiMenuTypeConnected:
         {
             [self gotoNewsTabWithType:NT_REPORT];
+        }
+            break;
+        case WiFiMenuTypeNotice:
+        {
+            if (_noticeContent.length) {
+                [self showAlertWithTitle:@"通知" message:_noticeContent cancelTitle:@"知道了" cancelHandler:nil defaultTitle:nil defaultHandler:nil];
+            } else if (_noticeUrl.length) {
+                WebViewController *vc = [[WebViewController alloc] init];
+                vc.url = _noticeUrl;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
         }
             break;
         default:

@@ -10,8 +10,6 @@
 
 @interface ServiceSectionHeader ()
 {
-    
-    __weak IBOutlet UIImageView *_iconView;
     __weak IBOutlet UILabel *_titleLbl;
     
 }
@@ -24,9 +22,8 @@
     // Initialization code
 }
 
-- (void)setTitle:(NSString *)title icon:(NSString *)url
+- (void)setTitle:(NSString *)title
 {
-    [_iconView yy_setImageWithURL:[NSURL URLWithString:url] options:YYWebImageOptionSetImageWithFadeAnimation];
     _titleLbl.text = title;
 }
 

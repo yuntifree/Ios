@@ -104,20 +104,17 @@
             self.scrollMenu.shouldUniformizeMenus = menus.count <= 5;
             [self.scrollMenu reloadData];
             
-            int j = 0;
             for (int i = 0; i < self.menuModels.count; i++) {
                 NewsMenuModel *model = self.menuModels[i];
                 NewsBaseViewController *vc = nil;
                 switch (model.ctype) {
                     case MenuCTypeNews:
                     {
-                        j++;
                         vc = [[NewsReportViewController alloc] init];
                     }
                         break;
                     case MenuCTypeVideo:
                     {
-                        j++;
                         vc = [[NewsVideoViewController alloc] init];
                     }
                         break;
@@ -131,7 +128,7 @@
                     [self.scrollView addSubview:vc.view];
                 }
             }
-            self.scrollView.contentSize = CGSizeMake(kScreenWidth * j, self.scrollView.height);
+            self.scrollView.contentSize = CGSizeMake(kScreenWidth * self.scrollView.subviews.count, self.scrollView.height);
             [self setCurrentPage:self.defaultType];
         }
     } else {

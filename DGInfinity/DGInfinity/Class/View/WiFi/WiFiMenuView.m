@@ -24,6 +24,9 @@
     __weak IBOutlet UIImageView *_backView;
     __weak IBOutlet UIImageView *_leftWeatherView;
     __weak IBOutlet UIImageView *_rightWeatherView;
+    __weak IBOutlet UIView *_noticeView;
+    __weak IBOutlet UILabel *_noticeLbl;
+    
     PulsingHaloLayer *_halo;
     UIImageView *_outsideSmallCircle;
     UIImageView *_outsideBigCircle;
@@ -187,6 +190,16 @@
     _badgeLbl.hidden = !(badge > 0);
 }
 
+- (void)setNotice:(NSString *)notice
+{
+    if (notice.length) {
+        _noticeView.hidden = NO;
+        _noticeLbl.text = notice;
+    } else {
+        _noticeView.hidden = YES;
+    }
+}
+
 - (void)setBackViewImage
 {
     TimeType type = [Tools getTimeType];
@@ -275,6 +288,14 @@
             [_delegate WiFiMenuViewClick:WiFiMenuTypeConnect];
         }
     }
+}
+
+- (IBAction)noticeBtnClick:(UIButton *)sender {
+    [UIView animateWithDuration:0.25 animations:^{
+        _noticeView.alpha = 0;
+    } completion:^(BOOL finished) {
+        _noticeView.hidden = YES;
+    }];
 }
 
 #pragma mark - CAAnimationDelegate

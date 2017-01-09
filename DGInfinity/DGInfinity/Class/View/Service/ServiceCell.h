@@ -10,6 +10,6 @@
 
 @interface ServiceCell : UICollectionViewCell
 
-- (void)setTitle:(NSString *)title;
+- (void)setTitle:(NSString *)title icon:(NSString *)icon;
 
 @end

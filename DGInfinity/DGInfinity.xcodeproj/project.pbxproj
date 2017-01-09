@@ -322,6 +322,8 @@
 		990F44F51E1B8C9000E242C2 /* circle_outside_big@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 990F44EF1E1B8C9000E242C2 /* circle_outside_big@3x.png */; };
 		990F44F61E1B8C9000E242C2 /* circle_outside_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 990F44F01E1B8C9000E242C2 /* circle_outside_small@2x.png */; };
 		990F44F71E1B8C9000E242C2 /* circle_outside_small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 990F44F11E1B8C9000E242C2 /* circle_outside_small@3x.png */; };
+		991066401E23838900D1525F /* ico_no@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9910663E1E23838900D1525F /* ico_no@2x.png */; };
+		991066411E23838900D1525F /* ico_no@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9910663F1E23838900D1525F /* ico_no@3x.png */; };
 		9943BFA41E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943BFA31E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.m */; };
 		9943BFB41E14F1E500531FE4 /* leftShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9943BFA71E14F1E500531FE4 /* leftShadow@2x.png */; };
 		9943BFB51E14F1E500531FE4 /* managerMenuButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9943BFA81E14F1E500531FE4 /* managerMenuButton@2x.png */; };
@@ -793,6 +795,8 @@
 		990F44EF1E1B8C9000E242C2 /* circle_outside_big@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle_outside_big@3x.png"; sourceTree = "<group>"; };
 		990F44F01E1B8C9000E242C2 /* circle_outside_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle_outside_small@2x.png"; sourceTree = "<group>"; };
 		990F44F11E1B8C9000E242C2 /* circle_outside_small@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle_outside_small@3x.png"; sourceTree = "<group>"; };
+		9910663E1E23838900D1525F /* ico_no@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_no@2x.png"; sourceTree = "<group>"; };
+		9910663F1E23838900D1525F /* ico_no@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_no@3x.png"; sourceTree = "<group>"; };
 		9943BFA21E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+ExclusiveTouch.h"; sourceTree = "<group>"; };
 		9943BFA31E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+ExclusiveTouch.m"; sourceTree = "<group>"; };
 		9943BFA71E14F1E500531FE4 /* leftShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leftShadow@2x.png"; sourceTree = "<group>"; };
@@ -1222,6 +1226,8 @@
 			children = (
 				6F32159A1DDDB29A00B7D5DA /* connect */,
 				6F3215821DDD879D00B7D5DA /* weather */,
+				9910663E1E23838900D1525F /* ico_no@2x.png */,
+				9910663F1E23838900D1525F /* ico_no@3x.png */,
 				9990CD011E0D1EE50002BF63 /* wireless_ico_setting@2x.png */,
 				9990CD021E0D1EE50002BF63 /* wireless_ico_setting@3x.png */,
 				6F32157E1DDD879D00B7D5DA /* img_bg_day@2x.png */,
@@ -2324,6 +2330,7 @@
 				6F3185191DB8A25700017D47 /* NewsReportCell.xib in Resources */,
 				6F2DF2CF1DD1D72C00A8F0EC /* tab_ico_service_gray@3x.png in Resources */,
 				6F2F10031DF914D100BBB742 /* ico_code@3x.png in Resources */,
+				991066411E23838900D1525F /* ico_no@3x.png in Resources */,
 				6F3067411DD32B8000FA841E /* btn_wifi welfare @2x.png in Resources */,
 				6FF9FA741DEAA01100620A6B /* ico_login_logo@2x.png in Resources */,
 				6F2EEAAC1DEDA61D00F5203C /* ico_addwifi@2x.png in Resources */,
@@ -2394,6 +2401,7 @@
 				6F3F32AC1DDAFB8F0024095A /* btn_Label@2x.png in Resources */,
 				6F3F32981DDAF97F0024095A /* wif_icon_qrcode_cornor@2x.png in Resources */,
 				6F30A1E01DD5AD5100149D73 /* service@3x.png in Resources */,
+				991066401E23838900D1525F /* ico_no@2x.png in Resources */,
 				9990CD171E0D1EEF0002BF63 /* icon_more@3x.png in Resources */,
 				6F6FDAE81DB4C82100E50D9B /* NewsViewController.xib in Resources */,
 				6F5033F21DD0706C001EBC97 /* Start button_normal@3x.png in Resources */,

@@ -11,15 +11,17 @@
 @interface ServiceCell ()
 {
     __weak IBOutlet UILabel *_titleLbl;
+    __weak IBOutlet UIImageView *_iconView;
     
 }
 @end
 
 @implementation ServiceCell
 
-- (void)setTitle:(NSString *)title
+- (void)setTitle:(NSString *)title icon:(NSString *)icon
 {
     _titleLbl.text = title;
+    [_iconView yy_setImageWithURL:[NSURL URLWithString:icon] options:YYWebImageOptionSetImageWithFadeAnimation];
 }
 
 - (void)awakeFromNib {

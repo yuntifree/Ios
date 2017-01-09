@@ -10,6 +10,6 @@
 
 @interface ServiceSectionHeader : UICollectionReusableView
 
-- (void)setTitle:(NSString *)title icon:(NSString *)url;
+- (void)setTitle:(NSString *)title;
 
 @end

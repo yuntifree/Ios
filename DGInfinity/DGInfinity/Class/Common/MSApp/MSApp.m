@@ -16,7 +16,7 @@
 #define KUD_TOKEN                   @"KUD_TOKEN"
 #define KUD_USERNAME                @"KUD_USERNAME"
 #define KUD_PRIVDATA                @"KUD_PRIVDATA"
-#define KUD_EXPIRE                  @"KUD_EXPIRE"
+#define KUD_EXPIRETIME              @"KUD_EXPIRETIME"
 #define KUD_WIFIPASS                @"KUD_WIFIPASS"
 #define KUD_APPVERSION              @"KUD_APPVERSION"
 #define KUD_SPLASHIMAGE             @"KUD_SPLASHIMAGE"
@@ -43,7 +43,7 @@ static MSApp *mSapp = nil;
     mSapp.uid = 0;
     mSapp.token = nil;
     mSapp.privdata = nil;
-    mSapp.expire = 0;
+    mSapp.expiretime = nil;
     mSapp.wifipass = nil;
 }
 
@@ -62,7 +62,7 @@ static MSApp *mSapp = nil;
     NSInteger uid = [data[@"uid"] integerValue];
     NSString *token = data[@"token"];
     NSString *privdata = data[@"privdata"];
-    NSTimeInterval expire = [data[@"expire"] doubleValue];
+    NSString *expiretime = data[@"expiretime"];
     if (uid) {
         SApp.uid = uid;
     }
@@ -72,15 +72,16 @@ static MSApp *mSapp = nil;
     if (privdata.length) {
         SApp.privdata = privdata;
     }
-    if (expire > 0) {
-        SApp.expire = expire + [[NSDate date] timeIntervalSince1970];
+    if (expiretime.length) {
+        SApp.expiretime = expiretime;
     }
     [SApp setMiPush];
 }
 
 + (void)autoLogin
 {
-    if (SApp.uid && SApp.privdata.length && SApp.expire <= [[NSDate date] timeIntervalSince1970]) {
+    NSString *dateStr = [NSDate formatStringWithDate:[NSDate date]];
+    if (SApp.uid && SApp.privdata.length && (!SApp.expiretime || [SApp.expiretime compare:dateStr] != NSOrderedDescending)) {
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0); // 创建信号量
         
         NSURL *url = [NSURL URLWithString:[[RequestManager shareManager] urlPath:@"auto_login"]];
@@ -205,15 +206,15 @@ static MSApp *mSapp = nil;
     return [NSUSERDEFAULTS objectForKey:KUD_PRIVDATA];
 }
 
-- (void)setExpire:(NSTimeInterval)expire
+- (void)setExpiretime:(NSString *)expiretime
 {
-    [NSUSERDEFAULTS setObject:@(expire) forKey:KUD_EXPIRE];
+    [NSUSERDEFAULTS setObject:expiretime forKey:KUD_EXPIRETIME];
     [NSUSERDEFAULTS synchronize];
 }
 
-- (NSTimeInterval)expire
+- (NSString *)expiretime
 {
-    return [[NSUSERDEFAULTS objectForKey:KUD_EXPIRE] doubleValue];
+    return [NSUSERDEFAULTS objectForKey:KUD_EXPIRETIME];
 }
 
 - (void)setWifipass:(NSString *)wifipass

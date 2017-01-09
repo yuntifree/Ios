@@ -37,7 +37,7 @@
                             </constraints>
                         </imageView>
                         <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZHF-di-tNg">
-                            <rect key="frame" x="131.5" y="63" width="113" height="113"/>
+                            <rect key="frame" x="131" y="63" width="113" height="113"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="113" id="1Cu-Vs-QSp"/>
@@ -81,12 +81,48 @@
                                 <outletCollection property="gestureRecognizers" destination="EJo-em-5bH" appends="YES" id="6nV-QJ-Z9c"/>
                             </connections>
                         </label>
+                        <view hidden="YES" tag="1009" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xP-Lj-LBs">
+                            <rect key="frame" x="0.0" y="281" width="375" height="36"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eg-ws-Eih">
+                                    <rect key="frame" x="334" y="0.0" width="36" height="36"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="36" id="Iy4-aa-BLT"/>
+                                        <constraint firstAttribute="height" constant="36" id="c2n-ne-MmS"/>
+                                    </constraints>
+                                    <state key="normal" backgroundImage="ico_no.png"/>
+                                    <connections>
+                                        <action selector="noticeBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="lwj-Lc-OpL"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yi-uq-EBN">
+                                    <rect key="frame" x="24" y="18.5" width="286" height="0.0"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="5eg-ws-Eih" secondAttribute="bottom" id="OFS-Vw-V3E"/>
+                                <constraint firstAttribute="height" constant="36" id="hTu-Le-bys"/>
+                                <constraint firstItem="5eg-ws-Eih" firstAttribute="leading" secondItem="0yi-uq-EBN" secondAttribute="trailing" constant="24" id="mE8-7L-2BU"/>
+                                <constraint firstItem="5eg-ws-Eih" firstAttribute="top" secondItem="0xP-Lj-LBs" secondAttribute="top" id="u7R-pm-NSk"/>
+                                <constraint firstItem="0yi-uq-EBN" firstAttribute="leading" secondItem="0xP-Lj-LBs" secondAttribute="leading" constant="24" id="uIa-8m-RRN"/>
+                                <constraint firstItem="0yi-uq-EBN" firstAttribute="centerY" secondItem="0xP-Lj-LBs" secondAttribute="centerY" id="zCI-cl-btQ"/>
+                                <constraint firstAttribute="trailing" secondItem="5eg-ws-Eih" secondAttribute="trailing" constant="5" id="zdt-M2-vgZ"/>
+                            </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="QYj-1g-QV9" appends="YES" id="ccg-xI-LJf"/>
+                            </connections>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="6ug-TH-yA9" secondAttribute="bottom" constant="47" id="1ZS-ru-siW"/>
                         <constraint firstAttribute="bottom" secondItem="EJL-Uv-jC0" secondAttribute="bottom" constant="13" id="78U-Sc-Gx6"/>
                         <constraint firstAttribute="trailing" secondItem="Ah2-cX-q3a" secondAttribute="trailing" constant="-30" id="Brd-RG-TEb"/>
+                        <constraint firstAttribute="bottom" secondItem="0xP-Lj-LBs" secondAttribute="bottom" id="Efl-IB-QxC"/>
                         <constraint firstAttribute="bottom" secondItem="8DQ-T2-OqM" secondAttribute="bottom" id="KXn-IM-Ipo"/>
                         <constraint firstItem="Ah2-cX-q3a" firstAttribute="top" secondItem="Rvn-c3-FFE" secondAttribute="top" constant="25" id="SXn-MH-ik0"/>
                         <constraint firstAttribute="trailing" secondItem="8DQ-T2-OqM" secondAttribute="trailing" id="Tkw-gk-n29"/>
@@ -97,7 +133,9 @@
                         <constraint firstAttribute="width" secondItem="Rvn-c3-FFE" secondAttribute="height" multiplier="375:317" id="blW-vw-OcF"/>
                         <constraint firstItem="EJL-Uv-jC0" firstAttribute="leading" secondItem="3qL-46-AD3" secondAttribute="trailing" id="em4-eu-DxI"/>
                         <constraint firstItem="3qL-46-AD3" firstAttribute="leading" secondItem="Rvn-c3-FFE" secondAttribute="leading" constant="12" id="f5m-fu-aAC"/>
+                        <constraint firstItem="0xP-Lj-LBs" firstAttribute="leading" secondItem="Rvn-c3-FFE" secondAttribute="leading" id="fem-Hd-No8"/>
                         <constraint firstItem="v9i-56-Vdl" firstAttribute="leading" secondItem="Rvn-c3-FFE" secondAttribute="leading" constant="-10" id="gtO-DR-hGL"/>
+                        <constraint firstAttribute="trailing" secondItem="0xP-Lj-LBs" secondAttribute="trailing" id="iMm-tn-bAH"/>
                         <constraint firstItem="ZHF-di-tNg" firstAttribute="top" secondItem="Rvn-c3-FFE" secondAttribute="top" constant="63" id="kEC-34-kJO"/>
                         <constraint firstItem="6ug-TH-yA9" firstAttribute="centerX" secondItem="Rvn-c3-FFE" secondAttribute="centerX" id="lNR-Rb-kkT"/>
                         <constraint firstItem="8DQ-T2-OqM" firstAttribute="leading" secondItem="Rvn-c3-FFE" secondAttribute="leading" id="nvq-ii-LE1"/>
@@ -365,6 +403,8 @@
                 <outlet property="_hotLbl" destination="AF4-jb-U74" id="IqI-Mf-SKA"/>
                 <outlet property="_leftWeatherView" destination="v9i-56-Vdl" id="9jZ-VJ-iuw"/>
                 <outlet property="_mapIconLeft" destination="O5W-yr-fib" id="sms-o2-jGY"/>
+                <outlet property="_noticeLbl" destination="0yi-uq-EBN" id="V6F-yf-CqU"/>
+                <outlet property="_noticeView" destination="0xP-Lj-LBs" id="Seg-mP-2MV"/>
                 <outlet property="_rightWeatherView" destination="Ah2-cX-q3a" id="ZwR-qH-sDR"/>
                 <outlet property="_statusLbl" destination="6ug-TH-yA9" id="1ER-vb-E9g"/>
                 <outlet property="_statusLblBottom" destination="1ZS-ru-siW" id="482-Lp-6Dg"/>
@@ -373,7 +413,7 @@
                 <outlet property="_weatherLbl" destination="EJL-Uv-jC0" id="GWY-mQ-PkY"/>
                 <outlet property="_welfareIconLeft" destination="SVq-zC-vHu" id="Z5p-ha-YKS"/>
             </connections>
-            <point key="canvasLocation" x="-482" y="-163"/>
+            <point key="canvasLocation" x="-545" y="-162"/>
         </view>
         <tapGestureRecognizer id="o02-dx-MzN">
             <connections>
@@ -410,14 +450,20 @@
                 <action selector="menuViewTap:" destination="iN0-l3-epB" id="r1j-0e-5zo"/>
             </connections>
         </tapGestureRecognizer>
+        <tapGestureRecognizer id="QYj-1g-QV9">
+            <connections>
+                <action selector="menuViewTap:" destination="iN0-l3-epB" id="k1O-Gh-2V8"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="Cloudy.png" width="83" height="83"/>
-        <image name="Connect.png" width="66" height="66"/>
+        <image name="Connect.png" width="57" height="57"/>
         <image name="btn_wifi map.png" width="46" height="46"/>
         <image name="btn_wifi welfare .png" width="46" height="46"/>
         <image name="btn_wifisetting.png" width="46" height="46"/>
         <image name="btn_wifitest.png" width="46" height="46"/>
         <image name="horn.png" width="14" height="14"/>
+        <image name="ico_no.png" width="36" height="36"/>
     </resources>
 </document>

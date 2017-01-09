@@ -16,6 +16,7 @@
     model.title = info[@"title"];
     model.dst = info[@"dst"];
     model.sid = [info[@"sid"] integerValue];
+    model.icon = info[@"icon"];
     return model;
 }
 

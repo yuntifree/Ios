@@ -10,7 +10,6 @@
 
 @interface ServiceSectionModel : NSObject
 
-@property (nonatomic, copy) NSString *icon;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, strong) NSMutableArray *items;
 
