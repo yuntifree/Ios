@@ -47,6 +47,8 @@
         self.backgroundColor = [UIColor whiteColor];
         
         _backView = [[UIImageView alloc] initWithFrame:self.bounds];
+        _backView.userInteractionEnabled = YES;
+        [_backView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goBtnClick)]];
         [self addSubview:_backView];
         
         UIImageView *leftIcon = [[UIImageView alloc] initWithImage:ImageNamed(@"text_ad")];
