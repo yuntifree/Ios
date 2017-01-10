@@ -24,6 +24,10 @@
 #define KUD_SPLASHTITLE             @"KUD_SPLASHTITLE"
 #define KUD_SPLASHEXPIRE            @"KUD_SPLASHEXPIRE"
 
+@interface MSApp () <NSURLSessionDelegate>
+
+@end
+
 @implementation MSApp
 
 static MSApp *mSapp = nil;
@@ -93,14 +97,17 @@ static MSApp *mSapp = nil;
         NSData *data = [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil];
         [request setHTTPBody:data];
         
-        NSURLSession *session = [NSURLSession sharedSession];
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:[self sharedMSApp] delegateQueue:nil];
         NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if (!error && data) {
                 NSDictionary *res = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
                 if ([res isKindOfClass:[NSDictionary class]]) {
-                    NSDictionary *data = res[@"data"];
-                    if ([data isKindOfClass:[NSDictionary class]]) {
-                        [self setUserInfo:data];
+                    int errcode = [res[@"errno"] intValue];
+                    if (E_OK == errcode) {
+                        NSDictionary *data = res[@"data"];
+                        if ([data isKindOfClass:[NSDictionary class]]) {
+                            [self setUserInfo:data];
+                        }
                     }
                 }
             }
@@ -300,6 +307,28 @@ static MSApp *mSapp = nil;
     if (!exist) {
         [_reportArray addObject:model];
         [NewsCGI reportClick:model.id_ type:model.type complete:nil];
+    }
+}
+
+#pragma mark - NSURLSessionDelegate
+- (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler {
+    
+    NSURLSessionAuthChallengeDisposition disposition = NSURLSessionAuthChallengePerformDefaultHandling;
+    __block NSURLCredential *credential = nil;
+    
+    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
+        credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+        if (credential) {
+            disposition = NSURLSessionAuthChallengeUseCredential;
+        } else {
+            disposition = NSURLSessionAuthChallengePerformDefaultHandling;
+        }
+    } else {
+        disposition = NSURLSessionAuthChallengePerformDefaultHandling;
+    }
+    
+    if (completionHandler) {
+        completionHandler(disposition, credential);
     }
 }
 
