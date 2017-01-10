@@ -31,7 +31,8 @@ static const float PING_TIMEOUT = 1;
     NSTimer *pingTimer;
 }
 
--(instancetype)initWithIPToPing:(NSString*)ip andCompletionHandler:(nullable void (^)(NSError  * _Nullable error, NSString  * _Nonnull ip))result;{
+-(instancetype)initWithIPToPing:(NSString*)ip andCompletionHandler:(nullable void (^)(NSError  * _Nullable error, NSString  * _Nonnull ip))result
+{
 
     self = [super init];
     
@@ -47,7 +48,7 @@ static const float PING_TIMEOUT = 1;
     }
     
     return self;
-};
+}
 
 -(void)start {
 
@@ -74,7 +75,7 @@ static const float PING_TIMEOUT = 1;
     //Ping method
     [self ping];
     
-    NSTimeInterval updateInterval = 0.1f;
+    NSTimeInterval updateInterval = 1.0f;
     NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:updateInterval];
     
     while (!_stopRunLoop && [runLoop runMode: NSDefaultRunLoopMode beforeDate:loopUntil]) {

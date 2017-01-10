@@ -110,8 +110,9 @@
     switch (indexPath.row) {
         case 0:
         {
+            SettingModel *model = self.dataArray[0];
             YYDiskCache *diskCache = [YYWebImageManager sharedManager].cache.diskCache;
-            if (diskCache.totalCost / 1024.0 / 1024.0 >= 0.1f) { // 大于或等于102.4k
+            if (model.desc.doubleValue >= 0.1) { // 大于或等于102.4k
                 [diskCache removeAllObjectsWithProgressBlock:^(int removedCount, int totalCount) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [SVProgressHUD showWithStatus:@"清理缓存中..."];
