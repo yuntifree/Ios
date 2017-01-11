@@ -156,7 +156,7 @@
                 if ([device.ipAddress isEqualToString:_serverIP]) continue;
                 WiFiExamDeviceModel *model = [WiFiExamDeviceModel createWithBrand:device.brand ip:device.ipAddress hostname:device.hostname];
                 if ([device.ipAddress isEqualToString:_localIP]) {
-                    model.hostname = [NSString stringWithFormat:@"%@（本机）",model.hostname];
+                    model.hostname = [NSString stringWithFormat:@"%@（本机）",[UIDevice currentDevice].name];
                 }
                 [_deviceArray addObject:model];
             }
@@ -174,7 +174,7 @@
 {
     [self performSelector:@selector(delayToHideProgress) withObject:nil afterDelay:0.5];
     if (_badgeblock) {
-        _badgeblock(self.presenter.connectedDevices.count - 1);
+        _badgeblock(_deviceArray.count);
     }
 }
 

@@ -109,7 +109,7 @@ NetWorkMgrDelegate
 {
 #if (!TARGET_IPHONE_SIMULATOR)
     [_menuView setConnectBtnStatus:ConnectStatusConnecting];
-    [[UserAuthManager manager] doLogon:SApp.username andPassWord:@"" andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
+    [[UserAuthManager manager] doLogon:SApp.username andPassWord:SApp.wifipass andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
         if (!error) {
             NSDictionary *head = response[@"head"];
             if ([head isKindOfClass:[NSDictionary class]]) {
