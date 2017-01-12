@@ -42,6 +42,7 @@ const NSInteger headerHeight = 105.f;
 {
     __weak IBOutlet UICollectionView *_listView;
     ServiceHeaderView *_header;
+    UIView *_padingView;
     
     NSMutableArray *_dataArray;
 }
@@ -119,16 +120,17 @@ const NSInteger headerHeight = 105.f;
     };
     [_listView addSubview:_header];
     
-    UIView *padingView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_header.frame), kScreenWidth, 12)];
-    padingView.backgroundColor = RGB(0xf5f5f5, 1);
-    [_listView addSubview:padingView];
+    _padingView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_header.frame), kScreenWidth, 12)];
+    _padingView.backgroundColor = RGB(0xf5f5f5, 1);
+    _padingView.hidden = YES;
+    [_listView addSubview:_padingView];
     
-    _listView.contentInset = UIEdgeInsetsMake(headerHeight + padingView.height, 0, 0, 0);
+    _listView.contentInset = UIEdgeInsetsMake(headerHeight + _padingView.height, 0, 0, 0);
     
     [_listView registerNib:[UINib nibWithNibName:@"ServiceSectionHeader" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ServiceSectionHeader"];
     
     _listView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-    _listView.mj_header.ignoredScrollViewContentInsetTop = headerHeight + padingView.height;
+    _listView.mj_header.ignoredScrollViewContentInsetTop = headerHeight + _padingView.height;
 }
 
 - (void)headerRefresh
@@ -142,6 +144,7 @@ const NSInteger headerHeight = 105.f;
         [_listView.mj_header endRefreshing];
         if (E_OK == res._errno) {
             _header.hidden = NO;
+            _padingView.hidden = NO;
             NSDictionary *data = res.data[@"data"];
             if ([data isKindOfClass:[NSDictionary class]]) {
                 NSArray *services = data[@"services"];
@@ -159,6 +162,7 @@ const NSInteger headerHeight = 105.f;
         } else {
             if (!_dataArray.count) {
                 _header.hidden = YES;
+                _padingView.hidden = YES;
             }
             if (E_CGI_FAILED == res._errno) {
                 __weak typeof(self) wself = self;
