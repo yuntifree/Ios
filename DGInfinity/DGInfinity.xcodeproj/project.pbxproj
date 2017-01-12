@@ -91,16 +91,6 @@
 		6F2F9BBD1DDC224A0055DAF9 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F9BBC1DDC224A0055DAF9 /* SearchViewController.m */; };
 		6F2F9BC51DDC64230055DAF9 /* WiFiExaminationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F9BC31DDC64230055DAF9 /* WiFiExaminationViewController.m */; };
 		6F2F9BC61DDC64230055DAF9 /* WiFiExaminationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F9BC41DDC64230055DAF9 /* WiFiExaminationViewController.xib */; };
-		6F2F9BDF1DDC670C0055DAF9 /* data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F9BC81DDC670C0055DAF9 /* data.plist */; };
-		6F2F9BE01DDC670C0055DAF9 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F9BCA1DDC670C0055DAF9 /* Device.m */; };
-		6F2F9BE11DDC670C0055DAF9 /* LANProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F9BCF1DDC670C0055DAF9 /* LANProperties.m */; };
-		6F2F9BE21DDC670C0055DAF9 /* MacFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F9BD11DDC670C0055DAF9 /* MacFinder.m */; };
-		6F2F9BE31DDC670C0055DAF9 /* MACOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F9BD31DDC670C0055DAF9 /* MACOperation.m */; };
-		6F2F9BE41DDC670C0055DAF9 /* MainPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F9BD51DDC670C0055DAF9 /* MainPresenter.m */; };
-		6F2F9BE51DDC670C0055DAF9 /* MMLANScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F9BD71DDC670C0055DAF9 /* MMLANScanner.m */; };
-		6F2F9BE61DDC670C0055DAF9 /* NetworkCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F9BD91DDC670C0055DAF9 /* NetworkCalculator.m */; };
-		6F2F9BE71DDC670C0055DAF9 /* PingOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F9BDB1DDC670C0055DAF9 /* PingOperation.m */; };
-		6F2F9BE81DDC670C0055DAF9 /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F9BDE1DDC670C0055DAF9 /* SimplePing.m */; };
 		6F2F9BED1DDC67A30055DAF9 /* WiFiExamCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F9BEB1DDC67A30055DAF9 /* WiFiExamCell.m */; };
 		6F2F9BEE1DDC67A30055DAF9 /* WiFiExamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F9BEC1DDC67A30055DAF9 /* WiFiExamCell.xib */; };
 		6F2F9BF21DDC70AB0055DAF9 /* WiFiExamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F9BF11DDC70AB0055DAF9 /* WiFiExamModel.m */; };
@@ -322,6 +312,14 @@
 		990F44F51E1B8C9000E242C2 /* circle_outside_big@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 990F44EF1E1B8C9000E242C2 /* circle_outside_big@3x.png */; };
 		990F44F61E1B8C9000E242C2 /* circle_outside_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 990F44F01E1B8C9000E242C2 /* circle_outside_small@2x.png */; };
 		990F44F71E1B8C9000E242C2 /* circle_outside_small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 990F44F11E1B8C9000E242C2 /* circle_outside_small@3x.png */; };
+		9910627C1E268847006B3D2A /* ConnectedDeviceUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 991062731E268847006B3D2A /* ConnectedDeviceUtils.m */; };
+		9910627D1E268847006B3D2A /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 991062751E268847006B3D2A /* GCDAsyncUdpSocket.m */; };
+		9910627E1E268847006B3D2A /* RMConnectedDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 991062771E268847006B3D2A /* RMConnectedDevice.m */; };
+		9910627F1E268847006B3D2A /* RMPingCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 991062791E268847006B3D2A /* RMPingCenter.m */; };
+		991062801E268847006B3D2A /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = 9910627B1E268847006B3D2A /* SimplePing.m */; };
+		991062891E269A6D006B3D2A /* data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 991062841E269A6D006B3D2A /* data.plist */; };
+		9910628A1E269A6D006B3D2A /* LANProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 991062861E269A6D006B3D2A /* LANProperties.m */; };
+		9910628B1E269A6D006B3D2A /* MacFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 991062881E269A6D006B3D2A /* MacFinder.m */; };
 		991066401E23838900D1525F /* ico_no@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9910663E1E23838900D1525F /* ico_no@2x.png */; };
 		991066411E23838900D1525F /* ico_no@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9910663F1E23838900D1525F /* ico_no@3x.png */; };
 		9943BFA41E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943BFA31E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.m */; };
@@ -477,29 +475,6 @@
 		6F2F9BC21DDC64230055DAF9 /* WiFiExaminationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiExaminationViewController.h; sourceTree = "<group>"; };
 		6F2F9BC31DDC64230055DAF9 /* WiFiExaminationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WiFiExaminationViewController.m; sourceTree = "<group>"; };
 		6F2F9BC41DDC64230055DAF9 /* WiFiExaminationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WiFiExaminationViewController.xib; sourceTree = "<group>"; };
-		6F2F9BC81DDC670C0055DAF9 /* data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = data.plist; sourceTree = "<group>"; };
-		6F2F9BC91DDC670C0055DAF9 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
-		6F2F9BCA1DDC670C0055DAF9 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
-		6F2F9BCB1DDC670C0055DAF9 /* if_arp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_arp.h; sourceTree = "<group>"; };
-		6F2F9BCC1DDC670C0055DAF9 /* if_ether.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_ether.h; sourceTree = "<group>"; };
-		6F2F9BCD1DDC670C0055DAF9 /* if_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_types.h; sourceTree = "<group>"; };
-		6F2F9BCE1DDC670C0055DAF9 /* LANProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LANProperties.h; sourceTree = "<group>"; };
-		6F2F9BCF1DDC670C0055DAF9 /* LANProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LANProperties.m; sourceTree = "<group>"; };
-		6F2F9BD01DDC670C0055DAF9 /* MacFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacFinder.h; sourceTree = "<group>"; };
-		6F2F9BD11DDC670C0055DAF9 /* MacFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MacFinder.m; sourceTree = "<group>"; };
-		6F2F9BD21DDC670C0055DAF9 /* MACOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MACOperation.h; sourceTree = "<group>"; };
-		6F2F9BD31DDC670C0055DAF9 /* MACOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MACOperation.m; sourceTree = "<group>"; };
-		6F2F9BD41DDC670C0055DAF9 /* MainPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPresenter.h; sourceTree = "<group>"; };
-		6F2F9BD51DDC670C0055DAF9 /* MainPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPresenter.m; sourceTree = "<group>"; };
-		6F2F9BD61DDC670C0055DAF9 /* MMLANScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMLANScanner.h; sourceTree = "<group>"; };
-		6F2F9BD71DDC670C0055DAF9 /* MMLANScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMLANScanner.m; sourceTree = "<group>"; };
-		6F2F9BD81DDC670C0055DAF9 /* NetworkCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkCalculator.h; sourceTree = "<group>"; };
-		6F2F9BD91DDC670C0055DAF9 /* NetworkCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkCalculator.m; sourceTree = "<group>"; };
-		6F2F9BDA1DDC670C0055DAF9 /* PingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PingOperation.h; sourceTree = "<group>"; };
-		6F2F9BDB1DDC670C0055DAF9 /* PingOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PingOperation.m; sourceTree = "<group>"; };
-		6F2F9BDC1DDC670C0055DAF9 /* route.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = route.h; sourceTree = "<group>"; };
-		6F2F9BDD1DDC670C0055DAF9 /* SimplePing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePing.h; sourceTree = "<group>"; };
-		6F2F9BDE1DDC670C0055DAF9 /* SimplePing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePing.m; sourceTree = "<group>"; };
 		6F2F9BEA1DDC67A30055DAF9 /* WiFiExamCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiExamCell.h; sourceTree = "<group>"; };
 		6F2F9BEB1DDC67A30055DAF9 /* WiFiExamCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WiFiExamCell.m; sourceTree = "<group>"; };
 		6F2F9BEC1DDC67A30055DAF9 /* WiFiExamCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WiFiExamCell.xib; sourceTree = "<group>"; };
@@ -795,6 +770,24 @@
 		990F44EF1E1B8C9000E242C2 /* circle_outside_big@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle_outside_big@3x.png"; sourceTree = "<group>"; };
 		990F44F01E1B8C9000E242C2 /* circle_outside_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle_outside_small@2x.png"; sourceTree = "<group>"; };
 		990F44F11E1B8C9000E242C2 /* circle_outside_small@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle_outside_small@3x.png"; sourceTree = "<group>"; };
+		991062721E268847006B3D2A /* ConnectedDeviceUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectedDeviceUtils.h; sourceTree = "<group>"; };
+		991062731E268847006B3D2A /* ConnectedDeviceUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectedDeviceUtils.m; sourceTree = "<group>"; };
+		991062741E268847006B3D2A /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		991062751E268847006B3D2A /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		991062761E268847006B3D2A /* RMConnectedDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMConnectedDevice.h; sourceTree = "<group>"; };
+		991062771E268847006B3D2A /* RMConnectedDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMConnectedDevice.m; sourceTree = "<group>"; };
+		991062781E268847006B3D2A /* RMPingCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMPingCenter.h; sourceTree = "<group>"; };
+		991062791E268847006B3D2A /* RMPingCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMPingCenter.m; sourceTree = "<group>"; };
+		9910627A1E268847006B3D2A /* SimplePing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePing.h; sourceTree = "<group>"; };
+		9910627B1E268847006B3D2A /* SimplePing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePing.m; sourceTree = "<group>"; };
+		991062811E268FAF006B3D2A /* if_arp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_arp.h; sourceTree = "<group>"; };
+		991062821E268FAF006B3D2A /* if_ether.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_ether.h; sourceTree = "<group>"; };
+		991062841E269A6D006B3D2A /* data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = data.plist; sourceTree = "<group>"; };
+		991062851E269A6D006B3D2A /* LANProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LANProperties.h; sourceTree = "<group>"; };
+		991062861E269A6D006B3D2A /* LANProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LANProperties.m; sourceTree = "<group>"; };
+		991062871E269A6D006B3D2A /* MacFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacFinder.h; sourceTree = "<group>"; };
+		991062881E269A6D006B3D2A /* MacFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MacFinder.m; sourceTree = "<group>"; };
+		9910628C1E269B28006B3D2A /* if_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_types.h; sourceTree = "<group>"; };
 		9910663E1E23838900D1525F /* ico_no@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_no@2x.png"; sourceTree = "<group>"; };
 		9910663F1E23838900D1525F /* ico_no@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_no@3x.png"; sourceTree = "<group>"; };
 		9943BFA21E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+ExclusiveTouch.h"; sourceTree = "<group>"; };
@@ -1141,36 +1134,6 @@
 				6F2F9BBC1DDC224A0055DAF9 /* SearchViewController.m */,
 			);
 			path = Search;
-			sourceTree = "<group>";
-		};
-		6F2F9BC71DDC670C0055DAF9 /* MMLanScan */ = {
-			isa = PBXGroup;
-			children = (
-				6F2F9BC81DDC670C0055DAF9 /* data.plist */,
-				6F2F9BC91DDC670C0055DAF9 /* Device.h */,
-				6F2F9BCA1DDC670C0055DAF9 /* Device.m */,
-				6F2F9BCB1DDC670C0055DAF9 /* if_arp.h */,
-				6F2F9BCC1DDC670C0055DAF9 /* if_ether.h */,
-				6F2F9BCD1DDC670C0055DAF9 /* if_types.h */,
-				6F2F9BCE1DDC670C0055DAF9 /* LANProperties.h */,
-				6F2F9BCF1DDC670C0055DAF9 /* LANProperties.m */,
-				6F2F9BD01DDC670C0055DAF9 /* MacFinder.h */,
-				6F2F9BD11DDC670C0055DAF9 /* MacFinder.m */,
-				6F2F9BD21DDC670C0055DAF9 /* MACOperation.h */,
-				6F2F9BD31DDC670C0055DAF9 /* MACOperation.m */,
-				6F2F9BD41DDC670C0055DAF9 /* MainPresenter.h */,
-				6F2F9BD51DDC670C0055DAF9 /* MainPresenter.m */,
-				6F2F9BD61DDC670C0055DAF9 /* MMLANScanner.h */,
-				6F2F9BD71DDC670C0055DAF9 /* MMLANScanner.m */,
-				6F2F9BD81DDC670C0055DAF9 /* NetworkCalculator.h */,
-				6F2F9BD91DDC670C0055DAF9 /* NetworkCalculator.m */,
-				6F2F9BDA1DDC670C0055DAF9 /* PingOperation.h */,
-				6F2F9BDB1DDC670C0055DAF9 /* PingOperation.m */,
-				6F2F9BDC1DDC670C0055DAF9 /* route.h */,
-				6F2F9BDD1DDC670C0055DAF9 /* SimplePing.h */,
-				6F2F9BDE1DDC670C0055DAF9 /* SimplePing.m */,
-			);
-			path = MMLanScan;
 			sourceTree = "<group>";
 		};
 		6F2F9BE91DDC67530055DAF9 /* WiFiExam */ = {
@@ -1697,12 +1660,12 @@
 		6F6FDABD1DB4B73500E50D9B /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				991062711E268847006B3D2A /* ConnectedDevice */,
 				9943BFA51E14F1E500531FE4 /* XHScrollMenu */,
 				6F30DE4E1DF7E9A500134B52 /* MiPush */,
 				6F2D17581DF6A08100590AEC /* AliyunOSS */,
 				6F4D363E1DF54AE000483A66 /* Pingpp */,
 				6F2F9BF31DDC84CD0055DAF9 /* getgateway */,
-				6F2F9BC71DDC670C0055DAF9 /* MMLanScan */,
 				6F3F328D1DDAE9BA0024095A /* MTBBarcodeScanner */,
 				6F3067521DD344EF00FA841E /* PulsingHalo */,
 				6F3A1D8A1DCC733200BC22EC /* Toast */,
@@ -2021,6 +1984,31 @@
 				990F0FB91E0BFB630027DFBB /* DGPicker.m */,
 			);
 			path = DGPicker;
+			sourceTree = "<group>";
+		};
+		991062711E268847006B3D2A /* ConnectedDevice */ = {
+			isa = PBXGroup;
+			children = (
+				9910628C1E269B28006B3D2A /* if_types.h */,
+				991062841E269A6D006B3D2A /* data.plist */,
+				991062851E269A6D006B3D2A /* LANProperties.h */,
+				991062861E269A6D006B3D2A /* LANProperties.m */,
+				991062871E269A6D006B3D2A /* MacFinder.h */,
+				991062881E269A6D006B3D2A /* MacFinder.m */,
+				991062811E268FAF006B3D2A /* if_arp.h */,
+				991062821E268FAF006B3D2A /* if_ether.h */,
+				991062721E268847006B3D2A /* ConnectedDeviceUtils.h */,
+				991062731E268847006B3D2A /* ConnectedDeviceUtils.m */,
+				991062741E268847006B3D2A /* GCDAsyncUdpSocket.h */,
+				991062751E268847006B3D2A /* GCDAsyncUdpSocket.m */,
+				991062761E268847006B3D2A /* RMConnectedDevice.h */,
+				991062771E268847006B3D2A /* RMConnectedDevice.m */,
+				991062781E268847006B3D2A /* RMPingCenter.h */,
+				991062791E268847006B3D2A /* RMPingCenter.m */,
+				9910627A1E268847006B3D2A /* SimplePing.h */,
+				9910627B1E268847006B3D2A /* SimplePing.m */,
+			);
+			path = ConnectedDevice;
 			sourceTree = "<group>";
 		};
 		9943BFA51E14F1E500531FE4 /* XHScrollMenu */ = {
@@ -2350,6 +2338,7 @@
 				6F3F32B11DDAFB8F0024095A /* ico_walk@3x.png in Resources */,
 				6F6FDAF21DB4C83D00E50D9B /* ShoppingViewController.xib in Resources */,
 				6F32158F1DDD879D00B7D5DA /* Cloudy@2x.png in Resources */,
+				991062891E269A6D006B3D2A /* data.plist in Resources */,
 				9990CD1E1E0D1EEF0002BF63 /* set_ico_logo@2x.png in Resources */,
 				9990CD1B1E0D1EEF0002BF63 /* set_btn_input_nor@3x.png in Resources */,
 				6F3067511DD32B8000FA841E /* Label_more@3x.png in Resources */,
@@ -2414,7 +2403,6 @@
 				6F2DF2D01DD1D72C00A8F0EC /* tab_ico_service_green@2x.png in Resources */,
 				6F5033ED1DD0706C001EBC97 /* loading_icon_key@2x.png in Resources */,
 				9990CD391E0D33370002BF63 /* FeedBackViewController.xib in Resources */,
-				6F2F9BDF1DDC670C0055DAF9 /* data.plist in Resources */,
 				6F3F32CB1DDB22180024095A /* cooperation@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2474,14 +2462,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F2F9BE01DDC670C0055DAF9 /* Device.m in Sources */,
+				9910627C1E268847006B3D2A /* ConnectedDeviceUtils.m in Sources */,
 				6F2F9BBD1DDC224A0055DAF9 /* SearchViewController.m in Sources */,
 				6F3FF83F1DE442EA002791DB /* LaunchGuideViewController.m in Sources */,
 				9943BFB91E14F1E500531FE4 /* XHMenu.m in Sources */,
 				6F3185181DB8A25700017D47 /* NewsReportCell.m in Sources */,
-				6F2F9BE61DDC670C0055DAF9 /* NetworkCalculator.m in Sources */,
-				6F2F9BE31DDC670C0055DAF9 /* MACOperation.m in Sources */,
-				6F2F9BE71DDC670C0055DAF9 /* PingOperation.m in Sources */,
 				6FFA16741DB5F9220077E7C3 /* RequestManager.m in Sources */,
 				998E17531E08051E00189DDD /* ActivityCGI.m in Sources */,
 				6F2E654D1DC9C28A00AF84BB /* MapCGI.m in Sources */,
@@ -2502,16 +2487,17 @@
 				6F6FDAA61DB4B3DE00E50D9B /* main.m in Sources */,
 				6F2E65711DC9C76000AF84BB /* BaiduMapSDK.m in Sources */,
 				9990CCFF1E0D19C80002BF63 /* SettingViewController.m in Sources */,
-				6F2F9BE41DDC670C0055DAF9 /* MainPresenter.m in Sources */,
 				6F2D17661DF6BA8A00590AEC /* PayCGI.m in Sources */,
 				6F30A1EC1DD5B4BD00149D73 /* UIButton+Vertical.m in Sources */,
 				6F3185141DB89C4300017D47 /* NewsCGI.m in Sources */,
 				6F3067241DD30CEF00FA841E /* ReportClickModel.m in Sources */,
 				6F02BAA91DCCA9C900C72833 /* UICollectionView+EmptyData.m in Sources */,
 				6F6FDAF11DB4C83D00E50D9B /* ShoppingViewController.m in Sources */,
+				9910627E1E268847006B3D2A /* RMConnectedDevice.m in Sources */,
 				6F6FDAFE1DB4DC4A00E50D9B /* CALayer+xib.m in Sources */,
 				6F6FDAFB1DB4D5D200E50D9B /* UIView+Frame.m in Sources */,
 				6F6FDACF1DB4BBCA00E50D9B /* DGViewController.m in Sources */,
+				991062801E268847006B3D2A /* SimplePing.m in Sources */,
 				6F2E57F41DB792F600C39F27 /* ServiceHeaderView.m in Sources */,
 				6F3067561DD344EF00FA841E /* PulsingHaloLayer.m in Sources */,
 				6F6FDAE21DB4C81100E50D9B /* WifiViewController.m in Sources */,
@@ -2529,7 +2515,6 @@
 				6F307C011DCB36980015F9EC /* WFNetworkSpeedDetector.m in Sources */,
 				9943BFB81E14F1E500531FE4 /* XHIndicatorView.m in Sources */,
 				9990CD311E0D29E20002BF63 /* SettingFooterView.m in Sources */,
-				6F2F9BE81DDC670C0055DAF9 /* SimplePing.m in Sources */,
 				9990CD261E0D1F7D0002BF63 /* SettingCell.m in Sources */,
 				990F3CFE1E167AFF007FFE5E /* NewsBaseViewController.m in Sources */,
 				6FF97FAF1DEFD89B00EF091C /* NSString+Format.m in Sources */,
@@ -2539,9 +2524,8 @@
 				6F31851F1DB8C97B00017D47 /* NullSafe.m in Sources */,
 				6F2E57B81DB758C300C39F27 /* AccountCGI.m in Sources */,
 				6F2F9BED1DDC67A30055DAF9 /* WiFiExamCell.m in Sources */,
-				6F2F9BE51DDC670C0055DAF9 /* MMLANScanner.m in Sources */,
+				9910627F1E268847006B3D2A /* RMPingCenter.m in Sources */,
 				6F2F9BF71DDC84CD0055DAF9 /* getgateway.c in Sources */,
-				6F2F9BE11DDC670C0055DAF9 /* LANProperties.m in Sources */,
 				9990CD381E0D33370002BF63 /* FeedBackViewController.m in Sources */,
 				6F3215991DDDB17C00B7D5DA /* WiFiConnectTipView.m in Sources */,
 				6F31850F1DB86DAB00017D47 /* ServiceCellModel.m in Sources */,
@@ -2557,14 +2541,15 @@
 				6F6FDAD71DB4C3CA00E50D9B /* NSData+Additions.m in Sources */,
 				6F2E50771DD47EDB00663148 /* WiFiTipView.m in Sources */,
 				6F3F328C1DDAE9400024095A /* PartialTransparentView.m in Sources */,
+				9910627D1E268847006B3D2A /* GCDAsyncUdpSocket.m in Sources */,
 				6F2DF2B71DD1BABB00A8F0EC /* NSDate+Format.m in Sources */,
 				6F3F32851DDAE7790024095A /* WiFiScanQrcodeViewController.m in Sources */,
 				6F307C031DCB36980015F9EC /* WiFiSpeedView.m in Sources */,
-				6F2F9BE21DDC670C0055DAF9 /* MacFinder.m in Sources */,
 				6F31850A1DB8601900017D47 /* ServiceSectionHeader.m in Sources */,
 				9990CD2B1E0D218A0002BF63 /* SettingModel.m in Sources */,
 				6F3E564A1DD96D5600F16A23 /* WiFiSpeedTestViewController.m in Sources */,
 				6F2E57F01DB78E0400C39F27 /* ServiceCell.m in Sources */,
+				9910628B1E269A6D006B3D2A /* MacFinder.m in Sources */,
 				6FFA16881DB606E10077E7C3 /* SSKeychainQuery.m in Sources */,
 				6F3C114E1DE81B1C00734F8C /* UIViewController+makeToastOrAlert.m in Sources */,
 				6F2DF2DA1DD1DA8900A8F0EC /* NewsTitleView.m in Sources */,
@@ -2584,6 +2569,7 @@
 				6F2E57B41DB711D000C39F27 /* UITabBarItem+Setup.m in Sources */,
 				6F30A1E71DD5AE2200149D73 /* WiFiFooterView.m in Sources */,
 				6FFA167D1DB603DD0077E7C3 /* Reachability.m in Sources */,
+				9910628A1E269A6D006B3D2A /* LANProperties.m in Sources */,
 				990F3CF31E160F7D007FFE5E /* NewsMenuModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

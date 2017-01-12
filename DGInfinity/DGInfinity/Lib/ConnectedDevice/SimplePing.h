@@ -78,6 +78,7 @@
 @property (nonatomic, copy,   readonly ) NSData *               hostAddress;
 @property (nonatomic, assign, readonly ) uint16_t               identifier;
 @property (nonatomic, assign, readonly ) uint16_t               nextSequenceNumber;
+@property (nonatomic, assign) NSInteger tag;
 
 - (void)start;
     // Starts the pinger object pinging.  You should call this after 
@@ -106,11 +107,30 @@
 @optional
 
 - (void)simplePing:(SimplePing *)pinger didStartWithAddress:(NSData *)address;
+    // Called after the SimplePing has successfully started up.  After this callback, you 
+    // can start sending pings via -sendPingWithData:
+    
 - (void)simplePing:(SimplePing *)pinger didFailWithError:(NSError *)error;
+    // If this is called, the SimplePing object has failed.  By the time this callback is 
+    // called, the object has stopped (that is, you don't need to call -stop yourself).
+
+// IMPORTANT: On the send side the packet does not include an IP header. 
+// On the receive side, it does.  In that case, use +[SimplePing icmpInPacket:] 
+// to find the ICMP header within the packet.
+
 - (void)simplePing:(SimplePing *)pinger didSendPacket:(NSData *)packet;
+    // Called whenever the SimplePing object has successfully sent a ping packet. 
+    
 - (void)simplePing:(SimplePing *)pinger didFailToSendPacket:(NSData *)packet error:(NSError *)error;
+    // Called whenever the SimplePing object tries and fails to send a ping packet.
+
 - (void)simplePing:(SimplePing *)pinger didReceivePingResponsePacket:(NSData *)packet;
- - (void)simplePing:(SimplePing *)pinger didReceiveUnexpectedPacket:(NSData *)packet;
+    // Called whenever the SimplePing object receives an ICMP packet that looks like 
+    // a response to one of our pings (that is, has a valid ICMP checksum, has 
+    // an identifier that matches our identifier, and has a sequence number in 
+    // the range of sequence numbers that we've sent out).
+
+- (void)simplePing:(SimplePing *)pinger didReceiveUnexpectedPacket:(NSData *)packet;
     // Called whenever the SimplePing object receives an ICMP packet that does not 
     // look like a response to one of our pings.
 

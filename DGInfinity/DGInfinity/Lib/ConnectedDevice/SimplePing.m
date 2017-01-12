@@ -1,4 +1,4 @@
- /*
+/*
     File:       SimplePing.m
 
     Contains:   Implements ping.
@@ -73,7 +73,7 @@ static uint16_t in_cksum(const void *buffer, size_t bufferLen)
 
 	bytesLeft = bufferLen;
 	sum = 0;
-	cursor = buffer;
+	cursor = (const uint16_t *)buffer;
 
 	/*
 	 * Our algorithm is simple, using a 32 bit accumulator (sum), we add
@@ -226,7 +226,7 @@ static uint16_t in_cksum(const void *buffer, size_t bufferLen)
     packet = [NSMutableData dataWithLength:sizeof(*icmpPtr) + [payload length]];
     assert(packet != nil);
 
-    icmpPtr = [packet mutableBytes];
+    icmpPtr = (ICMPHeader *)[packet mutableBytes];
     icmpPtr->type = kICMPTypeEchoRequest;
     icmpPtr->code = 0;
     icmpPtr->checksum = 0;
@@ -239,12 +239,6 @@ static uint16_t in_cksum(const void *buffer, size_t bufferLen)
     // 16-bit unit.
     
     icmpPtr->checksum = in_cksum([packet bytes], [packet length]);
-    
-    CFSocketNativeHandle sock = CFSocketGetNative(self->_socket);
-    struct timeval tv;
-    tv.tv_sec  = 0;
-    tv.tv_usec = 10000; // 0.1 sec
-    setsockopt(sock, SOL_SOCKET, SO_SNDTIMEO, (void *)&tv, sizeof(tv));
     
     // Send the packet.
     
@@ -547,8 +541,8 @@ static void HostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
 {
     SimplePing *    obj;
 
- //   NSLog(@">HostResolveCallback");
-    
+//    NSLog(@">HostResolveCallback");
+
     obj = (__bridge SimplePing *) info;
     assert([obj isKindOfClass:[SimplePing class]]);
     
@@ -586,9 +580,9 @@ static void HostResolveCallback(CFHostRef theHost, CFHostInfoType typeInfo, cons
         
         CFHostScheduleWithRunLoop(self->_host, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
         
-     //   NSLog(@">CFHostStartInfoResolution");
+//        NSLog(@">CFHostStartInfoResolution");
         success = CFHostStartInfoResolution(self->_host, kCFHostAddresses, &streamError);
-     //   NSLog(@"<CFHostStartInfoResolution");
+//        NSLog(@"<CFHostStartInfoResolution");
         if ( ! success ) {
             [self didFailWithHostStreamError:streamError];
         }

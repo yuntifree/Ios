@@ -7,13 +7,13 @@
 //
 
 #import "WiFiExaminationViewController.h"
-#import "MainPresenter.h"
 #import "WiFiExamCell.h"
-#import "Device.h"
 #import "WiFiExamSectionHeader.h"
 #import "NetworkManager.h"
+#import "RMPingCenter.h"
+#import "RMConnectedDevice.h"
 
-@interface WiFiExaminationViewController () <UITableViewDelegate, UITableViewDataSource, MainPresenterDelegate>
+@interface WiFiExaminationViewController () <UITableViewDelegate, UITableViewDataSource>
 {
     __weak IBOutlet UITableView *_listView;
     
@@ -23,23 +23,19 @@
     NSString *_serverIP;
 }
 
-@property (nonatomic, strong) MainPresenter *presenter;
 @property (nonatomic, strong) UIProgressView *progressView;
+@property (nonatomic, strong) NSTimer *progressTimer;
 
 @end
 
 @implementation WiFiExaminationViewController
 
-#pragma mark - lazy-init
-- (MainPresenter *)presenter
+- (void)dealloc
 {
-    if (_presenter == nil) {
-        _presenter = [[MainPresenter alloc] initWithDelegate:self];
-        [self addObserversForKVO];
-    }
-    return _presenter;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+#pragma mark - lazy-init
 - (UIProgressView *)progressView
 {
     if (_progressView == nil) {
@@ -55,33 +51,14 @@
     return _progressView;
 }
 
-- (void)dealloc
-{
-    if (_presenter) {
-        [self removeObserversForKVO];
-    }
-}
-
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _deviceArray = [NSMutableArray arrayWithCapacity:10];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(devicesChanged) name:NOTIFICATION_CONNECTED_DEVICE_LIST_CHANGED_USING_PING object:nil];
     }
     return self;
-}
-
-#pragma mark - KVO Observers
-- (void)addObserversForKVO
-{
-    [self.presenter addObserver:self forKeyPath:@"connectedDevices" options:NSKeyValueObservingOptionNew context:nil];
-    [self.presenter addObserver:self forKeyPath:@"progressValue" options:NSKeyValueObservingOptionNew context:nil];
-}
-
-- (void)removeObserversForKVO
-{
-    [self.presenter removeObserver:self forKeyPath:@"connectedDevices"];
-    [self.presenter removeObserver:self forKeyPath:@"progressValue"];
 }
 
 - (NSString *)title
@@ -102,14 +79,32 @@
         return;
     }
     
-    [self.presenter scanButtonClicked];
+    [[RMPingCenter sharedInstance] scan];
+    [self startTimer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    if (self.presenter.isScanRunning) {
-        [self.presenter scanButtonClicked];
+    [self.progressTimer invalidate];
+    self.progressTimer = nil;
+    [[RMPingCenter sharedInstance] stop];
+}
+
+- (void)startTimer
+{
+    [self.progressTimer invalidate];
+    self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.progressTimer forMode:NSRunLoopCommonModes];
+}
+
+- (void)updateProgress
+{
+    if (self.progressView.progress < 1) {
+        [self.progressView setProgress:self.progressView.progress + 0.002 animated:YES];
+        self.progressView.hidden = NO;
+    } else {
+        [self performSelector:@selector(delayToHideProgress) withObject:nil afterDelay:0.5];
     }
 }
 
@@ -132,6 +127,29 @@
     _listView.tableFooterView = [UIView new];
 }
 
+- (void)devicesChanged
+{
+    if (_deviceArray.count) {
+        [_deviceArray removeAllObjects];
+    }
+    NSArray *temArray = [NSArray arrayWithArray:[[RMPingCenter sharedInstance] getConnectedDevice]];
+    for (RMConnectedDevice *device in temArray) {
+        if ([device.ip isEqualToString:_serverIP]) continue;
+        WiFiExamDeviceModel *model = [WiFiExamDeviceModel createWithBrand:device.brand ip:device.ip hostname:device.dev_name];
+        if ([device.ip isEqualToString:_localIP]) {
+            model.hostname = [NSString stringWithFormat:@"%@（本机）",[UIDevice currentDevice].name];
+            [_deviceArray insertObject:model atIndex:0];
+        } else {
+            [_deviceArray addObject:model];
+        }
+    }
+    
+    [_listView reloadData];
+    if (_badgeblock) {
+        _badgeblock(_deviceArray.count);
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -141,46 +159,8 @@
 {
     [self.progressView setProgress:0 animated:NO];
     self.progressView.hidden = YES;
-}
-
-#pragma mark - KVO
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    
-    if (object == self.presenter) {
-        if ([keyPath isEqualToString:@"connectedDevices"]) {
-            if (_deviceArray.count) {
-                [_deviceArray removeAllObjects];
-            }
-            NSArray *temArray = [NSArray arrayWithArray:self.presenter.connectedDevices];
-            for (Device *device in temArray) {
-                if ([device.ipAddress isEqualToString:_serverIP]) continue;
-                WiFiExamDeviceModel *model = [WiFiExamDeviceModel createWithBrand:device.brand ip:device.ipAddress hostname:device.hostname];
-                if ([device.ipAddress isEqualToString:_localIP]) {
-                    model.hostname = [NSString stringWithFormat:@"%@（本机）",[UIDevice currentDevice].name];
-                }
-                [_deviceArray addObject:model];
-            }
-            [_listView reloadData];
-        } else if ([keyPath isEqualToString:@"progressValue"]) {
-            CGFloat progress = self.presenter.progressValue;
-            [self.progressView setProgress:progress animated:YES];
-            self.progressView.hidden = NO;
-        }
-    }
-}
-
-#pragma mark - MainPresenterDelegate
-- (void)mainPresenterIPSearchFinished
-{
-    [self performSelector:@selector(delayToHideProgress) withObject:nil afterDelay:0.5];
-    if (_badgeblock) {
-        _badgeblock(_deviceArray.count);
-    }
-}
-
-- (void)mainPresenterIPSearchFailed
-{
-    [self makeToast:@"扫描失败"];
+    [self.progressTimer invalidate];
+    self.progressTimer = nil;
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
