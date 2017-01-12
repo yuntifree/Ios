@@ -9,6 +9,7 @@
 #import "XHScrollMenu.h"
 
 #import "UIScrollView+XHVisibleCenterScroll.h"
+#import "XHMenuButton.h"
 
 #define kXHMenuButtonBaseTag 100
 
@@ -150,7 +151,7 @@
 - (UIButton *)getButtonWithMenu:(XHMenu *)menu {
 //    CGSize buttonSize = [menu.title sizeWithFont:menu.titleFont constrainedToSize:CGSizeMake(MAXFLOAT, CGRectGetHeight(self.bounds) - 10) lineBreakMode:NSLineBreakByCharWrapping];
     CGSize buttonSize = [menu.title boundingRectWithSize:CGSizeMake(MAXFLOAT, CGRectGetHeight(self.bounds) - 10) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: menu.titleFont} context:nil].size;
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, buttonSize.width, CGRectGetHeight(self.bounds))];
+    UIButton *button = [[XHMenuButton alloc] initWithFrame:CGRectMake(0, 0, buttonSize.width, CGRectGetHeight(self.bounds))];
     button.titleLabel.textAlignment = NSTextAlignmentCenter;
     button.titleLabel.font = menu.titleFont;
     [button setTitle:menu.title forState:UIControlStateNormal];

@@ -19,13 +19,15 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
-    // Drawing code
+    CGRect rectBig = CGRectInset(self.bounds, -(self.width / 2), 0);
+    
+    if (CGRectContainsPoint(rectBig, point)) {
+        return self;
+    } else {
+        return nil;
+    }
 }
-*/
 
 @end
