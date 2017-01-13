@@ -80,4 +80,31 @@
     }];
 }
 
++ (void)getCheckCode:(NSString *)phone
+            complete:(void (^)(DGCgiResult *res))complete
+{
+    NSMutableDictionary *params = [RequestManager httpParams];
+    params[@"data"] = @{@"phone": phone};
+    [[RequestManager shareManager] loadAsync:params cgi:@"get_check_code" complete:^(DGCgiResult *res) {
+        if (complete) {
+            complete(res);
+        }
+    }];
+}
+
++ (void)ConnectWifi:(NSString *)wlanacname
+         wlanuserip:(NSString *)wlanuserip
+           wlanacip:(NSString *)wlanacip
+        wlanusermac:(NSString *)wlanusermac
+              apmac:(NSString *)apmac
+           complete:(void (^)(DGCgiResult *res))complete
+{
+    NSMutableDictionary *params = [RequestManager httpParams];
+    [[RequestManager shareManager] loadAsync:params cgi:@"connect_wifi" complete:^(DGCgiResult *res) {
+        if (complete) {
+            complete(res);
+        }
+    }];
+}
+
 @end

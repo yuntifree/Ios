@@ -126,6 +126,7 @@ typedef NS_ENUM(NSUInteger, UploadPictureState) { // 上传图片状态
 #define AgreementURL @"http://www.yunxingzh.com/app/agreement.html"
 #define SearchURL @"https://m.baidu.com/s?word="
 #define AboutmeURL @"http://yunxingzh.com/app/about.html"
+#define CheckUpdateURL @"https://itunes.apple.com/cn/lookup?id=1177360625"
 
 // APP审核账号及密码
 #define TestAccount @"12345678910"

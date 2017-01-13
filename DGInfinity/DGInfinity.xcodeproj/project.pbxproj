@@ -331,6 +331,9 @@
 		9943BFB91E14F1E500531FE4 /* XHMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943BFAF1E14F1E500531FE4 /* XHMenu.m */; };
 		9943BFBA1E14F1E500531FE4 /* XHMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943BFB11E14F1E500531FE4 /* XHMenuButton.m */; };
 		9943BFBB1E14F1E500531FE4 /* XHScrollMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943BFB31E14F1E500531FE4 /* XHScrollMenu.m */; };
+		994641EA1E28B8BA00C81E53 /* img_bg_update@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 994641E81E28B8BA00C81E53 /* img_bg_update@2x.png */; };
+		994641EB1E28B8BA00C81E53 /* img_bg_update@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 994641E91E28B8BA00C81E53 /* img_bg_update@3x.png */; };
+		994641EF1E28B90E00C81E53 /* CheckUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 994641EE1E28B90E00C81E53 /* CheckUpdateView.m */; };
 		9961A3581E0A7B2300870103 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9961A3561E0A7B2300870103 /* libcrypto.a */; };
 		9961A3591E0A7B2300870103 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9961A3571E0A7B2300870103 /* libssl.a */; };
 		998E17391E07926800189DDD /* tab_ico_buy_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 998E17371E07926800189DDD /* tab_ico_buy_blue@2x.png */; };
@@ -805,6 +808,10 @@
 		9943BFB11E14F1E500531FE4 /* XHMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHMenuButton.m; sourceTree = "<group>"; };
 		9943BFB21E14F1E500531FE4 /* XHScrollMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHScrollMenu.h; sourceTree = "<group>"; };
 		9943BFB31E14F1E500531FE4 /* XHScrollMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHScrollMenu.m; sourceTree = "<group>"; };
+		994641E81E28B8BA00C81E53 /* img_bg_update@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_bg_update@2x.png"; sourceTree = "<group>"; };
+		994641E91E28B8BA00C81E53 /* img_bg_update@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_bg_update@3x.png"; sourceTree = "<group>"; };
+		994641ED1E28B90E00C81E53 /* CheckUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckUpdateView.h; sourceTree = "<group>"; };
+		994641EE1E28B90E00C81E53 /* CheckUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckUpdateView.m; sourceTree = "<group>"; };
 		9961A3561E0A7B2300870103 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		9961A3571E0A7B2300870103 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		998E17371E07926800189DDD /* tab_ico_buy_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_ico_buy_blue@2x.png"; sourceTree = "<group>"; };
@@ -950,6 +957,7 @@
 		6F2E57B91DB78B2B00C39F27 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				994641E71E28B8BA00C81E53 /* Version */,
 				9990CD051E0D1EEF0002BF63 /* Setting */,
 				6F3079851DFE9DC100477FE0 /* DGSplashView */,
 				6F2EEA9B1DEDA61D00F5203C /* WiFiWelfare */,
@@ -1789,6 +1797,7 @@
 		6F6FDAC41DB4B79300E50D9B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				994641EC1E28B8FE00C81E53 /* CheckUpdateView */,
 				9990CD221E0D1F650002BF63 /* Setting */,
 				990F0FB71E0BFB530027DFBB /* DGPicker */,
 				6F3079811DFE90BF00477FE0 /* DGSplashView */,
@@ -2039,6 +2048,24 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		994641E71E28B8BA00C81E53 /* Version */ = {
+			isa = PBXGroup;
+			children = (
+				994641E81E28B8BA00C81E53 /* img_bg_update@2x.png */,
+				994641E91E28B8BA00C81E53 /* img_bg_update@3x.png */,
+			);
+			path = Version;
+			sourceTree = "<group>";
+		};
+		994641EC1E28B8FE00C81E53 /* CheckUpdateView */ = {
+			isa = PBXGroup;
+			children = (
+				994641ED1E28B90E00C81E53 /* CheckUpdateView.h */,
+				994641EE1E28B90E00C81E53 /* CheckUpdateView.m */,
+			);
+			path = CheckUpdateView;
+			sourceTree = "<group>";
+		};
 		998E17501E08051E00189DDD /* Activity */ = {
 			isa = PBXGroup;
 			children = (
@@ -2233,6 +2260,7 @@
 				9990CD001E0D19C80002BF63 /* SettingViewController.xib in Resources */,
 				6F3E56401DD968C100F16A23 /* btn_test@2x.png in Resources */,
 				6F30674C1DD32B8000FA841E /* horn@3x.png in Resources */,
+				994641EB1E28B8BA00C81E53 /* img_bg_update@3x.png in Resources */,
 				6FF5C7FC1DC1F13D00B1A84A /* NewsVideoCell.xib in Resources */,
 				6F32158C1DDD879D00B7D5DA /* img_bg_day@3x.png in Resources */,
 				6F5033F11DD0706C001EBC97 /* Start button_normal@2x.png in Resources */,
@@ -2297,6 +2325,7 @@
 				6F3067451DD32B8000FA841E /* btn_wifitest@2x.png in Resources */,
 				6F3F32CA1DDB22180024095A /* cooperation@2x.png in Resources */,
 				6F3F32D51DDB22180024095A /* secong_hand@3x.png in Resources */,
+				994641EA1E28B8BA00C81E53 /* img_bg_update@2x.png in Resources */,
 				6F3F32AA1DDAFB8F0024095A /* bar-wifi@2x.png in Resources */,
 				6F3F32B01DDAFB8F0024095A /* ico_walk@2x.png in Resources */,
 				6F2DF2DF1DD1E99C00A8F0EC /* play@2x.png in Resources */,
@@ -2506,6 +2535,7 @@
 				6F2D17621DF6A51800590AEC /* UIImage+Format.m in Sources */,
 				6F2ED0F01DDEB7E1009112C5 /* WiFiWelfareViewController.m in Sources */,
 				6FF5C7EE1DC1DA5B00B1A84A /* NewsReportViewController.m in Sources */,
+				994641EF1E28B90E00C81E53 /* CheckUpdateView.m in Sources */,
 				6F2F9BFA1DDC89230055DAF9 /* WiFiExamSectionHeader.m in Sources */,
 				6F3079841DFE90FC00477FE0 /* DGSplashView.m in Sources */,
 				6F2F10091DF96BCC00BBB742 /* WeakScriptMessageDelegate.m in Sources */,

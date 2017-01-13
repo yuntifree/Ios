@@ -10,7 +10,8 @@
 
 enum SplashActionType {
     SplashActionTypeGet = 0,
-    SplashActionTypeDismiss
+    SplashActionTypeDismiss = 1,
+    SplashActionSkipOrCountDown = 2
 };
 
 typedef void(^SplashAction)(enum SplashActionType type, NSString *dst, NSString *title);

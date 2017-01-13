@@ -49,4 +49,26 @@
  */
 + (void)logout:(void (^)(DGCgiResult *res))complete;
 
+/**
+ *  get_check_code
+ *  @param phone 手机号
+ */
++ (void)getCheckCode:(NSString *)phone
+            complete:(void (^)(DGCgiResult *res))complete;
+
+/**
+ *  connect_wifi
+ *  @param wlanacname
+ *  @param wlanuserip
+ *  @param wlanacip
+ *  @param wlanusermac
+ *  @param apmac
+ */
++ (void)ConnectWifi:(NSString *)wlanacname
+         wlanuserip:(NSString *)wlanuserip
+           wlanacip:(NSString *)wlanacip
+        wlanusermac:(NSString *)wlanusermac
+              apmac:(NSString *)apmac
+           complete:(void (^)(DGCgiResult *res))complete;
+
 @end
