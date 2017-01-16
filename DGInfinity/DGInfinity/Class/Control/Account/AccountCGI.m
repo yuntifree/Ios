@@ -8,6 +8,7 @@
 
 #import "AccountCGI.h"
 #import "DeviceManager.h"
+#import "CMCCUserInfo.h"
 
 @implementation AccountCGI
 
@@ -30,11 +31,21 @@
           complete:(void (^)(DGCgiResult *res))complete
 {
     NSMutableDictionary *params = [RequestManager httpParams];
-    params[@"data"] = @{@"username": username,
-                        @"password": [[password dataUsingEncoding:NSUTF8StringEncoding] md5Hash],
-                        @"channel": @"App Store",
-                        @"model": [DeviceManager getiPhoneModel],
-                        @"udid": [DeviceManager getDeviceId]};
+    if ([username isEqualToString:TestAccount]) {
+        params[@"data"] = @{@"username": username,
+                            @"password": [[password dataUsingEncoding:NSUTF8StringEncoding] md5Hash],
+                            @"channel": @"App Store",
+                            @"model": [DeviceManager getiPhoneModel],
+                            @"udid": [DeviceManager getDeviceId]};
+    } else {
+        params[@"data"] = @{@"username": username,
+                            @"password": [[password dataUsingEncoding:NSUTF8StringEncoding] md5Hash],
+                            @"channel": @"App Store",
+                            @"model": [DeviceManager getiPhoneModel],
+                            @"udid": [DeviceManager getDeviceId],
+                            @"code": password};
+    }
+    
     [[RequestManager shareManager] loadAsync:params cgi:@"register" complete:^(DGCgiResult *res) {
         if (complete) {
             complete(res);
@@ -92,14 +103,25 @@
     }];
 }
 
-+ (void)ConnectWifi:(NSString *)wlanacname
-         wlanuserip:(NSString *)wlanuserip
-           wlanacip:(NSString *)wlanacip
-        wlanusermac:(NSString *)wlanusermac
-              apmac:(NSString *)apmac
-           complete:(void (^)(DGCgiResult *res))complete
++ (void)ConnectWifi:(void (^)(DGCgiResult *res))complete
 {
     NSMutableDictionary *params = [RequestManager httpParams];
+    NSMutableDictionary *data = [NSMutableDictionary dictionary];
+    CMCCUserInfo *info = [CMCCUserInfo shareInfo];
+    if (info.wlanacname) {
+        data[@"wlanacname"] = info.wlanacname;
+    }
+    if (info.wlanuserip) {
+        data[@"wlanuserip"] = info.wlanuserip;
+    }
+    if (info.wlanacip) {
+        data[@"wlanacip"] = info.wlanacip;
+    }
+    if (info.wlanusermac) {
+        data[@"wlanusermac"] = info.wlanusermac;
+    }
+    data[@"apmac"] = [Tools getBSSID];
+    params[@"data"] = data;
     [[RequestManager shareManager] loadAsync:params cgi:@"connect_wifi" complete:^(DGCgiResult *res) {
         if (complete) {
             complete(res);

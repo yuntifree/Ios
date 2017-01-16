@@ -23,6 +23,7 @@
  *  register
  *  @param username 用户名
  *  @param password 密码
+ *  @param code 验证码
  */
 + (void)doRegister:(NSString *)username
           password:(NSString *)password
@@ -64,11 +65,6 @@
  *  @param wlanusermac
  *  @param apmac
  */
-+ (void)ConnectWifi:(NSString *)wlanacname
-         wlanuserip:(NSString *)wlanuserip
-           wlanacip:(NSString *)wlanacip
-        wlanusermac:(NSString *)wlanusermac
-              apmac:(NSString *)apmac
-           complete:(void (^)(DGCgiResult *res))complete;
++ (void)ConnectWifi:(void (^)(DGCgiResult *res))complete;
 
 @end

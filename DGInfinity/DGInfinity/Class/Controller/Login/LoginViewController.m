@@ -115,50 +115,27 @@
         [self makeToast:@"请输入正确的手机号"];
         return;
     }
-#if (!TARGET_IPHONE_SIMULATOR)
+    
     [SVProgressHUD show];
-    [[UserAuthManager manager] doRegisterWithUserName:phone andPassWord:@"" andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
+    [AccountCGI getCheckCode:phone complete:^(DGCgiResult *res) {
         [SVProgressHUD dismiss];
-        if (!error) {
-            NSDictionary *head = response[@"head"];
-            if ([head isKindOfClass:[NSDictionary class]]) {
-                NSString *retflag = head[@"retflag"];
-                if ([retflag isEqualToString:@"0"]) {
-                    NSDictionary *body = response[@"body"];
-                    if ([body isKindOfClass:[NSDictionary class]]) {
-                        SApp.wifipass = body[@"pwd"];
-                        SApp.username = body[@"custcode"];
-                    }
-                    _codeBtn.enabled = NO;
-                    _phoneField.enabled = NO;
-                    _seconds = SECONDS;
-                    [self.timer setFireDate:[NSDate date]];
-                    [_codeField becomeFirstResponder];
-                } else {
-                    [self makeToast:head[@"reason"]];
-                }
-            }
+        if (E_OK == res._errno) {
+            _codeBtn.enabled = NO;
+            _phoneField.enabled = NO;
+            _seconds = SECONDS;
+            [self.timer setFireDate:[NSDate date]];
+            [_codeField becomeFirstResponder];
         } else {
-            [self makeToast:@"请求失败"];
+            [self makeToast:res.desc];
         }
     }];
-#endif
 }
 
 - (IBAction)doRegister:(id)sender {
     if (!_phoneField.text.length || !_codeField.text.length) return;
     NSString *phone = [_phoneField.text deleteHeadEndSpace];
     NSString *code = [_codeField.text deleteHeadEndSpace];
-#if (!TARGET_IPHONE_SIMULATOR)
-    if (![phone isEqualToString:SApp.username] && ![phone isEqualToString:TestAccount]) {
-        [self makeToast:@"请先获取验证码"];
-        return;
-    }
-    if (![code isEqualToString:SApp.wifipass] && ![code isEqualToString:TestPassword]) {
-        [self makeToast:@"验证码不正确"];
-        return;
-    }
-#endif
+
     [SVProgressHUD show];
     [AccountCGI doRegister:phone password:code complete:^(DGCgiResult *res) {
         [SVProgressHUD dismiss];

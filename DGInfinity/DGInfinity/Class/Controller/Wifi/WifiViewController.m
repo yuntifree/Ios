@@ -26,6 +26,7 @@
 #import "SettingViewController.h"
 #import <AFNetworking.h>
 #import "CheckUpdateView.h"
+#import "AccountCGI.h"
 
 #define Height (kScreenHeight - 20 - 44 - 49)
 
@@ -109,26 +110,15 @@ NetWorkMgrDelegate
 
 - (void)doLogon
 {
-#if (!TARGET_IPHONE_SIMULATOR)
     [_menuView setConnectBtnStatus:ConnectStatusConnecting];
-    [[UserAuthManager manager] doLogon:SApp.username andPassWord:SApp.wifipass andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
-        if (!error) {
-            NSDictionary *head = response[@"head"];
-            if ([head isKindOfClass:[NSDictionary class]]) {
-                NSString *retflag = head[@"retflag"];
-                if ([retflag isEqualToString:@"0"]) {
-                    [WiFiCGI reportApMac:[Tools getBSSID] complete:nil];
-                } else {
-                    [_menuView setConnectBtnStatus:ConnectStatusNotConnect];
-                    [self makeToast:head[@"reason"]];
-                }
-            }
+    [AccountCGI ConnectWifi:^(DGCgiResult *res) {
+        if (E_OK == res._errno) {
+            
         } else {
             [_menuView setConnectBtnStatus:ConnectStatusNotConnect];
-            [self makeToast:@"认证失败"];
+            [self makeToast:res.desc];
         }
     }];
-#endif
 }
 
 - (void)viewWillAppear:(BOOL)animated
