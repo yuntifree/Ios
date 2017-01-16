@@ -47,12 +47,6 @@
     
     [self setUpAttribute];
     
-    // wifiSDK
-#if !(TARGET_IPHONE_SIMULATOR)
-    [[UserAuthManager manager] initEnv:WIFISDK_SSID withWurl:WIFISDK_URL withVNO:WIFISDK_VNOCODE];
-    [[UserAuthManager manager] logEnable:NO];
-#endif
-    
     // keyboardManager
     [[IQKeyboardManager sharedManager] setEnable:YES];
     

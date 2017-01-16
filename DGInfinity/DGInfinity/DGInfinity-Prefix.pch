@@ -32,10 +32,7 @@
 #import "Pingpp.h"
 #import <Masonry.h>
 #import "UINavigationBar+ExclusiveTouch.h"
-
-#if !(TARGET_IPHONE_SIMULATOR)
 #import "UserAuthManager.h"
-#endif
 
 #endif
 

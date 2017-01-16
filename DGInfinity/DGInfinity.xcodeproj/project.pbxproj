@@ -300,7 +300,6 @@
 		6FFA16811DB606030077E7C3 /* DeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA16801DB606030077E7C3 /* DeviceManager.m */; };
 		6FFA16871DB606E10077E7C3 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA16841DB606E10077E7C3 /* SSKeychain.m */; };
 		6FFA16881DB606E10077E7C3 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA16861DB606E10077E7C3 /* SSKeychainQuery.m */; };
-		6FFA168C1DB6131B0077E7C3 /* libDongGuanSdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FFA168A1DB6131B0077E7C3 /* libDongGuanSdk.a */; };
 		990F0FBA1E0BFB630027DFBB /* DGPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 990F0FB91E0BFB630027DFBB /* DGPicker.m */; };
 		990F3CF31E160F7D007FFE5E /* NewsMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 990F3CF21E160F7D007FFE5E /* NewsMenuModel.m */; };
 		990F3CF61E1672CF007FFE5E /* img_Loading1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 990F3CF41E1672CF007FFE5E /* img_Loading1@2x.png */; };
@@ -334,6 +333,8 @@
 		994641EA1E28B8BA00C81E53 /* img_bg_update@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 994641E81E28B8BA00C81E53 /* img_bg_update@2x.png */; };
 		994641EB1E28B8BA00C81E53 /* img_bg_update@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 994641E91E28B8BA00C81E53 /* img_bg_update@3x.png */; };
 		994641EF1E28B90E00C81E53 /* CheckUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 994641EE1E28B90E00C81E53 /* CheckUpdateView.m */; };
+		995A871D1E2CD1DA001AB2A9 /* CMCCUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 995A871A1E2CD1DA001AB2A9 /* CMCCUserInfo.m */; };
+		995A871E1E2CD1DA001AB2A9 /* UserAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 995A871C1E2CD1DA001AB2A9 /* UserAuthManager.m */; };
 		9961A3581E0A7B2300870103 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9961A3561E0A7B2300870103 /* libcrypto.a */; };
 		9961A3591E0A7B2300870103 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9961A3571E0A7B2300870103 /* libssl.a */; };
 		998E17391E07926800189DDD /* tab_ico_buy_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 998E17371E07926800189DDD /* tab_ico_buy_blue@2x.png */; };
@@ -757,8 +758,6 @@
 		6FFA16841DB606E10077E7C3 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
 		6FFA16851DB606E10077E7C3 /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychainQuery.h; sourceTree = "<group>"; };
 		6FFA16861DB606E10077E7C3 /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychainQuery.m; sourceTree = "<group>"; };
-		6FFA168A1DB6131B0077E7C3 /* libDongGuanSdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libDongGuanSdk.a; sourceTree = "<group>"; };
-		6FFA168B1DB6131B0077E7C3 /* UserAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAuthManager.h; sourceTree = "<group>"; };
 		990F0FB81E0BFB630027DFBB /* DGPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DGPicker.h; sourceTree = "<group>"; };
 		990F0FB91E0BFB630027DFBB /* DGPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DGPicker.m; sourceTree = "<group>"; };
 		990F3CF11E160F7D007FFE5E /* NewsMenuModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsMenuModel.h; sourceTree = "<group>"; };
@@ -812,6 +811,10 @@
 		994641E91E28B8BA00C81E53 /* img_bg_update@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_bg_update@3x.png"; sourceTree = "<group>"; };
 		994641ED1E28B90E00C81E53 /* CheckUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckUpdateView.h; sourceTree = "<group>"; };
 		994641EE1E28B90E00C81E53 /* CheckUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckUpdateView.m; sourceTree = "<group>"; };
+		995A87191E2CD1DA001AB2A9 /* CMCCUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMCCUserInfo.h; sourceTree = "<group>"; };
+		995A871A1E2CD1DA001AB2A9 /* CMCCUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMCCUserInfo.m; sourceTree = "<group>"; };
+		995A871B1E2CD1DA001AB2A9 /* UserAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAuthManager.h; sourceTree = "<group>"; };
+		995A871C1E2CD1DA001AB2A9 /* UserAuthManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAuthManager.m; sourceTree = "<group>"; };
 		9961A3561E0A7B2300870103 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		9961A3571E0A7B2300870103 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		998E17371E07926800189DDD /* tab_ico_buy_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_ico_buy_blue@2x.png"; sourceTree = "<group>"; };
@@ -879,7 +882,6 @@
 				AB020984596E8C03FB0D323B /* libPods-DGInfinity.a in Frameworks */,
 				6F4D36561DF54AE000483A66 /* libpingpp+one.a in Frameworks */,
 				6F2E65561DC9C2FA00AF84BB /* BaiduMapAPI_Utils.framework in Frameworks */,
-				6FFA168C1DB6131B0077E7C3 /* libDongGuanSdk.a in Frameworks */,
 				6F30DE511DF7E9A500134B52 /* libMiPushSDK.a in Frameworks */,
 				6F3A1D951DCC8B9B00BC22EC /* CloudKit.framework in Frameworks */,
 				6F2E65551DC9C2FA00AF84BB /* BaiduMapAPI_Map.framework in Frameworks */,
@@ -1980,8 +1982,10 @@
 		6FFA16891DB612DB0077E7C3 /* WiFiSDK */ = {
 			isa = PBXGroup;
 			children = (
-				6FFA168A1DB6131B0077E7C3 /* libDongGuanSdk.a */,
-				6FFA168B1DB6131B0077E7C3 /* UserAuthManager.h */,
+				995A87191E2CD1DA001AB2A9 /* CMCCUserInfo.h */,
+				995A871A1E2CD1DA001AB2A9 /* CMCCUserInfo.m */,
+				995A871B1E2CD1DA001AB2A9 /* UserAuthManager.h */,
+				995A871C1E2CD1DA001AB2A9 /* UserAuthManager.m */,
 			);
 			path = WiFiSDK;
 			sourceTree = "<group>";
@@ -2498,6 +2502,7 @@
 				6F3185181DB8A25700017D47 /* NewsReportCell.m in Sources */,
 				6FFA16741DB5F9220077E7C3 /* RequestManager.m in Sources */,
 				998E17531E08051E00189DDD /* ActivityCGI.m in Sources */,
+				995A871D1E2CD1DA001AB2A9 /* CMCCUserInfo.m in Sources */,
 				6F2E654D1DC9C28A00AF84BB /* MapCGI.m in Sources */,
 				6F2E65741DC9C76000AF84BB /* LocationInfo.m in Sources */,
 				6F31851D1DB8A9DE00017D47 /* NewsReportModel.m in Sources */,
@@ -2514,6 +2519,7 @@
 				6F2E334F1DC6F74000D9E502 /* ServiceCGI.m in Sources */,
 				6F3A1D8D1DCC733200BC22EC /* UIView+Toast.m in Sources */,
 				6F6FDAA61DB4B3DE00E50D9B /* main.m in Sources */,
+				995A871E1E2CD1DA001AB2A9 /* UserAuthManager.m in Sources */,
 				6F2E65711DC9C76000AF84BB /* BaiduMapSDK.m in Sources */,
 				9990CCFF1E0D19C80002BF63 /* SettingViewController.m in Sources */,
 				6F2D17661DF6BA8A00590AEC /* PayCGI.m in Sources */,

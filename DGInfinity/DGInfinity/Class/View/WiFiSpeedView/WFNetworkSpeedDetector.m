@@ -24,9 +24,10 @@
     NSMutableURLRequest *_request;
     NSUInteger _evenOddCount;
     BOOL _ignoreFirstDataPack;
+    CGFloat _fakeSpeed;
 }
 
-@property (strong, nonatomic) dispatch_queue_t customSpeedDetectorQueue;
+//@property (strong, nonatomic) dispatch_queue_t customSpeedDetectorQueue;
 @end
 
 
@@ -52,7 +53,7 @@ static WFNetworkSpeedDetector * wfnetworkSpeedDetector;
         _detectTargetURLs = [[NSArray alloc] initWithObjects:@"http://download.weather.com.cn/3g/current/ChinaWeather_Android.apk", @"http://down.360safe.com/360mse/f/360fmse_js010001.apk", nil];
         _detectCount = 0;
         _request = [NSMutableURLRequest new];
-        _customSpeedDetectorQueue = dispatch_queue_create("com.yunxingzh.speeddetector", DISPATCH_QUEUE_CONCURRENT);
+//        _customSpeedDetectorQueue = dispatch_queue_create("com.yunxingzh.speeddetector", DISPATCH_QUEUE_CONCURRENT);
     }
     return self;
 }
@@ -61,27 +62,37 @@ static WFNetworkSpeedDetector * wfnetworkSpeedDetector;
 - (void)startSpeedDetector
 {
     _speedDetecting = YES;
-    dispatch_async(_customSpeedDetectorQueue, ^{
-        if (_speedDetectConnection) {
-            [_speedDetectConnection cancel];
-            _speedDetectConnection = nil;
-        }
-        
-        _request.URL = [NSURL URLWithString:[_detectTargetURLs objectAtIndex:_detectCount]];
-        [_request setCachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData];
-        _request.timeoutInterval = 5;
-        _speedDetectConnection = [[NSURLConnection alloc] initWithRequest:_request delegate:self startImmediately:YES];
-        
-        if (!_speedDetectTimer) {
-            _speedDetectTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(detectSpeedWithLimitTime) userInfo:nil repeats:NO];
-        }
-        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate distantFuture]];
-    });
+//    dispatch_async(_customSpeedDetectorQueue, ^{
+//        
+//        [self cleanAllData];
+//        
+//        _request.URL = [NSURL URLWithString:[_detectTargetURLs objectAtIndex:_detectCount]];
+//        [_request setCachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData];
+//        _request.timeoutInterval = 5;
+//        _speedDetectConnection = [[NSURLConnection alloc] initWithRequest:_request delegate:self startImmediately:YES];
+//        
+//        _speedDetectTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(detectSpeedWithLimitTime) userInfo:nil repeats:NO];
+//        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate distantFuture]];
+//    });
+    [self cleanAllData];
+    
+    _request.URL = [NSURL URLWithString:[_detectTargetURLs objectAtIndex:_detectCount]];
+    [_request setCachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData];
+    _request.timeoutInterval = 5;
+    _speedDetectConnection = [[NSURLConnection alloc] initWithRequest:_request delegate:self startImmediately:YES];
+    
+    _speedDetectTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(detectSpeedWithLimitTime) userInfo:nil repeats:NO];
     
 }
 - (void)stopSpeedDetector
 {
     _speedDetecting = NO;
+    [self cleanAllData];
+    self.delegate = nil;
+}
+
+- (void)cleanAllData
+{
     if (_speedDetectConnection) {
         [_speedDetectConnection cancel];
         _speedDetectConnection = nil;
@@ -90,7 +101,7 @@ static WFNetworkSpeedDetector * wfnetworkSpeedDetector;
         [_speedDetectTimer invalidate];
         _speedDetectTimer = nil;
     }
-    self.delegate = nil;
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
 }
 
 
@@ -184,6 +195,10 @@ static WFNetworkSpeedDetector * wfnetworkSpeedDetector;
 
 - (void)detectSpeedWithLimitTime
 {
+    if (_speedDetectConnection) {
+        [_speedDetectConnection cancel];
+        _speedDetectConnection = nil;
+    }
     if (_speedDetectTimer) { //未到10s而结束
         [_speedDetectTimer invalidate];
         _speedDetectTimer = nil;
@@ -198,7 +213,7 @@ static WFNetworkSpeedDetector * wfnetworkSpeedDetector;
             CGFloat speed = _acceptTotalDataLength/allTime;
             _evenOddCount = 0;
             [self randomFakeSpeedCalculate:[NSNumber numberWithFloat:speed]];
-            [self performSelector:@selector(notifyAverageSpeed:) withObject:[NSNumber numberWithFloat:speed] afterDelay:5];
+            [self performSelector:@selector(notifyAverageSpeed:) withObject:[NSNumber numberWithFloat:speed] afterDelay:5.0f];
         }
     }
 }
