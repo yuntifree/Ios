@@ -479,7 +479,7 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)response
     if (userIP)
     {
         [bodyDic setObject:userIP forKey:@"ip"];
-    } else {
+    } else if ([CMCCUserInfo shareInfo].wlanuserip) {
         [bodyDic setObject:[CMCCUserInfo shareInfo].wlanuserip forKey:@"ip"];
     }
     NSString *acIP = [[NSUserDefaults standardUserDefaults] objectForKey:YUE_WLAN_ACIP];
@@ -488,7 +488,7 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)response
         [bodyDic setObject:acIP forKey:@"acip"];
         [bodyDic setObject:acIP forKey:@"wlanacip"];
 
-    } else {
+    } else if ([CMCCUserInfo shareInfo].wlanacip) {
         [bodyDic setObject:[CMCCUserInfo shareInfo].wlanacip forKey:@"acip"];
         [bodyDic setObject:[CMCCUserInfo shareInfo].wlanacip forKey:@"wlanacip"];
     }
@@ -496,14 +496,14 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)response
     if (acName)
     {
         [bodyDic setObject:acName forKey:@"wlanacname"];
-    } else {
+    } else if ([CMCCUserInfo shareInfo].wlanacname) {
         [bodyDic setObject:[CMCCUserInfo shareInfo].wlanacname forKey:@"wlanacname"];
     }
     NSString *wlanusermac = [[NSUserDefaults standardUserDefaults] objectForKey:YUE_WLAN_USERMAC];
     if (wlanusermac)
     {
         [bodyDic setObject:wlanusermac forKey:@"wlanusermac"];
-    } else {
+    } else if ([CMCCUserInfo shareInfo].wlanusermac) {
         [bodyDic setObject:[CMCCUserInfo shareInfo].wlanusermac forKey:@"wlanusermac"];
     }
     if (logSwitch) {
