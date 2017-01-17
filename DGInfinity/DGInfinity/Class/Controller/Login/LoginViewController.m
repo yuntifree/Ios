@@ -142,6 +142,7 @@
         if (E_OK == res._errno) {
             NSDictionary *data = res.data[@"data"];
             if ([data isKindOfClass:[NSDictionary class]]) {
+                SApp.username = phone;
                 [MSApp setUserInfo:data];
                 [self invalidateTimer];
                 [[NSNotificationCenter defaultCenter] postNotificationName:KNC_LOGIN object:nil];

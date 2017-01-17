@@ -31,7 +31,7 @@
           complete:(void (^)(DGCgiResult *res))complete
 {
     NSMutableDictionary *params = [RequestManager httpParams];
-    if ([username isEqualToString:TestAccount]) {
+    if ([username isEqualToString:TestAccount] || TARGET_IPHONE_SIMULATOR) {
         params[@"data"] = @{@"username": username,
                             @"password": [[password dataUsingEncoding:NSUTF8StringEncoding] md5Hash],
                             @"channel": @"App Store",

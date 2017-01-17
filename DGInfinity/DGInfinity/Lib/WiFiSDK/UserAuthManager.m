@@ -202,8 +202,8 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)response
           
           if(response && !error)
           {
-//              NSString *ssidName = [[NSUserDefaults standardUserDefaults]objectForKey:SSID];
-              if ([[CMCCUserInfo shareInfo].ssid isEqualToString:WIFISDK_SSID])
+              NSString *ssidName = [[NSUserDefaults standardUserDefaults]objectForKey:SSID];
+              if ([[CMCCUserInfo shareInfo].ssid isEqualToString:ssidName])
               {
                   environmentCheck(ENV_LOGIN);//已登录认证的WiFi
                   
@@ -479,6 +479,8 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)response
     if (userIP)
     {
         [bodyDic setObject:userIP forKey:@"ip"];
+    } else {
+        [bodyDic setObject:[CMCCUserInfo shareInfo].wlanuserip forKey:@"ip"];
     }
     NSString *acIP = [[NSUserDefaults standardUserDefaults] objectForKey:YUE_WLAN_ACIP];
     if (acIP)
@@ -486,16 +488,23 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)response
         [bodyDic setObject:acIP forKey:@"acip"];
         [bodyDic setObject:acIP forKey:@"wlanacip"];
 
+    } else {
+        [bodyDic setObject:[CMCCUserInfo shareInfo].wlanacip forKey:@"acip"];
+        [bodyDic setObject:[CMCCUserInfo shareInfo].wlanacip forKey:@"wlanacip"];
     }
     NSString *acName = [[NSUserDefaults standardUserDefaults] objectForKey:YUE_WLAN_ACNAME];
     if (acName)
     {
         [bodyDic setObject:acName forKey:@"wlanacname"];
+    } else {
+        [bodyDic setObject:[CMCCUserInfo shareInfo].wlanacname forKey:@"wlanacname"];
     }
     NSString *wlanusermac = [[NSUserDefaults standardUserDefaults] objectForKey:YUE_WLAN_USERMAC];
     if (wlanusermac)
     {
         [bodyDic setObject:wlanusermac forKey:@"wlanusermac"];
+    } else {
+        [bodyDic setObject:[CMCCUserInfo shareInfo].wlanusermac forKey:@"wlanusermac"];
     }
     if (logSwitch) {
         DYLog(@"logout action body = %@", bodyDic);
