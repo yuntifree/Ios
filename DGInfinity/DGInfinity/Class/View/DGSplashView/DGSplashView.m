@@ -12,6 +12,7 @@
 {
     UIImageView *_backView;
     UILabel *_secondLbl;
+    UIButton *_goBtn;
     dispatch_source_t _timer;
     
     NSString *_dst;
@@ -32,7 +33,11 @@
     self = [self initWithFrame:kScreenFrame];
     if (self) {
         _backView.image = image;
-        _dst = dst;
+        if ([dst isKindOfClass:[NSString class]] && dst.length) {
+            _dst = dst;
+            _backView.userInteractionEnabled = YES;
+            _goBtn.hidden = NO;
+        }
         _title = title;
         [self fireTimer];
     }
@@ -47,7 +52,7 @@
         self.backgroundColor = [UIColor whiteColor];
         
         _backView = [[UIImageView alloc] initWithFrame:self.bounds];
-        _backView.userInteractionEnabled = YES;
+        _backView.userInteractionEnabled = NO;
         [_backView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goBtnClick)]];
         [self addSubview:_backView];
         
@@ -69,11 +74,12 @@
         [skipBtn addSubview:_secondLbl];
         
         CGFloat height = frame.size.width * 78 / 375;
-        UIButton *goBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        goBtn.frame = CGRectMake(0, frame.size.height - height - 100 * [Tools layoutFactor], frame.size.width, height);
-        [goBtn setBackgroundImage:ImageNamed(@"text_getmore") forState:UIControlStateNormal];
-        [goBtn addTarget:self action:@selector(goBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:goBtn];
+        _goBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _goBtn.hidden = YES;
+        _goBtn.frame = CGRectMake(0, frame.size.height - height - 100 * [Tools layoutFactor], frame.size.width, height);
+        [_goBtn setBackgroundImage:ImageNamed(@"text_getmore") forState:UIControlStateNormal];
+        [_goBtn addTarget:self action:@selector(goBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_goBtn];
     }
     return self;
 }
