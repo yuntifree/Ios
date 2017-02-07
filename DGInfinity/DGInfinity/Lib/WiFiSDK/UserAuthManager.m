@@ -111,6 +111,7 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)response
     }
     if ([string rangeOfString:@"wsmp"].location != NSNotFound && [string rangeOfString:@"ssid"].location != NSNotFound && [string rangeOfString:@"wlanacname"].location != NSNotFound)
     {
+        /*
         NSArray *array = [string componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"?&"]];
         NSMutableDictionary *infoDic = [@{} mutableCopy];
         if (logSwitch)
@@ -133,9 +134,17 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)response
         {
             DYLog(@"重定向返回url编码后的SSID____%@",encodeSSIDname);
         }
+        */
+        
+        NSMutableDictionary *infoDic = [NSMutableDictionary dictionary];
+        NSURLComponents *components = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
+        for (NSURLQueryItem *item in components.queryItems) {
+            [infoDic setObject:item.value forKey:item.name];
+        }
+        
         [CMCCUserInfo shareInfo].wlanacname = infoDic[YUE_WLAN_ACNAME];
         [CMCCUserInfo shareInfo].wlanuserip = infoDic[YUE_WLAN_USERIP];
-        [CMCCUserInfo shareInfo].ssid = encodeSSIDname.stringByRemovingPercentEncoding;
+        [CMCCUserInfo shareInfo].ssid = infoDic[YUE_SSID];
         [CMCCUserInfo shareInfo].wlanacip = infoDic[YUE_WLAN_ACIP];
         [CMCCUserInfo shareInfo].wlanusermac = infoDic[YUE_WLAN_USERMAC];
 
@@ -202,6 +211,7 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)response
           
           if(response && !error)
           {
+              /*
               NSString *ssidName = [[NSUserDefaults standardUserDefaults]objectForKey:SSID];
               if ([[CMCCUserInfo shareInfo].ssid isEqualToString:ssidName])
               {
@@ -224,8 +234,14 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)response
                   }
                   
               }
+              */
               
-              
+              environmentCheck(ENV_NOT_WIFI);//不是需要认证的WiFi
+              if (logSwitch)
+              {
+                  DYLog(@"当前网络为:不是需要认证的网络！");
+                  
+              }
               
           }
           else if (error)
