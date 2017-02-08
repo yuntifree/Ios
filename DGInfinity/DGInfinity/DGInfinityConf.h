@@ -46,7 +46,8 @@ typedef NS_ENUM(NSInteger, MenuCType) {
     MenuCTypeNews = 0,
     MenuCTypeVideo = 1,
     MenuCTypeWeb = 2,
-    MenuCTypeJoke = 3
+    MenuCTypeJoke = 3,
+    MenuCTypeLive = 4
 };
 
 typedef NS_ENUM(NSInteger, ReportType) {
@@ -127,6 +128,8 @@ typedef NS_ENUM(NSUInteger, UploadPictureState) { // 上传图片状态
 #define SearchURL @"https://m.baidu.com/s?word="
 #define AboutmeURL @"http://yunxingzh.com/app/about.html"
 #define CheckUpdateURL @"https://itunes.apple.com/cn/lookup?id=1177360625"
+#define LiveListURL @"http://web.free.wifi.360.cn/internet/huajiao"
+#define LiveRoomURL @"http://h.huajiao.com/l/index?liveid="
 
 // APP审核账号及密码
 #define TestAccount @"12345678910"

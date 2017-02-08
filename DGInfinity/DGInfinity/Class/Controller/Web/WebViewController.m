@@ -59,6 +59,7 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
         } else {
             config.requiresUserActionForMediaPlayback = NO;
         }
+        config.allowsInlineMediaPlayback = YES;
         _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:config];
         _webView.navigationDelegate = self;
         _webView.UIDelegate = self;

@@ -333,6 +333,13 @@
 		994641EA1E28B8BA00C81E53 /* img_bg_update@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 994641E81E28B8BA00C81E53 /* img_bg_update@2x.png */; };
 		994641EB1E28B8BA00C81E53 /* img_bg_update@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 994641E91E28B8BA00C81E53 /* img_bg_update@3x.png */; };
 		994641EF1E28B90E00C81E53 /* CheckUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 994641EE1E28B90E00C81E53 /* CheckUpdateView.m */; };
+		994908D81E4ABC7C006F623F /* LiveListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 994908D61E4ABC7C006F623F /* LiveListViewController.m */; };
+		994908D91E4ABC7C006F623F /* LiveListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 994908D71E4ABC7C006F623F /* LiveListViewController.xib */; };
+		994908DD1E4AFC36006F623F /* LiveListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 994908DC1E4AFC36006F623F /* LiveListModel.m */; };
+		994908E11E4B019F006F623F /* ico_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 994908DF1E4B019F006F623F /* ico_play@2x.png */; };
+		994908E21E4B019F006F623F /* ico_play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 994908E01E4B019F006F623F /* ico_play@3x.png */; };
+		994908E71E4B01ED006F623F /* LiveListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 994908E51E4B01ED006F623F /* LiveListCell.m */; };
+		994908E81E4B01ED006F623F /* LiveListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 994908E61E4B01ED006F623F /* LiveListCell.xib */; };
 		995A871D1E2CD1DA001AB2A9 /* CMCCUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 995A871A1E2CD1DA001AB2A9 /* CMCCUserInfo.m */; };
 		995A871E1E2CD1DA001AB2A9 /* UserAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 995A871C1E2CD1DA001AB2A9 /* UserAuthManager.m */; };
 		9961A3581E0A7B2300870103 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9961A3561E0A7B2300870103 /* libcrypto.a */; };
@@ -811,6 +818,16 @@
 		994641E91E28B8BA00C81E53 /* img_bg_update@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_bg_update@3x.png"; sourceTree = "<group>"; };
 		994641ED1E28B90E00C81E53 /* CheckUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckUpdateView.h; sourceTree = "<group>"; };
 		994641EE1E28B90E00C81E53 /* CheckUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckUpdateView.m; sourceTree = "<group>"; };
+		994908D51E4ABC7C006F623F /* LiveListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveListViewController.h; sourceTree = "<group>"; };
+		994908D61E4ABC7C006F623F /* LiveListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveListViewController.m; sourceTree = "<group>"; };
+		994908D71E4ABC7C006F623F /* LiveListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiveListViewController.xib; sourceTree = "<group>"; };
+		994908DB1E4AFC36006F623F /* LiveListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveListModel.h; sourceTree = "<group>"; };
+		994908DC1E4AFC36006F623F /* LiveListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveListModel.m; sourceTree = "<group>"; };
+		994908DF1E4B019F006F623F /* ico_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_play@2x.png"; sourceTree = "<group>"; };
+		994908E01E4B019F006F623F /* ico_play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_play@3x.png"; sourceTree = "<group>"; };
+		994908E41E4B01ED006F623F /* LiveListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveListCell.h; sourceTree = "<group>"; };
+		994908E51E4B01ED006F623F /* LiveListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveListCell.m; sourceTree = "<group>"; };
+		994908E61E4B01ED006F623F /* LiveListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiveListCell.xib; sourceTree = "<group>"; };
 		995A87191E2CD1DA001AB2A9 /* CMCCUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMCCUserInfo.h; sourceTree = "<group>"; };
 		995A871A1E2CD1DA001AB2A9 /* CMCCUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMCCUserInfo.m; sourceTree = "<group>"; };
 		995A871B1E2CD1DA001AB2A9 /* UserAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAuthManager.h; sourceTree = "<group>"; };
@@ -959,6 +976,7 @@
 		6F2E57B91DB78B2B00C39F27 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				994908DE1E4B019F006F623F /* Live */,
 				994641E71E28B8BA00C81E53 /* Version */,
 				9990CD051E0D1EEF0002BF63 /* Setting */,
 				6F3079851DFE9DC100477FE0 /* DGSplashView */,
@@ -1770,6 +1788,7 @@
 		6F6FDAC21DB4B79300E50D9B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				994908D41E4ABC51006F623F /* Live */,
 				9990CCFB1E0D19B40002BF63 /* Setting */,
 				6F3FF83C1DE44296002791DB /* Guide */,
 				6F2F9BBA1DDC22280055DAF9 /* Search */,
@@ -1788,6 +1807,7 @@
 		6F6FDAC31DB4B79300E50D9B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				994908DA1E4AFC28006F623F /* Live */,
 				9990CD281E0D217B0002BF63 /* Setting */,
 				6F2F9BEF1DDC709B0055DAF9 /* WiFi */,
 				6F31851A1DB8A97600017D47 /* News */,
@@ -1799,6 +1819,7 @@
 		6F6FDAC41DB4B79300E50D9B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				994908E31E4B01D6006F623F /* Live */,
 				994641EC1E28B8FE00C81E53 /* CheckUpdateView */,
 				9990CD221E0D1F650002BF63 /* Setting */,
 				990F0FB71E0BFB530027DFBB /* DGPicker */,
@@ -2070,6 +2091,44 @@
 			path = CheckUpdateView;
 			sourceTree = "<group>";
 		};
+		994908D41E4ABC51006F623F /* Live */ = {
+			isa = PBXGroup;
+			children = (
+				994908D51E4ABC7C006F623F /* LiveListViewController.h */,
+				994908D61E4ABC7C006F623F /* LiveListViewController.m */,
+				994908D71E4ABC7C006F623F /* LiveListViewController.xib */,
+			);
+			path = Live;
+			sourceTree = "<group>";
+		};
+		994908DA1E4AFC28006F623F /* Live */ = {
+			isa = PBXGroup;
+			children = (
+				994908DB1E4AFC36006F623F /* LiveListModel.h */,
+				994908DC1E4AFC36006F623F /* LiveListModel.m */,
+			);
+			path = Live;
+			sourceTree = "<group>";
+		};
+		994908DE1E4B019F006F623F /* Live */ = {
+			isa = PBXGroup;
+			children = (
+				994908DF1E4B019F006F623F /* ico_play@2x.png */,
+				994908E01E4B019F006F623F /* ico_play@3x.png */,
+			);
+			path = Live;
+			sourceTree = "<group>";
+		};
+		994908E31E4B01D6006F623F /* Live */ = {
+			isa = PBXGroup;
+			children = (
+				994908E41E4B01ED006F623F /* LiveListCell.h */,
+				994908E51E4B01ED006F623F /* LiveListCell.m */,
+				994908E61E4B01ED006F623F /* LiveListCell.xib */,
+			);
+			path = Live;
+			sourceTree = "<group>";
+		};
 		998E17501E08051E00189DDD /* Activity */ = {
 			isa = PBXGroup;
 			children = (
@@ -2228,6 +2287,7 @@
 				9990CD181E0D1EEF0002BF63 /* img_letter@2x.png in Resources */,
 				990F44F71E1B8C9000E242C2 /* circle_outside_small@3x.png in Resources */,
 				6F2DF2C81DD1D72C00A8F0EC /* tab_ico_buy_gray@2X.png in Resources */,
+				994908E21E4B019F006F623F /* ico_play@3x.png in Resources */,
 				6F3067501DD32B8000FA841E /* Label_more@2x.png in Resources */,
 				6F2DF2E01DD1E99C00A8F0EC /* play@3x.png in Resources */,
 				6F30A1E31DD5AD5100149D73 /* wireless_ico_QRcode@2x.png in Resources */,
@@ -2297,6 +2357,7 @@
 				6F30673F1DD32B8000FA841E /* btn_wifi map@2x.png in Resources */,
 				6F2F669D1DE5A7AF00511818 /* img_connect@3x.png in Resources */,
 				6F3F32CE1DDB22180024095A /* housing@2x.png in Resources */,
+				994908D91E4ABC7C006F623F /* LiveListViewController.xib in Resources */,
 				6F3E56441DD968C100F16A23 /* full_Compass@2x.png in Resources */,
 				6F2DF2D61DD1D72C00A8F0EC /* tab_icon_wifi_gray@2x.png in Resources */,
 				6F5033EE1DD0706C001EBC97 /* loading_icon_key@3x.png in Resources */,
@@ -2320,6 +2381,7 @@
 				6FF5C7EF1DC1DA5B00B1A84A /* NewsReportViewController.xib in Resources */,
 				6F30A1DD1DD5AD5100149D73 /* live@2x.png in Resources */,
 				9943BFB41E14F1E500531FE4 /* leftShadow@2x.png in Resources */,
+				994908E81E4B01ED006F623F /* LiveListCell.xib in Resources */,
 				6F3E56421DD968C100F16A23 /* empty_Compass@2x.png in Resources */,
 				6F3215911DDD879D00B7D5DA /* Rain@2x.png in Resources */,
 				6F30A1D51DD5AD5100149D73 /* government@2x.png in Resources */,
@@ -2378,6 +2440,7 @@
 				6F3067471DD32B8000FA841E /* circle_num@2x.png in Resources */,
 				6F6FDAB11DB4B3DE00E50D9B /* Assets.xcassets in Resources */,
 				6F30798E1DFE9DC100477FE0 /* text_getmore@2x.png in Resources */,
+				994908E11E4B019F006F623F /* ico_play@2x.png in Resources */,
 				6FF9FA791DEAAF5600620A6B /* text@3x.png in Resources */,
 				9990CD191E0D1EEF0002BF63 /* img_letter@3x.png in Resources */,
 				6F3215901DDD879D00B7D5DA /* Cloudy@3x.png in Resources */,
@@ -2546,6 +2609,7 @@
 				6F3079841DFE90FC00477FE0 /* DGSplashView.m in Sources */,
 				6F2F10091DF96BCC00BBB742 /* WeakScriptMessageDelegate.m in Sources */,
 				6FF75EE31DC0BB0100166725 /* NetworkManager.m in Sources */,
+				994908DD1E4AFC36006F623F /* LiveListModel.m in Sources */,
 				6F6FDAF71DB4D42F00E50D9B /* WebViewController.m in Sources */,
 				6F2F66951DE5936100511818 /* UIScrollView+EmptyData.m in Sources */,
 				6F307C011DCB36980015F9EC /* WFNetworkSpeedDetector.m in Sources */,
@@ -2573,6 +2637,7 @@
 				6FFA16811DB606030077E7C3 /* DeviceManager.m in Sources */,
 				9943BFA41E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.m in Sources */,
 				6FF5C7F71DC1F00200B1A84A /* NewsVideoModel.m in Sources */,
+				994908E71E4B01ED006F623F /* LiveListCell.m in Sources */,
 				6FCA54781DC9EA91000ED52A /* BaiduMapVC.m in Sources */,
 				6F6FDAD71DB4C3CA00E50D9B /* NSData+Additions.m in Sources */,
 				6F2E50771DD47EDB00663148 /* WiFiTipView.m in Sources */,
@@ -2588,6 +2653,7 @@
 				9910628B1E269A6D006B3D2A /* MacFinder.m in Sources */,
 				6FFA16881DB606E10077E7C3 /* SSKeychainQuery.m in Sources */,
 				6F3C114E1DE81B1C00734F8C /* UIViewController+makeToastOrAlert.m in Sources */,
+				994908D81E4ABC7C006F623F /* LiveListViewController.m in Sources */,
 				6F2DF2DA1DD1DA8900A8F0EC /* NewsTitleView.m in Sources */,
 				6F3A1D911DCC77D500BC22EC /* CheckUtil.m in Sources */,
 				9943BFB71E14F1E500531FE4 /* UIScrollView+XHVisibleCenterScroll.m in Sources */,
