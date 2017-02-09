@@ -23,6 +23,7 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
                                                 }, false); \
                                             } \
                                         })()";
+NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrcode,.open_huajiao,.tool-bar').hide();$('.popup-dialog').remove()";
 
 @interface WebViewController () <WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler>
 
@@ -272,6 +273,14 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
                 DDDLog(@"javaScript error: %@",error);
             }
         }];
+    } else if (_newsType == NT_LIVE) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [webView evaluateJavaScript:JavaScriptLiveHidden completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+                if (error) {
+                    DDDLog(@"javaScript error: %@",error);
+                }
+            }];
+        });
     }
 
     if (!self.backgroundView.hidden) {
@@ -286,7 +295,12 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
             self.backgroundView.hidden = NO;
         }
     } else {
-        [self makeToast:@"网页加载失败，请稍后再试"];
+        NSURL *url = error.userInfo[NSURLErrorFailingURLErrorKey];
+        if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
+            [self makeToast:@"网页加载失败，请稍后再试"];
+        } else if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        }
     }
 }
 

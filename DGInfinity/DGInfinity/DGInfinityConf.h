@@ -39,7 +39,8 @@ typedef NS_ENUM(NSInteger, NewsType) {
     NT_GAME = 3,
     NT_LOCAL = 4,
     NT_ENTERTAIN = 5,
-    NT_JOKE = 6
+    NT_JOKE = 6,
+    NT_LIVE = 99
 };
 
 typedef NS_ENUM(NSInteger, MenuCType) {
@@ -93,7 +94,7 @@ typedef NS_ENUM(NSUInteger, UploadPictureState) { // 上传图片状态
 #define ServerURL @"http://120.76.236.185/" // 测试环境
 //#define ServerURL @"https://api.yunxingzh.com/" // 正式环境
 #define IPServerURL @"https://120.25.133.234/" // AC白名单
-#define AppVersion 4 // 客户端内部版本
+#define AppVersion 5 // 客户端内部版本
 
 // WifiSDK
 #define WIFISDK_TIMEOUT  5 * 1000

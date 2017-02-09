@@ -182,6 +182,7 @@
     if (indexPath.row < _liveList.count) {
         LiveListModel *model = _liveList[indexPath.row];
         WebViewController *vc = [[WebViewController alloc] init];
+        vc.newsType = NT_LIVE;
         vc.url = [NSString stringWithFormat:@"%@%ld", LiveRoomURL, model.live_id];
         [self.navigationController pushViewController:vc animated:YES];
     }

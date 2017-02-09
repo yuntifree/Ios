@@ -102,18 +102,6 @@
                 [menus addObject:menu];
             }
             
-            // 测试数据，手动添加直播
-            NewsMenuModel *model = [NewsMenuModel createWithInfo:@{@"title": @"直播",
-                                                                   @"ctype": @4}];
-            [self.menuModels addObject:model];
-            XHMenu *menu = [[XHMenu alloc] init];
-            menu.title = model.title;
-            menu.titleNormalColor = COLOR(255, 255, 255, 0.6);
-            menu.titleSelectedColor = [UIColor whiteColor];
-            menu.titleFont = SystemFont(17);
-            [menus addObject:menu];
-            //
-            
             self.scrollMenu.menus = menus;
             self.scrollMenu.shouldUniformizeMenus = menus.count <= 5;
             [self.scrollMenu reloadData];

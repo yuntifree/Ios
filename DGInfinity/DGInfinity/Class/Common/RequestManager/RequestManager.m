@@ -101,42 +101,50 @@ static RequestManager *manager = nil;
             if (json && [json isKindOfClass:[NSDictionary class]]) {
                 int errcode = [[json objectForKey:@"errno"] intValue];
                 
-                DGCgiResult *r = [[DGCgiResult alloc] init];
-                r._errno = errcode;
-                r.desc = [json objectForKey:@"desc"];
-                r.data = json;
-                complete(r);
+                if (complete) {
+                    DGCgiResult *r = [[DGCgiResult alloc] init];
+                    r._errno = errcode;
+                    r.desc = [json objectForKey:@"desc"];
+                    r.data = json;
+                    complete(r);
+                }
                 
                 // 账号被踢 特殊逻辑
-                if (E_TOKEN == r._errno) {
+                if (E_TOKEN == errcode) {
                     [MSApp destory];
                     [[NSNotificationCenter defaultCenter] postNotificationName:KNC_LOGOUT object:nil];
                 }
             } else {
+                if (complete) {
+                    DGCgiResult *r = [[DGCgiResult alloc] init];
+                    r._errno = E_INVALID_DATA;
+                    r.desc = @"请求数据失败";
+                    complete(r);
+                }
+            }
+        } else {
+            if (complete) {
                 DGCgiResult *r = [[DGCgiResult alloc] init];
                 r._errno = E_INVALID_DATA;
                 r.desc = @"请求数据失败";
                 complete(r);
             }
-        } else {
-            DGCgiResult *r = [[DGCgiResult alloc] init];
-            r._errno = E_INVALID_DATA;
-            r.desc = @"请求数据失败";
-            complete(r);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NetworkHide;
         if ([error.domain isEqualToString:NSURLErrorDomain]) {
             _serverUrl = IPServerURL;
         }
-        DGCgiResult *r = [[DGCgiResult alloc] init];
-        r._errno = E_CGI_FAILED;
-        if ([[error localizedFailureReason] length]) {
-            r.desc = [error localizedFailureReason];
-        } else {
-            r.desc = @"网络不给力，请稍后再试";
+        if (complete) {
+            DGCgiResult *r = [[DGCgiResult alloc] init];
+            r._errno = E_CGI_FAILED;
+            if ([[error localizedFailureReason] length]) {
+                r.desc = [error localizedFailureReason];
+            } else {
+                r.desc = @"网络不给力，请稍后再试";
+            }
+            complete(r);
         }
-        complete(r);
     }];
 }
 
