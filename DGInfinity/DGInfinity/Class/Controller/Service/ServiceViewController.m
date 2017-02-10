@@ -36,7 +36,8 @@ static NSString *title[] = {
     @"更多"
 };
 
-const NSInteger headerHeight = 105.f;
+const CGFloat headerHeight = 108.0;
+const CGFloat padingHeight = 20.0;
 
 @interface ServiceViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 {
@@ -106,9 +107,9 @@ const NSInteger headerHeight = 105.f;
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)_listView.collectionViewLayout;
     layout.minimumLineSpacing = 0;
     layout.minimumInteritemSpacing = 0;
-    layout.itemSize = CGSizeMake((kScreenWidth - 60) / 3.0, 81.0);
+    layout.itemSize = CGSizeMake(kScreenWidth / 4.0, 81.0);
     
-    _header = [[ServiceHeaderView alloc] initWithFrame:CGRectMake(0, -headerHeight - 12, kScreenWidth, headerHeight)];
+    _header = [[ServiceHeaderView alloc] initWithFrame:CGRectMake(0, -headerHeight - padingHeight, kScreenWidth, headerHeight)];
     _header.hidden = YES;
     __weak typeof(self) wself = self;
     _header.headClick = ^(NSInteger tag) {
@@ -120,7 +121,7 @@ const NSInteger headerHeight = 105.f;
     };
     [_listView addSubview:_header];
     
-    _padingView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_header.frame), kScreenWidth, 12)];
+    _padingView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_header.frame), kScreenWidth, padingHeight)];
     _padingView.backgroundColor = RGB(0xf5f5f5, 1);
     _padingView.hidden = YES;
     [_listView addSubview:_padingView];

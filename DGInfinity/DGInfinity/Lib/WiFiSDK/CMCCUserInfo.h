@@ -10,12 +10,12 @@
 
 @interface CMCCUserInfo : NSObject
 
-@property (nonatomic, strong) NSString *wlanacname;
-@property (nonatomic, strong) NSString *wlanuserip;
-@property (nonatomic, strong) NSString *ssid;
-@property (nonatomic, strong) NSString *wlanacip;
-@property (nonatomic, strong) NSString *wlanusermac;
-@property (nonatomic, strong) NSString *vnoCode;
+@property (nonatomic, copy) NSString *wlanacname;
+@property (nonatomic, copy) NSString *wlanuserip;
+@property (nonatomic, copy) NSString *ssid;
+@property (nonatomic, copy) NSString *wlanacip;
+@property (nonatomic, copy) NSString *wlanusermac;
+@property (nonatomic, copy) NSString *vnoCode;
 
 + (CMCCUserInfo *)shareInfo;
 
