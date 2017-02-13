@@ -19,6 +19,7 @@
     NSInteger _offset;
     BOOL _isLoad;
     NSMutableArray *_liveList;
+    int _retryCount;
 }
 
 @end
@@ -30,6 +31,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _offset = 0;
+        _retryCount = 3;
         _isLoad = NO;
         _liveList = [NSMutableArray arrayWithCapacity:10];
     }
@@ -120,11 +122,16 @@
                             }
                         } else {
                             if (!_liveList.count) {
-                                [_listView configureNoNetStyleWithdidTapButtonBlock:^{
-                                    [wself headerRefresh];
-                                } didTapViewBlock:^{
-                                    
-                                }];
+                                if (_retryCount) { // 偶尔拉到的数据可能为空，增加重试机制
+                                    [self performSelector:@selector(getLiveList) withObject:nil afterDelay:0.5];
+                                    _retryCount--;
+                                } else {
+                                    [_listView configureNoNetStyleWithdidTapButtonBlock:^{
+                                        [wself headerRefresh];
+                                    } didTapViewBlock:^{
+                                        
+                                    }];
+                                }
                             }
                         }
                         [_listView reloadData];

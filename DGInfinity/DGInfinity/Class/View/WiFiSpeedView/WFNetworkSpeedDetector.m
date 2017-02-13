@@ -21,7 +21,6 @@
     
     NSMutableData *_acceptedTotalData;
     CGFloat _acceptTotalDataLength;//为了处理失败情况下的计算，用来不直接用[_acceptedTotalData length] 计算
-    NSMutableURLRequest *_request;
     NSUInteger _evenOddCount;
     BOOL _ignoreFirstDataPack;
     CGFloat _fakeSpeed;
@@ -52,7 +51,6 @@ static WFNetworkSpeedDetector * wfnetworkSpeedDetector;
     if (self) {
         _detectTargetURLs = [[NSArray alloc] initWithObjects:@"http://download.weather.com.cn/3g/current/ChinaWeather_Android.apk", @"http://down.360safe.com/360mse/f/360fmse_js010001.apk", nil];
         _detectCount = 0;
-        _request = [NSMutableURLRequest new];
 //        _customSpeedDetectorQueue = dispatch_queue_create("com.yunxingzh.speeddetector", DISPATCH_QUEUE_CONCURRENT);
     }
     return self;
@@ -76,10 +74,8 @@ static WFNetworkSpeedDetector * wfnetworkSpeedDetector;
 //    });
     [self cleanAllData];
     
-    _request.URL = [NSURL URLWithString:[_detectTargetURLs objectAtIndex:_detectCount]];
-    [_request setCachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData];
-    _request.timeoutInterval = 5;
-    _speedDetectConnection = [[NSURLConnection alloc] initWithRequest:_request delegate:self startImmediately:YES];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[_detectTargetURLs objectAtIndex:_detectCount]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:5];
+    _speedDetectConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
     
     _speedDetectTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(detectSpeedWithLimitTime) userInfo:nil repeats:NO];
     

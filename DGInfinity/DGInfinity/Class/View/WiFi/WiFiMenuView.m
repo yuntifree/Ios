@@ -40,6 +40,8 @@
     __weak IBOutlet NSLayoutConstraint *_welfareIconLeft;
     __weak IBOutlet NSLayoutConstraint *_connectBtnTop;
     __weak IBOutlet NSLayoutConstraint *_statusLblBottom;
+    __weak IBOutlet NSLayoutConstraint *_leftWeatherViewBottom;
+    __weak IBOutlet NSLayoutConstraint *_rightWeatherViewTop;
     
     TimeType _currentType;
     ENV_STATUS _currentStatus;
@@ -62,12 +64,15 @@
 {
     [super awakeFromNib];
     
-    _connectBtnTop.constant *= [Tools layoutFactor];
-    _statusLblBottom.constant *= [Tools layoutFactor];
-    _examIconLeft.constant *= [Tools layoutFactor];
-    _testIconLeft.constant *= [Tools layoutFactor];
-    _mapIconLeft.constant *= [Tools layoutFactor];
-    _welfareIconLeft.constant *= [Tools layoutFactor];
+    CGFloat factor = [Tools layoutFactor];
+    _connectBtnTop.constant *= factor;
+    _statusLblBottom.constant *= factor;
+    _examIconLeft.constant *= factor;
+    _testIconLeft.constant *= factor;
+    _mapIconLeft.constant *= factor;
+    _welfareIconLeft.constant *= factor;
+    _leftWeatherViewBottom.constant *= factor;
+    _rightWeatherViewTop.constant *= factor;
     
     _halo = [PulsingHaloLayer layer];
     _halo.position = CGPointMake(kScreenWidth / 2, _connectBtnTop.constant + 56.5);
@@ -221,13 +226,15 @@
         [_halo start];
     }
     if (!_leftAnimation) {
-        _leftAnimation = [AnimationManager positionAnimationFromPosition:_leftWeatherView.center toPosition:CGPointMake(_leftWeatherView.center.x - 50, _leftWeatherView.center.y) duration:6];
+        CGPoint center = CGPointMake(-10 + 83.0 / 2, kScreenWidth / 375 * 317 - 83.0 / 2 - _leftWeatherViewBottom.constant);
+        _leftAnimation = [AnimationManager positionAnimationFromPosition:center toPosition:CGPointMake(center.x - 50, center.y) duration:6];
         _leftAnimation.repeatCount = INFINITY;
         _leftAnimation.autoreverses = YES;
     }
     [_leftWeatherView.layer addAnimation:_leftAnimation forKey:@"weather"];
     if (!_rightAnimation) {
-        _rightAnimation = [AnimationManager positionAnimationFromPosition:_rightWeatherView.center toPosition:CGPointMake(_rightWeatherView.center.x + 20, _rightWeatherView.center.y) duration:3];
+        CGPoint center = CGPointMake(kScreenWidth - (83.0 / 2 - 30), _rightWeatherViewTop.constant + 83.0 / 2);
+        _rightAnimation = [AnimationManager positionAnimationFromPosition:center toPosition:CGPointMake(center.x + 20, center.y) duration:3];
         _rightAnimation.repeatCount = INFINITY;
         _rightAnimation.autoreverses = YES;
     }
