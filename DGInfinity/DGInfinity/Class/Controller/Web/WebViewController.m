@@ -60,7 +60,9 @@ NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrco
         } else {
             config.requiresUserActionForMediaPlayback = NO;
         }
-        config.allowsInlineMediaPlayback = YES;
+        if (_newsType == NT_LIVE) {
+            config.allowsInlineMediaPlayback = YES;
+        }
         _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:config];
         _webView.navigationDelegate = self;
         _webView.UIDelegate = self;
