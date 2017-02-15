@@ -206,6 +206,8 @@
 {
     NewsBaseViewController *vc = self.childViewControllers[index];
     [vc loadData];
+    // 预加载相邻两个页面数据
+    /*
     if (!index) {
         if (index + 1 < self.childViewControllers.count) {
             NewsBaseViewController *backVC = self.childViewControllers[index + 1];
@@ -220,6 +222,7 @@
         NewsBaseViewController *frontVC = self.childViewControllers[index - 1];
         [frontVC loadData];
     }
+     */
 }
 
 - (void)setCurrentPage:(NSInteger)type

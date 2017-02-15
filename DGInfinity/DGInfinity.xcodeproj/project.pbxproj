@@ -321,6 +321,7 @@
 		9910628B1E269A6D006B3D2A /* MacFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 991062881E269A6D006B3D2A /* MacFinder.m */; };
 		991066401E23838900D1525F /* ico_no@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9910663E1E23838900D1525F /* ico_no@2x.png */; };
 		991066411E23838900D1525F /* ico_no@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9910663F1E23838900D1525F /* ico_no@3x.png */; };
+		9943A8231E5428AE004AFF64 /* LiveCGI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943A8221E5428AE004AFF64 /* LiveCGI.m */; };
 		9943BFA41E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943BFA31E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.m */; };
 		9943BFB41E14F1E500531FE4 /* leftShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9943BFA71E14F1E500531FE4 /* leftShadow@2x.png */; };
 		9943BFB51E14F1E500531FE4 /* managerMenuButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9943BFA81E14F1E500531FE4 /* managerMenuButton@2x.png */; };
@@ -799,6 +800,8 @@
 		9910628C1E269B28006B3D2A /* if_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_types.h; sourceTree = "<group>"; };
 		9910663E1E23838900D1525F /* ico_no@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_no@2x.png"; sourceTree = "<group>"; };
 		9910663F1E23838900D1525F /* ico_no@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_no@3x.png"; sourceTree = "<group>"; };
+		9943A8211E5428AE004AFF64 /* LiveCGI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveCGI.h; sourceTree = "<group>"; };
+		9943A8221E5428AE004AFF64 /* LiveCGI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveCGI.m; sourceTree = "<group>"; };
 		9943BFA21E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+ExclusiveTouch.h"; sourceTree = "<group>"; };
 		9943BFA31E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+ExclusiveTouch.m"; sourceTree = "<group>"; };
 		9943BFA71E14F1E500531FE4 /* leftShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leftShadow@2x.png"; sourceTree = "<group>"; };
@@ -1772,6 +1775,7 @@
 		6F6FDAC11DB4B79300E50D9B /* Control */ = {
 			isa = PBXGroup;
 			children = (
+				9943A8201E5428A1004AFF64 /* Live */,
 				9990CD3A1E0D391D0002BF63 /* Setting */,
 				998E17501E08051E00189DDD /* Activity */,
 				6F2D17631DF6BA7E00590AEC /* Pay */,
@@ -2043,6 +2047,15 @@
 				9910627B1E268847006B3D2A /* SimplePing.m */,
 			);
 			path = ConnectedDevice;
+			sourceTree = "<group>";
+		};
+		9943A8201E5428A1004AFF64 /* Live */ = {
+			isa = PBXGroup;
+			children = (
+				9943A8211E5428AE004AFF64 /* LiveCGI.h */,
+				9943A8221E5428AE004AFF64 /* LiveCGI.m */,
+			);
+			path = Live;
 			sourceTree = "<group>";
 		};
 		9943BFA51E14F1E500531FE4 /* XHScrollMenu */ = {
@@ -2629,6 +2642,7 @@
 				9990CD381E0D33370002BF63 /* FeedBackViewController.m in Sources */,
 				6F3215991DDDB17C00B7D5DA /* WiFiConnectTipView.m in Sources */,
 				6F31850F1DB86DAB00017D47 /* ServiceCellModel.m in Sources */,
+				9943A8231E5428AE004AFF64 /* LiveCGI.m in Sources */,
 				6F2F9BF21DDC70AB0055DAF9 /* WiFiExamModel.m in Sources */,
 				9943BFBA1E14F1E500531FE4 /* XHMenuButton.m in Sources */,
 				6F02BAA61DCCA90F00C72833 /* UITableView+EmptyData.m in Sources */,

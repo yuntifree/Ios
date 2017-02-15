@@ -13,6 +13,7 @@
 + (instancetype)createWithInfo:(NSDictionary *)info
 {
     LiveListModel *model = [LiveListModel new];
+    model.uid = [info[@"uid"] integerValue];
     model.avatar = info[@"avatar"];
     model.img = info[@"img"];
     model.nickname = info[@"nickname"];
@@ -20,6 +21,8 @@
     model.location = info[@"location"];
     model.watches = [info[@"watches"] integerValue];
     model.live = [info[@"live"] intValue];
+    model.seq = [info[@"seq"] integerValue];
+    model.p_time = info[@"p_time"];
     return model;
 }
 

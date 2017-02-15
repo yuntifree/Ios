@@ -119,6 +119,7 @@
                 <outlet property="_locationLbl" destination="THS-dl-3DB" id="qp4-wn-Uy4"/>
                 <outlet property="_nicknameLbl" destination="0OF-zs-ao6" id="YBG-Vv-Gv4"/>
                 <outlet property="_watchesLbl" destination="0Qw-Qg-0yd" id="D38-Eg-Vcb"/>
+                <outlet property="_watchesLblWidth" destination="WL8-nI-jx5" id="ybB-uj-UOS"/>
             </connections>
             <point key="canvasLocation" x="-608" y="-12"/>
         </collectionViewCell>

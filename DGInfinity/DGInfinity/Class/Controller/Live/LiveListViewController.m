@@ -11,15 +11,15 @@
 #import "LiveListModel.h"
 #import "LiveListCell.h"
 #import "WebViewController.h"
+#import "LiveCGI.h"
 
 @interface LiveListViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 {
     __weak IBOutlet UICollectionView *_listView;
     
-    NSInteger _offset;
+    NSInteger _minseq;
     BOOL _isLoad;
     NSMutableArray *_liveList;
-    int _retryCount;
 }
 
 @end
@@ -30,8 +30,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _offset = 0;
-        _retryCount = 3;
+        _minseq = 0;
         _isLoad = NO;
         _liveList = [NSMutableArray arrayWithCapacity:10];
     }
@@ -66,7 +65,7 @@
 
 - (void)headerRefresh
 {
-    _offset = 0;
+    _minseq = 0;
     [_listView.mj_footer resetNoMoreData];
     [self getLiveList];
 }
@@ -81,84 +80,53 @@
 
 - (void)getLiveList
 {
-    __weak typeof(self) wself = self;
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSDictionary *params = @{@"offset": @(_offset)};
-    [manager GET:LiveListURL parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if (_offset) {
+    [LiveCGI getLiveInfo:_minseq complete:^(DGCgiResult *res) {
+        if (_minseq) {
             [_listView.mj_footer endRefreshing];
         } else {
             [_listView.mj_header endRefreshing];
         }
-        if (responseObject && [responseObject isKindOfClass:[NSData class]]) {
-            NSString *jsonString = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] deleteHeadEndSpace];
-            jsonString = [jsonString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"()"]];
-            id json = [Tools jsonStringToDictionary:jsonString];
-            if (json && [json isKindOfClass:[NSDictionary class]]) {
-                int errno_ = [json[@"errno"] intValue];
-                if (!errno_) {
-                    NSDictionary *data = json[@"data"];
-                    if ([data isKindOfClass:[NSDictionary class]]) {
-                        NSInteger tem = _offset;
-                        _offset = [data[@"offset"] integerValue];
-                        BOOL hasmore = [data[@"more"] boolValue];
-                        if (!hasmore) {
-                            [_listView.mj_footer endRefreshingWithNoMoreData];
-                        } else {
-                            if (!_listView.mj_footer) {
-                                _listView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(getLiveList)];
-                            }
+        if (E_OK == res._errno) {
+            NSDictionary *data = res.data[@"data"];
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                BOOL hasmore = [data[@"hasmore"] boolValue];
+                if (!hasmore) {
+                    [_listView.mj_footer endRefreshingWithNoMoreData];
+                } else {
+                    if (!_listView.mj_footer) {
+                        _listView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(getLiveList)];
+                    }
+                }
+                NSArray *infos = data[@"list"];
+                if ([infos isKindOfClass:[NSArray class]] && infos.count) {
+                    if (_minseq == 0) {
+                        [_liveList removeAllObjects];
+                    }
+                    for (NSDictionary *info in infos) {
+                        LiveListModel *model = [LiveListModel createWithInfo:info];
+                        [_liveList addObject:model];
+                        if (!_minseq || _minseq > model.seq) {
+                            _minseq = model.seq;
                         }
-                        NSArray *list = data[@"list"];
-                        if ([list isKindOfClass:[NSArray class]] && list.count) {
-                            if (tem == 0) {
-                                [_liveList removeAllObjects];
-                            }
-                            for (NSDictionary *info in list) {
-                                LiveListModel *model = [LiveListModel createWithInfo:info];
-                                [_liveList addObject:model];
-                            }
-                        } else {
-                            if (!_liveList.count) {
-                                if (_retryCount) { // 偶尔拉到的数据可能为空，增加重试机制
-                                    [self performSelector:@selector(getLiveList) withObject:nil afterDelay:0.5];
-                                    _retryCount--;
-                                } else {
-                                    [_listView configureNoNetStyleWithdidTapButtonBlock:^{
-                                        [wself headerRefresh];
-                                    } didTapViewBlock:^{
-                                        
-                                    }];
-                                }
-                            }
-                        }
-                        [_listView reloadData];
                     }
                 } else {
-                    [self makeToast:json[@"errmsg"]];
+                    if (!_liveList.count) {
+                        [self makeToast:@"暂时没有主播直播，请稍后重试"];
+                    }
                 }
-            } else {
-                [self makeToast:@"请求数据失败"];
+                [_listView reloadData];
             }
         } else {
-            [self makeToast:@"请求数据失败"];
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (_offset) {
-            [_listView.mj_footer endRefreshing];
-        } else {
-            [_listView.mj_header endRefreshing];
-        }
-        if (!_liveList.count) {
-            [_listView configureNoNetStyleWithdidTapButtonBlock:^{
-                [wself headerRefresh];
-            } didTapViewBlock:^{
-                
-            }];
-        } else {
-            [self makeToast:@"网络不给力，请稍后再试"];
+            if (E_CGI_FAILED == res._errno && !_liveList.count) {
+                __weak typeof(self) wself = self;
+                [_listView configureNoNetStyleWithdidTapButtonBlock:^{
+                    [wself headerRefresh];
+                } didTapViewBlock:^{
+                    
+                }];
+            } else {
+                [self makeToast:res.desc];
+            }
         }
     }];
 }
