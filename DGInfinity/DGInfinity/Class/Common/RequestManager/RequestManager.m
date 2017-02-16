@@ -10,7 +10,7 @@
 #import "DeviceManager.h"
 #import <AFHTTPSessionManager.h>
 
-#define MAX_REQUEST_TIMEOUT     7
+#define MAX_REQUEST_TIMEOUT     5
 
 @implementation DGCgiResult
 
