@@ -23,9 +23,11 @@
  *  report_click
  *  @param id_ 媒体id （视频/新闻/广告）
  *  @param type 类型 0- 视频播放 1-新闻点击 2-广告展示 3-广告点击
+ *  @param name type=7,8 传name来区分子类型
  */
 + (void)reportClick:(NSInteger)id_
                type:(NSInteger)type
+               name:(NSString *)name
            complete:(void (^)(DGCgiResult *res))complete;
 
 /**

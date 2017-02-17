@@ -298,7 +298,7 @@ static MSApp *mSapp = nil;
         if (model.id_ == md.id_ && model.type == md.type) {
             if (model.time > md.time + 60) {
                 md.time = model.time;
-                [NewsCGI reportClick:model.id_ type:model.type complete:nil];
+                [NewsCGI reportClick:model.id_ type:model.type name:model.name complete:nil];
             }
             exist = YES;
             break;
@@ -306,7 +306,7 @@ static MSApp *mSapp = nil;
     }
     if (!exist) {
         [_reportArray addObject:model];
-        [NewsCGI reportClick:model.id_ type:model.type complete:nil];
+        [NewsCGI reportClick:model.id_ type:model.type name:model.name complete:nil];
     }
 }
 

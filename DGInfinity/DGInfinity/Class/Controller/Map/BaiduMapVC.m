@@ -119,10 +119,8 @@
 {
     self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
     if (self) {
-        UIImage *image = ImageNamed(@"bar-wifi");
-        UIImageView *iv = [[UIImageView alloc] initWithImage:image];
-        self.bounds = iv.bounds;
-        [self addSubview:iv];
+        self.image = ImageNamed(@"ico_wifi");
+        self.centerOffset = CGPointMake(0, -self.image.size.height / 2);
         
         LocationActionPaopaoView *paopaoView = [[LocationActionPaopaoView alloc] initWithTitle:annotation.title distance:MetersTwoCoordinate2D([[BaiduMapSDK shareBaiduMapSDK] getUserLocation].location.coordinate, annotation.coordinate)];
         BMKActionPaopaoView *paopao = [[BMKActionPaopaoView alloc] initWithCustomView:paopaoView];
@@ -178,6 +176,7 @@
         _myLocation = [[BaiduMapSDK shareBaiduMapSDK] getUserLocation];
         [_mapView updateLocationData:_myLocation];
         [self navBtnClick];
+        [self addAnnotations];
     }
 }
 
@@ -223,8 +222,6 @@
     [_mapView setNeedsUpdateConstraints];
     [self.view addSubview:_mapView];
     
-    [[BaiduMapSDK shareBaiduMapSDK] addDelegate:self];
-    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     button.frame = CGRectMake(kScreenWidth - 36 - 20, 20, 36, 36);
     [button setBackgroundImage:ImageNamed(@"Navigation") forState:UIControlStateNormal];
@@ -234,7 +231,12 @@
 
 - (void)navBtnClick
 {
-    if (![[BaiduMapSDK shareBaiduMapSDK] locationServicesEnabled]) return;
+    if (![[BaiduMapSDK shareBaiduMapSDK] locationServicesEnabled]) {
+        [self showAlertWithTitle:@"提示" message:@"无法获取位置信息，建议开启定位服务" cancelTitle:@"忽略" cancelHandler:nil defaultTitle:@"开启" defaultHandler:^(UIAlertAction *action) {
+            [Tools openSetting];
+        }];
+        return;
+    }
     BMKMapStatus *status = [BMKMapStatus new];
     status.targetGeoPt = _myLocation.location.coordinate;
     [_mapView setMapStatus:status withAnimation:YES];
@@ -250,14 +252,15 @@
 }
 
 // 添加附近WiFi位置标注，和我的位置标注
-- (void)addAnnotations:(CLLocationCoordinate2D)location
+- (void)addAnnotations
 {
-    [MapCGI getNearbyAps:location.longitude latitude:location.latitude complete:^(DGCgiResult *res) {
+    [MapCGI getAllAps:^(DGCgiResult *res) {
         if (E_OK == res._errno) {
             NSDictionary *data = res.data[@"data"];
             if ([data isKindOfClass:[NSDictionary class]]) {
                 NSArray *infos = data[@"infos"];
                 if ([infos isKindOfClass:[NSArray class]]) {
+                    NSMutableArray *tem = [NSMutableArray array];
                     for (NSDictionary *info in infos) {
                         @autoreleasepool {
                             BMKPointAnnotation *annotation = [[BMKPointAnnotation alloc] init];
@@ -266,10 +269,11 @@
                             NSString *hashFlag = [NSString stringWithFormat:@"%lf%lf", annotation.coordinate.latitude, annotation.coordinate.longitude];
                             if (![_annotitaionSet containsObject:hashFlag]) {
                                 [_annotitaionSet addObject:hashFlag];
-                                [_mapView addAnnotation:annotation];
+                                [tem addObject:annotation];
                             }
                         }
                     }
+                    [_mapView addAnnotations:tem];
                 }
             }
         } else {
@@ -293,6 +297,7 @@
         return;
     }
     [_mapView updateLocationData:_myLocation];
+    [self addAnnotations];
 }
 
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id<BMKAnnotation>)annotation
@@ -309,25 +314,11 @@
     return annotationView;
 }
 
-- (void)mapView:(BMKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
-{
-    if (![[BaiduMapSDK shareBaiduMapSDK] locationServicesEnabled]) return;
-    [self addAnnotations:mapView.centerCoordinate];
-}
-
 - (void)mapView:(BMKMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view
 {
     BMKMapStatus *status = [BMKMapStatus new];
     status.targetGeoPt = view.annotation.coordinate;
     [_mapView setMapStatus:status withAnimation:YES];
-}
-
-#pragma mark - BaiduMapSDKDelegate
-- (void)didUpdateUserLocation:(BMKUserLocation *)userLocation;
-{
-    _myLocation = userLocation;
-    [_mapView updateLocationData:userLocation];
-    [self addAnnotations:_mapView.centerCoordinate];
 }
 
 @end

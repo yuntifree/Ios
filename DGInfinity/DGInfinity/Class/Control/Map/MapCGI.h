@@ -19,4 +19,9 @@
             latitude:(double)latitude
             complete:(void (^)(DGCgiResult *res))complete;
 
+/**
+ *  get_all_aps
+ */
++ (void)getAllAps:(void(^)(DGCgiResult *res))complete;
+
 @end

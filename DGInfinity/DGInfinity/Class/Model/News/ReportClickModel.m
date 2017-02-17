@@ -39,4 +39,13 @@
     return rcm;
 }
 
++ (instancetype)createWithLiveListModel:(LiveListModel *)model
+{
+    ReportClickModel *rcm = [ReportClickModel new];
+    rcm.id_ = model.live_id;
+    rcm.type = RCT_TABCUT;
+    rcm.name = @"livedetail";
+    return rcm;
+}
+
 @end

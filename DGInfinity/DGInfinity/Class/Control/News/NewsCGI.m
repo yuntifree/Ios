@@ -26,11 +26,18 @@
 
 + (void)reportClick:(NSInteger)id_
                type:(NSInteger)type
+               name:(NSString *)name
            complete:(void (^)(DGCgiResult *res))complete
 {
     NSMutableDictionary *params = [RequestManager httpParams];
-    params[@"data"] = @{@"id": @(id_),
-                        @"type": @(type)};
+    if ([name isKindOfClass:[NSString class]] && name.length) {
+        params[@"data"] = @{@"id": @(id_),
+                            @"type": @(type),
+                            @"name": name};
+    } else {
+        params[@"data"] = @{@"id": @(id_),
+                            @"type": @(type)};
+    }
     [[RequestManager shareManager] loadAsync:params cgi:@"report_click" complete:^(DGCgiResult *res) {
         if (complete) {
             complete(res);

@@ -61,7 +61,8 @@ typedef NS_ENUM(NSInteger, ReportClickType) {
     RCT_NEWSCLICK = 1,
     RCT_ADSHOW = 2,
     RCT_ADCLICK = 3,
-    RCT_SERVICE = 4
+    RCT_SERVICE = 4,
+    RCT_TABCUT = 7
 };
 
 typedef NS_ENUM(NSInteger, WeatherType) {

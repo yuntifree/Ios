@@ -156,6 +156,7 @@
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     if (indexPath.row < _liveList.count) {
         LiveListModel *model = _liveList[indexPath.row];
+        [SApp reportClick:[ReportClickModel createWithLiveListModel:model]];
         WebViewController *vc = [[WebViewController alloc] init];
         vc.newsType = NT_LIVE;
         vc.url = [NSString stringWithFormat:@"%@%ld", LiveRoomURL, model.live_id];
