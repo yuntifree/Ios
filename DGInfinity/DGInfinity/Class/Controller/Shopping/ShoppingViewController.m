@@ -95,7 +95,7 @@
 }
 
 - (IBAction)uploadTest:(UIButton *)sender {
-    [[PhotoManager shareManager] showPhotoPicker:self];
+    
 }
 
 - (IBAction)pickerClick:(UIButton *)sender {

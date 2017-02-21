@@ -13,8 +13,11 @@
 #import "SettingViewController.h"
 #import "UserInfoCGI.h"
 #import "AlterNameViewController.h"
+#import "PickHeadViewController.h"
+#import "PhotoManager.h"
+#import "AliyunOssService.h"
 
-@interface MeViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface MeViewController () <UITableViewDelegate, UITableViewDataSource, PhotoManagerDelegate>
 {
     __weak IBOutlet UITableView *_tableView;
     MeHeader *_header;
@@ -34,6 +37,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(modNickname:) name:kNCModNickname object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(modHead:) name:kNCModHead object:nil];
     }
     return self;
 }
@@ -73,20 +77,31 @@
 
 - (void)onTapHead
 {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    [alert addAction:[UIAlertAction actionWithTitle:@"我为你推荐" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
+    __weak typeof(self) wself = self;
+    LCActionSheet *actionSheet = [LCActionSheet sheetWithTitle:nil cancelButtonTitle:@"取消" clicked:^(LCActionSheet *actionSheet, NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            PickHeadViewController *vc = [PickHeadViewController new];
+            [wself.navigationController pushViewController:vc animated:YES];
+        } else if (buttonIndex == 2) {
+            [wself openPhotoAlbum];
+        }
+    } otherButtonTitles:@"我为你推荐", @"从相册选择", nil];
+    [actionSheet show];
+}
+
+- (void)openPhotoAlbum
+{
+    [[PhotoManager shareManager] showPhotoPicker:self sourceType:UIImagePickerControllerSourceTypePhotoLibrary];
 }
 
 - (void)modNickname:(NSNotification *)notification
 {
     [_header setNickname:notification.object];
+}
+
+- (void)modHead:(NSNotification *)notification
+{
+    [_header setHead:notification.object];
 }
 
 - (void)getUserInfo
@@ -97,6 +112,20 @@
             if ([data isKindOfClass:[NSDictionary class]]) {
                 [_header setHeaderValue:data];
             }
+        } else {
+            [self makeToast:res.desc];
+        }
+    }];
+}
+
+- (void)modUserHead:(NSString *)headurl
+{
+    [SVProgressHUD show];
+    [UserInfoCGI modUserInfo:@"headurl" value:headurl complete:^(DGCgiResult *res) {
+        [SVProgressHUD dismiss];
+        if (E_OK == res._errno) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNCModHead object:headurl];
+            [self makeToast:@"上传成功"];
         } else {
             [self makeToast:res.desc];
         }
@@ -165,6 +194,20 @@
     UIView *view = [UIView new];
     view.backgroundColor = RGB(0xf0f0f0, 1);
     return view;
+}
+
+#pragma mark - PhotoManagerDelegate
+- (void)photoManager:(PhotoManager *)manager didFinishPickImage:(UIImage *)image
+{
+    [SVProgressHUD show];
+    [[AliyunOssService sharedAliyunOssService] applyImage:image complete:^(UploadPictureState state, NSString *picture) {
+        [SVProgressHUD dismiss];
+        if (UploadPictureState_Success == state) {
+            [self modUserHead:picture];
+        } else {
+            [self makeToast:@"上传失败"];
+        }
+    }];
 }
 
 @end

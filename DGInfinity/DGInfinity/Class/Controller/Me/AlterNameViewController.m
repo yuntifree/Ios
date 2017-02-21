@@ -86,6 +86,12 @@
         [self makeToast:@"昵称不能为空"];
         return;
     }
+    
+    if (_textField.text.length > 12) {
+        [self makeToast:@"昵称的最大长度为12个字符"];
+        return;
+    }
+    
     NSString *nickname;
     if (_textField.text.length) {
         nickname = _textField.text;

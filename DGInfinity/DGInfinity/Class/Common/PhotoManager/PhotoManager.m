@@ -7,10 +7,12 @@
 //
 
 #import "PhotoManager.h"
+#import "PhotoViewController.h"
 
-@interface PhotoManager () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface PhotoManager () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, PhotoViewControllerDelegate>
 
 @property (nonatomic, weak) id <PhotoManagerDelegate> delegate;
+@property (nonatomic, assign) UIImagePickerControllerSourceType sourceType;
 
 @end
 
@@ -26,24 +28,19 @@
     return manager;
 }
 
-- (void)showPhotoPicker:(UIViewController <PhotoManagerDelegate> *)viewController
+- (void)showPhotoPicker:(UIViewController <PhotoManagerDelegate> *)viewController sourceType:(UIImagePickerControllerSourceType)sourceType
 {
     self.delegate = viewController;
-    __weak typeof(self) wself = self;
-    __weak typeof(viewController) wvc = viewController;
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    [alert addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    self.sourceType = sourceType;
+    if (sourceType == UIImagePickerControllerSourceTypeCamera) {
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            [wself openImagePickerController:UIImagePickerControllerSourceTypeCamera viewController:wvc];
+            [self openImagePickerController:UIImagePickerControllerSourceTypeCamera viewController:viewController];
         } else {
-            [wvc makeToast:@"您的设备不支持拍照功能"];
+            [viewController makeToast:@"您的设备不支持拍照功能"];
         }
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"从手机相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [wself openImagePickerController:UIImagePickerControllerSourceTypePhotoLibrary viewController:wvc];
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-    [viewController presentViewController:alert animated:YES completion:nil];
+    } else {
+        [self openImagePickerController:sourceType viewController:viewController];
+    }
 }
 
 //  打开相册或者相机
@@ -59,16 +56,57 @@
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-    [picker dismissViewControllerAnimated:YES completion:^{
-        UIImage *image = info[UIImagePickerControllerOriginalImage];
-        if (_delegate && [_delegate respondsToSelector:@selector(photoManager:didFinishPickImage:)]) {
-            [_delegate photoManager:self didFinishPickImage:image];
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    PhotoViewController *photoVC = [[PhotoViewController alloc] init];
+    photoVC.oldImage = image;
+    photoVC.mode = PhotoMaskViewModeSquare;
+    photoVC.cropWidth = kScreenWidth / 3 * 2;
+    photoVC.cropHeight = kScreenWidth / 3 * 2;
+    photoVC.delegate = self;
+    photoVC.isDark = YES;
+    photoVC.lineColor = [UIColor whiteColor];
+    photoVC.cropTitle = @"照片裁剪";
+    photoVC.btnBackgroundColor = [UIColor clearColor];
+    NSArray *subViews = photoVC.view.subviews;
+    if (subViews.count > 2) {
+        UIView *bottomView = subViews[2];
+        bottomView.backgroundColor = RGB(0x000000, 0.7);
+        bottomView.bounds = CGRectMake(0, 0, kScreenWidth, 64);
+        for (UIView *view in bottomView.subviews) {
+            if ([view isKindOfClass:[UIButton class]]) {
+                UIButton *btn = (UIButton *)view;
+                btn.frame = CGRectMake(kScreenWidth - 90, 0, 80, 64);
+                [btn setTitle:@"使用照片" forState:UIControlStateNormal];
+            } else {
+                [view removeFromSuperview];
+            }
         }
-    }];
+    }
+    [picker pushViewController:photoVC animated:YES];
 }
+
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - PhotoViewControllerDelegate
+- (void)imageCropper:(PhotoViewController *)cropperViewController didFinished:(UIImage *)editedImage
+{
+    [cropperViewController dismissViewControllerAnimated:YES completion:^{
+        if (_delegate && [_delegate respondsToSelector:@selector(photoManager:didFinishPickImage:)]) {
+            [_delegate photoManager:self didFinishPickImage:editedImage];
+        }
+    }];
+}
+
+- (void)imageCropperDidCancel:(PhotoViewController *)cropperViewController
+{
+    if (self.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        [cropperViewController dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        [cropperViewController.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 @end

@@ -139,5 +139,6 @@ typedef NS_ENUM(NSUInteger, UploadPictureState) { // 上传图片状态
 
 // 全局通知
 #define kNCModNickname @"kNCModNickname"
+#define kNCModHead @"kNCModHead"
 
 #endif /* DGInfinityConf_h */

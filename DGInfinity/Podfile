@@ -12,4 +12,5 @@ pod 'UMengAnalytics-NO-IDFA'
 pod 'DZNEmptyDataSet'
 pod 'AliyunOSSiOS'
 pod 'Masonry'
+pod 'LCActionSheet'
 end

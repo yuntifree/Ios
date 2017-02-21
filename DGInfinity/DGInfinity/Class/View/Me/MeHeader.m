@@ -23,7 +23,7 @@
 {
     NSString *url = info[@"headurl"];
     if ([url isKindOfClass:[NSString class]] && url.length) {
-        [_headView yy_setImageWithURL:[NSURL URLWithString:info[@"headurl"]] placeholder:ImageNamed(@"my_ico_pic")];
+        [_headView yy_setImageWithURL:[NSURL URLWithString:info[@"headurl"]] placeholder:ImageNamed(@"my_ico_pic") options:YYWebImageOptionSetImageWithFadeAnimation completion:nil];
     }
     NSString *nickname = info[@"nickname"];
     if ([nickname isKindOfClass:[NSString class]] && nickname.length) {
@@ -39,7 +39,7 @@
 
 - (void)setHead:(NSString *)headurl
 {
-    [_headView yy_setImageWithURL:[NSURL URLWithString:headurl] placeholder:ImageNamed(@"my_ico_pic")];
+    [_headView yy_setImageWithURL:[NSURL URLWithString:headurl] placeholder:ImageNamed(@"my_ico_pic") options:YYWebImageOptionSetImageWithFadeAnimation completion:nil];
 }
 
 - (IBAction)headViewTap:(UITapGestureRecognizer *)sender {

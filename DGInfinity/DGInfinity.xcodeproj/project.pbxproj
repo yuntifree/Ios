@@ -346,6 +346,15 @@
 		9910628B1E269A6D006B3D2A /* MacFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 991062881E269A6D006B3D2A /* MacFinder.m */; };
 		991066401E23838900D1525F /* ico_no@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9910663E1E23838900D1525F /* ico_no@2x.png */; };
 		991066411E23838900D1525F /* ico_no@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9910663F1E23838900D1525F /* ico_no@3x.png */; };
+		9912207D1E5C1633005A6BE9 /* PickHeadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9912207B1E5C1633005A6BE9 /* PickHeadViewController.m */; };
+		9912207E1E5C1633005A6BE9 /* PickHeadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9912207C1E5C1633005A6BE9 /* PickHeadViewController.xib */; };
+		991220821E5C1A63005A6BE9 /* PickHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 991220801E5C1A63005A6BE9 /* PickHeadCell.m */; };
+		991220831E5C1A63005A6BE9 /* PickHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 991220811E5C1A63005A6BE9 /* PickHeadCell.xib */; };
+		9912208A1E5C1DE3005A6BE9 /* PickHeadModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 991220891E5C1DE3005A6BE9 /* PickHeadModel.m */; };
+		9912208E1E5C2367005A6BE9 /* PickHeadSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9912208C1E5C2367005A6BE9 /* PickHeadSectionHeader.m */; };
+		9912208F1E5C2367005A6BE9 /* PickHeadSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9912208D1E5C2367005A6BE9 /* PickHeadSectionHeader.xib */; };
+		991220971E5C3FFB005A6BE9 /* icn_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 991220941E5C3FFB005A6BE9 /* icn_back@2x.png */; };
+		991220981E5C3FFB005A6BE9 /* WLHCropper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 991220961E5C3FFB005A6BE9 /* WLHCropper.a */; };
 		993DE33B1E57007B00D284D9 /* ico_wifi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993DE3391E57007B00D284D9 /* ico_wifi@2x.png */; };
 		993DE33C1E57007B00D284D9 /* ico_wifi@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993DE33A1E57007B00D284D9 /* ico_wifi@3x.png */; };
 		9943A8231E5428AE004AFF64 /* LiveCGI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943A8221E5428AE004AFF64 /* LiveCGI.m */; };
@@ -855,6 +864,20 @@
 		9910628C1E269B28006B3D2A /* if_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_types.h; sourceTree = "<group>"; };
 		9910663E1E23838900D1525F /* ico_no@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_no@2x.png"; sourceTree = "<group>"; };
 		9910663F1E23838900D1525F /* ico_no@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_no@3x.png"; sourceTree = "<group>"; };
+		9912207A1E5C1633005A6BE9 /* PickHeadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickHeadViewController.h; sourceTree = "<group>"; };
+		9912207B1E5C1633005A6BE9 /* PickHeadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickHeadViewController.m; sourceTree = "<group>"; };
+		9912207C1E5C1633005A6BE9 /* PickHeadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickHeadViewController.xib; sourceTree = "<group>"; };
+		9912207F1E5C1A63005A6BE9 /* PickHeadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickHeadCell.h; sourceTree = "<group>"; };
+		991220801E5C1A63005A6BE9 /* PickHeadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickHeadCell.m; sourceTree = "<group>"; };
+		991220811E5C1A63005A6BE9 /* PickHeadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickHeadCell.xib; sourceTree = "<group>"; };
+		991220881E5C1DE3005A6BE9 /* PickHeadModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickHeadModel.h; sourceTree = "<group>"; };
+		991220891E5C1DE3005A6BE9 /* PickHeadModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickHeadModel.m; sourceTree = "<group>"; };
+		9912208B1E5C2367005A6BE9 /* PickHeadSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickHeadSectionHeader.h; sourceTree = "<group>"; };
+		9912208C1E5C2367005A6BE9 /* PickHeadSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickHeadSectionHeader.m; sourceTree = "<group>"; };
+		9912208D1E5C2367005A6BE9 /* PickHeadSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickHeadSectionHeader.xib; sourceTree = "<group>"; };
+		991220941E5C3FFB005A6BE9 /* icn_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_back@2x.png"; sourceTree = "<group>"; };
+		991220951E5C3FFB005A6BE9 /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
+		991220961E5C3FFB005A6BE9 /* WLHCropper.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = WLHCropper.a; sourceTree = "<group>"; };
 		993DE3391E57007B00D284D9 /* ico_wifi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_wifi@2x.png"; sourceTree = "<group>"; };
 		993DE33A1E57007B00D284D9 /* ico_wifi@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_wifi@3x.png"; sourceTree = "<group>"; };
 		9943A8211E5428AE004AFF64 /* LiveCGI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveCGI.h; sourceTree = "<group>"; };
@@ -939,6 +962,7 @@
 				6F4D36591DF54B9C00483A66 /* CoreMotion.framework in Frameworks */,
 				6F4D36521DF54AE000483A66 /* libpingpp+alipay.a in Frameworks */,
 				6F2E65681DC9C47B00AF84BB /* libstdc++.6.0.9.tbd in Frameworks */,
+				991220981E5C3FFB005A6BE9 /* WLHCropper.a in Frameworks */,
 				6F2E65661DC9C47300AF84BB /* CoreTelephony.framework in Frameworks */,
 				9961A3581E0A7B2300870103 /* libcrypto.a in Frameworks */,
 				6F2E65641DC9C46700AF84BB /* libsqlite3.0.tbd in Frameworks */,
@@ -1747,6 +1771,7 @@
 		6F6FDABD1DB4B73500E50D9B /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				991220901E5C3FFB005A6BE9 /* ImageCropper */,
 				991062711E268847006B3D2A /* ConnectedDevice */,
 				9943BFA51E14F1E500531FE4 /* XHScrollMenu */,
 				6F30DE4E1DF7E9A500134B52 /* MiPush */,
@@ -1869,6 +1894,7 @@
 		6F6FDAC31DB4B79300E50D9B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				991220871E5C1DE3005A6BE9 /* Me */,
 				994908DA1E4AFC28006F623F /* Live */,
 				9990CD281E0D217B0002BF63 /* Setting */,
 				6F2F9BEF1DDC709B0055DAF9 /* WiFi */,
@@ -2083,6 +2109,9 @@
 				990D1E9E1E5AF8DC0039ECDD /* AlterNameViewController.h */,
 				990D1E9F1E5AF8DC0039ECDD /* AlterNameViewController.m */,
 				990D1EA01E5AF8DC0039ECDD /* AlterNameViewController.xib */,
+				9912207A1E5C1633005A6BE9 /* PickHeadViewController.h */,
+				9912207B1E5C1633005A6BE9 /* PickHeadViewController.m */,
+				9912207C1E5C1633005A6BE9 /* PickHeadViewController.xib */,
 			);
 			path = Me;
 			sourceTree = "<group>";
@@ -2096,6 +2125,12 @@
 				990D1E541E5AD1640039ECDD /* MeCell.h */,
 				990D1E551E5AD1640039ECDD /* MeCell.m */,
 				990D1E561E5AD1640039ECDD /* MeCell.xib */,
+				9912207F1E5C1A63005A6BE9 /* PickHeadCell.h */,
+				991220801E5C1A63005A6BE9 /* PickHeadCell.m */,
+				991220811E5C1A63005A6BE9 /* PickHeadCell.xib */,
+				9912208B1E5C2367005A6BE9 /* PickHeadSectionHeader.h */,
+				9912208C1E5C2367005A6BE9 /* PickHeadSectionHeader.m */,
+				9912208D1E5C2367005A6BE9 /* PickHeadSectionHeader.xib */,
 			);
 			path = Me;
 			sourceTree = "<group>";
@@ -2164,6 +2199,49 @@
 				9910627B1E268847006B3D2A /* SimplePing.m */,
 			);
 			path = ConnectedDevice;
+			sourceTree = "<group>";
+		};
+		991220871E5C1DE3005A6BE9 /* Me */ = {
+			isa = PBXGroup;
+			children = (
+				991220881E5C1DE3005A6BE9 /* PickHeadModel.h */,
+				991220891E5C1DE3005A6BE9 /* PickHeadModel.m */,
+			);
+			path = Me;
+			sourceTree = "<group>";
+		};
+		991220901E5C3FFB005A6BE9 /* ImageCropper */ = {
+			isa = PBXGroup;
+			children = (
+				991220911E5C3FFB005A6BE9 /* usr */,
+				991220961E5C3FFB005A6BE9 /* WLHCropper.a */,
+			);
+			path = ImageCropper;
+			sourceTree = "<group>";
+		};
+		991220911E5C3FFB005A6BE9 /* usr */ = {
+			isa = PBXGroup;
+			children = (
+				991220921E5C3FFB005A6BE9 /* local */,
+			);
+			path = usr;
+			sourceTree = "<group>";
+		};
+		991220921E5C3FFB005A6BE9 /* local */ = {
+			isa = PBXGroup;
+			children = (
+				991220931E5C3FFB005A6BE9 /* include */,
+			);
+			path = local;
+			sourceTree = "<group>";
+		};
+		991220931E5C3FFB005A6BE9 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				991220941E5C3FFB005A6BE9 /* icn_back@2x.png */,
+				991220951E5C3FFB005A6BE9 /* PhotoViewController.h */,
+			);
+			path = include;
 			sourceTree = "<group>";
 		};
 		9943A8201E5428A1004AFF64 /* Live */ = {
@@ -2444,6 +2522,7 @@
 				6F30798C1DFE9DC100477FE0 /* text_ad@2x.png in Resources */,
 				6F3F32B51DDAFB8F0024095A /* target@3x.png in Resources */,
 				6FF9FA751DEAA01100620A6B /* ico_login_logo@3x.png in Resources */,
+				9912207E1E5C1633005A6BE9 /* PickHeadViewController.xib in Resources */,
 				6F3F329D1DDAF97F0024095A /* wif_qrcode_scanning@3x.png in Resources */,
 				6F2EEAAA1DEDA61D00F5203C /* btn_sure_press@2x.png in Resources */,
 				990D1E961E5AE9580039ECDD /* tab_ico_my_blue@2x.png in Resources */,
@@ -2499,6 +2578,7 @@
 				6F5033EE1DD0706C001EBC97 /* loading_icon_key@3x.png in Resources */,
 				6F3FF8381DE43D59002791DB /* img_Loading2@2x.png in Resources */,
 				6F3F329A1DDAF97F0024095A /* wif_qrcode_fail@2x.png in Resources */,
+				991220971E5C3FFB005A6BE9 /* icn_back@2x.png in Resources */,
 				6F5033E91DD0706C001EBC97 /* img@2x.png in Resources */,
 				6F2F9BC61DDC64230055DAF9 /* WiFiExaminationViewController.xib in Resources */,
 				6F30A1D81DD5AD5100149D73 /* ico_Recommend@3x.png in Resources */,
@@ -2557,6 +2637,7 @@
 				9943BFB61E14F1E500531FE4 /* rightShadow@2x.png in Resources */,
 				6F2F10021DF914D100BBB742 /* ico_code@2x.png in Resources */,
 				6F30798F1DFE9DC100477FE0 /* text_getmore@3x.png in Resources */,
+				991220831E5C1A63005A6BE9 /* PickHeadCell.xib in Resources */,
 				6F2ED0F11DDEB7E1009112C5 /* WiFiWelfareViewController.xib in Resources */,
 				6F3067431DD32B8000FA841E /* btn_wifisetting@2x.png in Resources */,
 				6F30A1D41DD5AD5100149D73 /* buying@3x.png in Resources */,
@@ -2647,6 +2728,7 @@
 				990F44F31E1B8C9000E242C2 /* circle_around@3x.png in Resources */,
 				6F2E57D51DB78B2B00C39F27 /* icon_back@3x.png in Resources */,
 				6F3215961DDD879D00B7D5DA /* Sunny@3x.png in Resources */,
+				9912208F1E5C2367005A6BE9 /* PickHeadSectionHeader.xib in Resources */,
 				6F5033ED1DD0706C001EBC97 /* loading_icon_key@2x.png in Resources */,
 				9990CD391E0D33370002BF63 /* FeedBackViewController.xib in Resources */,
 				6F3F32CB1DDB22180024095A /* cooperation@3x.png in Resources */,
@@ -2711,6 +2793,7 @@
 				9910627C1E268847006B3D2A /* ConnectedDeviceUtils.m in Sources */,
 				6F2F9BBD1DDC224A0055DAF9 /* SearchViewController.m in Sources */,
 				6F3FF83F1DE442EA002791DB /* LaunchGuideViewController.m in Sources */,
+				9912208E1E5C2367005A6BE9 /* PickHeadSectionHeader.m in Sources */,
 				9943BFB91E14F1E500531FE4 /* XHMenu.m in Sources */,
 				6F3185181DB8A25700017D47 /* NewsReportCell.m in Sources */,
 				6FFA16741DB5F9220077E7C3 /* RequestManager.m in Sources */,
@@ -2749,6 +2832,7 @@
 				6F6FDAFB1DB4D5D200E50D9B /* UIView+Frame.m in Sources */,
 				6F6FDACF1DB4BBCA00E50D9B /* DGViewController.m in Sources */,
 				991062801E268847006B3D2A /* SimplePing.m in Sources */,
+				9912207D1E5C1633005A6BE9 /* PickHeadViewController.m in Sources */,
 				6F2E57F41DB792F600C39F27 /* ServiceHeaderView.m in Sources */,
 				6F3067561DD344EF00FA841E /* PulsingHaloLayer.m in Sources */,
 				6F6FDAE21DB4C81100E50D9B /* WifiViewController.m in Sources */,
@@ -2759,6 +2843,7 @@
 				6F2ED0F01DDEB7E1009112C5 /* WiFiWelfareViewController.m in Sources */,
 				6FF5C7EE1DC1DA5B00B1A84A /* NewsReportViewController.m in Sources */,
 				994641EF1E28B90E00C81E53 /* CheckUpdateView.m in Sources */,
+				9912208A1E5C1DE3005A6BE9 /* PickHeadModel.m in Sources */,
 				6F2F9BFA1DDC89230055DAF9 /* WiFiExamSectionHeader.m in Sources */,
 				6F3079841DFE90FC00477FE0 /* DGSplashView.m in Sources */,
 				6F2F10091DF96BCC00BBB742 /* WeakScriptMessageDelegate.m in Sources */,
@@ -2785,6 +2870,7 @@
 				6F31850F1DB86DAB00017D47 /* ServiceCellModel.m in Sources */,
 				9943A8231E5428AE004AFF64 /* LiveCGI.m in Sources */,
 				6F2F9BF21DDC70AB0055DAF9 /* WiFiExamModel.m in Sources */,
+				991220821E5C1A63005A6BE9 /* PickHeadCell.m in Sources */,
 				9943BFBA1E14F1E500531FE4 /* XHMenuButton.m in Sources */,
 				6F02BAA61DCCA90F00C72833 /* UITableView+EmptyData.m in Sources */,
 				990F0FBA1E0BFB630027DFBB /* DGPicker.m in Sources */,
@@ -2957,6 +3043,7 @@
 					"$(PROJECT_DIR)/DGInfinity/Lib/Pingpp/One",
 					"$(PROJECT_DIR)/DGInfinity/Lib/MiPush",
 					"$(PROJECT_DIR)/DGInfinity/Lib/BaiduMapSDK",
+					"$(PROJECT_DIR)/DGInfinity/Lib/ImageCropper",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -3039,6 +3126,7 @@
 					"$(PROJECT_DIR)/DGInfinity/Lib/Pingpp/One",
 					"$(PROJECT_DIR)/DGInfinity/Lib/MiPush",
 					"$(PROJECT_DIR)/DGInfinity/Lib/BaiduMapSDK",
+					"$(PROJECT_DIR)/DGInfinity/Lib/ImageCropper",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",

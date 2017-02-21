@@ -19,6 +19,6 @@
 @interface PhotoManager : NSObject
 
 + (instancetype)shareManager;
-- (void)showPhotoPicker:(UIViewController <PhotoManagerDelegate> *)viewController;
+- (void)showPhotoPicker:(UIViewController <PhotoManagerDelegate> *)viewController sourceType:(UIImagePickerControllerSourceType)sourceType;
 
 @end
