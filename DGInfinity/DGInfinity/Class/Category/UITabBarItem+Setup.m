@@ -15,13 +15,13 @@
 
 - (void)setImage:(NSString *)image selectedImage:(NSString *)selectedImage
 {
-    NSDictionary *textTitleOptionsNormal = [NSDictionary dictionaryWithObjectsAndKeys:FONT_TITLE, NSFontAttributeName, nil];
-    NSDictionary *textTitleOptionsSelected = [NSDictionary dictionaryWithObjectsAndKeys:COLOR_STATUS_SELECTED,  NSForegroundColorAttributeName, FONT_TITLE, NSFontAttributeName, nil];
+    NSDictionary *textTitleOptionsNormal = [NSDictionary dictionaryWithObjectsAndKeys:COLOR(170, 170, 170, 1), NSForegroundColorAttributeName, [UIFont systemFontOfSize:12 weight:UIFontWeightMedium], NSFontAttributeName,nil];
+    NSDictionary *textTitleOptionsSelected = [NSDictionary dictionaryWithObjectsAndKeys:COLOR(45, 82, 124, 1), NSForegroundColorAttributeName, [UIFont systemFontOfSize:12 weight:UIFontWeightMedium], NSFontAttributeName,nil];
     [self setTitleTextAttributes:textTitleOptionsNormal forState:UIControlStateNormal];
     [self setTitleTextAttributes:textTitleOptionsSelected forState:UIControlStateSelected];
     self.image = [UIImage originalImage:image];
     self.selectedImage = [UIImage originalImage:selectedImage];
-    [self setTitlePositionAdjustment:UIOffsetMake(0.0, -3.0)];
+    [self setTitlePositionAdjustment:UIOffsetMake(0.0, -2.0)];
     self.imageInsets = UIEdgeInsetsMake(-2, 0, 2, 0);
 }
 

@@ -13,8 +13,7 @@
 #import "ServiceViewController.h"
 #import "ShoppingViewController.h"
 #import "UITabBarItem+Setup.h"
-#import "WebViewController.h"
-#import "ActivityCGI.h"
+#import "MeViewController.h"
 
 @interface DGTabBarController () <UITabBarControllerDelegate>
 
@@ -37,19 +36,19 @@
         newsNav.tabBarItem.title = @"头条";
         
         DGNavigationViewController *serviceNav = [[DGNavigationViewController alloc] initWithRootViewController:[ServiceViewController new]];
-        [serviceNav.tabBarItem setImage:@"tab_ico_service_gray" selectedImage:@"tab_ico_service_green"];
-        serviceNav.tabBarItem.title = @"服务";
+        [serviceNav.tabBarItem setImage:@"tab_ico_find_gray" selectedImage:@"tab_ico_find_blue"];
+        serviceNav.tabBarItem.title = @"发现";
         
-        DGNavigationViewController *activityNav = [[DGNavigationViewController alloc] initWithRootViewController:[DGViewController new]];
-        [activityNav.tabBarItem setImage:@"tab_ico_buy_gray" selectedImage:@"tab_ico_buy_blue"];
-        activityNav.tabBarItem.title = @"活动";
+        DGNavigationViewController *meNav = [[DGNavigationViewController alloc] initWithRootViewController:[MeViewController new]];
+        [meNav.tabBarItem setImage:@"tab_ico_service_gray" selectedImage:@"tab_ico_my_blue"];
+        meNav.tabBarItem.title = @"我";
         
 #ifdef DEBUG
         DGNavigationViewController *shoppingNav = [[DGNavigationViewController alloc] initWithRootViewController:[ShoppingViewController new]];
         [shoppingNav.tabBarItem setImage:@"tab_ico_buy_gray" selectedImage:@"tab_ico_buy_blue"];
-        self.viewControllers = @[wifiNav, newsNav, serviceNav, activityNav, shoppingNav];
+        self.viewControllers = @[wifiNav, newsNav, serviceNav, meNav, shoppingNav];
 #else
-        self.viewControllers = @[wifiNav, newsNav, serviceNav, activityNav];
+        self.viewControllers = @[wifiNav, newsNav, serviceNav, meNav];
 #endif
     }
     return self;
@@ -93,27 +92,9 @@
     NSInteger index = [tabBarController.viewControllers indexOfObject:viewController];
     if (index == tabBarController.selectedIndex) {
         return NO;
-    } else if (index == 3) { // 活动
-        DGNavigationViewController *nav = (DGNavigationViewController *)tabBarController.selectedViewController;
-        [SVProgressHUD show];
-        [ActivityCGI getActivity:^(DGCgiResult *res) {
-            [SVProgressHUD dismiss];
-            if (E_OK == res._errno) {
-                NSDictionary *data = res.data[@"data"];
-                if ([data isKindOfClass:[NSDictionary class]]) {
-                    WebViewController *vc = [[WebViewController alloc] init];
-                    vc.url = data[@"dst"];
-                    vc.title = data[@"title"];
-                    vc.changeTitle = NO;
-                    [nav pushViewController:vc animated:YES];
-                }
-            } else {
-                [nav.topViewController makeToast:res.desc];
-            }
-        }];
-        return NO;
+    } else {
+        return YES;
     }
-    return YES;
 }
 
 @end

@@ -12,7 +12,6 @@
 #import "SettingHeaderView.h"
 #import "SettingFooterView.h"
 #import "WebViewController.h"
-#import "FeedBackViewController.h"
 
 @interface SettingViewController () <UITableViewDataSource, UITableViewDelegate>
 {
@@ -31,7 +30,6 @@
     if (_dataArray == nil) {
         NSString *totalCost = [NSString stringWithFormat:@"%.1lfM",[YYWebImageManager sharedManager].cache.diskCache.totalCost / 1024.0 / 1024.0];
         _dataArray = @[[SettingModel createWithTitle:@"清理缓存" desc:totalCost],
-                       [SettingModel createWithTitle:@"意见反馈" desc:nil],
                        [SettingModel createWithTitle:@"关于我们" desc:nil]];
     }
     return _dataArray;
@@ -54,7 +52,7 @@
     [_listView registerNib:[UINib nibWithNibName:@"SettingCell" bundle:nil] forCellReuseIdentifier:@"SettingCell"];
     SettingHeaderView *header = [[SettingHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth * 209 / 375)];
     _listView.tableHeaderView = header;
-    CGFloat footerHeight = IPHONE4 ? 80 : kScreenHeight - 64 - header.height - 165;
+    CGFloat footerHeight = kScreenHeight - 64 - header.height - 110;
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, footerHeight)];
     SettingFooterView *footer = [[SettingFooterView alloc] initWithFrame:footerView.bounds];
     __weak typeof(self) wself = self;
@@ -129,12 +127,6 @@
         }
             break;
         case 1:
-        {
-            FeedBackViewController *vc = [[FeedBackViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 2:
         {
             WebViewController *vc = [[WebViewController alloc] init];
             vc.url = AboutmeURL;

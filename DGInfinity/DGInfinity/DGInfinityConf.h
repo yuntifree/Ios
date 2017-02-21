@@ -137,4 +137,7 @@ typedef NS_ENUM(NSUInteger, UploadPictureState) { // 上传图片状态
 #define TestAccount @"12345678910"
 #define TestPassword @"8888"
 
+// 全局通知
+#define kNCModNickname @"kNCModNickname"
+
 #endif /* DGInfinityConf_h */

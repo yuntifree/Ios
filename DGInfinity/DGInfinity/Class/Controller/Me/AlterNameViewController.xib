@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AlterNameViewController">
+            <connections>
+                <outlet property="_textField" destination="lx2-QX-Uxh" id="oTC-OA-6NU"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wqx-Rs-QTI">
+                    <rect key="frame" x="337" y="12" width="26" height="26"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="26" id="APt-xe-QrY"/>
+                        <constraint firstAttribute="height" constant="26" id="frX-UC-3Q9"/>
+                    </constraints>
+                    <state key="normal" image="my_ico_refresh.png"/>
+                    <connections>
+                        <action selector="refreshBtnClick:" destination="-1" eventType="touchUpInside" id="gt6-zc-zad"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="换一个试试" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jX4-Nr-8KD">
+                    <rect key="frame" x="261" y="17" width="72" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.0" green="0.61176470588235299" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12个字以内" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOo-rh-uxe">
+                    <rect key="frame" x="12" y="38" width="62" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="pDz-Ar-eAr"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.70588235294117641" green="0.70588235294117641" blue="0.70588235294117641" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ABX-i1-P6R">
+                    <rect key="frame" x="12" y="59" width="351" height="44"/>
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="lx2-QX-Uxh">
+                            <rect key="frame" x="12" y="0.0" width="327" height="44"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="5mj-dk-ord"/>
+                        <constraint firstItem="lx2-QX-Uxh" firstAttribute="top" secondItem="ABX-i1-P6R" secondAttribute="top" id="GHn-EE-Vza"/>
+                        <constraint firstAttribute="trailing" secondItem="lx2-QX-Uxh" secondAttribute="trailing" constant="12" id="S9P-DI-Jrg"/>
+                        <constraint firstAttribute="bottom" secondItem="lx2-QX-Uxh" secondAttribute="bottom" id="ZVy-HZ-4Ho"/>
+                        <constraint firstItem="lx2-QX-Uxh" firstAttribute="leading" secondItem="ABX-i1-P6R" secondAttribute="leading" constant="12" id="lzY-CL-eXF"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                            <real key="value" value="0.5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderUIColor">
+                            <color key="value" red="0.82745098039999998" green="0.82745098039999998" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CWN-gL-9uc">
+                    <rect key="frame" x="12" y="123" width="351" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Hif-4K-veW"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="确定" backgroundImage="set_btn_input_nor.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" backgroundImage="set_btn_input_pre.png"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="6"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="sureBtnClick:" destination="-1" eventType="touchUpInside" id="Dyi-en-V9V"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="nOo-rh-uxe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="7py-KQ-VSZ"/>
+                <constraint firstItem="nOo-rh-uxe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="38" id="82z-Ae-GzD"/>
+                <constraint firstItem="ABX-i1-P6R" firstAttribute="top" secondItem="nOo-rh-uxe" secondAttribute="bottom" constant="4" id="8zD-aQ-br2"/>
+                <constraint firstItem="Wqx-Rs-QTI" firstAttribute="leading" secondItem="jX4-Nr-8KD" secondAttribute="trailing" constant="4" id="9DF-Xe-FBm"/>
+                <constraint firstAttribute="trailing" secondItem="CWN-gL-9uc" secondAttribute="trailing" constant="12" id="Dka-s3-aQq"/>
+                <constraint firstAttribute="trailing" secondItem="ABX-i1-P6R" secondAttribute="trailing" constant="12" id="IP4-b3-3Fg"/>
+                <constraint firstItem="Wqx-Rs-QTI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="12" id="Jzf-7D-Aom"/>
+                <constraint firstItem="ABX-i1-P6R" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="LXk-Lc-zXK"/>
+                <constraint firstItem="CWN-gL-9uc" firstAttribute="top" secondItem="ABX-i1-P6R" secondAttribute="bottom" constant="20" id="VrZ-wc-NjF"/>
+                <constraint firstAttribute="trailing" secondItem="Wqx-Rs-QTI" secondAttribute="trailing" constant="12" id="cRC-gy-Fki"/>
+                <constraint firstItem="CWN-gL-9uc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="kSK-Cj-vsa"/>
+                <constraint firstItem="Wqx-Rs-QTI" firstAttribute="centerY" secondItem="jX4-Nr-8KD" secondAttribute="centerY" id="mEL-5b-DQu"/>
+            </constraints>
+            <point key="canvasLocation" x="142" y="31"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="my_ico_refresh.png" width="26" height="26"/>
+        <image name="set_btn_input_nor.png" width="143" height="36"/>
+        <image name="set_btn_input_pre.png" width="143" height="36"/>
+    </resources>
+</document>

@@ -263,6 +263,7 @@
                     NSMutableArray *tem = [NSMutableArray array];
                     for (NSDictionary *info in infos) {
                         @autoreleasepool {
+                            if (![info[@"latitude"] doubleValue] && ![info[@"longitude"] doubleValue]) continue;
                             BMKPointAnnotation *annotation = [[BMKPointAnnotation alloc] init];
                             annotation.title = info[@"address"];
                             annotation.coordinate = CLLocationCoordinate2DMake([info[@"latitude"] doubleValue], [info[@"longitude"] doubleValue]);
