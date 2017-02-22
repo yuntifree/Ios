@@ -43,7 +43,7 @@
                         <outletCollection property="gestureRecognizers" destination="CDN-EI-BT5" appends="YES" id="mw9-7c-dEt"/>
                     </connections>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="东莞无限" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKR-FQ-gR7">
+                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="东莞无限" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKR-FQ-gR7">
                     <rect key="frame" x="161" y="86" width="54" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="Hre-fD-ECJ"/>
@@ -51,6 +51,9 @@
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="wag-Jg-f9Q" appends="YES" id="KHP-Fm-nOc"/>
+                    </connections>
                 </label>
                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_write.png" translatesAutoresizingMaskIntoConstraints="NO" id="nRV-Cr-DdL">
                     <rect key="frame" x="179" y="109" width="18" height="18"/>
@@ -112,6 +115,11 @@
         <tapGestureRecognizer id="uCC-c7-cB6">
             <connections>
                 <action selector="writeViewTap:" destination="iN0-l3-epB" id="HGg-Ka-haL"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="wag-Jg-f9Q">
+            <connections>
+                <action selector="writeViewTap:" destination="iN0-l3-epB" id="Yan-ke-ini"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

@@ -58,8 +58,8 @@
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)_listView.collectionViewLayout;
     layout.minimumLineSpacing = 3;
     layout.minimumInteritemSpacing = 0;
-    layout.sectionInset = UIEdgeInsetsMake(3, 0, 0, 0);
-    layout.itemSize = CGSizeMake((kScreenWidth - 3) / 2, (kScreenWidth - 3) / 2 * 190 / 186 + 50);
+    layout.sectionInset = UIEdgeInsetsMake(3, 3, 0, 3);
+    layout.itemSize = CGSizeMake((kScreenWidth - 9) / 2, (kScreenWidth - 9) / 2 + 59);
     _listView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
 }
 

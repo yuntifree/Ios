@@ -82,13 +82,9 @@
 
 - (void)setUpSubviews
 {
-    // button
-    [_okBtn dg_setBackgroundImage:ImageNamed(@"Start button_normal") forState:UIControlStateNormal];
-    [_okBtn dg_setBackgroundImage:ImageNamed(@"Start button_press") forState:UIControlStateHighlighted];
-    
     // textfield
-    NSDictionary *attriDic = @{NSFontAttributeName: [UIFont systemFontOfSize:12 weight:UIFontWeightMedium],
-                              NSForegroundColorAttributeName: COLOR(180, 180, 180, 1)};
+    NSDictionary *attriDic = @{NSFontAttributeName: SystemFont(16),
+                              NSForegroundColorAttributeName: COLOR(200, 200, 200, 1)};
     _phoneField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入手机号" attributes:attriDic];
     _codeField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入验证码" attributes:attriDic];
     
