@@ -20,11 +20,11 @@
 
 // banner 上方链接栏
 static NSString *url[] = {
-    @"http://jump.luna.58.com/i/29Zo",
-    @"http://jump.luna.58.com/i/29Zp",
-    @"http://jump.luna.58.com/i/29Zq",
-    @"http://jump.luna.58.com/i/29Zr",
-    @"http://jump.luna.58.com/i/29Zs"
+    @"https://jumpluna.58.com/i/LsnNyxPa1luDubj",
+    @"https://jumpluna.58.com/i/LsnO0JJ2J9tMcKG",
+    @"https://jumpluna.58.com/i/LsoLkY82J9tMeMj",
+    @"https://jumpluna.58.com/i/LsnODE6a1luDwQM",
+    @"https://jumpluna.58.com/i/LsnPAuIa1luDubj"
 };
 
 // title

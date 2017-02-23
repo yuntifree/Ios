@@ -48,4 +48,13 @@
     return rcm;
 }
 
++ (instancetype)createWithJokeModel:(JokeModel *)model
+{
+    ReportClickModel *rcm = [ReportClickModel new];
+    rcm.id_ = model.id_;
+    rcm.type = model.liked ? RCT_JOKELIKE : RCT_JOKEUNLIKE;
+    rcm.name = @"livedetail";
+    return rcm;
+}
+
 @end

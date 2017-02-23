@@ -28,7 +28,6 @@ NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrco
 @interface WebViewController () <WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler>
 {
     BOOL _isEvaluated; // 处理第一次页面加载完毕，注入JS脚本
-    BOOL _isloadFailed; // 标记是否加载失败
 }
 
 @property (nonatomic, strong) WKWebView *webView;
@@ -114,7 +113,6 @@ NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrco
     self = [super init];
     if (self) {
         _isEvaluated = NO;
-        _isloadFailed = NO;
         _changeTitle = YES;
         self.title = @"东莞无限";
     }
@@ -173,48 +171,6 @@ NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrco
         [self.webView loadRequest:request];
     } else {
         [self makeToast:@"链接无效，加载失败"];
-    }
-}
-
-- (void)handlePageFinishLoad
-{
-    if (_isloadFailed) {
-        _isloadFailed = NO;
-        return;
-    }
-    
-    if (!self.backgroundView.hidden) {
-        self.backgroundView.hidden = YES;
-    }
-    
-    if (_isEvaluated) return;
-    _isEvaluated = YES;
-    switch (_newsType) {
-        case NT_VIDEO:
-        {
-            [self.webView evaluateJavaScript:JavaScriptBackgroundColor completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
-                if (error) {
-                    DDDLog(@"javaScript error: %@",error);
-                }
-            }];
-            [self.webView evaluateJavaScript:JavaScriptClosePage completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
-                if (error) {
-                    DDDLog(@"javaScript error: %@",error);
-                }
-            }];
-        }
-            break;
-        case NT_LIVE:
-        {
-            [self.webView evaluateJavaScript:JavaScriptLiveHidden completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
-                if (error) {
-                    DDDLog(@"javaScript error: %@",error);
-                }
-            }];
-        }
-            break;
-        default:
-            break;
     }
 }
 
@@ -279,7 +235,6 @@ NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrco
             if (progress == 1) {
                 [self.progressView setProgress:progress animated:YES];
                 [self performSelector:@selector(delayToHideProgress) withObject:nil afterDelay:0.5];
-                [self handlePageFinishLoad];
             } else {
                 [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(delayToHideProgress) object:nil];
                 [self.progressView setProgress:progress animated:YES];
@@ -296,6 +251,7 @@ NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrco
 }
 
 #pragma mark - WKNavigationDelegate
+/*
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
     self.currentRequest = navigationAction.request;
@@ -310,15 +266,47 @@ NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrco
 {
     decisionHandler(WKNavigationResponsePolicyAllow);
 }
+ */
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation
 {
+    if (!self.backgroundView.hidden) {
+        self.backgroundView.hidden = YES;
+    }
     
+    if (_isEvaluated) return;
+    _isEvaluated = YES;
+    switch (_newsType) {
+        case NT_VIDEO:
+        {
+            [self.webView evaluateJavaScript:JavaScriptBackgroundColor completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+                if (error) {
+                    DDDLog(@"javaScript error: %@",error);
+                }
+            }];
+            [self.webView evaluateJavaScript:JavaScriptClosePage completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+                if (error) {
+                    DDDLog(@"javaScript error: %@",error);
+                }
+            }];
+        }
+            break;
+        case NT_LIVE:
+        {
+            [self.webView evaluateJavaScript:JavaScriptLiveHidden completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+                if (error) {
+                    DDDLog(@"javaScript error: %@",error);
+                }
+            }];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
 {
-    _isloadFailed = YES;
     if ([[NetworkManager shareManager] currentReachabilityStatus] == NotReachable) {
         if (self.backgroundView.hidden) {
             self.backgroundView.hidden = NO;

@@ -47,8 +47,9 @@ typedef NS_ENUM(NSInteger, MenuCType) {
     MenuCTypeNews = 0,
     MenuCTypeVideo = 1,
     MenuCTypeWeb = 2,
-    MenuCTypeJoke = 3,
-    MenuCTypeLive = 4
+    MenuCTypeLaugh = 3,
+    MenuCTypeLive = 4,
+    MenuCTypeJoke = 5
 };
 
 typedef NS_ENUM(NSInteger, ReportType) {
@@ -62,7 +63,9 @@ typedef NS_ENUM(NSInteger, ReportClickType) {
     RCT_ADSHOW = 2,
     RCT_ADCLICK = 3,
     RCT_SERVICE = 4,
-    RCT_TABCUT = 7
+    RCT_JOKELIKE = 5,
+    RCT_TABCUT = 7,
+    RCT_JOKEUNLIKE = 9
 };
 
 typedef NS_ENUM(NSInteger, WeatherType) {
@@ -95,7 +98,7 @@ typedef NS_ENUM(NSUInteger, UploadPictureState) { // 上传图片状态
 #define ServerURL @"http://120.76.236.185/" // 测试环境
 //#define ServerURL @"https://api.yunxingzh.com/" // 正式环境
 #define IPServerURL @"https://120.25.133.234/" // AC白名单
-#define AppVersion 5 // 客户端内部版本
+#define AppVersion 7 // 客户端内部版本
 
 // WifiSDK
 #define WIFISDK_TIMEOUT  5 * 1000

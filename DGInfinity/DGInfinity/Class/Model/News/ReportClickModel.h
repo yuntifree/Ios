@@ -10,6 +10,7 @@
 #import "NewsReportModel.h"
 #import "NewsVideoModel.h"
 #import "LiveListModel.h"
+#import "JokeModel.h"
 
 @interface ReportClickModel : NSObject
 
@@ -21,5 +22,6 @@
 + (instancetype)createWithReportModel:(NewsReportModel *)model;
 + (instancetype)createWithVideoModel:(NewsVideoModel *)model;
 + (instancetype)createWithLiveListModel:(LiveListModel *)model;
++ (instancetype)createWithJokeModel:(JokeModel *)model;
 
 @end

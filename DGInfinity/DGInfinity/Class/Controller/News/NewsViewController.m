@@ -15,6 +15,7 @@
 #import "WebViewController.h"
 #import "NewsCGI.h"
 #import "LiveListViewController.h"
+#import "JokeListViewController.h"
 
 @interface NewsViewController () <UIScrollViewDelegate, XHScrollMenuDelegate>
 {
@@ -125,6 +126,11 @@
                         vc = [[LiveListViewController alloc] init];
                     }
                         break;
+                    case MenuCTypeJoke:
+                    {
+                        vc = [[JokeListViewController alloc] init];
+                    }
+                        break;
                     default:
                         break;
                 }
@@ -155,7 +161,7 @@
 
 - (BOOL)isSupportedCtype:(NSInteger)ctype
 {
-    return ctype == MenuCTypeNews || ctype == MenuCTypeVideo || ctype == MenuCTypeWeb || ctype == MenuCTypeLive;
+    return ctype == MenuCTypeNews || ctype == MenuCTypeVideo || ctype == MenuCTypeWeb || ctype == MenuCTypeLive || ctype == MenuCTypeJoke;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -274,6 +280,7 @@
         case MenuCTypeNews:
         case MenuCTypeVideo:
         case MenuCTypeLive:
+        case MenuCTypeJoke:
         {
             [self.scrollView setContentOffset:CGPointMake(selectIndex * kScreenWidth, 0) animated:NO];
             [self setScrollsToTopWithTag:selectIndex];
