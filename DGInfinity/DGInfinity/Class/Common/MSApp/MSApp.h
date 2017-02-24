@@ -18,6 +18,8 @@
 @property (nonatomic, copy) NSString *privdata;
 @property (nonatomic, copy) NSString *expiretime;
 @property (nonatomic, copy) NSString *wifipass;
+@property (nonatomic, copy) NSString *headurl;
+@property (nonatomic, copy) NSString *nickname;
 
 // app info
 @property (nonatomic, copy) NSString *appVersion;

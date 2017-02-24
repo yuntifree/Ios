@@ -52,7 +52,6 @@
     _collectionView.dataSource = self;
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)_collectionView.collectionViewLayout;
     layout.minimumLineSpacing = 0;
-    layout.minimumInteritemSpacing = 0;
     layout.itemSize = CGSizeMake(66, 105);
     layout.sectionInset = UIEdgeInsetsMake(8, 56 * (kScreenWidth / 375), 8, 56 * (kScreenWidth / 375));
     

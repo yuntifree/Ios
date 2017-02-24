@@ -60,7 +60,7 @@
 
 - (void)getRankNick
 {
-    [UserInfoCGI getRankNick:^(DGCgiResult *res) {
+    [UserInfoCGI getRandNick:^(DGCgiResult *res) {
         [SVProgressHUD dismiss];
         if (E_OK == res._errno) {
             NSDictionary *data = res.data[@"data"];

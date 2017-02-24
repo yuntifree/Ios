@@ -39,8 +39,6 @@ typedef NS_ENUM(NSInteger, ConnectStatus) {
 @property (nonatomic, weak) id <WiFiMenuViewDelegate> delegate;
 
 - (void)setWeather:(NSDictionary *)weather;
-- (void)setHotNews:(NSString *)title;
-- (void)setDeviceBadge:(NSInteger)badge;
 - (void)setBackViewImage;
 - (void)startAnimation;
 - (void)stopAnimation;

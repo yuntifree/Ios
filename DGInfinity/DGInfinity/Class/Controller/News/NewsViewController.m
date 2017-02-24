@@ -104,7 +104,7 @@
             }
             
             self.scrollMenu.menus = menus;
-            self.scrollMenu.shouldUniformizeMenus = menus.count <= 5;
+            self.scrollMenu.shouldUniformizeMenus = IPHONE6P ? menus.count <= 6 : menus.count <= 5;
             [self.scrollMenu reloadData];
             
             for (int i = 0; i < self.menuModels.count; i++) {

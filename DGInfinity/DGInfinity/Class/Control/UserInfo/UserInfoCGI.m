@@ -22,10 +22,10 @@
     }];
 }
 
-+ (void)getRankNick:(void (^)(DGCgiResult *))complete
++ (void)getRandNick:(void (^)(DGCgiResult *))complete
 {
     NSMutableDictionary *params = [RequestManager httpParams];
-    [[RequestManager shareManager] loadAsync:params cgi:@"get_rank_nick" complete:^(DGCgiResult *res) {
+    [[RequestManager shareManager] loadAsync:params cgi:@"get_rand_nick" complete:^(DGCgiResult *res) {
         if (complete) {
             complete(res);
         }

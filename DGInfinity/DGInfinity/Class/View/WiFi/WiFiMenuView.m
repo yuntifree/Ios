@@ -19,8 +19,6 @@
     __weak IBOutlet UILabel *_statusLbl;
     __weak IBOutlet UILabel *_temperatureLbl;
     __weak IBOutlet UILabel *_weatherLbl;
-    __weak IBOutlet UILabel *_hotLbl;
-    __weak IBOutlet UILabel *_badgeLbl;
     __weak IBOutlet UIImageView *_backView;
     __weak IBOutlet UIImageView *_leftWeatherView;
     __weak IBOutlet UIImageView *_rightWeatherView;
@@ -33,11 +31,6 @@
     UIImageView *_aroundCircle;
     
     // layout constraint
-    __weak IBOutlet NSLayoutConstraint *_badgeLblWidth;
-    __weak IBOutlet NSLayoutConstraint *_examIconLeft;
-    __weak IBOutlet NSLayoutConstraint *_testIconLeft;
-    __weak IBOutlet NSLayoutConstraint *_mapIconLeft;
-    __weak IBOutlet NSLayoutConstraint *_welfareIconLeft;
     __weak IBOutlet NSLayoutConstraint *_connectBtnTop;
     __weak IBOutlet NSLayoutConstraint *_statusLblBottom;
     __weak IBOutlet NSLayoutConstraint *_leftWeatherViewBottom;
@@ -67,15 +60,9 @@
     CGFloat factor = [Tools layoutFactor];
     _connectBtnTop.constant *= factor;
     _statusLblBottom.constant *= factor;
-    _examIconLeft.constant *= factor;
-    _testIconLeft.constant *= factor;
-    _mapIconLeft.constant *= factor;
-    _welfareIconLeft.constant *= factor;
-    _leftWeatherViewBottom.constant *= factor;
-    _rightWeatherViewTop.constant *= factor;
     
     _halo = [PulsingHaloLayer layer];
-    _halo.position = CGPointMake(kScreenWidth / 2, _connectBtnTop.constant + 56.5);
+    _halo.position = CGPointMake(kScreenWidth / 2, _connectBtnTop.constant + 45);
     [self.layer addSublayer:_halo];
     
     _currentType = TimeTypeDay;
@@ -182,19 +169,6 @@
     _leftWeatherView.image = _rightWeatherView.image = ImageNamed(imageName);
 }
 
-- (void)setHotNews:(NSString *)title
-{
-    _hotLbl.text = [NSString stringWithFormat:@"东莞头条：%@",title];
-    _hotLbl.userInteractionEnabled = YES;
-}
-
-- (void)setDeviceBadge:(NSInteger)badge
-{
-    _badgeLbl.text = [NSString stringWithFormat:@"%ld",badge];
-    _badgeLblWidth.constant = [_badgeLbl.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12 weight:UIFontWeightMedium]}].width + 10;
-    _badgeLbl.hidden = !(badge > 0);
-}
-
 - (void)setNotice:(NSString *)notice
 {
     if (notice.length) {
@@ -226,7 +200,7 @@
         [_halo start];
     }
     if (!_leftAnimation) {
-        CGPoint center = CGPointMake(-10 + 83.0 / 2, kScreenWidth / 375 * 317 - 83.0 / 2 - _leftWeatherViewBottom.constant);
+        CGPoint center = CGPointMake(-10 + 83.0 / 2, kScreenWidth / 375 * 291 - 83.0 / 2 - _leftWeatherViewBottom.constant);
         _leftAnimation = [AnimationManager positionAnimationFromPosition:center toPosition:CGPointMake(center.x - 50, center.y) duration:6];
         _leftAnimation.repeatCount = INFINITY;
         _leftAnimation.autoreverses = YES;

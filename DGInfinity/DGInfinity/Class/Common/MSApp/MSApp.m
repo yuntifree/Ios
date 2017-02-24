@@ -23,6 +23,8 @@
 #define KUD_SPLASHDST               @"KUD_SPLASHDST"
 #define KUD_SPLASHTITLE             @"KUD_SPLASHTITLE"
 #define KUD_SPLASHEXPIRE            @"KUD_SPLASHEXPIRE"
+#define KUD_HEADURL                 @"KUD_HEADURL"
+#define KUD_NICKNAME                @"KUD_NICKNAME"
 
 @interface MSApp () <NSURLSessionDelegate>
 
@@ -49,6 +51,8 @@ static MSApp *mSapp = nil;
     mSapp.privdata = nil;
     mSapp.expiretime = nil;
     mSapp.wifipass = nil;
+    mSapp.headurl = nil;
+    mSapp.nickname = nil;
 }
 
 - (instancetype)init
@@ -67,6 +71,8 @@ static MSApp *mSapp = nil;
     NSString *token = data[@"token"];
     NSString *privdata = data[@"privdata"];
     NSString *expiretime = data[@"expiretime"];
+    NSString *headurl = data[@"headurl"];
+    NSString *nickname = data[@"nickname"];
     if (uid) {
         SApp.uid = uid;
     }
@@ -78,6 +84,12 @@ static MSApp *mSapp = nil;
     }
     if (expiretime.length) {
         SApp.expiretime = expiretime;
+    }
+    if ([headurl isKindOfClass:[NSString class]] && headurl.length) {
+        SApp.headurl = headurl;
+    }
+    if ([nickname isKindOfClass:[NSString class]] && nickname.length) {
+        SApp.nickname = nickname;
     }
     [SApp setMiPush];
 }
@@ -288,6 +300,28 @@ static MSApp *mSapp = nil;
 - (NSString *)splashExpire
 {
     return [NSUSERDEFAULTS objectForKey:KUD_SPLASHEXPIRE];
+}
+
+- (void)setHeadurl:(NSString *)headurl
+{
+    [NSUSERDEFAULTS setObject:headurl forKey:KUD_HEADURL];
+    [NSUSERDEFAULTS synchronize];
+}
+
+- (NSString *)headurl
+{
+    return [NSUSERDEFAULTS objectForKey:KUD_HEADURL];
+}
+
+- (void)setNickname:(NSString *)nickname
+{
+    [NSUSERDEFAULTS setObject:nickname forKey:KUD_NICKNAME];
+    [NSUSERDEFAULTS synchronize];
+}
+
+- (NSString *)nickname
+{
+    return [NSUSERDEFAULTS objectForKey:KUD_NICKNAME];
 }
 
 #pragma mark - ReportClick

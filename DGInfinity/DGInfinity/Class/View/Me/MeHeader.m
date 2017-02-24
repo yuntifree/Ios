@@ -21,25 +21,26 @@
 
 - (void)setHeaderValue:(NSDictionary *)info
 {
-    NSString *url = info[@"headurl"];
-    if ([url isKindOfClass:[NSString class]] && url.length) {
-        [_headView yy_setImageWithURL:[NSURL URLWithString:info[@"headurl"]] placeholder:ImageNamed(@"my_ico_pic") options:YYWebImageOptionSetImageWithFadeAnimation completion:nil];
-    }
-    NSString *nickname = info[@"nickname"];
-    if ([nickname isKindOfClass:[NSString class]] && nickname.length) {
-        _nameLbl.text = info[@"nickname"];
-    }
+    [self setHead:info[@"headurl"]];
+    [self setNickname:info[@"nickname"]];
     _descLbl.text = [NSString stringWithFormat:@"您已连接东莞无线%ld次，为您节省流量费用%ld元",[info[@"total"] integerValue], [info[@"save"] integerValue]];
 }
 
 - (void)setNickname:(NSString *)nickname
 {
-    _nameLbl.text = nickname;
+    if ([nickname isKindOfClass:[NSString class]] && nickname.length) {
+        SApp.nickname = nickname;
+        _nameLbl.text = nickname;
+    }
+    
 }
 
 - (void)setHead:(NSString *)headurl
 {
-    [_headView yy_setImageWithURL:[NSURL URLWithString:headurl] placeholder:ImageNamed(@"my_ico_pic") options:YYWebImageOptionSetImageWithFadeAnimation completion:nil];
+    if ([headurl isKindOfClass:[NSString class]] && headurl.length) {
+        SApp.headurl = headurl;
+        [_headView yy_setImageWithURL:[NSURL URLWithString:headurl] placeholder:ImageNamed(@"my_ico_pic") options:YYWebImageOptionSetImageWithFadeAnimation completion:nil];
+    }
 }
 
 - (IBAction)headViewTap:(UITapGestureRecognizer *)sender {

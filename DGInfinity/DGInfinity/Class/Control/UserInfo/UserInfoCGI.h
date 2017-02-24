@@ -18,9 +18,9 @@
            complete:(void(^)(DGCgiResult *res))complete;
 
 /**
- *  get_rank_nick
+ *  get_rand_nick
  */
-+ (void)getRankNick:(void(^)(DGCgiResult *res))complete;
++ (void)getRandNick:(void(^)(DGCgiResult *res))complete;
 
 /**
  *  mod_user_info
