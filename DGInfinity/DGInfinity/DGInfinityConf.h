@@ -65,7 +65,10 @@ typedef NS_ENUM(NSInteger, ReportClickType) {
     RCT_SERVICE = 4,
     RCT_JOKELIKE = 5,
     RCT_TABCUT = 7,
-    RCT_JOKEUNLIKE = 9
+    RCT_JOKEUNLIKE = 9,
+    RCT_BANNERCLICK = 10,
+    RCT_RECOMMENDCLICK = 11,
+    RCT_URBANSERVICE = 12
 };
 
 typedef NS_ENUM(NSInteger, WeatherType) {

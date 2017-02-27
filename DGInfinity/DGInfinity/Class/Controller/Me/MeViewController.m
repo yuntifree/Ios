@@ -124,6 +124,7 @@
     [UserInfoCGI modUserInfo:@"headurl" value:headurl complete:^(DGCgiResult *res) {
         [SVProgressHUD dismiss];
         if (E_OK == res._errno) {
+            SApp.headurl = headurl;
             [[NSNotificationCenter defaultCenter] postNotificationName:kNCModHead object:headurl];
             [self makeToast:@"上传成功"];
         } else {

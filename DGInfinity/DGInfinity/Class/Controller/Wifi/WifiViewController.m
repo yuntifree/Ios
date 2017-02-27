@@ -417,6 +417,7 @@ NetWorkMgrDelegate
             vc.title = @"东莞天气";
             [self.navigationController pushViewController:vc animated:YES];
         }
+            
             break;
         case WiFiMenuTypeConnected:
         {

@@ -108,12 +108,22 @@
 - (void)showInView:(UIView *)view
 {
     [view addSubview:self];
+    
     _alertView.alpha = 0.0f;
-    _alertView.transform = CGAffineTransformMakeScale(1.2, 1.2);
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         _backgroundView.backgroundColor = RGB(0x000000, 0.6);
         _alertView.alpha = 1.0f;
-        _alertView.transform = CGAffineTransformMakeScale(1, 1);
+    } completion:^(BOOL finished) {
+        
+    }];
+    _alertView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+    [UIView animateKeyframesWithDuration:1.0 delay:0 options:0 animations: ^{
+        [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:1 / 2.0 animations: ^{
+            _alertView.transform = CGAffineTransformMakeScale(1.2, 1.2);
+        }];
+        [UIView addKeyframeWithRelativeStartTime:1 / 2.0 relativeDuration:1 / 2.0 animations: ^{
+            _alertView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        }];
     } completion:^(BOOL finished) {
         
     }];

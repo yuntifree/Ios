@@ -29,7 +29,6 @@
 - (void)setNickname:(NSString *)nickname
 {
     if ([nickname isKindOfClass:[NSString class]] && nickname.length) {
-        SApp.nickname = nickname;
         _nameLbl.text = nickname;
     }
     
@@ -38,7 +37,6 @@
 - (void)setHead:(NSString *)headurl
 {
     if ([headurl isKindOfClass:[NSString class]] && headurl.length) {
-        SApp.headurl = headurl;
         [_headView yy_setImageWithURL:[NSURL URLWithString:headurl] placeholder:ImageNamed(@"my_ico_pic") options:YYWebImageOptionSetImageWithFadeAnimation completion:nil];
     }
 }

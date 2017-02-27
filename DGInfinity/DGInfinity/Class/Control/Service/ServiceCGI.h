@@ -15,4 +15,9 @@
  */
 + (void)getServices:(void (^)(DGCgiResult *res))complete;
 
+/**
+ *  get_discovery
+ */
++ (void)getDiscovery:(void(^)(DGCgiResult *res))complete;
+
 @end

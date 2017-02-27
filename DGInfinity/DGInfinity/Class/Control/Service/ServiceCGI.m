@@ -20,4 +20,14 @@
     }];
 }
 
++ (void)getDiscovery:(void (^)(DGCgiResult *))complete
+{
+    NSMutableDictionary *params = [RequestManager httpParams];
+    [[RequestManager shareManager] loadAsync:params cgi:@"get_discovery" complete:^(DGCgiResult *res) {
+        if (complete) {
+            complete(res);
+        }
+    }];
+}
+
 @end

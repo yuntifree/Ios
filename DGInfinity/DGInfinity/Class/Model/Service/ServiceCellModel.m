@@ -21,3 +21,30 @@
 }
 
 @end
+
+@implementation ServiceBannerModel
+
++ (instancetype)createWithInfo:(NSDictionary *)info
+{
+    ServiceBannerModel *model = [ServiceBannerModel new];
+    model.id_ = [info[@"id"] integerValue];
+    model.img = info[@"img"];
+    model.dst = info[@"dst"];
+    return model;
+}
+
+@end
+
+@implementation ServiceCityModel
+
++ (instancetype)createWithInfo:(NSDictionary *)info
+{
+    ServiceCityModel *model = [ServiceCityModel new];
+    model.id_ = [info[@"id"] integerValue];
+    model.img = info[@"img"];
+    model.title = info[@"title"];
+    model.dst = info[@"dst"];
+    return model;
+}
+
+@end

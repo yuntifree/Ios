@@ -104,6 +104,7 @@
     [UserInfoCGI modUserInfo:@"nickname" value:nickname complete:^(DGCgiResult *res) {
         [SVProgressHUD dismiss];
         if (E_OK == res._errno) {
+            SApp.nickname = nickname;
             [[NSNotificationCenter defaultCenter] postNotificationName:kNCModNickname object:nickname];
             [self.navigationController popViewControllerAnimated:YES];
         } else {

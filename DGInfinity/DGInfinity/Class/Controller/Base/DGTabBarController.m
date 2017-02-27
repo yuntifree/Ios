@@ -32,12 +32,12 @@
         wifiNav.tabBarItem.title = @"无线";
         
         DGNavigationViewController *newsNav = [[DGNavigationViewController alloc] initWithRootViewController:[NewsViewController new]];
-        [newsNav.tabBarItem setImage:@"tab_ico_headlines_gray" selectedImage:@"tab_ico_headlines_blue"];
-        newsNav.tabBarItem.title = @"头条";
+        [newsNav.tabBarItem setImage:@"tab_ico_entertainment_gray" selectedImage:@"tab_ico_entertainment_blue"];
+        newsNav.tabBarItem.title = @"娱乐";
         
         DGNavigationViewController *serviceNav = [[DGNavigationViewController alloc] initWithRootViewController:[ServiceViewController new]];
-        [serviceNav.tabBarItem setImage:@"tab_ico_find_gray" selectedImage:@"tab_ico_find_blue"];
-        serviceNav.tabBarItem.title = @"发现";
+        [serviceNav.tabBarItem setImage:@"tab_ico_life_gray" selectedImage:@"tab_ico_life_blue"];
+        serviceNav.tabBarItem.title = @"生活";
         
         DGNavigationViewController *meNav = [[DGNavigationViewController alloc] initWithRootViewController:[MeViewController new]];
         [meNav.tabBarItem setImage:@"tab_ico_service_gray" selectedImage:@"tab_ico_my_blue"];

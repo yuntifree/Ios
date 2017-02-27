@@ -28,6 +28,7 @@
     if ([items isKindOfClass:[NSArray class]]) {
         for (NSDictionary *dict in items) {
             ServiceCellModel *md = [ServiceCellModel createWithInfo:dict];
+            md.type = RCT_SERVICE;
             [model.items addObject:md];
         }
     }
