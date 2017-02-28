@@ -147,13 +147,13 @@ static WFNetworkSpeedDetector * wfnetworkSpeedDetector;
         
         if (_ignoreFirstDataPack) {
             _ignoreFirstDataPack = NO;
-            NSTimeInterval intervalSinceBegin = [currentDate timeIntervalSinceDate:_beginDate];
-            CGFloat realtimeSpeed = _acceptTotalDataLength/(intervalSinceBegin  * 5);//第一次数字一般计算非常大
-            if (self.delegate && [self.delegate respondsToSelector:@selector(didDetectRealtimeSpeed:)]) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.delegate didDetectRealtimeSpeed:realtimeSpeed];
-                });
-            }
+//            NSTimeInterval intervalSinceBegin = [currentDate timeIntervalSinceDate:_beginDate];
+//            CGFloat realtimeSpeed = _acceptTotalDataLength/(intervalSinceBegin  * 5);//第一次数字一般计算非常大
+//            if (self.delegate && [self.delegate respondsToSelector:@selector(didDetectRealtimeSpeed:)]) {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [self.delegate didDetectRealtimeSpeed:realtimeSpeed];
+//                });
+//            }
             _lastDate = currentDate;
         }else{
             

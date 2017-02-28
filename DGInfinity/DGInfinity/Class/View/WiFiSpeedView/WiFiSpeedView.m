@@ -150,7 +150,7 @@ const float EPSINON = 0.00001;
 #pragma mark -
 #pragma mark ======================= WFNetworkSpeedDetectorDelegate 方法 =======================
 /**
- *  计算的平均速度，单位为b
+ *  计算的平均速度，单位为B
  *
  *  @param speed 平均速度
  */
@@ -168,13 +168,20 @@ const float EPSINON = 0.00001;
 }
 
 /**
- *  计算的平均速度，单位为b
+ *  计算的平均速度，单位为B
  *
  *  @param speed 平均速度
  */
 
 - (void)didDetectRealtimeSpeed:(CGFloat)speed
 {
+    NSString *speedStr = [self formatSpeed:speed / 1024];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:speedStr];
+    [attributedString addAttributes:@{NSFontAttributeName: SystemFont(24), NSForegroundColorAttributeName: [UIColor whiteColor]} range:NSMakeRange(0, speedStr.length - 4)];
+    [attributedString addAttributes:@{NSFontAttributeName: SystemFont(14), NSForegroundColorAttributeName: [UIColor whiteColor]} range:NSMakeRange(speedStr.length - 4, 4)];
+    _speedLbl.attributedText = attributedString;
+    CGSize size = [_speedLbl sizeThatFits:CGSizeZero];
+    _speedLbl.frame = CGRectMake(0, _descLbl.y - 10 - size.height, self.width, size.height);
     [self calculateSpeed:speed];
 }
 
@@ -202,7 +209,16 @@ const float EPSINON = 0.00001;
 
 - (void)stopSpeedDetectionAnimation
 {
-    _speedLbl.text = _record.speed;
+    if (_record.speed.length) {
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:_record.speed];
+        [attributedString addAttributes:@{NSFontAttributeName: SystemFont(30), NSForegroundColorAttributeName: COLOR(255, 236, 0, 1)} range:NSMakeRange(0, _record.speed.length - 4)];
+        [attributedString addAttributes:@{NSFontAttributeName: SystemFont(14), NSForegroundColorAttributeName: COLOR(255, 236, 0, 1)} range:NSMakeRange(_record.speed.length - 4, 4)];
+        _speedLbl.attributedText = attributedString;
+        CGSize size = [_speedLbl sizeThatFits:CGSizeZero];
+        _speedLbl.frame = CGRectMake(0, _descLbl.y - 10 - size.height, self.width, size.height);
+    } else {
+        _speedLbl.text = nil;
+    }
     _descLbl.text = _record.desc;
     if (_testBtn.tag == TestBtnStatusTesting && [WFNetworkSpeedDetector sharedSpeedDetector].isSpeedDetecting) {
         _maskLayer.strokeEnd = 0.f;
@@ -228,7 +244,7 @@ const float EPSINON = 0.00001;
 /**
  *  速度格式化和显示的入口方法
  *
- *  @param speed 以b为单位的速度。
+ *  @param speed 以B为单位的速度。
  */
 - (void)calculateSpeed:(CGFloat)speed
 {
@@ -238,7 +254,7 @@ const float EPSINON = 0.00001;
 /**
  *  进行绘制相关的scale上面的刻度显示
  *
- *  @param speed 当前测出的速度，以kb为单位。
+ *  @param speed 当前测出的速度，以B为单位。
  */
 
 - (void)strokeCurrentSpeed:(CGFloat)speed
@@ -252,18 +268,30 @@ const float EPSINON = 0.00001;
 }
 
 //传入的speed的单位是KB
-- (NSString *)formatSpeed:(CGFloat)speedkb
+- (NSString *)formatSpeed:(CGFloat)speedKB
 {
+    /*
     NSString *formatedSpeed = [NSString new];
     
-    if ( speedkb >= 0 && speedkb < 10) {
-        formatedSpeed = [NSString stringWithFormat:@"%.2fK/s", speedkb];
-    }else if (speedkb >= 10 && speedkb < 100){
-        formatedSpeed = [NSString stringWithFormat:@"%.1fK/s", speedkb];
-    }else if (speedkb >= 100 && speedkb < 1024){
-        formatedSpeed = [NSString stringWithFormat:@"%.0fK/s", speedkb];
-    }else if (speedkb >= 1024){
-        formatedSpeed = [NSString stringWithFormat:@"%.2fM/s",speedkb/1024];
+    if ( speedKB >= 0 && speedKB < 10) {
+        formatedSpeed = [NSString stringWithFormat:@"%.2fK/s", speedKB];
+    }else if (speedKB >= 10 && speedKB < 100){
+        formatedSpeed = [NSString stringWithFormat:@"%.1fK/s", speedKB];
+    }else if (speedKB >= 100 && speedKB < 1024){
+        formatedSpeed = [NSString stringWithFormat:@"%.0fK/s", speedKB];
+    }else if (speedKB >= 1024){
+        formatedSpeed = [NSString stringWithFormat:@"%.2fM/s",speedKB/1024];
+    }
+    return formatedSpeed;
+     */
+    CGFloat speedMb = speedKB / 1024 * 8;
+    NSString *formatedSpeed = nil;
+    if (speedMb < 1) {
+        formatedSpeed = [NSString stringWithFormat:@"%.2fMbps", speedMb];
+    } else if (speedMb >= 1 && speedMb < 10) {
+        formatedSpeed = [NSString stringWithFormat:@"%.1fMbps", speedMb];
+    } else {
+        formatedSpeed = [NSString stringWithFormat:@"%.0fMbps", speedMb];
     }
     return formatedSpeed;
 }
@@ -304,6 +332,7 @@ const float EPSINON = 0.00001;
 - (CGFloat)speedToAngle:(CGFloat)speed
 {
     CGFloat angle = 0;
+    /*
     if (speed < 1024) {
         angle = 0;
     } else if (speed < 1024 * 1024 && speed >= 1024) {
@@ -319,27 +348,49 @@ const float EPSINON = 0.00001;
         angle = 180;
     }
     return angle;
+     */
+    CGFloat speedMb = speed / 1024 / 1024 * 8;
+    if (speedMb < 3) {
+        // 0~3M，每0.5M 11.25度
+        angle = speedMb / 0.5 * 11.25;
+    } else if (speedMb >= 3 && speedMb < 5) {
+        // 3~5M，每1M 11.25度
+        angle = (speedMb - 3) * 11.25 + 67.5;
+    } else if (speedMb >= 5 && speedMb < 10) {
+        // 5~10M，每2.5M 11.25度
+        angle = (speedMb - 5) / 2.5 * 11.25 + 90;
+    } else if (speedMb >= 10 && speedMb < 30) {
+        // 10~30M，每5M 11.25度
+        angle = (speedMb - 10) / 5 * 11.25 + 112.5;
+    } else if (speedMb >=30 && speedMb < 50) {
+        // 30~50M，每10M 11.25度
+        angle = (speedMb - 30) / 10 * 11.25 + 157.5;
+    } else {
+        // 超出50M
+        angle = 180;
+    }
+    return angle;
 }
 
 /**
  *  网络速度评价分级
  *
- *  @param speedkb 检测到的数据，以KB为单位。
+ *  @param speedKB 检测到的数据，以KB为单位。
  */
 
-- (void)evalueSpeed:(CGFloat)speedkb
+- (void)evalueSpeed:(CGFloat)speedKB
 {
     NSString *text = @"";
-    if (speedkb <= 0 && speedkb < 20) {
+    if (speedKB <= 0 && speedKB < 20) {
         text = @"聊天";
-    } else if (speedkb < 80) {
+    } else if (speedKB < 80) {
         text = @"聊天、上网";
-    } else if (speedkb < 150) {
+    } else if (speedKB < 150) {
         text = @"聊天、上网、玩游戏";
     } else {
         text = @"聊天、上网、玩游戏、看视频";
     }
-    [self showCurrentSpeed:speedkb];
+    [self showCurrentSpeed:speedKB];
     NSString *desc = [NSString stringWithFormat:@"当前网速适合:%@",text];
     _record.desc = desc;
 }
