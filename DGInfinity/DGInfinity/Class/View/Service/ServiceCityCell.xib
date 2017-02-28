@@ -18,37 +18,35 @@
                 <rect key="frame" x="0.0" y="0.0" width="106" height="109"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4CV-Rf-aQN">
-                        <rect key="frame" x="31" y="0.0" width="44" height="44"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oN6-fL-zEN">
+                        <rect key="frame" x="31.5" y="0.0" width="44" height="73"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="44" id="Wg4-jO-Dd4"/>
-                            <constraint firstAttribute="height" constant="44" id="lHF-Yo-0LW"/>
-                        </constraints>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBm-n6-jKW">
-                        <rect key="frame" x="35" y="53" width="36" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="sm9-lM-2kW"/>
+                            <constraint firstAttribute="width" constant="44" id="Xl3-qO-31t"/>
+                            <constraint firstAttribute="height" constant="73" id="l6h-VJ-JlJ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <state key="normal" title="功能" image="cooperation.png">
+                            <color key="titleColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="btnClick:" destination="Lec-QM-aVc" eventType="touchUpInside" id="0Eo-oL-8EU"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="NBm-n6-jKW" firstAttribute="top" secondItem="4CV-Rf-aQN" secondAttribute="bottom" constant="9" id="T1R-O7-Je9"/>
-                <constraint firstItem="4CV-Rf-aQN" firstAttribute="top" secondItem="Lec-QM-aVc" secondAttribute="top" id="Zr9-oH-4Ot"/>
-                <constraint firstItem="NBm-n6-jKW" firstAttribute="centerX" secondItem="Lec-QM-aVc" secondAttribute="centerX" id="q1p-yP-mUS"/>
-                <constraint firstItem="4CV-Rf-aQN" firstAttribute="centerX" secondItem="Lec-QM-aVc" secondAttribute="centerX" id="rGW-SU-LSD"/>
+                <constraint firstItem="oN6-fL-zEN" firstAttribute="centerX" secondItem="Lec-QM-aVc" secondAttribute="centerX" id="Hqu-dX-jVG"/>
+                <constraint firstItem="oN6-fL-zEN" firstAttribute="top" secondItem="Lec-QM-aVc" secondAttribute="top" id="idG-NL-cDN"/>
             </constraints>
             <size key="customSize" width="106" height="109"/>
             <connections>
-                <outlet property="_iconView" destination="4CV-Rf-aQN" id="9mH-sU-MAk"/>
-                <outlet property="_titleLbl" destination="NBm-n6-jKW" id="P1K-JM-fC1"/>
+                <outlet property="_button" destination="oN6-fL-zEN" id="ltc-JR-rJF"/>
             </connections>
-            <point key="canvasLocation" x="-275" y="125.5"/>
+            <point key="canvasLocation" x="-389" y="144"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="cooperation.png" width="44" height="44"/>
+    </resources>
 </document>

@@ -241,11 +241,11 @@
             reuseIdentifier = @"ServiceCell";
         }
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+        __weak typeof(self) wself = self;
         if (indexPath.row < sModel.items.count) {
             if ([sModel.title isEqualToString:@""] || [sModel.title isEqualToString:@"精品推荐"]) {
                 ServiceBannerCell *bannerCell = (ServiceBannerCell *)cell;
                 [bannerCell setBannerValue:sModel];
-                __weak typeof(self) wself = self;
                 bannerCell.tapBlock = ^ (ServiceBannerModel *model) {
                     ReportClickModel *rcModel = [ReportClickModel new];
                     rcModel.id_ = model.id_;
@@ -255,7 +255,15 @@
                 };
             } else if ([sModel.title isEqualToString:@"城市服务"]) {
                 ServiceCityModel *model = sModel.items[indexPath.row];
-                [((ServiceCityCell *)cell) setTitle:model.title icon:model.img];
+                ServiceCityCell *cityCell = (ServiceCityCell *)cell;
+                [cityCell setCityValue:model];
+                cityCell.btnClick = ^ (ServiceCityModel *model) {
+                    ReportClickModel *rcModel = [ReportClickModel new];
+                    rcModel.id_ = model.id_;
+                    rcModel.type = model.type;
+                    [SApp reportClick:rcModel];
+                    [wself openWebVCWithTitle:model.title url:model.dst];
+                };
             } else {
                 ServiceCellModel *model = sModel.items[indexPath.row];
                 [((ServiceCell *)cell) setTitle:model.title icon:model.icon];
@@ -289,12 +297,7 @@
         if ([sModel.title isEqualToString:@""] || [sModel.title isEqualToString:@"精品推荐"]) {
             
         } else if ([sModel.title isEqualToString:@"城市服务"]) {
-            ServiceCityModel *model = sModel.items[indexPath.row];
-            ReportClickModel *rcModel = [ReportClickModel new];
-            rcModel.id_ = model.id_;
-            rcModel.type = model.type;
-            [SApp reportClick:rcModel];
-            [self openWebVCWithTitle:model.title url:model.dst];
+            
         } else {
             ServiceCellModel *model = sModel.items[indexPath.row];
             ReportClickModel *rcModel = [ReportClickModel new];
@@ -358,7 +361,6 @@
     return CGSizeZero;
 }
 
-/*
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
@@ -375,6 +377,5 @@
     UICollectionViewCell *cell = [colView cellForItemAtIndexPath:indexPath];
     [cell setBackgroundColor:[UIColor whiteColor]];
 }
- */
 
 @end

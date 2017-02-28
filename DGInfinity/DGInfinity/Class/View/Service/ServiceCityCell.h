@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ServiceCellModel.h"
 
 @interface ServiceCityCell : UICollectionViewCell
 
-- (void)setTitle:(NSString *)title icon:(NSString *)icon;
+@property (nonatomic, copy) void(^btnClick)(ServiceCityModel *model);
+
+- (void)setCityValue:(ServiceCityModel *)model;
 
 @end
