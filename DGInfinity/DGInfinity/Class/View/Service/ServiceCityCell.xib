@@ -25,7 +25,7 @@
                             <constraint firstAttribute="height" constant="73" id="l6h-VJ-JlJ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <state key="normal" title="功能" image="cooperation.png">
+                        <state key="normal">
                             <color key="titleColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
@@ -46,7 +46,4 @@
             <point key="canvasLocation" x="-389" y="144"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="cooperation.png" width="44" height="44"/>
-    </resources>
 </document>

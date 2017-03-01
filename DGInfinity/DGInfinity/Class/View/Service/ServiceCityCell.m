@@ -22,14 +22,14 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [_button verticalImageAndTitle:9];
 }
 
 - (void)setCityValue:(ServiceCityModel *)model
 {
     _model = model;
-    [_button yy_setImageWithURL:[NSURL URLWithString:model.img] forState:UIControlStateNormal options:YYWebImageOptionSetImageWithFadeAnimation];
+    [_button yy_setImageWithURL:[NSURL URLWithString:model.img] forState:UIControlStateNormal placeholder:ImageNamed(@"cooperation.png") options:YYWebImageOptionSetImageWithFadeAnimation completion:nil];
     [_button setTitle:model.title forState:UIControlStateNormal];
+    [_button verticalImageAndTitle:9];
 }
 
 - (IBAction)btnClick:(id)sender {
