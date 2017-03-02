@@ -40,7 +40,7 @@
         serviceNav.tabBarItem.title = @"生活";
         
         DGNavigationViewController *meNav = [[DGNavigationViewController alloc] initWithRootViewController:[MeViewController new]];
-        [meNav.tabBarItem setImage:@"tab_ico_service_gray" selectedImage:@"tab_ico_my_blue"];
+        [meNav.tabBarItem setImage:@"tab_ico_my_gray" selectedImage:@"tab_ico_my_blue"];
         meNav.tabBarItem.title = @"我";
         
 #ifdef DEBUG

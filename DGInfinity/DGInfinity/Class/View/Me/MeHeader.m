@@ -37,7 +37,7 @@
 - (void)setHead:(NSString *)headurl
 {
     if ([headurl isKindOfClass:[NSString class]] && headurl.length) {
-        [_headView yy_setImageWithURL:[NSURL URLWithString:headurl] placeholder:ImageNamed(@"my_ico_pic") options:YYWebImageOptionSetImageWithFadeAnimation completion:nil];
+        [_headView yy_setImageWithURL:[NSURL URLWithString:headurl] placeholder:_headView.image options:YYWebImageOptionSetImageWithFadeAnimation completion:nil];
     }
 }
 
