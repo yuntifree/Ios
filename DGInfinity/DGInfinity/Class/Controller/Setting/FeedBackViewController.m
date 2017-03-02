@@ -69,7 +69,8 @@
             }
             _placeholderLbl.hidden = NO;
             _submitBtn.enabled = NO;
-            [self makeToast:@"提交成功，感谢您的反馈"];
+            [self.navigationController popViewControllerAnimated:YES];
+            [[UIApplication sharedApplication].keyWindow.rootViewController makeToast:@"提交成功，感谢您的反馈"];
         } else {
             [self makeToast:res.desc];
         }
