@@ -11,5 +11,6 @@
 @interface UIImage (Fit)
 
 + (UIImage *)originalImage:(NSString *)name;
++ (UIImage *)reSizeImage:(UIImage *)image toSize:(CGSize)reSize;
 
 @end

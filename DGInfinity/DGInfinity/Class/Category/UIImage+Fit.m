@@ -15,4 +15,13 @@
     return [ImageNamed(name) imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 }
 
++ (UIImage *)reSizeImage:(UIImage *)image toSize:(CGSize)reSize
+{
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(reSize.width, reSize.height), NO, [UIScreen mainScreen].scale);
+    [image drawInRect:CGRectMake(0, 0, reSize.width, reSize.height)];
+    UIImage *reSizeImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return reSizeImage;
+}
+
 @end
