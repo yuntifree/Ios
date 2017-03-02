@@ -31,12 +31,25 @@
     _attributeDic = @{NSParagraphStyleAttributeName: style,
                       NSFontAttributeName: SystemFont(14),
                       NSForegroundColorAttributeName: COLOR(50, 50, 50, 1)};
+    
+    [_heartLbl addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(heartLblTap:)]];
+    [_badLbl addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(badLblTap:)]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)heartLblTap:(UITapGestureRecognizer *)tap
+{
+    [self likeBtnClick:_likeBtn];
+}
+
+- (void)badLblTap:(UITapGestureRecognizer *)tap
+{
+    [self unlikeBtnClick:_unlikeBtn];
 }
 
 - (void)setJokeValue:(JokeModel *)model
@@ -58,7 +71,9 @@
         _badLbl.text = [NSString stringWithFormat:@"%ld人",model.bad];
     }
     _likeBtn.selected = model.liked;
+    _heartLbl.textColor = model.liked ? COLOR(255, 122, 47, 1) : COLOR(150, 150, 150, 1);
     _unlikeBtn.selected = model.unliked;
+    _badLbl.textColor = model.unliked ? COLOR(255, 122, 47, 1) : COLOR(150, 150, 150, 1);
 }
 
 - (IBAction)likeBtnClick:(UIButton *)sender {
@@ -70,6 +85,13 @@
     }
     _model.liked = YES;
     _model.heart++;
+    sender.selected = YES;
+    _heartLbl.textColor = COLOR(255, 122, 47, 1);
+    if (_model.heart >= 10000) {
+        _heartLbl.text = [NSString stringWithFormat:@"%ld万人",_model.heart / 10000];
+    } else {
+        _heartLbl.text = [NSString stringWithFormat:@"%ld人",_model.heart];
+    }
     sender.transform = CGAffineTransformIdentity;
     [UIView animateKeyframesWithDuration:0.4 delay:0 options:0 animations: ^{
         [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:1 / 2.0 animations: ^{
@@ -80,7 +102,7 @@
         }];
     } completion:^(BOOL finished) {
         if (_likeOrUnlikeBlock) {
-            _likeOrUnlikeBlock(_model, sender.tag - 100);
+            _likeOrUnlikeBlock(_model);
         }
     }];
 }
@@ -94,6 +116,13 @@
     }
     _model.unliked = YES;
     _model.bad++;
+    sender.selected = YES;
+    _badLbl.textColor = COLOR(255, 122, 47, 1);
+    if (_model.bad >= 10000) {
+        _badLbl.text = [NSString stringWithFormat:@"%ld万人",_model.bad / 10000];
+    } else {
+        _badLbl.text = [NSString stringWithFormat:@"%ld人",_model.bad];
+    }
     sender.transform = CGAffineTransformIdentity;
     [UIView animateKeyframesWithDuration:0.4 delay:0 options:0 animations: ^{
         [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:1 / 2.0 animations: ^{
@@ -104,7 +133,7 @@
         }];
     } completion:^(BOOL finished) {
         if (_likeOrUnlikeBlock) {
-            _likeOrUnlikeBlock(_model, sender.tag - 100);
+            _likeOrUnlikeBlock(_model);
         }
     }];
 }

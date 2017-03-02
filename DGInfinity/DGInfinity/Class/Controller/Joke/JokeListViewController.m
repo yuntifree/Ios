@@ -137,13 +137,10 @@
         [cell setJokeValue:_jokes[indexPath.row]];
     }
     __weak typeof(self) wself = self;
-    __weak typeof(tableView) weakTableView = tableView;
-    __weak typeof(_jokes) weakJokes = _jokes;
     cell.evaluatedBlock = ^ {
         [wself makeToast:@"你已经评价过啦"];
     };
-    cell.likeOrUnlikeBlock = ^(JokeModel *model, NSInteger tag) {
-        [weakTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[weakJokes indexOfObject:model] inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    cell.likeOrUnlikeBlock = ^(JokeModel *model) {
         [SApp reportClick:[ReportClickModel createWithJokeModel:model]];
     };
     return cell;

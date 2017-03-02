@@ -12,7 +12,7 @@
 @interface JokeListCell : UITableViewCell
 
 @property (nonatomic, copy) void(^evaluatedBlock)(void);
-@property (nonatomic, copy) void(^likeOrUnlikeBlock)(JokeModel *model, NSInteger tag);
+@property (nonatomic, copy) void(^likeOrUnlikeBlock)(JokeModel *model);
 
 - (void)setJokeValue:(JokeModel *)model;
 
