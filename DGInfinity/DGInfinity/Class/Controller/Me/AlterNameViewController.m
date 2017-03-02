@@ -51,7 +51,7 @@
         NSString *placeHolder = self.nameSet.anyObject;
         [self.nameSet removeObject:placeHolder];
         _textField.text = nil;
-        _textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeHolder attributes:attriDic];
+        _textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:[placeHolder deleteHeadEndSpace] attributes:attriDic];
     } else {
         [SVProgressHUD show];
         [self getRankNick];
@@ -82,20 +82,18 @@
 }
 
 - (IBAction)sureBtnClick:(id)sender {
-    if (!_textField.text.length && !_textField.attributedPlaceholder.length) {
+    NSString *nickname = [_textField.text deleteHeadEndSpace];
+    if (!nickname.length && !_textField.attributedPlaceholder.length) {
         [self makeToast:@"昵称不能为空"];
         return;
     }
     
-    if (_textField.text.length > 12) {
+    if (nickname.length > 12) {
         [self makeToast:@"昵称的最大长度为12个字符"];
         return;
     }
     
-    NSString *nickname;
-    if (_textField.text.length) {
-        nickname = _textField.text;
-    } else {
+    if (!nickname.length) {
         nickname = _textField.attributedPlaceholder.string;
     }
     
