@@ -27,6 +27,7 @@
     CGFloat _fakeSpeed;
     
     CGFloat _timeInterval;
+    int _count;
 }
 
 //@property (strong, nonatomic) dispatch_queue_t customSpeedDetectorQueue;
@@ -79,6 +80,7 @@ static WFNetworkSpeedDetector * wfnetworkSpeedDetector;
     
     if ([[NetworkManager shareManager] isWiFi] && [[Tools getCurrentSSID] isEqualToString:WIFISDK_SSID]) {
         _timeInterval = (int)(arc4random() % 6) + 5.0;
+        _count = 0;
         _speedDetectTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(pretendSpeedTest) userInfo:nil repeats:YES];
     } else {
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[_detectTargetURLs objectAtIndex:_detectCount]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:5];
@@ -91,22 +93,18 @@ static WFNetworkSpeedDetector * wfnetworkSpeedDetector;
 - (void)pretendSpeedTest
 {
     static CGFloat speed = 4 * 1024 * 1024 / 8;
-    static CGFloat total = 0;
-    static int count = 0;
     CGFloat percent = ((int)(arc4random() % 21 - 10)) * 0.01;
     CGFloat realTimeSpeed = speed * (1 + percent);
-    total += realTimeSpeed;
-    count++;
+    _count++;
     if (self.delegate && [self.delegate respondsToSelector:@selector(didDetectRealtimeSpeed:)]) {
         [self.delegate didDetectRealtimeSpeed:realTimeSpeed];
     }
-    if (count == ceil(_timeInterval / 0.3)) {
+    if (_count == ceil(_timeInterval / 0.3)) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(didFinishDetectWithAverageSpeed:)]) {
-            [self.delegate didFinishDetectWithAverageSpeed:total / count];
+            [self.delegate didFinishDetectWithAverageSpeed:realTimeSpeed];
         }
         [self stopSpeedDetector];
-        total = 0;
-        count = 0;
+        _count = 0;
     }
 }
 
