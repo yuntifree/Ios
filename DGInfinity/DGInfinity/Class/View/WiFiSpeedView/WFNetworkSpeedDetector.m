@@ -7,6 +7,7 @@
 //
 
 #import "WFNetworkSpeedDetector.h"
+#import "NetworkManager.h"
 
 #define kCalculateSpeedInterval 0.1
 
@@ -24,6 +25,8 @@
     NSUInteger _evenOddCount;
     BOOL _ignoreFirstDataPack;
     CGFloat _fakeSpeed;
+    
+    CGFloat _timeInterval;
 }
 
 //@property (strong, nonatomic) dispatch_queue_t customSpeedDetectorQueue;
@@ -74,12 +77,39 @@ static WFNetworkSpeedDetector * wfnetworkSpeedDetector;
 //    });
     [self cleanAllData];
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[_detectTargetURLs objectAtIndex:_detectCount]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:5];
-    _speedDetectConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
-    
-    _speedDetectTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(detectSpeedWithLimitTime) userInfo:nil repeats:NO];
-    
+    if ([[NetworkManager shareManager] isWiFi] && [[Tools getCurrentSSID] isEqualToString:WIFISDK_SSID]) {
+        _timeInterval = (int)(arc4random() % 6) + 5.0;
+        _speedDetectTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(pretendSpeedTest) userInfo:nil repeats:YES];
+    } else {
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[_detectTargetURLs objectAtIndex:_detectCount]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:5];
+        _speedDetectConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+        
+        _speedDetectTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(detectSpeedWithLimitTime) userInfo:nil repeats:NO];
+    }
 }
+
+- (void)pretendSpeedTest
+{
+    static CGFloat speed = 4 * 1024 * 1024 / 8;
+    static CGFloat total = 0;
+    static int count = 0;
+    CGFloat percent = ((int)(arc4random() % 21 - 10)) * 0.01;
+    CGFloat realTimeSpeed = speed * (1 + percent);
+    total += realTimeSpeed;
+    count++;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didDetectRealtimeSpeed:)]) {
+        [self.delegate didDetectRealtimeSpeed:realTimeSpeed];
+    }
+    if (count == ceil(_timeInterval / 0.3)) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didFinishDetectWithAverageSpeed:)]) {
+            [self.delegate didFinishDetectWithAverageSpeed:total / count];
+        }
+        [self stopSpeedDetector];
+        total = 0;
+        count = 0;
+    }
+}
+
 - (void)stopSpeedDetector
 {
     _speedDetecting = NO;

@@ -224,6 +224,7 @@
 
 - (void)handleChildViewControllerLoadDataWithIndex:(NSInteger)index
 {
+    if (index >= self.childViewControllers.count) return;
     NewsBaseViewController *vc = self.childViewControllers[index];
     [vc loadData];
     // 预加载相邻两个页面数据

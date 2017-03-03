@@ -208,6 +208,7 @@
 - (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)aniamted calledDelegate:(BOOL)calledDelgate {
     if (_selectedIndex == selectedIndex)
         return;
+    if (_selectedIndex >= self.menuButtons.count) return;
     UIButton *towardsButton = [self.menuButtons objectAtIndex:selectedIndex];
     towardsButton.selected = YES;
     
