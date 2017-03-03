@@ -23,6 +23,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    _ageLbl.hidden = YES;
 }
 
 - (void)setPickHeadValue:(PickHeadModel *)model

@@ -85,7 +85,7 @@
         } else if (buttonIndex == 2) {
             [wself openPhotoAlbum];
         }
-    } otherButtonTitles:@"我为你推荐", @"从相册选择", nil];
+    } otherButtonTitles:@"经典头像", @"自定义头像", nil];
     [actionSheet show];
 }
 
