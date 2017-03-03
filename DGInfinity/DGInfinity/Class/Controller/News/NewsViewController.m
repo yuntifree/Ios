@@ -150,7 +150,7 @@
                 NSInteger week = [NSDate weekdayFromDate:[NSDate date]];
                 NSString *hourStr = [NSDate stringWithDate:[NSDate date] formatStr:@"HH"];
                 NSInteger hour = [hourStr integerValue];
-                if (week >= 2 && week <= 6 && hour >= 8 && hour <= 20) { // 星期一到星期五 早8晚8
+                if (week >= 2 && week <= 6 && hour >= 8 && hour <= 19) { // 星期一到星期五 早8晚8
                     self.defaultType = NT_REPORT;
                 } else {
                     self.defaultType = NT_LIVE;
