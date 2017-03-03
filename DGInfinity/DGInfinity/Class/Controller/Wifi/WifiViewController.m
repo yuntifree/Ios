@@ -461,6 +461,7 @@ NetWorkMgrDelegate
     UINavigationController *nav = root.viewControllers[1];
     NewsViewController *vc = (NewsViewController *)nav.topViewController;
     vc.defaultType = type;
+    vc.jumped = YES;
     root.selectedIndex = 1;
 }
 

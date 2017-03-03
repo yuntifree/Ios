@@ -37,4 +37,14 @@
     return [dateFormat stringFromDate:date];
 }
 
++ (NSInteger)weekdayFromDate:(NSDate *)inputDate
+{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSTimeZone *timeZone = [[NSTimeZone alloc] initWithName:@"Asia/Shanghai"];
+    [calendar setTimeZone:timeZone];
+    NSCalendarUnit calendarUnit = NSCalendarUnitWeekday;
+    NSDateComponents *theComponents = [calendar components:calendarUnit fromDate:inputDate];
+    return theComponents.weekday;
+}
+
 @end

@@ -80,6 +80,7 @@
     if (self) {
         _lastSelectedIndex = 0;
         _defaultType = 0;
+        _jumped = NO;
     }
     return self;
 }
@@ -94,6 +95,9 @@
             for (NSDictionary *info in infos) {
                 if (![self isSupportedCtype:[info[@"ctype"] integerValue]]) continue;
                 NewsMenuModel *model = [NewsMenuModel createWithInfo:info];
+                if (model.ctype == MenuCTypeLive) {
+                    model.type = NT_LIVE;
+                }
                 [self.menuModels addObject:model];
                 XHMenu *menu = [[XHMenu alloc] init];
                 menu.title = model.title;
@@ -142,6 +146,16 @@
                 }
             }
             self.scrollView.contentSize = CGSizeMake(kScreenWidth * self.scrollView.subviews.count, self.scrollView.height);
+            if (!self.jumped) {
+                NSInteger week = [NSDate weekdayFromDate:[NSDate date]];
+                NSString *hourStr = [NSDate stringWithDate:[NSDate date] formatStr:@"HH"];
+                NSInteger hour = [hourStr integerValue];
+                if (week >= 2 && week <= 6 && hour >= 8 && hour <= 20) { // 星期一到星期五 早8晚8
+                    self.defaultType = NT_REPORT;
+                } else {
+                    self.defaultType = NT_LIVE;
+                }
+            }
             [self setCurrentPage:self.defaultType];
         }
     } else {

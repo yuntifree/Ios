@@ -12,5 +12,6 @@
 
 @property (nonatomic, assign) NSInteger defaultType;
 @property (nonatomic, strong) NSDictionary *data;
+@property (nonatomic, assign) BOOL jumped; // 是否由别的页面跳转而来
 
 @end

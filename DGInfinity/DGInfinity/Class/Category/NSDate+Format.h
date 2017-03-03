@@ -14,5 +14,7 @@
 + (NSDate *)dateWithTimeStr:(NSString *)timeStr;
 + (NSString *)stringWithDate:(NSDate *)date formatStr:(NSString *)format;
 + (NSString *)formatStringWithDate:(NSDate *)date;
+// 1-7 星期日 星期一 星期二 ... 星期六
++ (NSInteger)weekdayFromDate:(NSDate *)inputDate;
 
 @end
