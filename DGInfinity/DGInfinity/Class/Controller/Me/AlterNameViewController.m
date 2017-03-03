@@ -13,6 +13,7 @@
 {
     __weak IBOutlet UITextField *_textField;
     
+    BOOL _hasName;
 }
 
 @property (nonatomic, strong) NSMutableSet *nameSet;
@@ -30,6 +31,15 @@
     return _nameSet;
 }
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        _hasName = NO;
+    }
+    return self;
+}
+
 - (NSString *)title
 {
     return @"昵称";
@@ -39,6 +49,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = RGB(0xf2f2f2, 1);
+    if ([SApp.nickname isKindOfClass:[NSString class]] && SApp.nickname.length) {
+        _textField.text = SApp.nickname;
+        _hasName = YES;
+    }
     
     [self getRankNick];
 }
@@ -50,7 +64,11 @@
                                    NSForegroundColorAttributeName: COLOR(180, 180, 180, 1)};
         NSString *placeHolder = self.nameSet.anyObject;
         [self.nameSet removeObject:placeHolder];
-        _textField.text = nil;
+        if (!_hasName) {
+            _textField.text = nil;
+        } else {
+            _hasName = NO;
+        }
         _textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:[placeHolder deleteHeadEndSpace] attributes:attriDic];
     } else {
         [SVProgressHUD show];
@@ -66,13 +84,14 @@
             NSDictionary *data = res.data[@"data"];
             if ([data isKindOfClass:[NSDictionary class]]) {
                 NSArray *nicknames = data[@"nicknames"];
-                if ([nicknames isKindOfClass:[NSArray class]]) {
+                if ([nicknames isKindOfClass:[NSArray class]] && nicknames.count) {
                     [self.nameSet addObjectsFromArray:nicknames];
                     [self textFieldSetPlaceholder];
                 }
             }
         } else {
             [self makeToast:res.desc];
+            if (_hasName) _hasName = NO;
         }
     }];
 }
