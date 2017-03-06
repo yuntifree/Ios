@@ -65,7 +65,7 @@
     [searchView addSubview:icon];
     
     UILabel *placeholder = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, searchView.width - 80, searchView.height)];
-    placeholder.text = @"搜索或输入网址";
+    placeholder.text = @"点击搜索";
     placeholder.font = SystemFont(14);
     placeholder.textColor = COLOR(252, 252, 252, 0.6);
     [searchView addSubview:placeholder];
