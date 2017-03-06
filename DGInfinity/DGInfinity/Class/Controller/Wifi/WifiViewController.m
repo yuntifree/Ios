@@ -134,6 +134,7 @@ NetWorkMgrDelegate
     [super viewWillAppear:animated];
     [_menuView setBackViewImage];
     [_menuView startAnimation];
+    [_leftUserinfoView refreshUserinfo];
     if ([Tools getTimeType] == TimeTypeNight) {
         [self.navigationController.navigationBar setBarTintColor:RGB(0x236EC5, 1)];
     } else {

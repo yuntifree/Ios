@@ -58,6 +58,21 @@ UIKIT_EXTERN int MetersTwoCoordinate2D(CLLocationCoordinate2D a, CLLocationCoord
 - (BMKUserLocation *)getUserLocation;
 
 /**
+ *  是否安装百度地图
+ */
+- (BOOL)whetherInstallBaiduApp;
+
+/**
+ *  打开百度地图导航
+ */
+- (void)openBaiduMapApp:(LocationInfo *)startLocationInfo endLocationInfo:(LocationInfo *)endLocationInfo;
+
+/**
+ *  打开系统导航
+ */
+- (void)openSystemMapApp:(LocationInfo *)startLocationInfo endLocationInfo:(LocationInfo *)endLocationInfo;
+
+/**
  *  打开地图客户端，默认打开百度地图，如果没有百度地图，则打开系统地图
  */
 - (void)openMapApp:(LocationInfo *)startLocationInfo

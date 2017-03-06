@@ -58,6 +58,7 @@
 - (void)setUpSubViews
 {
     [_tableView registerNib:[UINib nibWithNibName:@"MeCell" bundle:nil] forCellReuseIdentifier:@"MeCell"];
+    _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
     
     UIView *view = [UIView new];
     view.frame = CGRectMake(0, 0, kScreenWidth, 160);
@@ -73,6 +74,11 @@
         AlterNameViewController *vc = [AlterNameViewController new];
         [wself.navigationController pushViewController:vc animated:YES];
     };
+}
+
+- (void)headerRefresh
+{
+    [self getUserInfo];
 }
 
 - (void)onTapHead
@@ -107,9 +113,18 @@
 - (void)getUserInfo
 {
     [UserInfoCGI getUserInfo:SApp.uid complete:^(DGCgiResult *res) {
+        [_tableView.mj_header endRefreshing];
         if (E_OK == res._errno) {
             NSDictionary *data = res.data[@"data"];
             if ([data isKindOfClass:[NSDictionary class]]) {
+                NSString *headurl = data[@"headurl"];
+                if ([headurl isKindOfClass:[NSString class]] && headurl.length) {
+                    SApp.headurl = headurl;
+                }
+                NSString *nickname = data[@"nickname"];
+                if ([nickname isKindOfClass:[NSString class]] && nickname.length) {
+                    SApp.nickname = nickname;
+                }
                 [_header setHeaderValue:data];
             }
         } else {

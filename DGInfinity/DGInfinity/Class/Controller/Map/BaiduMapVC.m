@@ -11,13 +11,19 @@
 #import "BaiduMapSDK.h"
 #import "UIImage+LeftAndRightStretch.h"
 #import "MapCGI.h"
+#import "DetailLocationViewController.h"
 
 /**
  *  自定义BMKActionPaopaoView类
  */
 @interface LocationActionPaopaoView : UIImageView
+{
+    BMKPointAnnotation *_annotation;
+}
 
-- (id)initWithTitle:(NSString *)title distance:(CLLocationDistance)distance;
+@property (nonatomic, copy) void(^navigateBlock)(BMKPointAnnotation *annotation);
+
+- (id)initWithAnnotion:(BMKPointAnnotation *)annotation;
 
 @end
 
@@ -28,10 +34,12 @@
     DDDLog(@"LocationActionPaopaoView Dealloc");
 }
 
-- (id)initWithTitle:(NSString *)title distance:(CLLocationDistance)distance
+- (id)initWithAnnotion:(BMKPointAnnotation *)annotation
 {
     self = [super initWithFrame:CGRectMake(0, 0, 250, 140)];
     if (self) {
+        self.userInteractionEnabled = YES;
+        _annotation = annotation;
         
         UIImageView *wifiView = [[UIImageView alloc] initWithImage:ImageNamed(@"icon_WiFi")];
         wifiView.origin = CGPointMake(17, 16);
@@ -50,8 +58,8 @@
         UILabel *locationLbl = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(locationView.frame), 73, 140, 14)];
         locationLbl.font = SystemFont(10);
         locationLbl.textColor = COLOR(180, 180, 180, 1);
-        if (title.length) {
-            locationLbl.text = title;
+        if (annotation.title.length) {
+            locationLbl.text = annotation.title;
         } else {
             locationLbl.text = @"暂无地理位置信息";
         }
@@ -64,7 +72,7 @@
         UILabel *distanceLbl = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(walkView.frame), 72, self.width - CGRectGetMaxX(walkView.frame), 17)];
         distanceLbl.font = SystemFont(12);
         distanceLbl.textColor = COLOR(0, 166, 249, 1);
-        distanceLbl.text = [self getDistance:distance];
+        distanceLbl.text = [self getDistance:MetersTwoCoordinate2D([[BaiduMapSDK shareBaiduMapSDK] getUserLocation].location.coordinate, annotation.coordinate)];
         [self addSubview:distanceLbl];
         
         UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(4, CGRectGetMaxY(walkView.frame) + 6, self.width - 8, 30)];
@@ -83,8 +91,23 @@
         UIImage *bgImage = ImageNamed(@"btn_Label");
         CGSize size = bgImage.size;
         self.image = [bgImage stretchImageWithFLeftCapWidth:size.width - 10 fTopCapHeight:size.height * 0.5 tempWidth:self.width sLeftCapWidth:10 sTopCapHeight:size.height * 0.5];
+        
+        // 导航
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        button.frame = CGRectMake(180, 30, 50, 30);
+        [button setTitle:@"导航" forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(navigateClick) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:button];
+        
     }
     return self;
+}
+
+- (void)navigateClick
+{
+    if (_navigateBlock) {
+        _navigateBlock(_annotation);
+    }
 }
 
 - (NSString *)getDistance:(CLLocationDistance)distance
@@ -102,40 +125,9 @@
 
 
 /**
- *  自定义PINAnnotationView类
- */
-@interface LocationAnnotationView : BMKAnnotationView
-
-@end
-
-@implementation LocationAnnotationView
-
-- (void)dealloc
-{
-    DDDLog(@"LocationAnnotationView Dealloc");
-}
-
-- (id)initWithAnnotation:(id<BMKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
-    if (self) {
-        self.image = ImageNamed(@"ico_wifi");
-        self.centerOffset = CGPointMake(0, -self.image.size.height / 2);
-        
-        LocationActionPaopaoView *paopaoView = [[LocationActionPaopaoView alloc] initWithTitle:annotation.title distance:MetersTwoCoordinate2D([[BaiduMapSDK shareBaiduMapSDK] getUserLocation].location.coordinate, annotation.coordinate)];
-        BMKActionPaopaoView *paopao = [[BMKActionPaopaoView alloc] initWithCustomView:paopaoView];
-        self.paopaoView = paopao;
-    }
-    return self;
-}
-
-@end
-
-
-/**
  *  BaiduMapVC类
  */
-@interface BaiduMapVC () <BMKMapViewDelegate, BaiduMapSDKDelegate>
+@interface BaiduMapVC () <BMKMapViewDelegate>
 {
     BMKMapView *_mapView;
     BMKUserLocation *_myLocation;
@@ -150,7 +142,6 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [[BaiduMapSDK shareBaiduMapSDK] removeDelegate:self];
     _mapView = nil;
 }
 
@@ -310,8 +301,19 @@
     static NSString *reuseIdentifier = @"LocationIdentifier";
     BMKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:reuseIdentifier];
     if (annotationView == nil) {
-        annotationView = [[LocationAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
+        annotationView = [[BMKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
+        annotationView.image = ImageNamed(@"ico_wifi");
+        annotationView.centerOffset = CGPointMake(0, -annotationView.image.size.height / 2);
     }
+    LocationActionPaopaoView *paopaoView = [[LocationActionPaopaoView alloc] initWithAnnotion:annotation];
+    BMKActionPaopaoView *paopao = [[BMKActionPaopaoView alloc] initWithCustomView:paopaoView];
+    annotationView.paopaoView = paopao;
+    __weak typeof(self) wself = self;
+    paopaoView.navigateBlock = ^ (BMKPointAnnotation *anno) {
+        DetailLocationViewController *vc = [DetailLocationViewController new];
+        vc.annotation = anno;
+        [wself.navigationController pushViewController:vc animated:YES];
+    };
     return annotationView;
 }
 

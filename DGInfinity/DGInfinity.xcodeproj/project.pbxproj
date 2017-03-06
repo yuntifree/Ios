@@ -349,6 +349,8 @@
 		9912208F1E5C2367005A6BE9 /* PickHeadSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9912208D1E5C2367005A6BE9 /* PickHeadSectionHeader.xib */; };
 		991220971E5C3FFB005A6BE9 /* icn_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 991220941E5C3FFB005A6BE9 /* icn_back@2x.png */; };
 		991220981E5C3FFB005A6BE9 /* WLHCropper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 991220961E5C3FFB005A6BE9 /* WLHCropper.a */; };
+		991B7ADA1E6D6155009C5AFC /* DetailLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 991B7AD81E6D6155009C5AFC /* DetailLocationViewController.m */; };
+		991B7ADB1E6D6155009C5AFC /* DetailLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 991B7AD91E6D6155009C5AFC /* DetailLocationViewController.xib */; };
 		993DE33B1E57007B00D284D9 /* ico_wifi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993DE3391E57007B00D284D9 /* ico_wifi@2x.png */; };
 		993DE33C1E57007B00D284D9 /* ico_wifi@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993DE33A1E57007B00D284D9 /* ico_wifi@3x.png */; };
 		994312C11E656E8F002501E7 /* btn_wifi map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 994312BB1E656E8F002501E7 /* btn_wifi map@2x.png */; };
@@ -883,6 +885,9 @@
 		991220941E5C3FFB005A6BE9 /* icn_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_back@2x.png"; sourceTree = "<group>"; };
 		991220951E5C3FFB005A6BE9 /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
 		991220961E5C3FFB005A6BE9 /* WLHCropper.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = WLHCropper.a; sourceTree = "<group>"; };
+		991B7AD71E6D6155009C5AFC /* DetailLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailLocationViewController.h; sourceTree = "<group>"; };
+		991B7AD81E6D6155009C5AFC /* DetailLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailLocationViewController.m; sourceTree = "<group>"; };
+		991B7AD91E6D6155009C5AFC /* DetailLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailLocationViewController.xib; sourceTree = "<group>"; };
 		993DE3391E57007B00D284D9 /* ico_wifi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_wifi@2x.png"; sourceTree = "<group>"; };
 		993DE33A1E57007B00D284D9 /* ico_wifi@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_wifi@3x.png"; sourceTree = "<group>"; };
 		994312BB1E656E8F002501E7 /* btn_wifi map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_wifi map@2x.png"; sourceTree = "<group>"; };
@@ -1950,6 +1955,9 @@
 				6FCA54751DC9EA91000ED52A /* BaiduMapVC.h */,
 				6FCA54761DC9EA91000ED52A /* BaiduMapVC.m */,
 				6FCA54771DC9EA91000ED52A /* BaiduMapVC.xib */,
+				991B7AD71E6D6155009C5AFC /* DetailLocationViewController.h */,
+				991B7AD81E6D6155009C5AFC /* DetailLocationViewController.m */,
+				991B7AD91E6D6155009C5AFC /* DetailLocationViewController.xib */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -2664,6 +2672,7 @@
 				6F3215901DDD879D00B7D5DA /* Cloudy@3x.png in Resources */,
 				990E37ED1E5ED0C100F1E01F /* ico_unlike_gray@3x.png in Resources */,
 				990D1E6D1E5AD5BD0039ECDD /* ico_sex_woman@3x.png in Resources */,
+				991B7ADB1E6D6155009C5AFC /* DetailLocationViewController.xib in Resources */,
 				6F3F32CC1DDB22180024095A /* Housekeeping@2x.png in Resources */,
 				990F44F51E1B8C9000E242C2 /* circle_outside_big@3x.png in Resources */,
 				6F2F66991DE594DF00511818 /* btn_open_press@3x.png in Resources */,
@@ -2917,6 +2926,7 @@
 				6F3AD65B1E028064000A27E0 /* PhotoManager.m in Sources */,
 				6F2F9BC51DDC64230055DAF9 /* WiFiExaminationViewController.m in Sources */,
 				6F307BDB1DCB24ED0015F9EC /* AnimationManager.m in Sources */,
+				991B7ADA1E6D6155009C5AFC /* DetailLocationViewController.m in Sources */,
 				6F6FDAC81DB4B7E700E50D9B /* DGTabBarController.m in Sources */,
 				6F3F32881DDAE7BA0024095A /* WiFiQrcodeFailViewController.m in Sources */,
 				9990CD2E1E0D26BD0002BF63 /* SettingHeaderView.m in Sources */,
