@@ -9,7 +9,6 @@
 #import "MSApp.h"
 #import "AccountCGI.h"
 #import "NewsCGI.h"
-#import "MiPushSDK.h"
 #import "WiFiCGI.h"
 
 #define KUD_UID                     @"KUD_UID"
@@ -45,7 +44,6 @@ static MSApp *mSapp = nil;
 
 + (void)destory
 {
-    [SApp unSetMiPush];
     mSapp.uid = 0;
     mSapp.token = nil;
     mSapp.privdata = nil;
@@ -91,7 +89,6 @@ static MSApp *mSapp = nil;
     if ([nickname isKindOfClass:[NSString class]] && nickname.length) {
         SApp.nickname = nickname;
     }
-    [SApp setMiPush];
 }
 
 + (void)autoLogin
@@ -128,20 +125,6 @@ static MSApp *mSapp = nil;
         [task resume];
         
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER); // 等待信号
-    }
-}
-
-- (void)setMiPush
-{
-    if (SApp.uid) {
-        [MiPushSDK setAlias:[NSString stringWithFormat:@"%ld",SApp.uid]];
-    }
-}
-
-- (void)unSetMiPush
-{
-    if (SApp.uid) {
-        [MiPushSDK unsetAlias:[NSString stringWithFormat:@"%ld",SApp.uid]];
     }
 }
 

@@ -40,8 +40,6 @@
 + (void)setUserInfo:(NSDictionary *)data;
 + (void)autoLogin;
 - (void)reportClick:(ReportClickModel *)model;
-- (void)setMiPush;
-- (void)unSetMiPush;
 - (void)getFlashAD;
 
 @end

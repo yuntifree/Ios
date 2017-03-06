@@ -29,7 +29,6 @@
 #import "UIScrollView+EmptyData.h"
 #import "UIViewController+makeToastOrAlert.h"
 #import "NSString+Format.h"
-#import "Pingpp.h"
 #import <Masonry.h>
 #import "UINavigationBar+ExclusiveTouch.h"
 #import "UserAuthManager.h"

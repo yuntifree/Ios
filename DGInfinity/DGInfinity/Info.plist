@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.4</string>
+	<string>1.0.6</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -40,36 +40,15 @@
 				<string>dgwireless</string>
 			</array>
 		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>wx</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>wx4af6399d8e66df9e</string>
-			</array>
-		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.0</string>
+	<string>1.0.6</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>baidumap</string>
-		<string>weixin</string>
-		<string>wechat</string>
-		<string>alipay</string>
-		<string>alipays</string>
-		<string>mqq</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>MiSDKAppID</key>
-	<string>2882303761517531155</string>
-	<key>MiSDKAppKey</key>
-	<string>5451753150155</string>
-	<key>MiSDKRun</key>
-	<string>online</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -83,10 +62,6 @@
 	<string>使用您的位置来发现附近免费WiFi</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>App需要您的同意,才能访问相册</string>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>network-authentication</string>
-	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

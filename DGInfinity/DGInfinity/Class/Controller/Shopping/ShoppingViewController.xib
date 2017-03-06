@@ -19,44 +19,12 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" tag="1000" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGC-os-923">
-                    <rect key="frame" x="86" y="139" width="30" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="wx"/>
-                    <connections>
-                        <action selector="payTest:" destination="-1" eventType="touchUpInside" id="sxX-sL-yq0"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="1001" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c7f-Ej-wJM">
-                    <rect key="frame" x="227" y="139" width="40" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="alipay"/>
-                    <connections>
-                        <action selector="payTest:" destination="-1" eventType="touchUpInside" id="0Kp-9Q-U8d"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFc-af-dhu">
-                    <rect key="frame" x="227" y="254" width="47" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="upload"/>
-                    <connections>
-                        <action selector="uploadTest:" destination="-1" eventType="touchUpInside" id="tDF-71-HhN"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rpr-M9-owy">
-                    <rect key="frame" x="79" y="254" width="44" height="30"/>
+                    <rect key="frame" x="165" y="245" width="44" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="logout"/>
                     <connections>
                         <action selector="logout:" destination="-1" eventType="touchUpInside" id="5oB-Af-mFd"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLT-W7-Wmp">
-                    <rect key="frame" x="88" y="341" width="42" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="picker"/>
-                    <connections>
-                        <action selector="pickerClick:" destination="-1" eventType="touchUpInside" id="XPG-op-6gw"/>
                     </connections>
                 </button>
             </subviews>
