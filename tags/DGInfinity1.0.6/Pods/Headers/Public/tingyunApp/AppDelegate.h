@@ -1,1 +1,0 @@
-../../../tingyunApp/nbs-newlens-ios-2.4.1/TingyunDemo/TingyunDemo/AppDelegate.h
