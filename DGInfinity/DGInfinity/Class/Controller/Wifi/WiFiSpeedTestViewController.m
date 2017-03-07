@@ -17,14 +17,6 @@
     return @"WiFi测速";
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    if (![[NetworkManager shareManager] isWiFi]) {
-        [self showAlertWithTitle:@"提示" message:@"您当前为非WiFi网络环境，WiFi测速会产生一定的流量消耗" cancelTitle:@"知道了" cancelHandler:nil defaultTitle:nil defaultHandler:nil];
-    }
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

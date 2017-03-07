@@ -25,7 +25,8 @@ typedef NS_ENUM(NSInteger, ConnectStatus) {
     ConnectStatusDefault = -99,
     ConnectStatusNotConnect = 0,
     ConnectStatusConnected = 1,
-    ConnectStatusConnecting = 2
+    ConnectStatusConnecting = 2,
+    ConnectStatusSearch = 3
 };
 
 @protocol WiFiMenuViewDelegate <NSObject>
@@ -39,13 +40,12 @@ typedef NS_ENUM(NSInteger, ConnectStatus) {
 @property (nonatomic, weak) id <WiFiMenuViewDelegate> delegate;
 
 - (void)setWeather:(NSDictionary *)weather;
-- (void)setHotNews:(NSString *)title;
-- (void)setDeviceBadge:(NSInteger)badge;
 - (void)setBackViewImage;
 - (void)startAnimation;
 - (void)stopAnimation;
 - (void)checkConnectBtnStatus;
 - (void)setConnectBtnStatus:(ConnectStatus)status;
 - (void)setNotice:(NSString *)notice;
+- (void)searchNearbyAps;
 
 @end

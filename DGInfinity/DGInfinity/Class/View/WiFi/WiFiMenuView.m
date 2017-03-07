@@ -10,6 +10,8 @@
 #import "PulsingHaloLayer.h"
 #import "AnimationManager.h"
 #import "NetworkManager.h"
+#import "MapCGI.h"
+#import "BaiduMapSDK.h"
 
 #define ROTATIONSSECONDS 5
 
@@ -19,13 +21,13 @@
     __weak IBOutlet UILabel *_statusLbl;
     __weak IBOutlet UILabel *_temperatureLbl;
     __weak IBOutlet UILabel *_weatherLbl;
-    __weak IBOutlet UILabel *_hotLbl;
-    __weak IBOutlet UILabel *_badgeLbl;
     __weak IBOutlet UIImageView *_backView;
     __weak IBOutlet UIImageView *_leftWeatherView;
     __weak IBOutlet UIImageView *_rightWeatherView;
     __weak IBOutlet UIView *_noticeView;
     __weak IBOutlet UILabel *_noticeLbl;
+    __weak IBOutlet UIView *_buttonView;
+    
     
     PulsingHaloLayer *_halo;
     UIImageView *_outsideSmallCircle;
@@ -33,15 +35,9 @@
     UIImageView *_aroundCircle;
     
     // layout constraint
-    __weak IBOutlet NSLayoutConstraint *_badgeLblWidth;
-    __weak IBOutlet NSLayoutConstraint *_examIconLeft;
-    __weak IBOutlet NSLayoutConstraint *_testIconLeft;
-    __weak IBOutlet NSLayoutConstraint *_mapIconLeft;
-    __weak IBOutlet NSLayoutConstraint *_welfareIconLeft;
-    __weak IBOutlet NSLayoutConstraint *_connectBtnTop;
-    __weak IBOutlet NSLayoutConstraint *_statusLblBottom;
     __weak IBOutlet NSLayoutConstraint *_leftWeatherViewBottom;
     __weak IBOutlet NSLayoutConstraint *_rightWeatherViewTop;
+    __weak IBOutlet NSLayoutConstraint *_statusLblTop;
     
     TimeType _currentType;
     ENV_STATUS _currentStatus;
@@ -65,17 +61,12 @@
     [super awakeFromNib];
     
     CGFloat factor = [Tools layoutFactor];
-    _connectBtnTop.constant *= factor;
-    _statusLblBottom.constant *= factor;
-    _examIconLeft.constant *= factor;
-    _testIconLeft.constant *= factor;
-    _mapIconLeft.constant *= factor;
-    _welfareIconLeft.constant *= factor;
     _leftWeatherViewBottom.constant *= factor;
     _rightWeatherViewTop.constant *= factor;
+    _statusLblTop.constant = _statusLblTop.constant * factor + (factor >= 1 ? : -10);
     
     _halo = [PulsingHaloLayer layer];
-    _halo.position = CGPointMake(kScreenWidth / 2, _connectBtnTop.constant + 56.5);
+    _halo.position = CGPointMake(kScreenWidth / 2, kScreenWidth / 375 * 244 / 2);
     [self.layer addSublayer:_halo];
     
     _currentType = TimeTypeDay;
@@ -97,7 +88,7 @@
     _aroundCircle.center = _halo.position;
     [self addSubview:_aroundCircle];
     
-    [self setConnectBtnStatus:ConnectStatusNotConnect];
+    [self setConnectBtnStatus:ConnectStatusSearch];
     [self checkConnectBtnStatus];
 }
 
@@ -105,33 +96,28 @@
 {
     if (_connectStatus == status) return;
     _connectStatus = status;
-    _outsideBigCircle.hidden = _outsideSmallCircle.hidden = _connectStatus == ConnectStatusNotConnect;
-    _aroundCircle.hidden = _connectStatus != ConnectStatusConnecting;
-    [_connectBtn setImage:(status == ConnectStatusConnected ? ImageNamed(@"Connect") : nil) forState:UIControlStateNormal];
+    _connectBtn.hidden = _connectStatus == ConnectStatusConnected;
+    _outsideBigCircle.hidden = _outsideSmallCircle.hidden = _aroundCircle.hidden = _connectStatus != ConnectStatusConnecting;
+    _buttonView.hidden = _connectStatus != ConnectStatusConnected;
     [_aroundCircle.layer removeAnimationForKey:@"rotationAnimation"];
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     if (status == ConnectStatusNotConnect) {
         _connectBtn.userInteractionEnabled = YES;
-        _connectBtn.selected = NO;
         [_connectBtn setTitle:@"一键连接" forState:UIControlStateNormal];
         [_connectBtn setAttributedTitle:nil forState:UIControlStateNormal];
-        _statusLbl.text = @"发现东莞无限免费WiFi";
+        _statusLbl.text = @"检测到免费WiFi热点";
         [_halo start];
-        [_aroundCircle.layer removeAnimationForKey:@"rotationAnimation"];
     } else if (status == ConnectStatusConnected) {
         _connectBtn.userInteractionEnabled = YES;
         _currentStatus = ENV_LOGIN;
-        _connectBtn.selected = YES;
         [_connectBtn setTitle:@"" forState:UIControlStateNormal];
         [_connectBtn setAttributedTitle:nil forState:UIControlStateNormal];
-        _statusLbl.text = @"已连接东莞无限免费WiFi";
+        _statusLbl.text = [NSString stringWithFormat:@"已连接%@",[Tools getCurrentSSID]];
         [_halo stop];
-        [_aroundCircle.layer removeAnimationForKey:@"rotationAnimation"];
-    } else {
+    } else if (status == ConnectStatusConnecting) {
         _connectBtn.userInteractionEnabled = NO;
-        _connectBtn.selected = NO;
         [_connectBtn setTitle:@"" forState:UIControlStateNormal];
-        _statusLbl.text = @"正在连接东莞无限免费WiFi";
+        _statusLbl.text = @"正在连接免费WiFi";
         [_halo stop];
         if (!_aroundAnimation) {
             _aroundAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
@@ -143,6 +129,12 @@
         }
         [_aroundCircle.layer addAnimation:_aroundAnimation forKey:@"rotationAnimation"];
         [self countDownLoadingSeconds:@(ROTATIONSSECONDS)];
+    } else {
+        _connectBtn.userInteractionEnabled = YES;
+        [_connectBtn setTitle:@"找WiFi" forState:UIControlStateNormal];
+        [_connectBtn setAttributedTitle:nil forState:UIControlStateNormal];
+        _statusLbl.text = @"寻找附近免费WiFi";
+        [_halo start];
     }
 }
 
@@ -182,19 +174,6 @@
     _leftWeatherView.image = _rightWeatherView.image = ImageNamed(imageName);
 }
 
-- (void)setHotNews:(NSString *)title
-{
-    _hotLbl.text = [NSString stringWithFormat:@"东莞头条：%@",title];
-    _hotLbl.userInteractionEnabled = YES;
-}
-
-- (void)setDeviceBadge:(NSInteger)badge
-{
-    _badgeLbl.text = [NSString stringWithFormat:@"%ld",badge];
-    _badgeLblWidth.constant = [_badgeLbl.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12 weight:UIFontWeightMedium]}].width + 10;
-    _badgeLbl.hidden = !(badge > 0);
-}
-
 - (void)setNotice:(NSString *)notice
 {
     if (notice.length) {
@@ -222,11 +201,11 @@
 
 - (void)startAnimation
 {
-    if (_connectStatus == ConnectStatusNotConnect) {
+    if (_connectStatus == ConnectStatusNotConnect || _connectStatus == ConnectStatusSearch) {
         [_halo start];
     }
     if (!_leftAnimation) {
-        CGPoint center = CGPointMake(-10 + 83.0 / 2, kScreenWidth / 375 * 317 - 83.0 / 2 - _leftWeatherViewBottom.constant);
+        CGPoint center = CGPointMake(-10 + 83.0 / 2, kScreenWidth / 375 * 244 - 83.0 / 2 - _leftWeatherViewBottom.constant);
         _leftAnimation = [AnimationManager positionAnimationFromPosition:center toPosition:CGPointMake(center.x - 50, center.y) duration:6];
         _leftAnimation.repeatCount = INFINITY;
         _leftAnimation.autoreverses = YES;
@@ -243,7 +222,7 @@
 
 - (void)stopAnimation
 {
-    if (_connectStatus == ConnectStatusNotConnect) {
+    if (_connectStatus == ConnectStatusNotConnect || _connectStatus == ConnectStatusSearch) {
         [_halo stop];
     }
     [_leftWeatherView.layer removeAnimationForKey:@"weather"];
@@ -264,21 +243,67 @@
                     [self setConnectBtnStatus:ConnectStatusConnected];
                 } else {
                     // 别的网络（WiFi或者4G）
-//                    if ([[NetworkManager shareManager] isWiFi]) {
-//                        [self setConnectBtnStatus:ConnectStatusConnected];
-//                    } else {
-//                        [self setConnectBtnStatus:ConnectStatusNotConnect];
-//                    }
-                    [self setConnectBtnStatus:ConnectStatusNotConnect];
+                    if ([[NetworkManager shareManager] isWiFi]) {
+                        [self setConnectBtnStatus:ConnectStatusConnected];
+                    } else {
+                        [self searchNearbyAps];
+                    }
                 }
-            } else {
+            } else if (status == ENV_NOT_LOGIN) {
                 [self setConnectBtnStatus:ConnectStatusNotConnect];
+            } else {
+                [self setConnectBtnStatus:ConnectStatusSearch];
             }
         }
     }];
 #else
     [self setConnectBtnStatus:ConnectStatusNotConnect];
 #endif
+}
+
+- (void)searchNearbyAps
+{
+    if (![[BaiduMapSDK shareBaiduMapSDK] locationServicesEnabled]) {
+        [self setConnectBtnStatus:ConnectStatusSearch];
+    } else {
+        CLLocationCoordinate2D coordinate = [[BaiduMapSDK shareBaiduMapSDK] getUserLocation].location.coordinate;
+        [MapCGI getNearbyAps:coordinate.longitude latitude:coordinate.latitude complete:^(DGCgiResult *res) {
+            if (E_OK == res._errno) {
+                NSDictionary *data = res.data[@"data"];
+                if ([data isKindOfClass:[NSDictionary class]]) {
+                    NSArray *infos = data[@"infos"];
+                    if ([infos isKindOfClass:[NSArray class]]) {
+                        BOOL exist = NO;
+                        for (NSDictionary *info in infos) {
+                            if (MetersTwoCoordinate2D(coordinate, CLLocationCoordinate2DMake([info[@"latitude"] doubleValue], [info[@"longitude"] doubleValue])) <= 20) {
+                                exist = YES;
+                                break;
+                            }
+                        }
+                        exist ? [self setConnectBtnStatus:ConnectStatusNotConnect] : [self setConnectBtnStatus:ConnectStatusSearch];
+                    } else {
+                        [self setConnectBtnStatus:ConnectStatusSearch];
+                    }
+                } else {
+                    [self setConnectBtnStatus:ConnectStatusSearch];
+                }
+            } else {
+                [self setConnectBtnStatus:ConnectStatusSearch];
+            }
+        }];
+    }
+}
+
+- (IBAction)testBtnClick:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(WiFiMenuViewClick:)]) {
+        [_delegate WiFiMenuViewClick:sender.tag];
+    }
+}
+
+- (IBAction)shareBtnClick:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(WiFiMenuViewClick:)]) {
+        [_delegate WiFiMenuViewClick:sender.tag];
+    }
 }
 
 - (IBAction)menuViewTap:(UITapGestureRecognizer *)sender {
@@ -289,10 +314,10 @@
 
 - (IBAction)connectBtnClick:(UIButton *)sender {
     if (_delegate && [_delegate respondsToSelector:@selector(WiFiMenuViewClick:)]) {
-        if (_connectStatus == ConnectStatusConnected) {
-            [_delegate WiFiMenuViewClick:WiFiMenuTypeConnected];
-        } else {
+        if (_connectStatus == ConnectStatusNotConnect) {
             [_delegate WiFiMenuViewClick:WiFiMenuTypeConnect];
+        } else {
+            [_delegate WiFiMenuViewClick:WiFiMenuTypeMap];
         }
     }
 }
