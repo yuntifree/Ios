@@ -34,6 +34,7 @@
         _headView.layer.masksToBounds = YES;
         _headView.layer.cornerRadius = 13;
         _headView.contentMode = UIViewContentModeScaleAspectFill;
+        _headView.image = ImageNamed(@"my_ico_pic");
         [self addSubview:_headView];
         
         _nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(40, 6, 60, 14)];
@@ -49,7 +50,7 @@
 - (void)refreshUserinfo
 {
     if ([SApp.headurl isKindOfClass:[NSString class]] && SApp.headurl.length) {
-        [_headView yy_setImageWithURL:[NSURL URLWithString:SApp.headurl] placeholder:ImageNamed(@"my_ico_pic") options:YYWebImageOptionSetImageWithFadeAnimation completion:nil];
+        [_headView yy_setImageWithURL:[NSURL URLWithString:SApp.headurl] placeholder:_headView.image options:YYWebImageOptionSetImageWithFadeAnimation completion:nil];
     } else {
         _headView.image = ImageNamed(@"my_ico_pic");
     }
