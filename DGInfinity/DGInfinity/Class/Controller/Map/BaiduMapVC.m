@@ -133,6 +133,7 @@
     BMKUserLocation *_myLocation;
     
     NSMutableSet *_annotitaionSet;
+    BOOL _isLoad;
 }
 
 @end
@@ -157,6 +158,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
         _annotitaionSet = [NSMutableSet setWithCapacity:20];
         _myLocation = [[BaiduMapSDK shareBaiduMapSDK] getUserLocation];
+        _isLoad = NO;
     }
     return self;
 }
@@ -176,7 +178,10 @@
     [super viewWillAppear:animated];
     [_mapView viewWillAppear];
     _mapView.delegate = self;
-    [SVProgressHUD showWithStatus:@"正在查找免费WiFi"];
+    if (!_isLoad) {
+        [SVProgressHUD showWithStatus:@"正在查找免费WiFi"];
+        _isLoad = YES;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated

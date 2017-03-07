@@ -41,8 +41,6 @@
         _nameLbl.textColor = [UIColor whiteColor];
         [self addSubview:_nameLbl];
         
-        [self refreshUserinfo];
-        
         [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap)]];
     }
     return self;
