@@ -15,7 +15,7 @@
 
 #define ROTATIONSSECONDS 5
 
-@interface WiFiMenuView () <CAAnimationDelegate>
+@interface WiFiMenuView () <CAAnimationDelegate, BaiduMapSDKDelegate>
 {
     __weak IBOutlet UIButton *_connectBtn;
     __weak IBOutlet UILabel *_statusLbl;
@@ -44,13 +44,17 @@
     CAAnimation *_leftAnimation;
     CAAnimation *_rightAnimation;
     CABasicAnimation *_aroundAnimation;
+    
+    NSArray *_annotations;
 }
+
 @end
 
 @implementation WiFiMenuView
 
 - (void)dealloc
 {
+    [[BaiduMapSDK shareBaiduMapSDK] removeDelegate:self];
     _leftAnimation = nil;
     _rightAnimation = nil;
 }
@@ -58,6 +62,8 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    
+    [[BaiduMapSDK shareBaiduMapSDK] addDelegate:self];
     
     CGFloat factor = [Tools layoutFactor];
     _leftWeatherViewBottom.constant *= factor;
@@ -268,31 +274,41 @@
         [self setConnectBtnStatus:ConnectStatusSearch];
     } else {
         CLLocationCoordinate2D coordinate = [[BaiduMapSDK shareBaiduMapSDK] getUserLocation].location.coordinate;
-        [MapCGI getNearbyAps:coordinate.longitude latitude:coordinate.latitude complete:^(DGCgiResult *res) {
-            if (E_OK == res._errno) {
-                NSDictionary *data = res.data[@"data"];
-                if ([data isKindOfClass:[NSDictionary class]]) {
-                    NSArray *infos = data[@"infos"];
-                    if ([infos isKindOfClass:[NSArray class]] && infos.count) {
-                        BOOL exist = NO;
-                        for (NSDictionary *info in infos) {
-                            if (MetersTwoCoordinate2D(coordinate, CLLocationCoordinate2DMake([info[@"latitude"] doubleValue], [info[@"longitude"] doubleValue])) <= 20) {
-                                exist = YES;
-                                break;
-                            }
+        if (_annotations.count) {
+            [self judgeNearbyAps:coordinate];
+        } else {
+            [MapCGI getNearbyAps:coordinate.longitude latitude:coordinate.latitude complete:^(DGCgiResult *res) {
+                if (E_OK == res._errno) {
+                    NSDictionary *data = res.data[@"data"];
+                    if ([data isKindOfClass:[NSDictionary class]]) {
+                        NSArray *infos = data[@"infos"];
+                        if ([infos isKindOfClass:[NSArray class]] && infos.count) {
+                            _annotations = infos;
+                            [self judgeNearbyAps:coordinate];
+                        } else {
+                            [self setConnectBtnStatus:ConnectStatusSearch];
                         }
-                        exist ? [self setConnectBtnStatus:ConnectStatusNotConnect] : [self setConnectBtnStatus:ConnectStatusSearch];
                     } else {
                         [self setConnectBtnStatus:ConnectStatusSearch];
                     }
                 } else {
                     [self setConnectBtnStatus:ConnectStatusSearch];
                 }
-            } else {
-                [self setConnectBtnStatus:ConnectStatusSearch];
-            }
-        }];
+            }];
+        }
     }
+}
+
+- (void)judgeNearbyAps:(CLLocationCoordinate2D)coordinate
+{
+    BOOL exist = NO;
+    for (NSDictionary *info in _annotations) {
+        if (MetersTwoCoordinate2D(coordinate, CLLocationCoordinate2DMake([info[@"latitude"] doubleValue], [info[@"longitude"] doubleValue])) <= 20) {
+            exist = YES;
+            break;
+        }
+    }
+    exist ? [self setConnectBtnStatus:ConnectStatusNotConnect] : [self setConnectBtnStatus:ConnectStatusSearch];
 }
 
 - (IBAction)testBtnClick:(UIButton *)sender {
@@ -337,6 +353,12 @@
     if (anim == [_aroundCircle.layer animationForKey:@"rotationAnimation"]) {
         [self setConnectBtnStatus:ConnectStatusConnected];
     }
+}
+
+#pragma mark - BaiduMapSDKDelegate
+- (void)didUpdateUserLocation:(BMKUserLocation *)userLocation
+{
+    [self checkConnectBtnStatus];
 }
 
 @end
