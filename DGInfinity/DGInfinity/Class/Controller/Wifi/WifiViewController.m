@@ -68,8 +68,7 @@ NetWorkMgrDelegate
         _weatherUrl = WeatherURL;
         [[NetworkManager shareManager] addNetworkObserver:self];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserInfo) name:kNCModHead object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserInfo) name:kNCModNickname object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserInfo) name:kNCRefreshUserInfo object:nil];
     }
     return self;
 }

@@ -94,7 +94,7 @@
         [SVProgressHUD dismiss];
         if (E_OK == res._errno) {
             SApp.headurl = headurl;
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNCModHead object:headurl];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNCRefreshUserInfo object:headurl];
             [self.navigationController popViewControllerAnimated:YES];
         } else {
             [self makeToast:res.desc];

@@ -122,7 +122,7 @@
         [SVProgressHUD dismiss];
         if (E_OK == res._errno) {
             SApp.nickname = nickname;
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNCModNickname object:nickname];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNCRefreshUserInfo object:nickname];
             [self.navigationController popViewControllerAnimated:YES];
         } else {
             [self makeToast:res.desc];

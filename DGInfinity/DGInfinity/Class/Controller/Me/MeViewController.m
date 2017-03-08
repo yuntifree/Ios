@@ -36,10 +36,14 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(modNickname:) name:kNCModNickname object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(modHead:) name:kNCModHead object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserInfo) name:kNCRefreshUserInfo object:nil];
     }
     return self;
+}
+
+- (void)refreshUserInfo
+{
+    [_header refreshUserinfo];
 }
 
 - (NSString *)title
@@ -100,16 +104,6 @@
     [[PhotoManager shareManager] showPhotoPicker:self sourceType:UIImagePickerControllerSourceTypePhotoLibrary];
 }
 
-- (void)modNickname:(NSNotification *)notification
-{
-    [_header setNickname:notification.object];
-}
-
-- (void)modHead:(NSNotification *)notification
-{
-    [_header setHead:notification.object];
-}
-
 - (void)getUserInfo
 {
     [UserInfoCGI getUserInfo:SApp.uid complete:^(DGCgiResult *res) {
@@ -126,6 +120,7 @@
                     SApp.nickname = nickname;
                 }
                 [_header setHeaderValue:data];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNCRefreshUserInfo object:nil];
             }
         } else {
             [self makeToast:res.desc];
@@ -140,7 +135,7 @@
         [SVProgressHUD dismiss];
         if (E_OK == res._errno) {
             SApp.headurl = headurl;
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNCModHead object:headurl];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNCRefreshUserInfo object:nil];
             [self makeToast:@"上传成功"];
         } else {
             [self makeToast:res.desc];

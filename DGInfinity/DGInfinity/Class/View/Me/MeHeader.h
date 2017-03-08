@@ -17,7 +17,6 @@ typedef void (^WriteViewTap)(void);
 @property (nonatomic, copy) WriteViewTap writeTap;
 
 - (void)setHeaderValue:(NSDictionary *)info;
-- (void)setNickname:(NSString *)nickname;
-- (void)setHead:(NSString *)headurl;
+- (void)refreshUserinfo;
 
 @end

@@ -21,23 +21,16 @@
 
 - (void)setHeaderValue:(NSDictionary *)info
 {
-    [self setHead:info[@"headurl"]];
-    [self setNickname:info[@"nickname"]];
     _descLbl.text = [NSString stringWithFormat:@"您已连接东莞无线%ld次，为您节省流量费用%ld元",[info[@"total"] integerValue], [info[@"save"] integerValue]];
 }
 
-- (void)setNickname:(NSString *)nickname
+- (void)refreshUserinfo
 {
-    if ([nickname isKindOfClass:[NSString class]] && nickname.length) {
-        _nameLbl.text = nickname;
+    if ([SApp.headurl isKindOfClass:[NSString class]] && SApp.headurl.length) {
+        [_headView yy_setImageWithURL:[NSURL URLWithString:SApp.headurl] placeholder:_headView.image options:YYWebImageOptionSetImageWithFadeAnimation completion:nil];
     }
-    
-}
-
-- (void)setHead:(NSString *)headurl
-{
-    if ([headurl isKindOfClass:[NSString class]] && headurl.length) {
-        [_headView yy_setImageWithURL:[NSURL URLWithString:headurl] placeholder:_headView.image options:YYWebImageOptionSetImageWithFadeAnimation completion:nil];
+    if ([SApp.nickname isKindOfClass:[NSString class]] && SApp.nickname.length) {
+        _nameLbl.text = SApp.nickname;
     }
 }
 

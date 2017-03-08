@@ -40,7 +40,6 @@
     __weak IBOutlet NSLayoutConstraint *_statusLblTop;
     
     TimeType _currentType;
-    ENV_STATUS _currentStatus;
     ConnectStatus _connectStatus;
     CAAnimation *_leftAnimation;
     CAAnimation *_rightAnimation;
@@ -70,7 +69,6 @@
     [self.layer addSublayer:_halo];
     
     _currentType = TimeTypeDay;
-    _currentStatus = ENV_DEFAULT;
     _connectStatus = ConnectStatusDefault;
     NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"img_bg_day.png"];
     _backView.image = [UIImage imageWithContentsOfFile:imagePath];
@@ -78,17 +76,20 @@
     // connect views
     _outsideSmallCircle = [[UIImageView alloc] initWithImage:ImageNamed(@"circle_outside_small")];
     _outsideSmallCircle.center = _halo.position;
+    _outsideSmallCircle.alpha = 0;
     [self addSubview:_outsideSmallCircle];
     
     _outsideBigCircle = [[UIImageView alloc] initWithImage:ImageNamed(@"circle_outside_big")];
     _outsideBigCircle.center = _halo.position;
+    _outsideBigCircle.alpha = 0;
     [self addSubview:_outsideBigCircle];
     
     _aroundCircle = [[UIImageView alloc] initWithImage:ImageNamed(@"circle_around")];
     _aroundCircle.center = _halo.position;
+    _aroundCircle.alpha = 0;
     [self addSubview:_aroundCircle];
     
-    [self setConnectBtnStatus:ConnectStatusSearch];
+    _connectBtn.alpha = _buttonView.alpha = 0;
     [self checkConnectBtnStatus];
 }
 
@@ -96,9 +97,13 @@
 {
     if (_connectStatus == status) return;
     _connectStatus = status;
-    _connectBtn.hidden = _connectStatus == ConnectStatusConnected;
-    _outsideBigCircle.hidden = _outsideSmallCircle.hidden = _aroundCircle.hidden = _connectStatus != ConnectStatusConnecting;
-    _buttonView.hidden = _connectStatus != ConnectStatusConnected;
+    _statusLbl.alpha = 0;
+    [UIView animateWithDuration:0.5 animations:^{
+        _statusLbl.alpha = 1;
+        _connectBtn.alpha = _connectStatus != ConnectStatusConnected;
+        _outsideBigCircle.alpha = _outsideSmallCircle.alpha = _aroundCircle.alpha = _connectStatus == ConnectStatusConnecting;
+        _buttonView.alpha = _connectStatus == ConnectStatusConnected;
+    }];
     [_aroundCircle.layer removeAnimationForKey:@"rotationAnimation"];
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     if (status == ConnectStatusNotConnect) {
@@ -109,7 +114,6 @@
         [_halo start];
     } else if (status == ConnectStatusConnected) {
         _connectBtn.userInteractionEnabled = YES;
-        _currentStatus = ENV_LOGIN;
         [_connectBtn setTitle:@"" forState:UIControlStateNormal];
         [_connectBtn setAttributedTitle:nil forState:UIControlStateNormal];
         _statusLbl.text = [NSString stringWithFormat:@"已连接%@",[Tools getCurrentSSID]];
@@ -233,27 +237,24 @@
 {
 #if !(TARGET_IPHONE_SIMULATOR)
     [[UserAuthManager manager] checkEnvironmentBlock:^(ENV_STATUS status) {
-        if (_currentStatus != status) {
-            _currentStatus = status;
-            if (status == ENV_LOGIN) {
+        if (status == ENV_LOGIN) {
+            [self setConnectBtnStatus:ConnectStatusConnected];
+        } else if (status == ENV_NOT_WIFI) {
+            if ([[Tools getCurrentSSID] isEqualToString:WIFISDK_SSID]) {
+                // 已经portal认证
                 [self setConnectBtnStatus:ConnectStatusConnected];
-            } else if (status == ENV_NOT_WIFI) {
-                if ([[Tools getCurrentSSID] isEqualToString:WIFISDK_SSID]) {
-                    // 已经portal认证
+            } else {
+                // 别的网络（WiFi或者4G）
+                if ([[NetworkManager shareManager] isWiFi]) {
                     [self setConnectBtnStatus:ConnectStatusConnected];
                 } else {
-                    // 别的网络（WiFi或者4G）
-                    if ([[NetworkManager shareManager] isWiFi]) {
-                        [self setConnectBtnStatus:ConnectStatusConnected];
-                    } else {
-                        [self searchNearbyAps];
-                    }
+                    [self searchNearbyAps];
                 }
-            } else if (status == ENV_NOT_LOGIN) {
-                [self setConnectBtnStatus:ConnectStatusNotConnect];
-            } else {
-                [self setConnectBtnStatus:ConnectStatusSearch];
             }
+        } else if (status == ENV_NOT_LOGIN) {
+            [self setConnectBtnStatus:ConnectStatusNotConnect];
+        } else {
+            [self setConnectBtnStatus:ConnectStatusSearch];
         }
     }];
 #else
@@ -272,7 +273,7 @@
                 NSDictionary *data = res.data[@"data"];
                 if ([data isKindOfClass:[NSDictionary class]]) {
                     NSArray *infos = data[@"infos"];
-                    if ([infos isKindOfClass:[NSArray class]]) {
+                    if ([infos isKindOfClass:[NSArray class]] && infos.count) {
                         BOOL exist = NO;
                         for (NSDictionary *info in infos) {
                             if (MetersTwoCoordinate2D(coordinate, CLLocationCoordinate2DMake([info[@"latitude"] doubleValue], [info[@"longitude"] doubleValue])) <= 20) {

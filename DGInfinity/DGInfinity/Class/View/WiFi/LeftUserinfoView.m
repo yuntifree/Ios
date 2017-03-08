@@ -40,7 +40,10 @@
         _nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(40, 6, 60, 14)];
         _nameLbl.font = [UIFont systemFontOfSize:10 weight:UIFontWeightLight];
         _nameLbl.textColor = [UIColor whiteColor];
+        _nameLbl.text = @"东莞无限";
         [self addSubview:_nameLbl];
+        
+        [self refreshUserinfo];
         
         [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap)]];
     }
@@ -51,13 +54,9 @@
 {
     if ([SApp.headurl isKindOfClass:[NSString class]] && SApp.headurl.length) {
         [_headView yy_setImageWithURL:[NSURL URLWithString:SApp.headurl] placeholder:_headView.image options:YYWebImageOptionSetImageWithFadeAnimation completion:nil];
-    } else {
-        _headView.image = ImageNamed(@"my_ico_pic");
     }
     if ([SApp.nickname isKindOfClass:[NSString class]] && SApp.nickname.length) {
         _nameLbl.text = SApp.nickname;
-    } else {
-        _nameLbl.text = @"东莞无限";
     }
     
     CGSize size = [_nameLbl sizeThatFits:CGSizeZero];
