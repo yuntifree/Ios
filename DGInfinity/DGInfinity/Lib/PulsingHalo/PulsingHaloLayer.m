@@ -127,7 +127,7 @@
     _useTimingFunction = YES;
 
     self.repeatCount = HUGE_VALF;
-    self.radius = 40;
+    self.radius = 50;
     self.haloLayerNumber = 3;
     self.startInterval = 1;
     self.backgroundColor = [RGB(0xffffff, 0.4) CGColor];
@@ -145,7 +145,7 @@
     
     CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale.xy"];
     scaleAnimation.fromValue = @(self.fromValueForRadius);
-    scaleAnimation.toValue = @(2);
+    scaleAnimation.toValue = @(1.6);
     scaleAnimation.duration = self.animationDuration;
     
 //    CAKeyframeAnimation *opacityAnimation = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];

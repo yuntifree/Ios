@@ -41,21 +41,21 @@
         self.userInteractionEnabled = YES;
         _annotation = annotation;
         
-        UIImageView *wifiView = [[UIImageView alloc] initWithImage:ImageNamed(@"icon_WiFi")];
-        wifiView.origin = CGPointMake(17, 16);
+        UIImageView *wifiView = [[UIImageView alloc] initWithImage:ImageNamed(@"ico_wifiname")];
+        wifiView.origin = CGPointMake(18, 16);
         [self addSubview:wifiView];
         
-        UILabel *ssidLbl = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(wifiView.frame) + 10, 16, self.width - CGRectGetMaxX(wifiView.frame) - 20, 17)];
+        UILabel *ssidLbl = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(wifiView.frame) + 6, 18, 140, 17)];
         ssidLbl.font = SystemFont(12);
         ssidLbl.textColor = COLOR(49, 49, 49, 1);
         ssidLbl.text = WIFISDK_SSID;
         [self addSubview:ssidLbl];
         
         UIImageView *locationView = [[UIImageView alloc] initWithImage:ImageNamed(@"ico_location")];
-        locationView.origin = CGPointMake(wifiView.x, CGRectGetMaxY(wifiView.frame) + 18);
+        locationView.origin = CGPointMake(wifiView.x, CGRectGetMaxY(wifiView.frame) + 7);
         [self addSubview:locationView];
         
-        UILabel *locationLbl = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(locationView.frame), 73, 140, 14)];
+        UILabel *locationLbl = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(locationView.frame) + 5, CGRectGetMaxY(ssidLbl.frame) + 11, 130, 14)];
         locationLbl.font = SystemFont(10);
         locationLbl.textColor = COLOR(180, 180, 180, 1);
         if (annotation.title.length) {
@@ -65,23 +65,19 @@
         }
         [self addSubview:locationLbl];
         
-        UIImageView *walkView = [[UIImageView alloc] initWithImage:ImageNamed(@"ico_walk")];
-        walkView.origin = CGPointMake(177, 70);
-        [self addSubview:walkView];
-        
-        UILabel *distanceLbl = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(walkView.frame), 72, self.width - CGRectGetMaxX(walkView.frame), 17)];
-        distanceLbl.font = SystemFont(12);
+        UILabel *distanceLbl = [[UILabel alloc] initWithFrame:CGRectMake(locationLbl.x, CGRectGetMaxY(locationLbl.frame) + 6, 130, 20)];
+        distanceLbl.font = SystemFont(14);
         distanceLbl.textColor = COLOR(0, 166, 249, 1);
         distanceLbl.text = [self getDistance:MetersTwoCoordinate2D([[BaiduMapSDK shareBaiduMapSDK] getUserLocation].location.coordinate, annotation.coordinate)];
         [self addSubview:distanceLbl];
         
-        UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(4, CGRectGetMaxY(walkView.frame) + 6, self.width - 8, 30)];
+        UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(4, CGRectGetMaxY(distanceLbl.frame) + 12, self.width - 8, 29)];
         backView.backgroundColor = COLOR(229, 243, 251, 1);
         backView.layer.masksToBounds = YES;
         backView.layer.cornerRadius = 3;
         [self addSubview:backView];
         
-        UILabel *descLbl = [[UILabel alloc] initWithFrame:CGRectMake(wifiView.x, 103, self.width - 14, 17)];
+        UILabel *descLbl = [[UILabel alloc] initWithFrame:CGRectMake(14, backView.y + 6, self.width - 28, 17)];
         descLbl.font = SystemFont(12);
         descLbl.textColor = COLOR(180, 180, 180, 1);
         descLbl.text = @"前往此处，在WiFi列表里有免费WiFi可连";
@@ -93,9 +89,10 @@
         self.image = [bgImage stretchImageWithFLeftCapWidth:size.width - 10 fTopCapHeight:size.height * 0.5 tempWidth:self.width sLeftCapWidth:10 sTopCapHeight:size.height * 0.5];
         
         // 导航
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-        button.frame = CGRectMake(180, 30, 50, 30);
-        [button setTitle:@"导航" forState:UIControlStateNormal];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(self.width - 58 - 11, 26, 58, 58);
+        [button setBackgroundImage:ImageNamed(@"btn_going_nor") forState:UIControlStateNormal];
+        [button setBackgroundImage:ImageNamed(@"btn_going_pre") forState:UIControlStateHighlighted];
         [button addTarget:self action:@selector(navigateClick) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
         

@@ -37,11 +37,11 @@
                             </constraints>
                         </imageView>
                         <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZHF-di-tNg">
-                            <rect key="frame" x="148" y="82" width="80" height="80"/>
+                            <rect key="frame" x="138" y="72" width="100" height="100"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="80" id="1Cu-Vs-QSp"/>
-                                <constraint firstAttribute="width" constant="80" id="O5r-mv-0iL"/>
+                                <constraint firstAttribute="height" constant="100" id="1Cu-Vs-QSp"/>
+                                <constraint firstAttribute="width" constant="100" id="O5r-mv-0iL"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                             <state key="normal">
@@ -49,7 +49,7 @@
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="40"/>
+                                    <integer key="value" value="50"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
@@ -126,7 +126,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Rf-Qr-Xog">
                             <rect key="frame" x="124" y="74" width="128" height="96"/>
                             <subviews>
-                                <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cMo-aJ-8F9">
+                                <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cMo-aJ-8F9">
                                     <rect key="frame" x="0.0" y="0.0" width="128" height="38"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -134,9 +134,10 @@
                                         <constraint firstAttribute="width" constant="128" id="sbe-rv-OgO"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <state key="normal" title="WiFi测速">
+                                    <state key="normal" title="WiFi测速" backgroundImage="btn_wifi_nor.png">
                                         <color key="titleColor" red="0.0" green="0.61176470588235299" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <state key="highlighted" backgroundImage="btn_wifi_pre.png"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -147,7 +148,7 @@
                                         <action selector="testBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="gk4-gj-k8w"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" tag="1004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AKh-G7-LDs">
+                                <button opaque="NO" tag="1004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AKh-G7-LDs">
                                     <rect key="frame" x="0.0" y="58" width="128" height="38"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -155,9 +156,10 @@
                                         <constraint firstAttribute="height" constant="38" id="ZDu-PH-gGL"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <state key="normal" title="共享WiFi">
+                                    <state key="normal" title="WiFi共享" backgroundImage="btn_wifi_nor.png">
                                         <color key="titleColor" red="0.0" green="0.61176470589999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <state key="highlighted" backgroundImage="btn_wifi_pre.png"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -250,6 +252,8 @@
     </objects>
     <resources>
         <image name="Cloudy.png" width="83" height="83"/>
+        <image name="btn_wifi_nor.png" width="128" height="38"/>
+        <image name="btn_wifi_pre.png" width="128" height="38"/>
         <image name="ico_no.png" width="30" height="30"/>
     </resources>
 </document>
