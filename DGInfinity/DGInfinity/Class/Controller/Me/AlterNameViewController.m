@@ -14,6 +14,7 @@
     __weak IBOutlet UITextField *_textField;
     
     BOOL _hasName;
+    int _randomCount;
 }
 
 @property (nonatomic, strong) NSMutableSet *nameSet;
@@ -36,6 +37,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _hasName = NO;
+        _randomCount = 0;
     }
     return self;
 }
@@ -43,6 +45,12 @@
 - (NSString *)title
 {
     return @"昵称";
+}
+
+- (void)backBtnClick:(id)sender
+{
+    MobClick(@"profile_name_cancel");
+    [super backBtnClick:sender];
 }
 
 - (void)viewDidLoad {
@@ -97,6 +105,20 @@
 }
 
 - (IBAction)refreshBtnClick:(id)sender {
+    _randomCount++;
+    switch (_randomCount) {
+        case 1:
+            MobClick(@"profile_name_random");
+            break;
+        case 3:
+            MobClick(@"profile_name_random_3");
+            break;
+        case 5:
+            MobClick(@"profile_name_random_5");
+            break;
+        default:
+            break;
+    }
     [self textFieldSetPlaceholder];
 }
 
@@ -114,6 +136,9 @@
     
     if (!nickname.length) {
         nickname = _textField.attributedPlaceholder.string;
+        MobClick(@"profile_name_random_ok");
+    } else {
+        MobClick(@"profile_name_ok");
     }
     
     [self.view endEditing:YES];

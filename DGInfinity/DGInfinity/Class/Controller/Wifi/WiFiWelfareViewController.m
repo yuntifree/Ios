@@ -21,6 +21,12 @@
 
 @implementation WiFiWelfareViewController
 
+- (void)backBtnClick:(id)sender
+{
+    MobClick(@"share_wifi_cancel");
+    [super backBtnClick:sender];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.

@@ -38,6 +38,12 @@
     return @"选择头像";
 }
 
+- (void)backBtnClick:(id)sender
+{
+    MobClick(@"sys_profile_photo_cancel");
+    [super backBtnClick:sender];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -107,6 +113,24 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)handleMobClick:(NSString *)headurl
+{
+    for (NSDictionary *info in _male) {
+        if ([info[@"headurl"] isEqualToString:headurl]) {
+            NSString *event = [NSString stringWithFormat:@"sys_profile_photo_select_%ld",[_male indexOfObject:info] + 1];
+            MobClick(event);
+            return;
+        }
+    }
+    for (NSDictionary *info in _female) {
+        if ([info[@"headurl"] isEqualToString:headurl]) {
+            NSString *event = [NSString stringWithFormat:@"sys_profile_photo_select_%ld",[_female indexOfObject:info] + 4];
+            MobClick(event);
+            break;
+        }
+    }
+}
+
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -136,6 +160,7 @@
     }
     __weak typeof(self) wself = self;
     cell.HeadTap = ^ (NSString *headurl) {
+        [wself handleMobClick:headurl];
         [wself modUserHead:headurl];
     };
     return cell;

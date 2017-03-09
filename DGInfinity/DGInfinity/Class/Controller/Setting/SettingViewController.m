@@ -40,6 +40,12 @@
     return @"设置";
 }
 
+- (void)backBtnClick:(id)sender
+{
+    MobClick(@"setting_cancel");
+    [super backBtnClick:sender];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.

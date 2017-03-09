@@ -273,6 +273,52 @@
     }];
 }
 
+- (void)handleMobClick:(NSInteger)selectIndex
+{
+    NewsMenuModel *fm = self.menuModels[_lastSelectedIndex];
+    NewsMenuModel *tm = self.menuModels[selectIndex];
+    NSMutableString *event = [NSMutableString string];
+    switch (fm.type) {
+        case NT_REPORT:
+            [event appendString:@"hotspot"];
+            break;
+        case NT_LOCAL:
+            [event appendString:@"DG"];
+            break;
+        case NT_ENTERTAIN:
+            [event appendString:@"entertainment"];
+            break;
+        case NT_VIDEO:
+            [event appendString:@"video"];
+            break;
+        case NT_LIVE:
+            [event appendString:@"stream"];
+            break;
+        default:
+            break;
+    }
+    switch (tm.type) {
+        case NT_REPORT:
+            [event appendString:@"_hotspot"];
+            break;
+        case NT_LOCAL:
+            [event appendString:@"_DG"];
+            break;
+        case NT_ENTERTAIN:
+            [event appendString:@"_entertainment"];
+            break;
+        case NT_VIDEO:
+            [event appendString:@"_video"];
+            break;
+        case NT_LIVE:
+            [event appendString:@"_stream"];
+            break;
+        default:
+            break;
+    }
+    if (event.length) MobClick(event);
+}
+
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
@@ -290,6 +336,7 @@
 
 - (void)scrollMenuDidSelected:(XHScrollMenu *)scrollMenu menuIndex:(NSUInteger)selectIndex
 {
+    [self handleMobClick:selectIndex];
     NewsMenuModel *model = self.menuModels[selectIndex];
     switch (model.ctype) {
         case MenuCTypeNews:

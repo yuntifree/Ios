@@ -75,6 +75,7 @@
         [wself onTapHead];
     };
     _header.writeTap = ^ {
+        MobClick(@"Me_profile_name");
         AlterNameViewController *vc = [AlterNameViewController new];
         [wself.navigationController pushViewController:vc animated:YES];
     };
@@ -87,6 +88,7 @@
 
 - (void)onTapHead
 {
+    MobClick(@"Me_profile_photo");
     __weak typeof(self) wself = self;
     LCActionSheet *actionSheet = [LCActionSheet sheetWithTitle:nil cancelButtonTitle:@"取消" clicked:^(LCActionSheet *actionSheet, NSInteger buttonIndex) {
         if (buttonIndex == 1) {
@@ -180,12 +182,14 @@
     switch (indexPath.row) {
         case 0:
         {
+            MobClick(@"Me_feedback");
             FeedBackViewController *vc = [FeedBackViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 1:
         {
+            MobClick(@"Me_setting");
             SettingViewController *vc = [SettingViewController new];
             [self.navigationController pushViewController:vc animated:YES];
         }

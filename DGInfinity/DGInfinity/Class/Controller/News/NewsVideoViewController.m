@@ -20,9 +20,21 @@
     NSInteger _minseq;
     BOOL _isLoad;
 }
+
+@property (nonatomic, strong) NSMutableSet *mobSet;
+
 @end
 
 @implementation NewsVideoViewController
+
+#pragma mark - lazy-init
+- (NSMutableSet *)mobSet
+{
+    if (!_mobSet) {
+        _mobSet = [NSMutableSet set];
+    }
+    return _mobSet;
+}
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -148,6 +160,12 @@
             model.read = YES;
             model.play++;
             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+        [self.mobSet addObject:@(model.id_)];
+        if (self.mobSet.count == 3) {
+            MobClick(@"video_triple_view");
+        } else if (self.mobSet.count == 5) {
+            MobClick(@"video_penta_view");
         }
         [SApp reportClick:[ReportClickModel createWithVideoModel:model]];
         WebViewController *vc = [[WebViewController alloc] init];

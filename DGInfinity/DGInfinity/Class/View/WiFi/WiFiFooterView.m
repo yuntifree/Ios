@@ -19,7 +19,6 @@
     __weak IBOutlet NSLayoutConstraint *_serviceBottom;
     
     NSMutableArray *_banners;
-    dispatch_source_t _timer;
 }
 @end
 
@@ -27,10 +26,7 @@
 
 - (void)dealloc
 {
-    if (_timer) {
-        dispatch_source_cancel(_timer);
-        _timer = nil;
-    }
+    
 }
 
 - (void)awakeFromNib

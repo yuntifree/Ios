@@ -28,6 +28,8 @@ NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrco
 @interface WebViewController () <WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler>
 {
     BOOL _isEvaluated; // 处理第一次页面加载完毕，注入JS脚本
+    dispatch_source_t _timer; // 上报观看直播时长
+    NSInteger _minutes; // 观看分钟
 }
 
 @property (nonatomic, strong) WKWebView *webView;
@@ -50,6 +52,10 @@ NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrco
     self.webView = nil;
     self.progressView = nil;
     self.backgroundView = nil;
+    if (_timer) {
+        dispatch_source_cancel(_timer);
+        _timer = nil;
+    }
 }
 
 - (WKWebView *)webView
@@ -116,6 +122,7 @@ NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrco
     if (self) {
         _isEvaluated = NO;
         _changeTitle = YES;
+        _minutes = 0;
         self.title = @"东莞无限";
     }
     return self;
@@ -174,6 +181,33 @@ NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrco
     } else {
         [self makeToast:@"链接无效，加载失败"];
     }
+    
+    // 友盟统计观看直播时长
+    if (_newsType == NT_LIVE) {
+        [self fireTimer];
+    }
+}
+
+- (void)fireTimer
+{
+    dispatch_queue_t queue = dispatch_get_main_queue();
+    _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 0), 60.0 * NSEC_PER_SEC, 0);
+    __weak typeof(self) wself = self;
+    dispatch_source_set_event_handler(_timer, ^{
+        [wself timerRun];
+    });
+    dispatch_resume(_timer);
+}
+
+- (void)timerRun
+{
+    if (_minutes == 3) {
+        MobClick(@"stream_view_3min");
+    } else if (_minutes == 5) {
+        MobClick(@"stream_view_5min");
+    }
+    _minutes++;
 }
 
 - (void)didReceiveMemoryWarning {

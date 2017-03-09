@@ -26,6 +26,12 @@
     return @"反馈问题";
 }
 
+- (void)backBtnClick:(id)sender
+{
+    MobClick(@"feedback_cancel");
+    [super backBtnClick:sender];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.

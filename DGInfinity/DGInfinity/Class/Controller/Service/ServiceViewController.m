@@ -75,6 +75,7 @@
 
 - (void)goSearch
 {
+    MobClick(@"life_search");
     DGNavigationViewController *nav = [[DGNavigationViewController alloc] initWithRootViewController:[SearchViewController new]];
     [self.view.window.layer addAnimation:[AnimationManager presentFadeAnimation] forKey:nil];
     [self presentViewController:nav animated:NO completion:nil];
@@ -176,6 +177,45 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)handleMobClick:(NSString *)title
+{
+    NSString *event = nil;
+    if ([title isEqualToString:@"招聘"]) {
+        event = @"life_recruit";
+    } else if ([title isEqualToString:@"二手"]) {
+        event = @"life_secondhand";
+    } else if ([title isEqualToString:@"租房"]) {
+        event = @"life_rental";
+    } else if ([title isEqualToString:@"家政"]) {
+        event = @"life_service";
+    } else if ([title isEqualToString:@"更多"]) {
+        event = @"life_more";
+    } else if ([title isEqualToString:@"社保查询"]) {
+        event = @"life_socialinsurance";
+    } else if ([title isEqualToString:@"积分入户"]) {
+        event = @"life_integralhome";
+    } else if ([title isEqualToString:@"发票真伪"]) {
+        event = @"life_invoice";
+    } else if ([title isEqualToString:@"违章查询"]) {
+        event = @"life_peccancy";
+    } else if ([title isEqualToString:@"积分入学"]) {
+        event = @"life_integralstudy";
+    } else if ([title isEqualToString:@"公交查询"]) {
+        event = @"life_bus";
+    } else if ([title isEqualToString:@"火车票"]) {
+        event = @"life_trainticket";
+    } else if ([title isEqualToString:@"汽车票"]) {
+        event = @"life_busticket";
+    } else if ([title isEqualToString:@"飞机票"]) {
+        event = @"life_planeticket";
+    } else if ([title isEqualToString:@"预约挂号"]) {
+        event = @"life_docappointment";
+    } else if ([title isEqualToString:@"医院查询"]) {
+        event = @"life_hospitical";
+    }
+    if (event.length) MobClick(event);
 }
 
 #pragma mark - UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout

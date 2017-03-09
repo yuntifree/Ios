@@ -19,6 +19,7 @@
     NSMutableArray *_newsArray;
     NSInteger _minseq;
     BOOL _isLoad;
+    int _footerRefreshCount;
 }
 @end
 
@@ -31,6 +32,7 @@
         _newsArray = [NSMutableArray arrayWithCapacity:20];
         _minseq = 0;
         _isLoad = NO;
+        _footerRefreshCount = 0;
     }
     return self;
 }
@@ -72,6 +74,7 @@
 
 - (void)getNews
 {
+    [self handleMobFooterRefresh];
     [NewsCGI getHot:self.type seq:_minseq complete:^(DGCgiResult *res) {
         if (_minseq) {
             [_listView.mj_footer endRefreshing];
@@ -122,6 +125,35 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)handleMobFooterRefresh
+{
+    if (_minseq) {
+        _footerRefreshCount++;
+    }
+    switch (_footerRefreshCount) {
+        case 3:
+            if (self.type == NT_REPORT) {
+                MobClick(@"hotspot_triple_load");
+            } else if (self.type == NT_LOCAL) {
+                MobClick(@"DG_triple_load");
+            } else if (self.type == NT_ENTERTAIN) {
+                MobClick(@"entertainment_triple_load");
+            }
+            break;
+        case 5:
+            if (self.type == NT_REPORT) {
+                MobClick(@"hotspot_penta_load");
+            } else if (self.type == NT_LOCAL) {
+                MobClick(@"DG_penta_load");
+            } else if (self.type == NT_ENTERTAIN) {
+                MobClick(@"entertainment_penta_load");
+            }
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - UITableViewDataSource, UITableViewDelegate

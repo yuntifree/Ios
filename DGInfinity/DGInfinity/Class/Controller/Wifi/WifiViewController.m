@@ -247,6 +247,7 @@ NetWorkMgrDelegate
     leftFixedSpace.width = -15;
     _leftUserinfoView = [[LeftUserinfoView alloc] initWithFrame:CGRectMake(0, 0, 100, 26)];
     _leftUserinfoView.tapBlock = ^ {
+        MobClick(@"Index_userinfo");
         UITabBarController *root = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
         root.selectedIndex = 3;
     };
@@ -259,6 +260,7 @@ NetWorkMgrDelegate
 
 - (void)scanQRcode
 {
+    MobClick(@"Index_QR");
     [Tools permissionOfCamera:^{
         WiFiScanQrcodeViewController *vc = [WiFiScanQrcodeViewController new];
         [self.navigationController pushViewController:vc animated:YES];
@@ -370,6 +372,7 @@ NetWorkMgrDelegate
     switch (type) {
         case WiFiMenuTypeSpeedTest:
         {
+            MobClick(@"Index_speedtest");
             WiFiSpeedTestViewController *vc = [[WiFiSpeedTestViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
@@ -403,6 +406,7 @@ NetWorkMgrDelegate
             break;
         case WiFiMenuTypeWelfare:
         {
+            MobClick(@"Index_share_wifi");
             if ([[Tools getCurrentSSID] isEqualToString:WIFISDK_SSID]) {
                 [self makeToast:@"您连接的是东莞无限免费WiFi，无需分享噢"];
             } else {
@@ -447,6 +451,7 @@ NetWorkMgrDelegate
 
 - (void)headerTap:(UITapGestureRecognizer *)tap
 {
+    MobClick(@"Index_click_header_hot");
     [self gotoNewsTabWithType:NT_LOCAL];
 }
 

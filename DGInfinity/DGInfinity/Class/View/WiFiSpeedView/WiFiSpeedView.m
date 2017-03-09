@@ -46,6 +46,7 @@ const float EPSINON = 0.00001;
     UIButton *_testBtn;
     
     WiFiSpeedRecord *_record;
+    BOOL _isTwiceTest;
 }
 
 @end
@@ -65,6 +66,7 @@ const float EPSINON = 0.00001;
     if (self) {
         self.backgroundColor = COLOR(0, 156, 251, 1);
         _record = [WiFiSpeedRecord new];
+        _isTwiceTest = NO;
         [self setupWiFiPageSubViews];
     }
     return self;
@@ -130,6 +132,10 @@ const float EPSINON = 0.00001;
 
 - (void)testBtnClick:(UIButton *)button
 {
+    if ([button.currentTitle isEqualToString:@"重新测速"] && !_isTwiceTest) {
+        MobClick(@"speedtest_twice");
+        _isTwiceTest = YES;
+    }
     switch (button.tag) {
         case TestBtnStatusNone:
         case TestBtnStatusTested:

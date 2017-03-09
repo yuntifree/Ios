@@ -22,9 +22,20 @@
     NSMutableArray *_liveList;
 }
 
+@property (nonatomic, strong) NSMutableSet *mobSet;
+
 @end
 
 @implementation LiveListViewController
+
+#pragma mark - lazy-init
+- (NSMutableSet *)mobSet
+{
+    if (!_mobSet) {
+        _mobSet = [NSMutableSet set];
+    }
+    return _mobSet;
+}
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -156,6 +167,12 @@
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     if (indexPath.row < _liveList.count) {
         LiveListModel *model = _liveList[indexPath.row];
+        [self.mobSet addObject:@(model.live_id)];
+        if (self.mobSet.count == 3) {
+            MobClick(@"stream_triple_view");
+        } else if (self.mobSet.count == 5) {
+            MobClick(@"stream_penta_view");
+        }
         [SApp reportClick:[ReportClickModel createWithLiveListModel:model]];
         WebViewController *vc = [[WebViewController alloc] init];
         vc.newsType = NT_LIVE;

@@ -38,6 +38,12 @@
     return @"扫码连WiFi";
 }
 
+- (void)backBtnClick:(id)sender
+{
+    MobClick(@"QR_cancel");
+    [super backBtnClick:sender];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
