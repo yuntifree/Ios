@@ -129,8 +129,7 @@
     BMKMapView *_mapView;
     BMKUserLocation *_myLocation;
     
-    NSMutableSet *_annotitaionSet;
-    BOOL _isLoad;
+    NSMutableArray *_annotitaions;
 }
 
 @end
@@ -153,9 +152,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
-        _annotitaionSet = [NSMutableSet setWithCapacity:20];
+        _annotitaions = [NSMutableArray array];
         _myLocation = [[BaiduMapSDK shareBaiduMapSDK] getUserLocation];
-        _isLoad = NO;
     }
     return self;
 }
@@ -175,16 +173,6 @@
     [super viewWillAppear:animated];
     [_mapView viewWillAppear];
     _mapView.delegate = self;
-    if (!_isLoad) {
-        [SVProgressHUD showWithStatus:@"正在查找免费WiFi"];
-        _isLoad = YES;
-    }
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [SVProgressHUD dismiss];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -244,30 +232,38 @@
     [super updateViewConstraints];
 }
 
-// 添加附近WiFi位置标注，和我的位置标注
+// 添加WiFi位置标注
 - (void)addAnnotations
+{
+    if (_annotitaionInfos && _annotitaionInfos.count) {
+        [SVProgressHUD showWithStatus:@"正在查找免费WiFi"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            for (NSDictionary *info in _annotitaionInfos) {
+                @autoreleasepool {
+                    if (![info[@"latitude"] doubleValue] && ![info[@"longitude"] doubleValue]) continue;
+                    BMKPointAnnotation *annotation = [[BMKPointAnnotation alloc] init];
+                    annotation.title = info[@"address"];
+                    annotation.coordinate = CLLocationCoordinate2DMake([info[@"latitude"] doubleValue], [info[@"longitude"] doubleValue]);
+                    [_annotitaions addObject:annotation];
+                }
+            }
+            [_mapView addAnnotations:_annotitaions];
+        });
+    } else {
+        [self getAllAps];
+    }
+}
+
+- (void)getAllAps
 {
     [MapCGI getAllAps:^(DGCgiResult *res) {
         if (E_OK == res._errno) {
             NSDictionary *data = res.data[@"data"];
             if ([data isKindOfClass:[NSDictionary class]]) {
                 NSArray *infos = data[@"infos"];
-                if ([infos isKindOfClass:[NSArray class]]) {
-                    NSMutableArray *tem = [NSMutableArray array];
-                    for (NSDictionary *info in infos) {
-                        @autoreleasepool {
-                            if (![info[@"latitude"] doubleValue] && ![info[@"longitude"] doubleValue]) continue;
-                            BMKPointAnnotation *annotation = [[BMKPointAnnotation alloc] init];
-                            annotation.title = info[@"address"];
-                            annotation.coordinate = CLLocationCoordinate2DMake([info[@"latitude"] doubleValue], [info[@"longitude"] doubleValue]);
-                            NSString *hashFlag = [NSString stringWithFormat:@"%lf%lf", annotation.coordinate.latitude, annotation.coordinate.longitude];
-                            if (![_annotitaionSet containsObject:hashFlag]) {
-                                [_annotitaionSet addObject:hashFlag];
-                                [tem addObject:annotation];
-                            }
-                        }
-                    }
-                    [_mapView addAnnotations:tem];
+                if ([infos isKindOfClass:[NSArray class]] && infos.count) {
+                    _annotitaionInfos = infos;
+                    [self addAnnotations];
                 }
             }
         } else {
@@ -317,6 +313,16 @@
         [wself.navigationController pushViewController:vc animated:YES];
     };
     return annotationView;
+}
+
+- (void)mapView:(BMKMapView *)mapView didAddAnnotationViews:(NSArray *)views
+{
+    static int count = 0;
+    count += views.count;
+    if (count == _annotitaions.count) {
+        [SVProgressHUD dismiss];
+        count = 0;
+    }
 }
 
 - (void)mapView:(BMKMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view

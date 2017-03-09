@@ -11,4 +11,6 @@
 
 @interface BaiduMapVC : DGViewController
 
+@property (nonatomic, strong) NSArray *annotitaionInfos;
+
 @end

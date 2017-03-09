@@ -45,7 +45,7 @@
     CAAnimation *_rightAnimation;
     CABasicAnimation *_aroundAnimation;
     
-    NSArray *_annotations;
+    BMKUserLocation *_lastLocation;
 }
 
 @end
@@ -57,6 +57,7 @@
     [[BaiduMapSDK shareBaiduMapSDK] removeDelegate:self];
     _leftAnimation = nil;
     _rightAnimation = nil;
+    _annotations = nil;
 }
 
 - (void)awakeFromNib
@@ -277,7 +278,7 @@
         if (_annotations.count) {
             [self judgeNearbyAps:coordinate];
         } else {
-            [MapCGI getNearbyAps:coordinate.longitude latitude:coordinate.latitude complete:^(DGCgiResult *res) {
+            [MapCGI getAllAps:^(DGCgiResult *res) {
                 if (E_OK == res._errno) {
                     NSDictionary *data = res.data[@"data"];
                     if ([data isKindOfClass:[NSDictionary class]]) {
@@ -359,6 +360,16 @@
 - (void)didUpdateUserLocation:(BMKUserLocation *)userLocation
 {
     if (_connectStatus != ConnectStatusConnected) {
+        // 第一次忽略
+        if (!_lastLocation) {
+            _lastLocation = userLocation;
+            return;
+        }
+        // 移动小于5m忽略
+        if (MetersTwoCoordinate2D(_lastLocation.location.coordinate, userLocation.location.coordinate) < 5) {
+            return;
+        }
+        _lastLocation = userLocation;
         [self checkConnectBtnStatus];
     }
 }

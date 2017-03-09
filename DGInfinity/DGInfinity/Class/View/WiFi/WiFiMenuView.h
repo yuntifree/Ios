@@ -38,6 +38,7 @@ typedef NS_ENUM(NSInteger, ConnectStatus) {
 @interface WiFiMenuView : UIView
 
 @property (nonatomic, weak) id <WiFiMenuViewDelegate> delegate;
+@property (nonatomic, strong, readonly) NSArray *annotations;
 
 - (void)setWeather:(NSDictionary *)weather;
 - (void)setBackViewImage;

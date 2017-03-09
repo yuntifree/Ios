@@ -377,6 +377,7 @@ NetWorkMgrDelegate
         case WiFiMenuTypeMap:
         {
             BaiduMapVC *vc = [[BaiduMapVC alloc] init];
+            vc.annotitaionInfos = _menuView.annotations;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
