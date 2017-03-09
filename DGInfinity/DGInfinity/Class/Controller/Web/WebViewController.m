@@ -45,6 +45,7 @@ NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrco
     [self.webView removeObserver:self forKeyPath:@"title"];
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
     [self.webView removeObserver:self forKeyPath:@"canGoBack"];
+    [self.webView removeObserver:self forKeyPath:@"URL"];
     [self.webView.configuration.userContentController removeScriptMessageHandlerForName:JSHOST];
     self.webView = nil;
     self.progressView = nil;
@@ -72,6 +73,7 @@ NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrco
         [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
         [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
         [_webView addObserver:self forKeyPath:@"canGoBack" options:NSKeyValueObservingOptionNew context:NULL];
+        [_webView addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:NULL];
         [self.view addSubview:_webView];
     }
     return _webView;
@@ -246,27 +248,27 @@ NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrco
             } else {
                 [self setUpBackItem];
             }
+        } else if ([keyPath isEqualToString:@"URL"]) {
+            self.currentRequest = [NSURLRequest requestWithURL:self.webView.URL];
         }
     }
 }
 
 #pragma mark - WKNavigationDelegate
-/*
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
-    self.currentRequest = navigationAction.request;
     if(navigationAction.targetFrame == nil)
     {
         [webView loadRequest:navigationAction.request];
     }
-    decisionHandler(WKNavigationActionPolicyAllow);
+    NSURL *URL = navigationAction.request.URL;
+    NSString *scheme = [URL scheme];
+    if ([scheme isEqualToString:@"huajiao"]) {
+        decisionHandler(WKNavigationActionPolicyCancel);
+    } else {
+        decisionHandler(WKNavigationActionPolicyAllow);
+    }
 }
-
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler
-{
-    decisionHandler(WKNavigationResponsePolicyAllow);
-}
- */
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation
 {
