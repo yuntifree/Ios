@@ -358,7 +358,9 @@
 #pragma mark - BaiduMapSDKDelegate
 - (void)didUpdateUserLocation:(BMKUserLocation *)userLocation
 {
-    [self checkConnectBtnStatus];
+    if (_connectStatus != ConnectStatusConnected) {
+        [self checkConnectBtnStatus];
+    }
 }
 
 @end

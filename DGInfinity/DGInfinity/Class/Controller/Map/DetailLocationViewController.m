@@ -20,6 +20,11 @@
 
 @implementation DetailLocationViewController
 
+- (NSString *)title
+{
+    return @"WiFi地图";
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -56,13 +61,17 @@
     NSArray *titles = isInstallBaiduMap ? @[@"苹果地图", @"百度地图"] : @[@"苹果地图"];
     __weak typeof(self) wself = self;
     LCActionSheet *actionSheet = [LCActionSheet sheetWithTitle:nil cancelButtonTitle:@"取消" clicked:^(LCActionSheet *actionSheet, NSInteger buttonIndex) {
-        LocationInfo *myInfo = [LocationInfo new];
-        myInfo.coordinate2D = [[BaiduMapSDK shareBaiduMapSDK] getUserLocation].location.coordinate;
-        LocationInfo *targetInfo = [LocationInfo new];
-        targetInfo.coordinate2D = wself.annotation.coordinate;
         if (buttonIndex == 1) {
+            LocationInfo *myInfo = [LocationInfo new];
+            myInfo.coordinate2D = [[BaiduMapSDK shareBaiduMapSDK] getUserLocation].location.coordinate;
+            LocationInfo *targetInfo = [LocationInfo new];
+            targetInfo.coordinate2D = wself.annotation.coordinate;
             [[BaiduMapSDK shareBaiduMapSDK] openSystemMapApp:myInfo endLocationInfo:targetInfo];
         } else if (buttonIndex == 2) {
+            LocationInfo *myInfo = [LocationInfo new];
+            myInfo.coordinate2D = [[BaiduMapSDK shareBaiduMapSDK] getUserLocation].location.coordinate;
+            LocationInfo *targetInfo = [LocationInfo new];
+            targetInfo.coordinate2D = wself.annotation.coordinate;
             [[BaiduMapSDK shareBaiduMapSDK] openBaiduMapApp:myInfo endLocationInfo:targetInfo];
         }
     } otherButtonTitleArray:titles];
