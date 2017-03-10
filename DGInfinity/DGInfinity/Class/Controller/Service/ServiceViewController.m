@@ -34,6 +34,11 @@
 
 @implementation ServiceViewController
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNCServiceViewControllerDealloc object:nil];
+}
+
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

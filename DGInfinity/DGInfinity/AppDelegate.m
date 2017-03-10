@@ -145,10 +145,7 @@
         [[UIApplication sharedApplication] endBackgroundTask:_backgroundTaskID];
         _backgroundTaskID = UIBackgroundTaskInvalid;
     }];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[NetworkManager shareManager] addNetworkObserver:self];
-    });
+    [[NetworkManager shareManager] addNetworkObserver:self];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {

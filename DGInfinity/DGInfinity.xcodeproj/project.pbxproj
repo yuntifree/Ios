@@ -395,6 +395,8 @@
 		995912A01E725196005A7FE0 /* ico_crying@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9959129A1E725196005A7FE0 /* ico_crying@2x.png */; };
 		995912A11E725196005A7FE0 /* ico_crying@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9959129B1E725196005A7FE0 /* ico_crying@3x.png */; };
 		995912A41E7251BB005A7FE0 /* WiFiNoNetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 995912A31E7251BB005A7FE0 /* WiFiNoNetView.m */; };
+		995912A71E72AF6E005A7FE0 /* wireless_ico_person@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 995912A51E72AF6E005A7FE0 /* wireless_ico_person@2x.png */; };
+		995912A81E72AF6E005A7FE0 /* wireless_ico_person@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 995912A61E72AF6E005A7FE0 /* wireless_ico_person@3x.png */; };
 		995A871D1E2CD1DA001AB2A9 /* CMCCUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 995A871A1E2CD1DA001AB2A9 /* CMCCUserInfo.m */; };
 		995A871E1E2CD1DA001AB2A9 /* UserAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 995A871C1E2CD1DA001AB2A9 /* UserAuthManager.m */; };
 		9961A3581E0A7B2300870103 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9961A3561E0A7B2300870103 /* libcrypto.a */; };
@@ -950,6 +952,8 @@
 		9959129B1E725196005A7FE0 /* ico_crying@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_crying@3x.png"; sourceTree = "<group>"; };
 		995912A21E7251BB005A7FE0 /* WiFiNoNetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiNoNetView.h; sourceTree = "<group>"; };
 		995912A31E7251BB005A7FE0 /* WiFiNoNetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WiFiNoNetView.m; sourceTree = "<group>"; };
+		995912A51E72AF6E005A7FE0 /* wireless_ico_person@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wireless_ico_person@2x.png"; sourceTree = "<group>"; };
+		995912A61E72AF6E005A7FE0 /* wireless_ico_person@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wireless_ico_person@3x.png"; sourceTree = "<group>"; };
 		995A87191E2CD1DA001AB2A9 /* CMCCUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMCCUserInfo.h; sourceTree = "<group>"; };
 		995A871A1E2CD1DA001AB2A9 /* CMCCUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMCCUserInfo.m; sourceTree = "<group>"; };
 		995A871B1E2CD1DA001AB2A9 /* UserAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAuthManager.h; sourceTree = "<group>"; };
@@ -1339,6 +1343,8 @@
 		6F30672B1DD32B8000FA841E /* WiFi */ = {
 			isa = PBXGroup;
 			children = (
+				995912A51E72AF6E005A7FE0 /* wireless_ico_person@2x.png */,
+				995912A61E72AF6E005A7FE0 /* wireless_ico_person@3x.png */,
 				995912951E725196005A7FE0 /* nonet */,
 				99143FFF1E701EFC00AF9C85 /* btn_wifi_pre@2x.png */,
 				991440001E701EFC00AF9C85 /* btn_wifi_pre@3x.png */,
@@ -2733,6 +2739,7 @@
 				6F6FDAE31DB4C81100E50D9B /* WifiViewController.xib in Resources */,
 				990C1DE51E680C2100388622 /* tab_icon_wifi_gray@2x.png in Resources */,
 				6F2EEAA91DEDA61D00F5203C /* btn_sure_nor@3x.png in Resources */,
+				995912A81E72AF6E005A7FE0 /* wireless_ico_person@3x.png in Resources */,
 				6F3F32AF1DDAFB8F0024095A /* ico_location@3x.png in Resources */,
 				990F3CF61E1672CF007FFE5E /* img_Loading1@2x.png in Resources */,
 				99143FF91E70029100AF9C85 /* btn_going_nor@2x.png in Resources */,
@@ -2753,6 +2760,7 @@
 				6F3F32981DDAF97F0024095A /* wif_icon_qrcode_cornor@2x.png in Resources */,
 				995912A01E725196005A7FE0 /* ico_crying@2x.png in Resources */,
 				991066401E23838900D1525F /* ico_no@2x.png in Resources */,
+				995912A71E72AF6E005A7FE0 /* wireless_ico_person@2x.png in Resources */,
 				9990CD171E0D1EEF0002BF63 /* icon_more@3x.png in Resources */,
 				6F6FDAE81DB4C82100E50D9B /* NewsViewController.xib in Resources */,
 				990C1DE41E680C2100388622 /* tab_icon_wifi_blue@3x.png in Resources */,

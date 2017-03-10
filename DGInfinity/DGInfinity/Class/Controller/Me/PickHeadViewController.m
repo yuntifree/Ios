@@ -115,16 +115,16 @@
 
 - (void)handleMobClick:(NSString *)headurl
 {
-    for (NSDictionary *info in _male) {
-        if ([info[@"headurl"] isEqualToString:headurl]) {
-            NSString *event = [NSString stringWithFormat:@"sys_profile_photo_select_%ld",[_male indexOfObject:info] + 1];
+    for (PickHeadModel *model in _male) {
+        if ([model.headurl isEqualToString:headurl]) {
+            NSString *event = [NSString stringWithFormat:@"sys_profile_photo_select_%ld",[_male indexOfObject:model] + 1];
             MobClick(event);
             return;
         }
     }
-    for (NSDictionary *info in _female) {
-        if ([info[@"headurl"] isEqualToString:headurl]) {
-            NSString *event = [NSString stringWithFormat:@"sys_profile_photo_select_%ld",[_female indexOfObject:info] + 4];
+    for (PickHeadModel *model in _female) {
+        if ([model.headurl isEqualToString:headurl]) {
+            NSString *event = [NSString stringWithFormat:@"sys_profile_photo_select_%ld",[_female indexOfObject:model] + 4];
             MobClick(event);
             break;
         }

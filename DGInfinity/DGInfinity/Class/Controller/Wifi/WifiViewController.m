@@ -24,7 +24,6 @@
 #import <AFNetworking.h>
 #import "CheckUpdateView.h"
 #import "AccountCGI.h"
-#import "LeftUserinfoView.h"
 #import "WiFiNoNetView.h"
 
 @interface WifiViewController ()
@@ -40,7 +39,6 @@ NetWorkMgrDelegate
     __weak IBOutlet UITableView *_tableView;
     WiFiMenuView *_menuView;
     WiFiConnectTipView *_connectTipView;
-    LeftUserinfoView *_leftUserinfoView;
     
     NSMutableArray *_newsArray;
     NSString *_weatherUrl;
@@ -69,14 +67,8 @@ NetWorkMgrDelegate
         _weatherUrl = WeatherURL;
         [[NetworkManager shareManager] addNetworkObserver:self];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserInfo) name:kNCRefreshUserInfo object:nil];
     }
     return self;
-}
-
-- (void)refreshUserInfo
-{
-    [_leftUserinfoView refreshUserinfo];
 }
 
 - (void)willEnterForeground
@@ -129,7 +121,6 @@ NetWorkMgrDelegate
     [super viewWillAppear:animated];
     [_menuView setBackViewImage];
     [_menuView startAnimation];
-    [_leftUserinfoView refreshUserinfo];
     if ([Tools getTimeType] == TimeTypeNight) {
         [self.navigationController.navigationBar setBarTintColor:RGB(0x236EC5, 1)];
     } else {
@@ -246,17 +237,18 @@ NetWorkMgrDelegate
 {
     UIBarButtonItem *leftFixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     leftFixedSpace.width = -15;
-    _leftUserinfoView = [[LeftUserinfoView alloc] initWithFrame:CGRectMake(0, 0, 100, 26)];
-    _leftUserinfoView.tapBlock = ^ {
-        MobClick(@"Index_userinfo");
-        UITabBarController *root = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-        root.selectedIndex = 3;
-    };
-    self.navigationItem.leftBarButtonItems = @[leftFixedSpace, [[UIBarButtonItem alloc] initWithCustomView:_leftUserinfoView]];
+    self.navigationItem.leftBarButtonItems = @[leftFixedSpace, [[UIBarButtonItem alloc] initWithImage:[UIImage originalImage:@"wireless_ico_person"] style:UIBarButtonItemStylePlain target:self action:@selector(goTabMe)]];
     UIBarButtonItem *rightFixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     rightFixedSpace.width = -15;
     self.navigationItem.rightBarButtonItems = @[rightFixedSpace, [[UIBarButtonItem alloc] initWithImage:[UIImage originalImage:@"wireless_ico_QRcode"] style:UIBarButtonItemStylePlain target:self action:@selector(scanQRcode)]];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:ImageNamed(@"text")];
+}
+
+- (void)goTabMe
+{
+    MobClick(@"Index_userinfo");
+    UITabBarController *root = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    root.selectedIndex = 3;
 }
 
 - (void)scanQRcode

@@ -10,6 +10,8 @@
 #import "ServiceSectionModel.h"
 #import "ServiceCellModel.h"
 
+#define kNCServiceViewControllerDealloc @"kNCServiceViewControllerDealloc"
+
 @interface ServiceBannerCell : UICollectionViewCell
 
 @property (nonatomic, copy) void(^tapBlock)(ServiceBannerModel *model);
