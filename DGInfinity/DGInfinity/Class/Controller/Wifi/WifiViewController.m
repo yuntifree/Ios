@@ -25,6 +25,7 @@
 #import "CheckUpdateView.h"
 #import "AccountCGI.h"
 #import "LeftUserinfoView.h"
+#import "WiFiNoNetView.h"
 
 @interface WifiViewController ()
 <
@@ -323,11 +324,11 @@ NetWorkMgrDelegate
         } else {
             if (E_CGI_FAILED == res._errno && !_newsArray.count) {
                 __weak typeof(self) wself = self;
-                [_tableView configureNoNetStyleWithdidTapButtonBlock:^{
+                WiFiNoNetView *nonetView = [WiFiNoNetView new];
+                _tableView.backgroundView = nonetView;
+                nonetView.buttonClick = ^ {
                     [wself getWeatherAndNews];
-                } didTapViewBlock:^{
-                    
-                }];
+                };
             } else {
                 [self makeToast:res.desc];
             }
@@ -458,6 +459,7 @@ NetWorkMgrDelegate
 #pragma mark - UITableViewDataSource, UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (_newsArray.count) tableView.backgroundView = nil;
     return _newsArray.count;
 }
 
