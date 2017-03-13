@@ -10,6 +10,7 @@
 #import "AccountCGI.h"
 #import "NewsCGI.h"
 #import "WiFiCGI.h"
+#import "MiPushSDK.h"
 
 #define KUD_UID                     @"KUD_UID"
 #define KUD_TOKEN                   @"KUD_TOKEN"
@@ -24,6 +25,7 @@
 #define KUD_SPLASHEXPIRE            @"KUD_SPLASHEXPIRE"
 #define KUD_HEADURL                 @"KUD_HEADURL"
 #define KUD_NICKNAME                @"KUD_NICKNAME"
+#define KUD_PUSHTEST                @"KUD_PUSHTEST"
 
 @interface MSApp () <NSURLSessionDelegate>
 
@@ -44,6 +46,7 @@ static MSApp *mSapp = nil;
 
 + (void)destory
 {
+    [SApp unSetMiPush];
     mSapp.uid = 0;
     mSapp.token = nil;
     mSapp.privdata = nil;
@@ -51,6 +54,7 @@ static MSApp *mSapp = nil;
     mSapp.wifipass = nil;
     mSapp.headurl = nil;
     mSapp.nickname = nil;
+    mSapp.pushtest = 0;
 }
 
 - (instancetype)init
@@ -71,6 +75,7 @@ static MSApp *mSapp = nil;
     NSString *expiretime = data[@"expiretime"];
     NSString *headurl = data[@"headurl"];
     NSString *nickname = data[@"nickname"];
+    NSInteger pushtest = [data[@"pushtest"] integerValue];
     if (uid) {
         SApp.uid = uid;
     }
@@ -88,6 +93,9 @@ static MSApp *mSapp = nil;
     }
     if ([nickname isKindOfClass:[NSString class]] && nickname.length) {
         SApp.nickname = nickname;
+    }
+    if (pushtest) {
+        SApp.pushtest = pushtest;
     }
 }
 
@@ -162,6 +170,28 @@ static MSApp *mSapp = nil;
             }
         }
     }];
+}
+
+- (void)setMiPush
+{
+    if (SApp.uid) {
+        [MiPushSDK setAlias:[NSString stringWithFormat:@"%ld",SApp.uid]];
+    }
+    if (SApp.pushtest) {
+        [MiPushSDK subscribe:@"yuntitest"];
+    }
+    [MiPushSDK subscribe:@"yuntifree"];
+}
+
+- (void)unSetMiPush
+{
+    if (SApp.uid) {
+        [MiPushSDK unsetAlias:[NSString stringWithFormat:@"%ld",SApp.uid]];
+    }
+    if (SApp.pushtest) {
+        [MiPushSDK unsubscribe:@"yuntitest"];
+    }
+    [MiPushSDK unsubscribe:@"yuntifree"];
 }
 
 - (void)setUid:(NSInteger)uid
@@ -305,6 +335,17 @@ static MSApp *mSapp = nil;
 - (NSString *)nickname
 {
     return [NSUSERDEFAULTS objectForKey:KUD_NICKNAME];
+}
+
+- (void)setPushtest:(NSInteger)pushtest
+{
+    [NSUSERDEFAULTS setInteger:pushtest forKey:KUD_PUSHTEST];
+    [NSUSERDEFAULTS synchronize];
+}
+
+- (NSInteger)pushtest
+{
+    return [NSUSERDEFAULTS integerForKey:KUD_PUSHTEST];
 }
 
 #pragma mark - ReportClick

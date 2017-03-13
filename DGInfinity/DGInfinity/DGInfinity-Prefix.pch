@@ -88,6 +88,7 @@ do { \
 #define kScreenWidth kScreenFrame.size.width
 #define kScreenHeight kScreenFrame.size.height
 #define ImageNamed(_string) [UIImage imageNamed:_string]
+#define ImageForPath(_string) [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:_string]]
 #define SystemFont(float) [UIFont systemFontOfSize:float]
 #define NSUSERDEFAULTS [NSUserDefaults standardUserDefaults]
 #define SApp [MSApp sharedMSApp]

@@ -20,6 +20,7 @@
 @property (nonatomic, copy) NSString *wifipass;
 @property (nonatomic, copy) NSString *headurl;
 @property (nonatomic, copy) NSString *nickname;
+@property (nonatomic, assign) NSInteger pushtest;
 
 // app info
 @property (nonatomic, copy) NSString *appVersion;
@@ -41,5 +42,7 @@
 + (void)autoLogin;
 - (void)reportClick:(ReportClickModel *)model;
 - (void)getFlashAD;
+- (void)setMiPush;
+- (void)unSetMiPush;
 
 @end

@@ -13,10 +13,14 @@
 #import "AnimationManager.h"
 #import "LaunchGuideViewController.h"
 #import "DGNavigationViewController.h"
+#import "MiPushSDK.h"
+#import "WebViewController.h"
+#import "LaunchGifViewController.h"
 
-@interface AppDelegate () <NetWorkMgrDelegate, BMKGeneralDelegate>
+@interface AppDelegate () <NetWorkMgrDelegate, BMKGeneralDelegate, MiPushSDKDelegate, UNUserNotificationCenterDelegate>
 {
     UIBackgroundTaskIdentifier _backgroundTaskID;
+    BOOL _isBackgroundMode; // 是否是点击推送栏
 }
 @end
 
@@ -31,6 +35,7 @@
 {
     self = [super init];
     if (self) {
+        _isBackgroundMode = NO;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setRootViewController) name:KNC_LOGIN object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setRootViewController) name:KNC_LOGOUT object:nil];
     }
@@ -55,9 +60,6 @@
     // keyboardManager
     [[IQKeyboardManager sharedManager] setEnable:YES];
     
-    // Notifications
-    [Tools registerNotification];
-    
     // Network
     [[NetworkManager shareManager] startNotifier];
     [[NetworkManager shareManager] registerNetworkExtension];
@@ -66,13 +68,6 @@
     [MobClick setAppVersion:XcodeAppVersion];
     UMConfigInstance.appKey = UMengAppKey;
     [MobClick startWithConfigure:UMConfigInstance];
-    
-    // BaiduMap
-    [[BaiduMapSDK shareBaiduMapSDK] startUserLocationService];
-    BOOL ret = [[[BMKMapManager alloc] init] start:BaiduMapAppKey generalDelegate:self];
-    if (!ret) {
-        DDDLog(@"manager start failed!");
-    }
     
     // autoLogin
     [MSApp autoLogin];
@@ -103,32 +98,47 @@
 
 - (void)setRootViewController
 {
+    static BOOL launchGif = NO;
     CAAnimation *animation = [self.window.layer animationForKey:@"changeRoot"];
     if (!animation) {
         animation = [AnimationManager changeRootAnimation];
         [self.window.layer addAnimation:animation forKey:@"changeRoot"];
     }
     UIViewController *root;
-    if (!SApp.appVersion || ![SApp.appVersion isEqualToString:XcodeAppVersion]) {
-        __weak typeof(self) wself = self;
-        root = [[LaunchGuideViewController alloc] init];
-        ((LaunchGuideViewController *)root).block = ^ {
-            SApp.appVersion = XcodeAppVersion;
-            [wself setRootViewController];
-        };
+    if (!launchGif) {
+        launchGif = YES;
+        root = [[LaunchGifViewController alloc] init];
     } else {
-        if (SApp.uid) {
-            root = [[DGTabBarController alloc] init];
+        if (!SApp.appVersion || ![SApp.appVersion isEqualToString:XcodeAppVersion]) {
+            __weak typeof(self) wself = self;
+            root = [[LaunchGuideViewController alloc] init];
+            ((LaunchGuideViewController *)root).block = ^ {
+                SApp.appVersion = XcodeAppVersion;
+                [wself setRootViewController];
+            };
         } else {
-            root = [[DGNavigationViewController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
+            static dispatch_once_t onceToken;
+            dispatch_once(&onceToken, ^{
+                // BaiduMap
+                [[BaiduMapSDK shareBaiduMapSDK] startUserLocationService];
+                BOOL ret = [[[BMKMapManager alloc] init] start:BaiduMapAppKey generalDelegate:self];
+                if (!ret) {
+                    DDDLog(@"manager start failed!");
+                }
+                
+                // MiPush
+                [MiPushSDK registerMiPush:self type:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound connect:YES];
+            });
+            
+            if (SApp.uid) {
+                root = [[DGTabBarController alloc] init];
+                [SApp setMiPush];
+            } else {
+                root = [[DGNavigationViewController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
+            }
         }
     }
     self.window.rootViewController = root;
-}
-
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
-{
-    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -158,11 +168,9 @@
     }
 }
 
-
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
-
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
@@ -199,6 +207,114 @@
         DDDLog(@"授权成功");
     } else {
         DDDLog(@"onGetPermissionState %d", iError);
+    }
+}
+
+#pragma mark - 注册push服务.
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    // 注册APNS成功, 注册deviceToken
+    DDDLog(@"推送服务注册成功");
+    [MiPushSDK bindDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
+{
+    // 注册APNS失败.
+    DDDLog(@"注册推送服务失败：%@",err.description);
+}
+
+#pragma mark - Local And Push Notification
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    application.applicationIconBadgeNumber = 0;
+}
+
+// iOS10之前点击通知栏进入应用
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    // 当同时启动APNs与内部长连接时, 把两处收到的消息合并. 通过miPushReceiveNotification返回
+    [MiPushSDK handleReceiveRemoteNotification:userInfo];
+    _isBackgroundMode = YES;
+}
+
+// iOS10新加入的回调方法
+// 应用在前台收到通知
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+    NSDictionary *userInfo = notification.request.content.userInfo;
+    if ([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [MiPushSDK handleReceiveRemoteNotification:userInfo];
+    }
+//    completionHandler(UNNotificationPresentationOptionAlert);
+}
+
+// 点击通知进入应用
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+    NSDictionary *userInfo = response.notification.request.content.userInfo;
+    if ([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [MiPushSDK handleReceiveRemoteNotification:userInfo];
+        _isBackgroundMode = YES;
+    }
+    completionHandler();
+}
+
+#pragma mark - MiPushSDKDelegate
+- (void)miPushRequestSuccWithSelector:(NSString *)selector data:(NSDictionary *)data
+{
+    DDDLog(@"小米推送请求成功：%@, data = %@", selector, data);
+    // 成功绑定DeviceToken
+    if ([selector isEqualToString:@"bindDeviceToken:"]) {
+        [SApp setMiPush];
+    }
+}
+
+- (void)miPushRequestErrWithSelector:(NSString *)selector error:(int)error data:(NSDictionary *)data
+{
+    DDDLog(@"小米推送请求失败：%@, errcode = %d", selector, error);
+}
+
+/**
+ *  当App启动并运行在前台时，SDK内部会运行一个Socket长连接到Server端，以接收消息推送。
+ *  长连接接收到的消息。消息格式跟APNs格式一样。
+ */
+- (void)miPushReceiveNotification:(NSDictionary *)data
+{
+    DDDLog(@"收到的推送消息为：%@",data);
+    if (!_isBackgroundMode) return;
+    _isBackgroundMode = NO;
+    NSString *payload = data[@"payload"];
+    NSDictionary *json = [Tools jsonStringToDictionary:payload];
+    if ([json isKindOfClass:[NSDictionary class]]) {
+        NSInteger type = [json[@"type"] integerValue];
+        switch (type) {
+            case 1: // 新增模块推广 跳转到首页
+            {
+                
+            }
+                break;
+            case 2: // 活动推广 跳转到活动页
+            {
+                NSString *dst = json[@"dst"];
+                if ([dst isKindOfClass:[NSString class]] && dst.length) {
+                    DGNavigationViewController *navigationVC = nil;
+                    UIViewController *rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+                    if ([rootVC isKindOfClass:[DGNavigationViewController class]]) {
+                        navigationVC = (DGNavigationViewController *)rootVC;
+                    } else if ([rootVC isKindOfClass:[DGTabBarController class]]) {
+                        DGTabBarController *tabVC = (DGTabBarController *)rootVC;
+                        navigationVC = tabVC.selectedViewController;
+                    }
+                    if (navigationVC) {
+                        WebViewController *vc = [WebViewController new];
+                        vc.url = dst;
+                        [navigationVC pushViewController:vc animated:YES];
+                    }
+                }
+            }
+                break;
+            default:
+                break;
+        }
     }
 }
 
