@@ -393,7 +393,7 @@
 
 + (NSDictionary *)jsonStringToDictionary:(NSString *)jsonString
 {
-    if (!jsonString || ![jsonString isKindOfClass:[NSDictionary class]]) return nil;
+    if (!jsonString || ![jsonString isKindOfClass:[NSString class]]) return nil;
     NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error = nil;
     NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:jsonData

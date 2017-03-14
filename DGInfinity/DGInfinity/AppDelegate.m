@@ -234,8 +234,8 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     // 当同时启动APNs与内部长连接时, 把两处收到的消息合并. 通过miPushReceiveNotification返回
-    [MiPushSDK handleReceiveRemoteNotification:userInfo];
     _isBackgroundMode = YES;
+    [MiPushSDK handleReceiveRemoteNotification:userInfo];
 }
 
 // iOS10新加入的回调方法
@@ -243,6 +243,7 @@
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
     NSDictionary *userInfo = notification.request.content.userInfo;
     if ([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        _isBackgroundMode = NO;
         [MiPushSDK handleReceiveRemoteNotification:userInfo];
     }
 //    completionHandler(UNNotificationPresentationOptionAlert);
@@ -252,8 +253,8 @@
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
     NSDictionary *userInfo = response.notification.request.content.userInfo;
     if ([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        [MiPushSDK handleReceiveRemoteNotification:userInfo];
         _isBackgroundMode = YES;
+        [MiPushSDK handleReceiveRemoteNotification:userInfo];
     }
     completionHandler();
 }
