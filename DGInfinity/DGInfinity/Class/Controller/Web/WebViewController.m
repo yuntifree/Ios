@@ -329,11 +329,13 @@ NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrco
             break;
         case NT_LIVE:
         {
-            [self.webView evaluateJavaScript:JavaScriptLiveHidden completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
-                if (error) {
-                    DDDLog(@"javaScript error: %@",error);
-                }
-            }];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.webView evaluateJavaScript:JavaScriptLiveHidden completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+                    if (error) {
+                        DDDLog(@"javaScript error: %@",error);
+                    }
+                }];
+            });
         }
             break;
         default:
