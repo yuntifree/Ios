@@ -43,28 +43,6 @@
                         <outletCollection property="gestureRecognizers" destination="CDN-EI-BT5" appends="YES" id="mw9-7c-dEt"/>
                     </connections>
                 </imageView>
-                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="东莞无限" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKR-FQ-gR7">
-                    <rect key="frame" x="161" y="86" width="54" height="18"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="18" id="Hre-fD-ECJ"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                    <connections>
-                        <outletCollection property="gestureRecognizers" destination="wag-Jg-f9Q" appends="YES" id="KHP-Fm-nOc"/>
-                    </connections>
-                </label>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_write.png" translatesAutoresizingMaskIntoConstraints="NO" id="nRV-Cr-DdL">
-                    <rect key="frame" x="179" y="109" width="18" height="18"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="18" id="W0G-hO-Qor"/>
-                        <constraint firstAttribute="height" constant="18" id="fJC-Kd-TVP"/>
-                    </constraints>
-                    <connections>
-                        <outletCollection property="gestureRecognizers" destination="uCC-c7-cB6" appends="YES" id="e4V-oM-jZC"/>
-                    </connections>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="INk-yQ-i7q">
                     <rect key="frame" x="0.0" y="135" width="375" height="25"/>
                     <subviews>
@@ -83,27 +61,58 @@
                         <constraint firstItem="rwO-Ct-iff" firstAttribute="leading" secondItem="INk-yQ-i7q" secondAttribute="leading" id="xPa-2t-tDB"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bnh-TT-mGw">
+                    <rect key="frame" x="67" y="86" width="240" height="41"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="东莞无限" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKR-FQ-gR7">
+                            <rect key="frame" x="93" y="0.0" width="54" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="18" id="Hre-fD-ECJ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_write.png" translatesAutoresizingMaskIntoConstraints="NO" id="nRV-Cr-DdL">
+                            <rect key="frame" x="111" y="23" width="18" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="18" id="W0G-hO-Qor"/>
+                                <constraint firstAttribute="height" constant="18" id="fJC-Kd-TVP"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="EKR-FQ-gR7" firstAttribute="top" secondItem="bnh-TT-mGw" secondAttribute="top" id="5JO-f5-5Rz"/>
+                        <constraint firstAttribute="bottom" secondItem="nRV-Cr-DdL" secondAttribute="bottom" id="ANX-FS-p0C"/>
+                        <constraint firstItem="nRV-Cr-DdL" firstAttribute="centerX" secondItem="bnh-TT-mGw" secondAttribute="centerX" id="H07-qP-xLb"/>
+                        <constraint firstAttribute="height" constant="41" id="QmU-7b-JS9"/>
+                        <constraint firstItem="EKR-FQ-gR7" firstAttribute="centerX" secondItem="bnh-TT-mGw" secondAttribute="centerX" id="mDJ-t0-zCP"/>
+                        <constraint firstAttribute="width" constant="240" id="sr5-wJ-6je"/>
+                    </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="uCC-c7-cB6" appends="YES" id="QQQ-Fq-vxa"/>
+                    </connections>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="nzT-mS-hOn" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="0cz-e4-ZdH"/>
-                <constraint firstItem="nRV-Cr-DdL" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="SJ4-LI-gEh"/>
-                <constraint firstItem="INk-yQ-i7q" firstAttribute="top" secondItem="nRV-Cr-DdL" secondAttribute="bottom" constant="8" id="TvH-X3-hTQ"/>
-                <constraint firstItem="nRV-Cr-DdL" firstAttribute="top" secondItem="EKR-FQ-gR7" secondAttribute="bottom" constant="5" id="XMw-Yb-XgA"/>
+                <constraint firstItem="bnh-TT-mGw" firstAttribute="top" secondItem="nzT-mS-hOn" secondAttribute="bottom" constant="6" id="51Y-rJ-1u1"/>
                 <constraint firstItem="INk-yQ-i7q" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Zag-fb-SiJ"/>
                 <constraint firstAttribute="trailing" secondItem="xyZ-Du-hYc" secondAttribute="trailing" id="bi5-bD-2o4"/>
-                <constraint firstItem="EKR-FQ-gR7" firstAttribute="top" secondItem="nzT-mS-hOn" secondAttribute="bottom" constant="6" id="dPk-nf-nqd"/>
                 <constraint firstItem="nzT-mS-hOn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="14" id="dYT-Cs-iSJ"/>
                 <constraint firstItem="xyZ-Du-hYc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dfy-bB-FVD"/>
+                <constraint firstItem="INk-yQ-i7q" firstAttribute="top" secondItem="bnh-TT-mGw" secondAttribute="bottom" constant="8" id="om7-zN-2n0"/>
                 <constraint firstAttribute="trailing" secondItem="INk-yQ-i7q" secondAttribute="trailing" id="ono-IA-GNu"/>
                 <constraint firstItem="xyZ-Du-hYc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="rqv-nX-VnC"/>
-                <constraint firstItem="EKR-FQ-gR7" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="snq-Br-Sqx"/>
+                <constraint firstItem="bnh-TT-mGw" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="syd-ag-elt"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="_descLbl" destination="rwO-Ct-iff" id="0yc-y2-hP8"/>
                 <outlet property="_headView" destination="nzT-mS-hOn" id="HAJ-Yj-uf7"/>
                 <outlet property="_nameLbl" destination="EKR-FQ-gR7" id="a9k-Kc-wcm"/>
+                <outlet property="_nameViewWidth" destination="sr5-wJ-6je" id="Gci-Sd-xHU"/>
             </connections>
             <point key="canvasLocation" x="-152.5" y="-66"/>
         </view>
@@ -115,11 +124,6 @@
         <tapGestureRecognizer id="uCC-c7-cB6">
             <connections>
                 <action selector="writeViewTap:" destination="iN0-l3-epB" id="HGg-Ka-haL"/>
-            </connections>
-        </tapGestureRecognizer>
-        <tapGestureRecognizer id="wag-Jg-f9Q">
-            <connections>
-                <action selector="writeViewTap:" destination="iN0-l3-epB" id="Yan-ke-ini"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

@@ -12,7 +12,8 @@
 
 - (void)makeToast:(NSString *)message
 {
-    [self.view makeToast:message];
+//    [self.view makeToast:message];
+    [[UIApplication sharedApplication].windows.lastObject makeToast:message];
 }
 
 - (void)showAlertWithTitle:(NSString *)title

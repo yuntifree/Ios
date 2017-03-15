@@ -14,6 +14,7 @@
     __weak IBOutlet UILabel *_nameLbl;
     __weak IBOutlet UILabel *_descLbl;
     
+    __weak IBOutlet NSLayoutConstraint *_nameViewWidth;
 }
 @end
 
@@ -22,6 +23,7 @@
 - (void)setHeaderValue:(NSDictionary *)info
 {
     _descLbl.text = [NSString stringWithFormat:@"您已连接东莞无线%ld次，为您节省流量费用%ld元",[info[@"total"] integerValue], [info[@"save"] integerValue]];
+    _nameViewWidth.constant = ceil([_nameLbl sizeThatFits:CGSizeZero].width);
 }
 
 - (void)refreshUserinfo
@@ -31,6 +33,7 @@
     }
     if ([SApp.nickname isKindOfClass:[NSString class]] && SApp.nickname.length) {
         _nameLbl.text = SApp.nickname;
+        _nameViewWidth.constant = ceil([_nameLbl sizeThatFits:CGSizeZero].width);
     }
 }
 
