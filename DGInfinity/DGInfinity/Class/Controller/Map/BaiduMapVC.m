@@ -126,7 +126,7 @@
  */
 @interface BaiduMapVC () <BMKMapViewDelegate>
 {
-    BMKMapView *_mapView;
+    __weak IBOutlet BMKMapView *_mapView;
     BMKUserLocation *_myLocation;
     
     NSMutableArray *_annotitaions;
@@ -186,31 +186,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    // 适配ios7
-    if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 7.0) {
-        self.navigationController.navigationBar.translucent = NO;
-    }
-    
-    _mapView = [[BMKMapView alloc] init];
-    _mapView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self setUpMapView];
+}
+
+- (void)setUpMapView
+{
     _mapView.showsUserLocation = YES;
+    _mapView.showMapScaleBar = YES;
     _mapView.zoomLevel = 16.1;
     _mapView.centerCoordinate = _myLocation.location.coordinate;
     BMKLocationViewDisplayParam *param = [[BMKLocationViewDisplayParam alloc] init];
     param.isAccuracyCircleShow = NO;
     param.locationViewImgName = @"target";
     [_mapView updateLocationViewWithParam:param];
-    [_mapView setNeedsUpdateConstraints];
-    [self.view addSubview:_mapView];
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    button.frame = CGRectMake(kScreenWidth - 36 - 20, 20, 36, 36);
-    [button setBackgroundImage:ImageNamed(@"Navigation") forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(navBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
 }
 
-- (void)navBtnClick
+- (IBAction)navBtnClick
 {
     if (![[BaiduMapSDK shareBaiduMapSDK] locationServicesEnabled]) {
         [self showAlertWithTitle:@"提示" message:@"无法获取位置信息，建议开启定位服务" cancelTitle:@"忽略" cancelHandler:nil defaultTitle:@"开启" defaultHandler:^(UIAlertAction *action) {
@@ -221,15 +212,6 @@
     BMKMapStatus *status = [BMKMapStatus new];
     status.targetGeoPt = _myLocation.location.coordinate;
     [_mapView setMapStatus:status withAnimation:YES];
-}
-
-- (void)updateViewConstraints
-{
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:_mapView attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_mapView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0]];
-    [super updateViewConstraints];
 }
 
 // 添加WiFi位置标注

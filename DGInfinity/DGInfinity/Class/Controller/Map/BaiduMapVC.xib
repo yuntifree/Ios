@@ -1,13 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BaiduMapVC">
             <connections>
+                <outlet property="_mapView" destination="w5o-GW-WUn" id="v2O-Hk-M8s"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,7 +19,35 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w5o-GW-WUn" customClass="BMKMapView">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJc-Rs-o37">
+                    <rect key="frame" x="319" y="20" width="36" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="Gnm-RS-CZB"/>
+                        <constraint firstAttribute="width" constant="36" id="uPK-ty-SJM"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="Navigation.png"/>
+                    <connections>
+                        <action selector="navBtnClick" destination="-1" eventType="touchUpInside" id="VO6-Ei-OXz"/>
+                    </connections>
+                </button>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="w5o-GW-WUn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="0jH-X0-GO1"/>
+                <constraint firstAttribute="bottom" secondItem="w5o-GW-WUn" secondAttribute="bottom" id="McE-gN-vi5"/>
+                <constraint firstItem="QJc-Rs-o37" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="XT7-Gp-qJp"/>
+                <constraint firstAttribute="trailing" secondItem="QJc-Rs-o37" secondAttribute="trailing" constant="20" id="hkQ-ha-0Qv"/>
+                <constraint firstItem="w5o-GW-WUn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="laN-OD-y5V"/>
+                <constraint firstAttribute="trailing" secondItem="w5o-GW-WUn" secondAttribute="trailing" id="p4W-Om-HsU"/>
+            </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="Navigation.png" width="36" height="36"/>
+    </resources>
 </document>

@@ -49,6 +49,7 @@
 - (void)setUpSubViews
 {
     _mapView.zoomLevel = 16;
+    _mapView.showMapScaleBar = YES;
     _mapView.centerCoordinate = _annotation.coordinate;
     [_mapView addAnnotation:_annotation];
     
