@@ -45,8 +45,19 @@
         make.centerX.equalTo(self.view.mas_centerX);
         make.width.equalTo(@113);
         make.height.equalTo(@113);
-        make.top.equalTo(self.view).offset(217 * [Tools layoutFactor]);
+        make.top.equalTo(self.view).offset(175 * [Tools layoutFactor]);
     }];
+    
+    UIImageView *sloganView = [UIImageView new];
+    sloganView.image = ImageForPath(@"loading_img_text.png");
+    [self.view addSubview:sloganView];
+    [sloganView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.width.equalTo(@216);
+        make.height.equalTo(@54);
+        make.top.equalTo(_gifView.mas_bottom).offset(18);
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {
