@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="246" height="109"/>
                     </scrollView>
                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="2Vc-PE-q29">
-                        <rect key="frame" x="103.5" y="79" width="39" height="37"/>
+                        <rect key="frame" x="103.5" y="81" width="39" height="37"/>
                     </pageControl>
                 </subviews>
             </view>
@@ -33,7 +33,7 @@
                 <constraint firstItem="aUm-aR-dqi" firstAttribute="leading" secondItem="C81-PB-oF4" secondAttribute="leading" id="JOA-Ih-mAO"/>
                 <constraint firstAttribute="bottom" secondItem="aUm-aR-dqi" secondAttribute="bottom" id="VEZ-FR-QMv"/>
                 <constraint firstItem="aUm-aR-dqi" firstAttribute="top" secondItem="C81-PB-oF4" secondAttribute="top" id="fOh-FQ-e6L"/>
-                <constraint firstItem="2Vc-PE-q29" firstAttribute="top" secondItem="aUm-aR-dqi" secondAttribute="bottom" constant="-30" id="g6V-67-voh"/>
+                <constraint firstItem="2Vc-PE-q29" firstAttribute="top" secondItem="aUm-aR-dqi" secondAttribute="bottom" constant="-28" id="g6V-67-voh"/>
             </constraints>
             <size key="customSize" width="246" height="109"/>
             <connections>

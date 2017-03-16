@@ -17,6 +17,7 @@
 {
     __weak IBOutlet UITableView *_listView;
     
+    BOOL _isScaned;
 }
 
 @property (nonatomic, strong) NSArray *dataArray;
@@ -28,11 +29,19 @@
 - (NSArray *)dataArray
 {
     if (_dataArray == nil) {
-        NSString *totalCost = [NSString stringWithFormat:@"%.1lfM",[YYWebImageManager sharedManager].cache.diskCache.totalCost / 1024.0 / 1024.0];
-        _dataArray = @[[SettingModel createWithTitle:@"清理缓存" desc:totalCost],
+        _dataArray = @[[SettingModel createWithTitle:@"清理缓存" desc:nil],
                        [SettingModel createWithTitle:@"关于我们" desc:nil]];
     }
     return _dataArray;
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        _isScaned = NO;
+    }
+    return self;
 }
 
 - (NSString *)title
@@ -44,6 +53,30 @@
 {
     MobClick(@"setting_cancel");
     [super backBtnClick:sender];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (!_isScaned) {
+        [SVProgressHUD showWithStatus:@"扫描缓存中..."];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (!_isScaned) {
+        [[YYWebImageManager sharedManager].cache.diskCache totalCostWithBlock:^(NSInteger totalCost) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _isScaned = YES;
+                [SVProgressHUD dismiss];
+                SettingModel *model = self.dataArray.firstObject;
+                model.desc = [NSString stringWithFormat:@"%.1lfM", totalCost / 1024.0 / 1024.0];
+                [_listView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+            });
+        }];
+    }
 }
 
 - (void)viewDidLoad {

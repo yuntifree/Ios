@@ -27,7 +27,7 @@
 - (void)setCityValue:(ServiceCityModel *)model
 {
     _model = model;
-    [_button yy_setImageWithURL:[NSURL URLWithString:model.img] forState:UIControlStateNormal placeholder:ImageNamed(@"cooperation.png") options:YYWebImageOptionSetImageWithFadeAnimation completion:^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
+    [_button yy_setImageWithURL:[NSURL URLWithString:model.img] forState:UIControlStateNormal placeholder:ImageNamed(@"ico_fillgray") options:YYWebImageOptionSetImageWithFadeAnimation completion:^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
         [_button setImage:[UIImage reSizeImage:image toSize:CGSizeMake(44, 44)] forState:UIControlStateNormal];
     }];
     [_button setTitle:model.title forState:UIControlStateNormal];
