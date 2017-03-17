@@ -43,7 +43,8 @@ static NetworkManager *manager = nil;
 {
     self = [super init];
     if (self) {
-        _reachability = [Reachability reachabilityWithHostName:@"www.yunxingzh.com"];
+//        _reachability = [Reachability reachabilityWithHostName:@"www.yunxingzh.com"];
+        _reachability = [Reachability reachabilityForInternetConnection];
         _currentStatus = [_reachability currentReachabilityStatus];
         _observers = [NSHashTable weakObjectsHashTable];
         _lastSSID = nil;
