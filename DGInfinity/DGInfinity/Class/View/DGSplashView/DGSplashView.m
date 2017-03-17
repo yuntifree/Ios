@@ -117,7 +117,7 @@
 {
     dispatch_queue_t queue = dispatch_get_main_queue();
     _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
-    dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 0), 1.0 * NSEC_PER_SEC, 0);
+    dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 0), 1.2 * NSEC_PER_SEC, 0);
     __weak typeof(self) wself = self;
     dispatch_source_set_event_handler(_timer, ^{
         [wself timerRun];

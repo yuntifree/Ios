@@ -14,6 +14,7 @@
 #import "BaiduMapSDK.h"
 
 #define ROTATIONSSECONDS 5
+#define JUDGEDISTANCE 100
 
 @interface WiFiMenuView () <CAAnimationDelegate, BaiduMapSDKDelegate>
 {
@@ -304,7 +305,7 @@
 {
     BOOL exist = NO;
     for (NSDictionary *info in _annotations) {
-        if (MetersTwoCoordinate2D(coordinate, CLLocationCoordinate2DMake([info[@"latitude"] doubleValue], [info[@"longitude"] doubleValue])) <= 20) {
+        if (MetersTwoCoordinate2D(coordinate, CLLocationCoordinate2DMake([info[@"latitude"] doubleValue], [info[@"longitude"] doubleValue])) <= JUDGEDISTANCE) {
             exist = YES;
             break;
         }
