@@ -128,22 +128,6 @@ NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrco
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    if (_newsType == NT_VIDEO) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    if (!self.navigationController.interactivePopGestureRecognizer.enabled) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-    }
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
