@@ -70,7 +70,7 @@
     CGFloat factor = [Tools layoutFactor];
     _leftWeatherViewBottom.constant *= factor;
     _rightWeatherViewTop.constant *= factor;
-    _statusLblTop.constant = _statusLblTop.constant * factor + (factor >= 1 ? : -10);
+    _statusLblTop.constant = _statusLblTop.constant * factor + (factor >= 1 ? 0 : -10);
     
     _halo = [PulsingHaloLayer layer];
     _halo.position = CGPointMake(kScreenWidth / 2, kScreenWidth / 375 * 244 / 2);

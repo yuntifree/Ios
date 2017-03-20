@@ -110,15 +110,23 @@
     CMCCUserInfo *info = [CMCCUserInfo shareInfo];
     if (info.wlanacname) {
         data[@"wlanacname"] = info.wlanacname;
+    } else {
+        data[@"wlanacname"] = @"";
     }
     if (info.wlanuserip) {
         data[@"wlanuserip"] = info.wlanuserip;
+    } else {
+        data[@"wlanuserip"] = @"";
     }
     if (info.wlanacip) {
         data[@"wlanacip"] = info.wlanacip;
+    } else {
+        data[@"wlanacip"] = @"";
     }
     if (info.wlanusermac) {
         data[@"wlanusermac"] = info.wlanusermac;
+    } else {
+        data[@"wlanusermac"] = @"";
     }
     data[@"apmac"] = [Tools getBSSID];
     params[@"data"] = data;
