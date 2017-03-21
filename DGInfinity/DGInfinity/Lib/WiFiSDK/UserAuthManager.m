@@ -18,16 +18,6 @@
 #define YUEAP_HOST                @"http://112.33.2.51:7071/wsmp/interface?"
 #define YUE_HOST_NAME             @"http://www.apple.com/cn/"
 
-
-#define YUE_WLAN_ACNAME           @"wlanacname"
-#define YUE_WLAN_USERIP           @"wlanuserip"
-#define YUE_SSID                  @"ssid"
-#define YUE_WLAN_ACIP             @"wlanacip"
-#define YUE_WLAN_USERMAC          @"wlanusermac"
-
-
-
-
 #define YUE_SESSIONID             @"sessionid"
 
 #define TOKEN                     @"tokenID"

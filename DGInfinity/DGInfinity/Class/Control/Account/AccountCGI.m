@@ -9,6 +9,7 @@
 #import "AccountCGI.h"
 #import "DeviceManager.h"
 #import "CMCCUserInfo.h"
+#import "UserAuthManager.h"
 
 @implementation AccountCGI
 
@@ -131,6 +132,14 @@
     data[@"apmac"] = [Tools getBSSID];
     params[@"data"] = data;
     [[RequestManager shareManager] loadAsync:params cgi:@"connect_wifi" complete:^(DGCgiResult *res) {
+        if (E_OK == res._errno) {
+            NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+            [userDefault setObject:info.wlanacname forKey:YUE_WLAN_ACNAME];
+            [userDefault setObject:info.wlanacip forKey:YUE_WLAN_ACIP];
+            [userDefault setObject:info.wlanuserip forKey:YUE_WLAN_USERIP];
+            [userDefault setObject:info.wlanusermac forKey:YUE_WLAN_USERMAC];
+            [userDefault synchronize];
+        }
         if (complete) {
             complete(res);
         }

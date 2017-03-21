@@ -46,6 +46,12 @@
  */
 #import <Foundation/Foundation.h>
 
+#define YUE_WLAN_ACNAME           @"wlanacname"
+#define YUE_WLAN_USERIP           @"wlanuserip"
+#define YUE_SSID                  @"ssid"
+#define YUE_WLAN_ACIP             @"wlanacip"
+#define YUE_WLAN_USERMAC          @"wlanusermac"
+
 @interface UserAuthManager : NSObject
 {
     
