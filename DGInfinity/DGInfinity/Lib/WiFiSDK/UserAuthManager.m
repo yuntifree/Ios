@@ -234,7 +234,7 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)response
               }
               
           }
-          else if (error)
+          else
           {
               //网络检测异常(无网络)
               environmentCheck(ENV_ERROR);//无网络

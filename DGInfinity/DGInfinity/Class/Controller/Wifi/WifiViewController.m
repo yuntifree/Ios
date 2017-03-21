@@ -74,28 +74,17 @@ NetWorkMgrDelegate
 - (void)willEnterForeground
 {
 #if (!TARGET_IPHONE_SIMULATOR)
-    [[UserAuthManager manager] checkEnvironmentBlock:^(ENV_STATUS status) {
-        if (status == ENV_NOT_WIFI) {
-            if ([[Tools getCurrentSSID] isEqualToString:WIFISDK_SSID]) {
-                // 已经portal认证
-                [_menuView setConnectBtnStatus:ConnectStatusConnected];
+    if ([[NetworkManager shareManager] isWiFi]) {
+        [[UserAuthManager manager] checkEnvironmentBlock:^(ENV_STATUS status) {
+            if (status == ENV_NOT_LOGIN) {
+                [self doLogon];
             } else {
-                // 别的网络（WiFi或者4G）
-                if ([[NetworkManager shareManager] isWiFi]) {
-                    [_menuView setConnectBtnStatus:ConnectStatusConnected];
-                } else {
-                    [_menuView searchNearbyAps];
-                }
+                [_menuView setConnectBtnStatus:ConnectStatusConnected];
             }
-        } else if (status == ENV_LOGIN) {
-            // 已经通过SDK认证
-            [_menuView setConnectBtnStatus:ConnectStatusConnected];
-        } else if (status == ENV_NOT_LOGIN) {
-            [self doLogon];
-        } else {
-            [_menuView setConnectBtnStatus:ConnectStatusSearch];
-        }
-    }];
+        }];
+    } else {
+        [_menuView searchNearbyAps];
+    }
 #endif
     if (SApp.beWakened) {
         SApp.beWakened = NO;
