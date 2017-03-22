@@ -11,6 +11,8 @@
 #import "NewsCGI.h"
 #import "WiFiCGI.h"
 #import "MiPushSDK.h"
+#import <AFNetworking.h>
+#import "CheckUpdateView.h"
 
 #define KUD_UID                     @"KUD_UID"
 #define KUD_TOKEN                   @"KUD_TOKEN"
@@ -193,6 +195,42 @@ static MSApp *mSapp = nil;
     }
     [MiPushSDK unsubscribe:@"yuntifree"];
 }
+
+- (void)showCheckUpdataView
+{
+    static BOOL isChecked = NO;
+    if (!isChecked) {
+        isChecked = YES;
+        [self checkUpdate];
+    }
+}
+
+- (void)checkUpdate
+{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:CheckUpdateURL parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (responseObject && [responseObject isKindOfClass:[NSData class]]) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            if ([dict isKindOfClass:[NSDictionary class]]) {
+                NSArray *results = dict[@"results"];
+                if ([results isKindOfClass:[NSArray class]] && results.count) {
+                    NSDictionary *info = results[0];
+                    if ([info isKindOfClass:[NSDictionary class]]) {
+                        NSString *version = info[@"version"];
+                        if ([version compare:XcodeAppVersion] == NSOrderedDescending) {
+                            CheckUpdateView *view = [[CheckUpdateView alloc] initWithVersion:version trackViewUrl:info[@"trackViewUrl"]];
+                            [view showInView:[UIApplication sharedApplication].keyWindow];
+                        }
+                    }
+                }
+            }
+        }
+    } failure:nil];
+}
+
+#pragma mark - User Info
 
 - (void)setUid:(NSInteger)uid
 {

@@ -99,9 +99,6 @@
 
 - (void)skipBtnClick
 {
-    if (_action) {
-        _action(SplashActionSkipOrCountDown, nil, nil);
-    }
     [self dismiss];
 }
 
@@ -138,9 +135,6 @@
     if (_seconds) {
         _secondLbl.text = [NSString stringWithFormat:@"%d",_seconds];
     } else {
-        if (_action) {
-            _action(SplashActionSkipOrCountDown, nil, nil);
-        }
         [self dismiss];
     }
     _seconds--;

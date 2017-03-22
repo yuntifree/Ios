@@ -153,7 +153,7 @@
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -166,6 +166,11 @@
         }
             break;
         case 1:
+        {
+            [cell setIcon:@"" title:@"联系客服"];
+        }
+            break;
+        case 2:
         {
             [cell setIcon:@"my_ico_set" title:@"设置"];
         }
@@ -188,6 +193,16 @@
         }
             break;
         case 1:
+        {
+            [self showAlertWithTitle:@"拨打客服热线" message:@"0769-21660569" cancelTitle:@"取消" cancelHandler:nil defaultTitle:@"确定" defaultHandler:^(UIAlertAction *action) {
+                NSURL *tel = [NSURL URLWithString:@"tel:076921660569"];
+                if ([[UIApplication sharedApplication] canOpenURL:tel]) {
+                    [[UIApplication sharedApplication] openURL:tel];
+                }
+            }];
+        }
+            break;
+        case 2:
         {
             MobClick(@"Me_setting");
             SettingViewController *vc = [SettingViewController new];

@@ -44,5 +44,6 @@
 - (void)getFlashAD;
 - (void)setMiPush;
 - (void)unSetMiPush;
+- (void)showCheckUpdataView;
 
 @end

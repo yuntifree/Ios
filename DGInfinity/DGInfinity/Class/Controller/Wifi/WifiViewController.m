@@ -21,8 +21,6 @@
 #import "WiFiWelfareViewController.h"
 #import "NetworkManager.h"
 #import "DGSplashView.h"
-#import <AFNetworking.h>
-#import "CheckUpdateView.h"
 #import "AccountCGI.h"
 #import "WiFiNoNetView.h"
 
@@ -117,6 +115,13 @@ NetWorkMgrDelegate
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [_menuView stopAnimation];
+    [self.navigationController.navigationBar setBarTintColor:COLOR(0, 156, 251, 1)];
+}
+
 - (void)showSplashView
 {
     NSString *dateStr = [NSDate formatStringWithDate:[NSDate date]];
@@ -131,80 +136,17 @@ NetWorkMgrDelegate
             if (type == SplashActionTypeDismiss) {
                 wself.isHiddenStatusBar = NO;
                 [wself setNeedsStatusBarAppearanceUpdate];
+                [SApp showCheckUpdataView];
             } else if (type == SplashActionTypeGet) {
                 WebViewController *vc = [[WebViewController alloc] init];
                 vc.url = dst;
                 vc.title = title;
                 [wself.navigationController pushViewController:vc animated:YES];
-            } else if (type == SplashActionSkipOrCountDown) {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [wself showCheckUpdataView];
-                });
             }
         };
+    } else {
+        [SApp showCheckUpdataView];
     }
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [_menuView stopAnimation];
-    [self.navigationController.navigationBar setBarTintColor:COLOR(0, 156, 251, 1)];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [self showCheckUpdataView];
-}
-
-- (void)showCheckUpdataView
-{
-    static BOOL isChecked = NO;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if (!isChecked && ![self containSplashView]) {
-            isChecked = YES;
-            [self checkUpdate];
-        }
-    });
-}
-
-- (BOOL)containSplashView
-{
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    __block BOOL isContained = NO;
-    [window.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[DGSplashView class]]) {
-            isContained = YES;
-            *stop = YES;
-        }
-    }];
-    return isContained;
-}
-
-- (void)checkUpdate
-{
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager GET:CheckUpdateURL parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if (responseObject && [responseObject isKindOfClass:[NSData class]]) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            if ([dict isKindOfClass:[NSDictionary class]]) {
-                NSArray *results = dict[@"results"];
-                if ([results isKindOfClass:[NSArray class]] && results.count) {
-                    NSDictionary *info = results[0];
-                    if ([info isKindOfClass:[NSDictionary class]]) {
-                        NSString *version = info[@"version"];
-                        if ([version compare:XcodeAppVersion] == NSOrderedDescending) {
-                            CheckUpdateView *view = [[CheckUpdateView alloc] initWithVersion:version trackViewUrl:info[@"trackViewUrl"]];
-                            [view showInView:[UIApplication sharedApplication].keyWindow];
-                        }
-                    }
-                }
-            }
-        }
-    } failure:nil];
 }
 
 - (void)viewDidLoad {
