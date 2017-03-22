@@ -88,10 +88,9 @@
 
 - (void)setUpListView
 {
-    [_listView registerNib:[UINib nibWithNibName:@"SettingCell" bundle:nil] forCellReuseIdentifier:@"SettingCell"];
     SettingHeaderView *header = [[SettingHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth * 209 / 375)];
     _listView.tableHeaderView = header;
-    CGFloat footerHeight = kScreenHeight - 64 - header.height - 110;
+    CGFloat footerHeight = kScreenHeight - 64 - header.height - self.dataArray.count * 55 - 50 - 20;
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, footerHeight)];
     SettingFooterView *footer = [[SettingFooterView alloc] initWithFrame:footerView.bounds];
     __weak typeof(self) wself = self;
@@ -113,27 +112,55 @@
 #pragma mark - UITableViewDataSource, UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataArray.count;
+    if (section == 0) {
+        return self.dataArray.count;
+    } else {
+        return 1;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        return 55;
+    } else {
+        return 50;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingCell"];
-    if (indexPath.row < self.dataArray.count) {
-        SettingModel *model = self.dataArray[indexPath.row];
-        [cell setTitle:model.title desc:model.desc];
+    UITableViewCell *cell;
+    if (indexPath.section == 0) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"SettingCell"];
+        if (!cell) {
+            cell = [[NSBundle mainBundle] loadNibNamed:@"SettingCell" owner:nil options:nil][0];
+        }
+        if (indexPath.row < self.dataArray.count) {
+            SettingModel *model = self.dataArray[indexPath.row];
+            [(SettingCell *)cell setTitle:model.title desc:model.desc arrowHiden:indexPath.row == 0];
+        }
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"SettingExitCell"];
+        if (!cell) {
+            cell = [[NSBundle mainBundle] loadNibNamed:@"SettingCell" owner:nil options:nil][1];
+        }
     }
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.001;
+    if (section == 0) {
+        return 0.001;
+    } else {
+        return 20;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -144,37 +171,48 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    switch (indexPath.row) {
-        case 0:
-        {
-            SettingModel *model = self.dataArray[0];
-            YYDiskCache *diskCache = [YYWebImageManager sharedManager].cache.diskCache;
-            if (model.desc.doubleValue >= 0.1) { // 大于或等于102.4k
-                [diskCache removeAllObjectsWithProgressBlock:^(int removedCount, int totalCount) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [SVProgressHUD showWithStatus:@"清理缓存中..."];
-                    });
-                } endBlock:^(BOOL error) {
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        [SVProgressHUD showSuccessWithStatus:@"缓存已清除"];
-                        SettingModel *model = self.dataArray[indexPath.row];
-                        model.desc = @"0.0M";
-                        [_listView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                    });
-                }];
+    if (indexPath.section == 0) {
+        switch (indexPath.row) {
+            case 0:
+            {
+                SettingModel *model = self.dataArray[0];
+                YYDiskCache *diskCache = [YYWebImageManager sharedManager].cache.diskCache;
+                if (model.desc.doubleValue >= 0.1) { // 大于或等于102.4k
+                    [diskCache removeAllObjectsWithProgressBlock:^(int removedCount, int totalCount) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [SVProgressHUD showWithStatus:@"清理缓存中..."];
+                        });
+                    } endBlock:^(BOOL error) {
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                            [SVProgressHUD showSuccessWithStatus:@"缓存已清除"];
+                            SettingModel *model = self.dataArray[indexPath.row];
+                            model.desc = @"0.0M";
+                            [_listView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                        });
+                    }];
+                }
             }
+                break;
+            case 1:
+            {
+                WebViewController *vc = [[WebViewController alloc] init];
+                vc.url = AboutmeURL;
+                vc.title = @"关于我们";
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            default:
+                break;
         }
-            break;
-        case 1:
-        {
-            WebViewController *vc = [[WebViewController alloc] init];
-            vc.url = AboutmeURL;
-            vc.title = @"关于我们";
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        default:
-            break;
+    } else {
+        [self showAlertWithTitle:@"确定退出当前账号?" message:nil cancelTitle:@"取消" cancelHandler:nil defaultTitle:@"确定退出" defaultHandler:^(UIAlertAction *action) {
+            [SVProgressHUD show];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+                [MSApp destory];
+                [[NSNotificationCenter defaultCenter] postNotificationName:KNC_LOGOUT object:nil];
+            });
+        }];
     }
 }
 

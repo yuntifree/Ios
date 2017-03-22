@@ -10,6 +10,10 @@
 
 @interface SettingCell : UITableViewCell
 
-- (void)setTitle:(NSString *)title desc:(NSString *)desc;
+- (void)setTitle:(NSString *)title desc:(NSString *)desc arrowHiden:(BOOL)hiden;
+
+@end
+
+@interface SettingExitCell : UITableViewCell
 
 @end

@@ -12,7 +12,9 @@
 {
     __weak IBOutlet UILabel *_titleLbl;
     __weak IBOutlet UILabel *_descLbl;
+    __weak IBOutlet UIImageView *_arrowView;
     
+    __weak IBOutlet NSLayoutConstraint *_descLblRight;
 }
 @end
 
@@ -29,10 +31,16 @@
     // Configure the view for the selected state
 }
 
-- (void)setTitle:(NSString *)title desc:(NSString *)desc
+- (void)setTitle:(NSString *)title desc:(NSString *)desc arrowHiden:(BOOL)hiden
 {
     _titleLbl.text = title;
     _descLbl.text = desc;
+    _arrowView.hidden = hiden;
+    _descLblRight.constant = hiden ? 12 : 32;
 }
+
+@end
+
+@implementation SettingExitCell
 
 @end

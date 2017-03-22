@@ -167,7 +167,7 @@
             break;
         case 1:
         {
-            [cell setIcon:@"" title:@"联系客服"];
+            [cell setIcon:@"my_ico_call" title:@"客服热线"];
         }
             break;
         case 2:
