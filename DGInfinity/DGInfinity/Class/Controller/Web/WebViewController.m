@@ -275,8 +275,7 @@ NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrco
 #pragma mark - WKNavigationDelegate
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
-    if(navigationAction.targetFrame == nil)
-    {
+    if (navigationAction.targetFrame == nil) {
         [webView loadRequest:navigationAction.request];
     }
     NSURL *URL = navigationAction.request.URL;
