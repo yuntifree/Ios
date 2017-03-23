@@ -206,8 +206,6 @@
 		6F6FDAE81DB4C82100E50D9B /* NewsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6FDAE61DB4C82100E50D9B /* NewsViewController.xib */; };
 		6F6FDAEC1DB4C83000E50D9B /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAEA1DB4C83000E50D9B /* ServiceViewController.m */; };
 		6F6FDAED1DB4C83000E50D9B /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6FDAEB1DB4C83000E50D9B /* ServiceViewController.xib */; };
-		6F6FDAF11DB4C83D00E50D9B /* ShoppingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAEF1DB4C83D00E50D9B /* ShoppingViewController.m */; };
-		6F6FDAF21DB4C83D00E50D9B /* ShoppingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6FDAF01DB4C83D00E50D9B /* ShoppingViewController.xib */; };
 		6F6FDAF71DB4D42F00E50D9B /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAF51DB4D42F00E50D9B /* WebViewController.m */; };
 		6F6FDAFB1DB4D5D200E50D9B /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAFA1DB4D5D200E50D9B /* UIView+Frame.m */; };
 		6F6FDAFE1DB4DC4A00E50D9B /* CALayer+xib.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FDAFD1DB4DC4A00E50D9B /* CALayer+xib.m */; };
@@ -722,9 +720,6 @@
 		6F6FDAE91DB4C83000E50D9B /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
 		6F6FDAEA1DB4C83000E50D9B /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
 		6F6FDAEB1DB4C83000E50D9B /* ServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceViewController.xib; sourceTree = "<group>"; };
-		6F6FDAEE1DB4C83D00E50D9B /* ShoppingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingViewController.h; sourceTree = "<group>"; };
-		6F6FDAEF1DB4C83D00E50D9B /* ShoppingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingViewController.m; sourceTree = "<group>"; };
-		6F6FDAF01DB4C83D00E50D9B /* ShoppingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoppingViewController.xib; sourceTree = "<group>"; };
 		6F6FDAF41DB4D42F00E50D9B /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		6F6FDAF51DB4D42F00E50D9B /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		6F6FDAF91DB4D5D200E50D9B /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
@@ -1889,7 +1884,6 @@
 				6F6FDAF31DB4D39C00E50D9B /* Web */,
 				6F6FDADB1DB4C7AA00E50D9B /* News */,
 				6F6FDADC1DB4C7AA00E50D9B /* Service */,
-				6F6FDADD1DB4C7AA00E50D9B /* Shopping */,
 				6F6FDADE1DB4C7AA00E50D9B /* Wifi */,
 				6F6FDAC51DB4B7AA00E50D9B /* Base */,
 			);
@@ -1969,16 +1963,6 @@
 				6F6FDAEB1DB4C83000E50D9B /* ServiceViewController.xib */,
 			);
 			path = Service;
-			sourceTree = "<group>";
-		};
-		6F6FDADD1DB4C7AA00E50D9B /* Shopping */ = {
-			isa = PBXGroup;
-			children = (
-				6F6FDAEE1DB4C83D00E50D9B /* ShoppingViewController.h */,
-				6F6FDAEF1DB4C83D00E50D9B /* ShoppingViewController.m */,
-				6F6FDAF01DB4C83D00E50D9B /* ShoppingViewController.xib */,
-			);
-			path = Shopping;
 			sourceTree = "<group>";
 		};
 		6F6FDADE1DB4C7AA00E50D9B /* Wifi */ = {
@@ -2791,7 +2775,6 @@
 				9959BA731E7679AB00FB5FC9 /* gif_d@2x.png in Resources */,
 				6F30672A1DD3293F00FA841E /* WiFiMenuView.xib in Resources */,
 				6F3215A21DDDB29A00B7D5DA /* btn_Start button@3x.png in Resources */,
-				6F6FDAF21DB4C83D00E50D9B /* ShoppingViewController.xib in Resources */,
 				6F32158F1DDD879D00B7D5DA /* Cloudy@2x.png in Resources */,
 				994312DB1E656FAD002501E7 /* service@2x.png in Resources */,
 				990D1E761E5AD5BD0039ECDD /* my_ico_set@2x.png in Resources */,
@@ -2994,7 +2977,6 @@
 				6F3185141DB89C4300017D47 /* NewsCGI.m in Sources */,
 				6F3067241DD30CEF00FA841E /* ReportClickModel.m in Sources */,
 				6F02BAA91DCCA9C900C72833 /* UICollectionView+EmptyData.m in Sources */,
-				6F6FDAF11DB4C83D00E50D9B /* ShoppingViewController.m in Sources */,
 				9910627E1E268847006B3D2A /* RMConnectedDevice.m in Sources */,
 				6F6FDAFE1DB4DC4A00E50D9B /* CALayer+xib.m in Sources */,
 				6F6FDAFB1DB4D5D200E50D9B /* UIView+Frame.m in Sources */,

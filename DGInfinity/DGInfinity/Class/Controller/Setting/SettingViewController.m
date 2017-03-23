@@ -104,6 +104,34 @@
     _listView.tableFooterView = footerView;
 }
 
+- (void)logout
+{
+#if (!TARGET_IPHONE_SIMULATOR)
+    if ([NSUSERDEFAULTS objectForKey:YUE_WLAN_ACNAME]) {
+        [SVProgressHUD show];
+        [[UserAuthManager manager] doLogout:SApp.username andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
+            [SVProgressHUD dismiss];
+            [MSApp destory];
+            [[NSNotificationCenter defaultCenter] postNotificationName:KNC_LOGOUT object:nil];
+        }];
+    } else {
+        [SVProgressHUD show];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [MSApp destory];
+            [[NSNotificationCenter defaultCenter] postNotificationName:KNC_LOGOUT object:nil];
+        });
+    }
+#else
+    [SVProgressHUD show];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [SVProgressHUD dismiss];
+        [MSApp destory];
+        [[NSNotificationCenter defaultCenter] postNotificationName:KNC_LOGOUT object:nil];
+    });
+#endif
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -205,13 +233,9 @@
                 break;
         }
     } else {
+        __weak typeof(self) wself = self;
         [self showAlertWithTitle:@"确定退出当前账号?" message:nil cancelTitle:@"取消" cancelHandler:nil defaultTitle:@"确定退出" defaultHandler:^(UIAlertAction *action) {
-            [SVProgressHUD show];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [SVProgressHUD dismiss];
-                [MSApp destory];
-                [[NSNotificationCenter defaultCenter] postNotificationName:KNC_LOGOUT object:nil];
-            });
+            [wself logout];
         }];
     }
 }

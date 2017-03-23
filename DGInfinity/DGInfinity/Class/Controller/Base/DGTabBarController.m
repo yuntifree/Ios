@@ -11,7 +11,6 @@
 #import "WifiViewController.h"
 #import "NewsViewController.h"
 #import "ServiceViewController.h"
-#import "ShoppingViewController.h"
 #import "UITabBarItem+Setup.h"
 #import "MeViewController.h"
 
@@ -43,13 +42,7 @@
         [meNav.tabBarItem setImage:@"tab_ico_my_gray" selectedImage:@"tab_ico_my_blue"];
         meNav.tabBarItem.title = @"我";
         
-#ifdef DEBUG
-        DGNavigationViewController *shoppingNav = [[DGNavigationViewController alloc] initWithRootViewController:[ShoppingViewController new]];
-        [shoppingNav.tabBarItem setImage:@"tab_ico_buy_gray" selectedImage:@"tab_ico_buy_blue"];
-        self.viewControllers = @[wifiNav, newsNav, serviceNav, meNav, shoppingNav];
-#else
         self.viewControllers = @[wifiNav, newsNav, serviceNav, meNav];
-#endif
     }
     return self;
 }

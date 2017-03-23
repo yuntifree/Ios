@@ -101,7 +101,7 @@ typedef NS_ENUM(NSUInteger, UploadPictureState) { // 上传图片状态
 #define ServerURL @"http://120.76.236.185/" // 测试环境
 //#define ServerURL @"https://api.yunxingzh.com/" // 正式环境
 #define IPServerURL @"https://120.25.133.234/" // AC白名单
-#define AppVersion 7 // 客户端内部版本
+#define AppVersion 9 // 客户端内部版本
 
 // WifiSDK
 #define WIFISDK_TIMEOUT  5 * 1000
