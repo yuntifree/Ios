@@ -186,12 +186,16 @@ NetWorkMgrDelegate
 {
     MobClick(@"Index_QR");
     [Tools permissionOfCamera:^{
+#if (!TARGET_IPHONE_SIMULATOR)
         WiFiScanQrcodeViewController *vc = [WiFiScanQrcodeViewController new];
         [self.navigationController pushViewController:vc animated:YES];
         __weak typeof(self) wself = self;
         vc.success = ^ {
             [wself WiFiMenuViewClick:WiFiMenuTypeConnect];
         };
+#else
+        [self makeToast:@"模拟器不支持扫描"];
+#endif
     } noPermission:^(NSString *tip) {
         [self showAlertWithTitle:@"提示" message:tip cancelTitle:@"忽略" cancelHandler:nil defaultTitle:@"开启" defaultHandler:^(UIAlertAction *action) {
             [Tools openSetting];

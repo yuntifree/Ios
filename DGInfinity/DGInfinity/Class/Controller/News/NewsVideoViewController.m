@@ -101,11 +101,16 @@
                         _listView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(getNews)];
                     }
                 }
+                if (_minseq == 0) {
+                    [_videosArray removeAllObjects];
+                }
+                NSDictionary *top = data[@"top"];
+                if ([top isKindOfClass:[NSDictionary class]]) {
+                    NewsVideoTopModel *model = [NewsVideoTopModel createWithInfo:top];
+                    [_videosArray addObject:model];
+                }
                 NSArray *infos = data[@"infos"];
                 if ([infos isKindOfClass:[NSArray class]]) {
-                    if (_minseq == 0) {
-                        [_videosArray removeAllObjects];
-                    }
                     for (NSDictionary *info in infos) {
                         NewsVideoModel *model = [NewsVideoModel createWithInfo:info];
                         [_videosArray addObject:model];
@@ -146,7 +151,12 @@
 {
     NewsVideoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewsVideoCell"];
     if (indexPath.row < _videosArray.count) {
-        [cell setNewsVideoValue:_videosArray[indexPath.row]];
+        id model = _videosArray[indexPath.row];
+        if ([model isKindOfClass:[NewsVideoModel class]]) {
+            [cell setNewsVideoValue:model];
+        } else {
+            [cell setNewsVideoTopValue:model];
+        }
     }
     return cell;
 }
@@ -155,23 +165,30 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row < _videosArray.count) {
-        NewsVideoModel *model = _videosArray[indexPath.row];
-        if (!model.read) {
-            model.read = YES;
-            model.play++;
-            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        }
-        [self.mobSet addObject:@(model.id_)];
-        if (self.mobSet.count == 3) {
-            MobClick(@"video_triple_view");
-        } else if (self.mobSet.count == 5) {
-            MobClick(@"video_penta_view");
-        }
-        [SApp reportClick:[ReportClickModel createWithVideoModel:model]];
+        id obj = _videosArray[indexPath.row];
         WebViewController *vc = [[WebViewController alloc] init];
-        vc.url = model.dst;
-        vc.newsType = NT_VIDEO;
-        vc.title = model.title;
+        if ([obj isKindOfClass:[NewsVideoModel class]]) {
+            NewsVideoModel *model = (NewsVideoModel *)obj;
+            if (!model.read) {
+                model.read = YES;
+                model.play++;
+                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            }
+            [self.mobSet addObject:@(model.id_)];
+            if (self.mobSet.count == 3) {
+                MobClick(@"video_triple_view");
+            } else if (self.mobSet.count == 5) {
+                MobClick(@"video_penta_view");
+            }
+            [SApp reportClick:[ReportClickModel createWithVideoModel:model]];
+            vc.url = model.dst;
+            vc.newsType = NT_VIDEO;
+            vc.title = model.title;
+        } else {
+            NewsVideoTopModel *model = (NewsVideoTopModel *)obj;
+            vc.url = model.dst;
+            vc.title = model.title;
+        }
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

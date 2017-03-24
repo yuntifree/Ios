@@ -16,7 +16,8 @@
 #define VNO_CODE                  @"CMCC_VCODE"
 
 #define YUEAP_HOST                @"http://112.33.2.51:7071/wsmp/interface?"
-#define YUE_HOST_NAME             @"http://www.apple.com/cn/"
+//#define YUE_HOST_NAME             @"http://www.apple.com/cn/"
+#define YUE_HOST_NAME             @"http://www.baidu.com"
 
 #define YUE_SESSIONID             @"sessionid"
 

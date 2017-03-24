@@ -21,7 +21,12 @@
 
 - (void)setHeaderValue:(NSDictionary *)info
 {
-    _descLbl.text = [NSString stringWithFormat:@"您已连接东莞无线%ld次，为您节省流量费用%ld元",[info[@"total"] integerValue], [info[@"save"] integerValue]];
+    NSString *tip = info[@"tip"];
+    if ([tip isKindOfClass:[NSString class]] && tip.length) {
+        _descLbl.text = tip;
+    } else {
+        _descLbl.text = [NSString stringWithFormat:@"您已连接东莞无线%ld次，为您节省流量费用%ld元",[info[@"total"] integerValue], [info[@"save"] integerValue]];
+    }
 }
 
 - (void)refreshUserinfo

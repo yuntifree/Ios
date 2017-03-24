@@ -12,5 +12,6 @@
 @interface NewsVideoCell : UITableViewCell
 
 - (void)setNewsVideoValue:(NewsVideoModel *)model;
+- (void)setNewsVideoTopValue:(NewsVideoTopModel *)model;
 
 @end

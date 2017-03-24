@@ -24,3 +24,13 @@
 + (instancetype)createWithInfo:(NSDictionary *)info;
 
 @end
+
+@interface NewsVideoTopModel : NSObject
+
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *dst;
+@property (nonatomic, copy) NSString *img;
+
++ (instancetype)createWithInfo:(NSDictionary *)info;
+
+@end

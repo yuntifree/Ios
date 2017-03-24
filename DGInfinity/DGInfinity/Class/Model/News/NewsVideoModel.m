@@ -35,3 +35,16 @@
 }
 
 @end
+
+@implementation NewsVideoTopModel
+
++ (instancetype)createWithInfo:(NSDictionary *)info
+{
+    NewsVideoTopModel *model = [NewsVideoTopModel new];
+    model.title = info[@"title"];
+    model.dst = info[@"dst"];
+    model.img = info[@"img"];
+    return model;
+}
+
+@end

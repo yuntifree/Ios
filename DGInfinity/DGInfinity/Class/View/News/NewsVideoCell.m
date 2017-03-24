@@ -15,6 +15,7 @@
     __weak IBOutlet UILabel *_sourceLbl;
     __weak IBOutlet UILabel *_dateLbl;
     __weak IBOutlet UILabel *_playLbl;
+    __weak IBOutlet UIImageView *_playIconView;
     
 }
 @end
@@ -34,6 +35,8 @@
 
 - (void)setNewsVideoValue:(NewsVideoModel *)model
 {
+    _sourceLbl.hidden = _dateLbl.hidden = _playLbl.hidden = _playIconView.hidden = NO;
+    
     _titleLbl.text = model.title;
     if (model.images.count) {
         [_imgView yy_setImageWithURL:[NSURL URLWithString:model.images[0]] options:YYWebImageOptionSetImageWithFadeAnimation];
@@ -46,6 +49,14 @@
     _sourceLbl.text = model.source;
     _dateLbl.text = model.date;
     _playLbl.text = [NSString stringWithFormat:@"%ld次播放",model.play];
+}
+
+- (void)setNewsVideoTopValue:(NewsVideoTopModel *)model
+{
+    _sourceLbl.hidden = _dateLbl.hidden = _playLbl.hidden = _playIconView.hidden = YES;
+    
+    _titleLbl.text = model.title;
+    [_imgView yy_setImageWithURL:[NSURL URLWithString:model.img] options:YYWebImageOptionSetImageWithFadeAnimation];
 }
 
 @end

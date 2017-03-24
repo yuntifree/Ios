@@ -106,30 +106,12 @@
 
 - (void)logout
 {
-#if (!TARGET_IPHONE_SIMULATOR)
-    if ([NSUSERDEFAULTS objectForKey:YUE_WLAN_ACNAME]) {
-        [SVProgressHUD show];
-        [[UserAuthManager manager] doLogout:SApp.username andTimeOut:WIFISDK_TIMEOUT block:^(NSDictionary *response, NSError *error) {
-            [SVProgressHUD dismiss];
-            [MSApp destory];
-            [[NSNotificationCenter defaultCenter] postNotificationName:KNC_LOGOUT object:nil];
-        }];
-    } else {
-        [SVProgressHUD show];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-            [MSApp destory];
-            [[NSNotificationCenter defaultCenter] postNotificationName:KNC_LOGOUT object:nil];
-        });
-    }
-#else
     [SVProgressHUD show];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [SVProgressHUD dismiss];
         [MSApp destory];
         [[NSNotificationCenter defaultCenter] postNotificationName:KNC_LOGOUT object:nil];
     });
-#endif
 }
 
 - (void)didReceiveMemoryWarning {

@@ -92,6 +92,7 @@
             <connections>
                 <outlet property="_dateLbl" destination="1oN-DU-F3C" id="L5G-le-8tL"/>
                 <outlet property="_imgView" destination="6LS-To-2b3" id="zmR-mB-G4D"/>
+                <outlet property="_playIconView" destination="nJN-Xe-Jb0" id="Bjg-kW-vbT"/>
                 <outlet property="_playLbl" destination="vRR-hv-yN8" id="qfd-BS-o4P"/>
                 <outlet property="_sourceLbl" destination="kSe-A7-JgW" id="XBc-Mv-bU6"/>
                 <outlet property="_titleLbl" destination="ebF-Yj-W2p" id="zST-5k-0sg"/>
