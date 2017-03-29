@@ -185,6 +185,7 @@
             vc.newsType = NT_VIDEO;
             vc.title = model.title;
         } else {
+            MobClick(@"video_360");
             NewsVideoTopModel *model = (NewsVideoTopModel *)obj;
             vc.url = [NSString stringWithFormat:@"%@?uid=%ld&token=%@", model.dst, SApp.uid, SApp.token];
             vc.title = model.title;
