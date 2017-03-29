@@ -186,7 +186,7 @@
             vc.title = model.title;
         } else {
             NewsVideoTopModel *model = (NewsVideoTopModel *)obj;
-            vc.url = model.dst;
+            vc.url = [NSString stringWithFormat:@"%@?uid=%ld&token=%@", model.dst, SApp.uid, SApp.token];
             vc.title = model.title;
         }
         [self.navigationController pushViewController:vc animated:YES];
