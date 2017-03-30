@@ -120,7 +120,7 @@
                     model.title = @"";
                     for (NSDictionary *info in banners) {
                         ServiceBannerModel *md = [ServiceBannerModel createWithInfo:info];
-                        md.type = RCT_BANNERCLICK;
+                        md.rcType = RCT_BANNERCLICK;
                         [model.items addObject:md];
                     }
                     [_dataArray addObject:model];
@@ -131,7 +131,7 @@
                     model.title = @"城市服务";
                     for (NSDictionary *info in urbanservices) {
                         ServiceCityModel *md = [ServiceCityModel createWithInfo:info];
-                        md.type = RCT_URBANSERVICE;
+                        md.rcType = RCT_URBANSERVICE;
                         [model.items addObject:md];
                     }
                     [_dataArray addObject:model];
@@ -142,7 +142,7 @@
                     model.title = @"精品推荐";
                     for (NSDictionary *info in recommends) {
                         ServiceBannerModel *md = [ServiceBannerModel createWithInfo:info];
-                        md.type = RCT_RECOMMENDCLICK;
+                        md.rcType = RCT_RECOMMENDCLICK;
                         [model.items addObject:md];
                     }
                     [_dataArray addObject:model];
@@ -294,9 +294,13 @@
                 bannerCell.tapBlock = ^ (ServiceBannerModel *model) {
                     ReportClickModel *rcModel = [ReportClickModel new];
                     rcModel.id_ = model.id_;
-                    rcModel.type = model.type;
+                    rcModel.type = model.rcType;
                     [SApp reportClick:rcModel];
-                    [wself openWebVCWithTitle:nil url:model.dst];
+                    if (model.type == JumpType_Web) {
+                        [wself openWebVCWithTitle:nil url:model.dst];
+                    } else if (model.type == JumpType_Application) {
+                        [wself gotoNewsTabWithDst:model.dst];
+                    }
                 };
             } else if ([sModel.title isEqualToString:@"城市服务"]) {
                 ServiceCityModel *model = sModel.items[indexPath.row];
@@ -305,7 +309,7 @@
                 cityCell.btnClick = ^ (ServiceCityModel *model) {
                     ReportClickModel *rcModel = [ReportClickModel new];
                     rcModel.id_ = model.id_;
-                    rcModel.type = model.type;
+                    rcModel.type = model.rcType;
                     [SApp reportClick:rcModel];
                     [wself openWebVCWithTitle:model.title url:model.dst];
                 };
@@ -347,7 +351,7 @@
             ServiceCellModel *model = sModel.items[indexPath.row];
             ReportClickModel *rcModel = [ReportClickModel new];
             rcModel.id_ = model.sid;
-            rcModel.type = model.type;
+            rcModel.type = model.rcType;
             [SApp reportClick:rcModel];
             [self openWebVCWithTitle:model.title url:model.dst];
         }

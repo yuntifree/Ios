@@ -30,6 +30,7 @@
     model.id_ = [info[@"id"] integerValue];
     model.img = info[@"img"];
     model.dst = info[@"dst"];
+    model.type = [info[@"type"] integerValue];
     return model;
 }
 

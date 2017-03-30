@@ -14,7 +14,6 @@
 #import "WebViewController.h"
 #import "NewsReportCell.h"
 #import "WiFiSpeedTestViewController.h"
-#import "NewsViewController.h"
 #import "WiFiScanQrcodeViewController.h"
 #import "WiFiExaminationViewController.h"
 #import "WiFiConnectTipView.h"
@@ -272,16 +271,6 @@ NetWorkMgrDelegate
     vc.newsType = NT_REPORT;
     vc.title = model.title;
     [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)gotoNewsTabWithType:(NSInteger)type
-{
-    UITabBarController *root = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-    UINavigationController *nav = root.viewControllers[1];
-    NewsViewController *vc = (NewsViewController *)nav.topViewController;
-    vc.defaultType = type;
-    vc.jumped = YES;
-    root.selectedIndex = 1;
 }
 
 - (BOOL)prefersStatusBarHidden

@@ -97,6 +97,11 @@ typedef NS_ENUM(NSUInteger, UploadPictureState) { // 上传图片状态
     UploadPictureState_Fail,
 };
 
+typedef NS_ENUM(NSUInteger, JumpType) { // 跳转形式
+    JumpType_Web = 0,
+    JumpType_Application = 1
+};
+
 // Server
 #define ServerURL @"http://120.76.236.185/" // 测试环境
 //#define ServerURL @"https://api.yunxingzh.com/" // 正式环境

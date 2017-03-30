@@ -7,6 +7,7 @@
 //
 
 #import "DGViewController.h"
+#import "NewsViewController.h"
 
 @interface DGViewController ()
 
@@ -105,6 +106,33 @@
 {
     
 }
+
+#pragma mark - 相关跳转
+- (void)gotoNewsTabWithType:(NSInteger)type
+{
+    UITabBarController *root = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    UINavigationController *nav = root.viewControllers[1];
+    NewsViewController *vc = (NewsViewController *)nav.topViewController;
+    vc.defaultType = type;
+    vc.jumped = YES;
+    root.selectedIndex = 1;
+}
+
+- (void)gotoNewsTabWithDst:(NSString *)dst
+{
+    [self gotoNewsTabWithType:[self dstToType:dst]];
+}
+
+- (NSInteger)dstToType:(NSString *)dst
+{
+    NSInteger type = 0;
+    if ([dst isEqualToString:@"dgnews"]) {
+        type = NT_LOCAL;
+    }
+    return type;
+}
+
+#pragma mark
 
 - (BOOL)shouldAutorotate
 {

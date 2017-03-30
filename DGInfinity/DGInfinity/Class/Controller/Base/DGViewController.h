@@ -17,5 +17,7 @@
 - (void)setUpCloseItem;
 - (void)backBtnClick:(id)sender;
 - (void)closeBtnClick:(id)sender;
+- (void)gotoNewsTabWithType:(NSInteger)type;
+- (void)gotoNewsTabWithDst:(NSString *)dst;
 
 @end
