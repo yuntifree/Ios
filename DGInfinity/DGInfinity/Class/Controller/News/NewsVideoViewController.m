@@ -187,7 +187,7 @@
         } else {
             MobClick(@"video_360");
             NewsVideoTopModel *model = (NewsVideoTopModel *)obj;
-            vc.url = [NSString stringWithFormat:@"%@?uid=%ld&token=%@", model.dst, SApp.uid, SApp.token];
+            vc.url = model.dst;
             vc.title = model.title;
         }
         [self.navigationController pushViewController:vc animated:YES];
