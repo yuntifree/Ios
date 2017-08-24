@@ -345,6 +345,10 @@
 		991440041E701EFC00AF9C85 /* btn_wifi_pre@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 991440001E701EFC00AF9C85 /* btn_wifi_pre@3x.png */; };
 		991440051E701EFC00AF9C85 /* btn_wifi_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 991440011E701EFC00AF9C85 /* btn_wifi_nor@2x.png */; };
 		991440061E701EFC00AF9C85 /* btn_wifi_nor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 991440021E701EFC00AF9C85 /* btn_wifi_nor@3x.png */; };
+		9917A4FB1F4E730F00DA722C /* my_ico_shop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9917A4F91F4E730F00DA722C /* my_ico_shop@2x.png */; };
+		9917A4FC1F4E730F00DA722C /* my_ico_shop@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9917A4FA1F4E730F00DA722C /* my_ico_shop@3x.png */; };
+		9917A4FF1F4E77CF00DA722C /* MeMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917A4FE1F4E77CF00DA722C /* MeMenuModel.m */; };
+		9917A5021F4E816C00DA722C /* UITabBar+badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917A5011F4E816C00DA722C /* UITabBar+badge.m */; };
 		991B7ADA1E6D6155009C5AFC /* DetailLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 991B7AD81E6D6155009C5AFC /* DetailLocationViewController.m */; };
 		991B7ADB1E6D6155009C5AFC /* DetailLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 991B7AD91E6D6155009C5AFC /* DetailLocationViewController.xib */; };
 		993DE33B1E57007B00D284D9 /* ico_wifi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993DE3391E57007B00D284D9 /* ico_wifi@2x.png */; };
@@ -908,6 +912,12 @@
 		991440001E701EFC00AF9C85 /* btn_wifi_pre@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_wifi_pre@3x.png"; sourceTree = "<group>"; };
 		991440011E701EFC00AF9C85 /* btn_wifi_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_wifi_nor@2x.png"; sourceTree = "<group>"; };
 		991440021E701EFC00AF9C85 /* btn_wifi_nor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_wifi_nor@3x.png"; sourceTree = "<group>"; };
+		9917A4F91F4E730F00DA722C /* my_ico_shop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_ico_shop@2x.png"; sourceTree = "<group>"; };
+		9917A4FA1F4E730F00DA722C /* my_ico_shop@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_ico_shop@3x.png"; sourceTree = "<group>"; };
+		9917A4FD1F4E77CF00DA722C /* MeMenuModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeMenuModel.h; sourceTree = "<group>"; };
+		9917A4FE1F4E77CF00DA722C /* MeMenuModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeMenuModel.m; sourceTree = "<group>"; };
+		9917A5001F4E816C00DA722C /* UITabBar+badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+badge.h"; sourceTree = "<group>"; };
+		9917A5011F4E816C00DA722C /* UITabBar+badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+badge.m"; sourceTree = "<group>"; };
 		991B7AD71E6D6155009C5AFC /* DetailLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailLocationViewController.h; sourceTree = "<group>"; };
 		991B7AD81E6D6155009C5AFC /* DetailLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailLocationViewController.m; sourceTree = "<group>"; };
 		991B7AD91E6D6155009C5AFC /* DetailLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailLocationViewController.xib; sourceTree = "<group>"; };
@@ -1831,6 +1841,8 @@
 				6F2D17611DF6A51800590AEC /* UIImage+Format.m */,
 				9943BFA21E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.h */,
 				9943BFA31E14E79100531FE4 /* UINavigationBar+ExclusiveTouch.m */,
+				9917A5001F4E816C00DA722C /* UITabBar+badge.h */,
+				9917A5011F4E816C00DA722C /* UITabBar+badge.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2132,6 +2144,8 @@
 		990D1E591E5AD5BD0039ECDD /* Me */ = {
 			isa = PBXGroup;
 			children = (
+				9917A4F91F4E730F00DA722C /* my_ico_shop@2x.png */,
+				9917A4FA1F4E730F00DA722C /* my_ico_shop@3x.png */,
 				994275C51E82851D0083CEB3 /* my_ico_call@2x.png */,
 				994275C61E82851D0083CEB3 /* my_ico_call@3x.png */,
 				990D1E5A1E5AD5BD0039ECDD /* ico_sex_man@2x.png */,
@@ -2257,6 +2271,8 @@
 			children = (
 				991220881E5C1DE3005A6BE9 /* PickHeadModel.h */,
 				991220891E5C1DE3005A6BE9 /* PickHeadModel.m */,
+				9917A4FD1F4E77CF00DA722C /* MeMenuModel.h */,
+				9917A4FE1F4E77CF00DA722C /* MeMenuModel.m */,
 			);
 			path = Me;
 			sourceTree = "<group>";
@@ -2565,6 +2581,9 @@
 							com.apple.Keychain = {
 								enabled = 0;
 							};
+							com.apple.NetworkExtensions = {
+								enabled = 0;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -2644,6 +2663,7 @@
 				990CD51F1E7105A100BA621D /* ico_route_pre@2x.png in Resources */,
 				990C1DE31E680C2100388622 /* tab_icon_wifi_blue@2x.png in Resources */,
 				6F3F32B51DDAFB8F0024095A /* target@3x.png in Resources */,
+				9917A4FB1F4E730F00DA722C /* my_ico_shop@2x.png in Resources */,
 				991440031E701EFC00AF9C85 /* btn_wifi_pre@2x.png in Resources */,
 				6FF9FA751DEAA01100620A6B /* ico_login_logo@3x.png in Resources */,
 				994312D31E656FAD002501E7 /* government@2x.png in Resources */,
@@ -2877,6 +2897,7 @@
 				990F44F31E1B8C9000E242C2 /* circle_around@3x.png in Resources */,
 				990E37F91E5ED34600F1E01F /* JokeListCell.xib in Resources */,
 				6F2E57D51DB78B2B00C39F27 /* icon_back@3x.png in Resources */,
+				9917A4FC1F4E730F00DA722C /* my_ico_shop@3x.png in Resources */,
 				9959BA751E7679AB00FB5FC9 /* gif_e@2x.png in Resources */,
 				6F3215961DDD879D00B7D5DA /* Sunny@3x.png in Resources */,
 				9912208F1E5C2367005A6BE9 /* PickHeadSectionHeader.xib in Resources */,
@@ -3050,11 +3071,13 @@
 				9910628B1E269A6D006B3D2A /* MacFinder.m in Sources */,
 				6FFA16881DB606E10077E7C3 /* SSKeychainQuery.m in Sources */,
 				6F3C114E1DE81B1C00734F8C /* UIViewController+makeToastOrAlert.m in Sources */,
+				9917A4FF1F4E77CF00DA722C /* MeMenuModel.m in Sources */,
 				994908D81E4ABC7C006F623F /* LiveListViewController.m in Sources */,
 				990EF3E01E64244500EC36E6 /* ServiceSectionFooter.m in Sources */,
 				990EF3E51E6432D800EC36E6 /* ServiceBannerCell.m in Sources */,
 				6F2DF2DA1DD1DA8900A8F0EC /* NewsTitleView.m in Sources */,
 				6F3A1D911DCC77D500BC22EC /* CheckUtil.m in Sources */,
+				9917A5021F4E816C00DA722C /* UITabBar+badge.m in Sources */,
 				9943BFB71E14F1E500531FE4 /* UIScrollView+XHVisibleCenterScroll.m in Sources */,
 				6FF5C7FB1DC1F13D00B1A84A /* NewsVideoCell.m in Sources */,
 				6F2D175B1DF6A08100590AEC /* AliyunOssService.m in Sources */,

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="54.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dyR-X5-Z4w">
@@ -38,18 +38,44 @@
                             <constraint firstAttribute="height" constant="32" id="BHy-ma-7HS"/>
                         </constraints>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8FT-9Q-AC6">
+                        <rect key="frame" x="269" y="11" width="7" height="7"/>
+                        <color key="backgroundColor" red="0.90196078431372551" green="0.0" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="7" id="msX-WJ-isw"/>
+                            <constraint firstAttribute="height" constant="7" id="vrZ-m1-exS"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <real key="value" value="3.5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="免费领取进口零食" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BiH-aD-W9F">
+                        <rect key="frame" x="153.5" y="19" width="115" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="dyR-X5-Z4w" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="7xp-by-VtH"/>
                     <constraint firstItem="Alr-4J-xyh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="GQw-Ol-9oQ"/>
                     <constraint firstItem="dyR-X5-Z4w" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="OI7-uk-QMC"/>
+                    <constraint firstItem="lMx-Gi-8kw" firstAttribute="top" secondItem="8FT-9Q-AC6" secondAttribute="top" id="T8e-L3-uA3"/>
                     <constraint firstItem="lMx-Gi-8kw" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="eXD-ck-1rW"/>
                     <constraint firstItem="Alr-4J-xyh" firstAttribute="leading" secondItem="dyR-X5-Z4w" secondAttribute="trailing" constant="4" id="fOa-Aj-SjK"/>
+                    <constraint firstItem="lMx-Gi-8kw" firstAttribute="leading" secondItem="8FT-9Q-AC6" secondAttribute="trailing" id="lRE-de-Sq6"/>
+                    <constraint firstItem="lMx-Gi-8kw" firstAttribute="leading" secondItem="BiH-aD-W9F" secondAttribute="trailing" constant="8" id="n9K-UJ-0Mt"/>
                     <constraint firstAttribute="trailing" secondItem="lMx-Gi-8kw" secondAttribute="trailing" constant="12" id="pNv-Gd-PqJ"/>
+                    <constraint firstItem="BiH-aD-W9F" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="yJK-QS-K0f"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="_descLbl" destination="BiH-aD-W9F" id="ANJ-2f-LmV"/>
                 <outlet property="_iconView" destination="dyR-X5-Z4w" id="ubS-Me-u76"/>
+                <outlet property="_redPoint" destination="8FT-9Q-AC6" id="dVl-Fn-EXl"/>
                 <outlet property="_titleLbl" destination="Alr-4J-xyh" id="B90-sn-gKQ"/>
             </connections>
             <point key="canvasLocation" x="-228" y="-90.5"/>

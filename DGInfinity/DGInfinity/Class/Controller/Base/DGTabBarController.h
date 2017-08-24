@@ -10,4 +10,7 @@
 
 @interface DGTabBarController : UITabBarController
 
+- (void)showBadgeOnItemIndex:(int)index;
+- (void)hideBadgeOnItemIndex:(int)index;
+
 @end

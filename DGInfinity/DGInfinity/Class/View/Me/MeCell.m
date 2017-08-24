@@ -12,6 +12,8 @@
 {
     __weak IBOutlet UIImageView *_iconView;
     __weak IBOutlet UILabel *_titleLbl;
+    __weak IBOutlet UILabel *_descLbl;
+    __weak IBOutlet UIView *_redPoint;
     
 }
 @end
@@ -29,10 +31,16 @@
     // Configure the view for the selected state
 }
 
-- (void)setIcon:(NSString *)imageName title:(NSString *)title
+- (void)setMenuValue:(MeMenuModel *)model
 {
-    _iconView.image = ImageNamed(imageName);
-    _titleLbl.text = title;
+    _iconView.image = ImageNamed(model.icon);
+    _titleLbl.text = model.title;
+    if (model.desc.length) {
+        _descLbl.text = model.desc;
+    } else {
+        _descLbl.text = @"";
+    }
+    _redPoint.hidden = !model.showPoint;
 }
 
 @end

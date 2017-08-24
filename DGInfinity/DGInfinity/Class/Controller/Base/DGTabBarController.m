@@ -13,6 +13,7 @@
 #import "ServiceViewController.h"
 #import "UITabBarItem+Setup.h"
 #import "MeViewController.h"
+#import "UITabBar+badge.h"
 
 @interface DGTabBarController () <UITabBarControllerDelegate>
 
@@ -32,7 +33,7 @@
         
         DGNavigationViewController *newsNav = [[DGNavigationViewController alloc] initWithRootViewController:[NewsViewController new]];
         [newsNav.tabBarItem setImage:@"tab_ico_entertainment_gray" selectedImage:@"tab_ico_entertainment_blue"];
-        newsNav.tabBarItem.title = @"娱乐";
+        newsNav.tabBarItem.title = @"资讯";
         
         DGNavigationViewController *serviceNav = [[DGNavigationViewController alloc] initWithRootViewController:[ServiceViewController new]];
         [serviceNav.tabBarItem setImage:@"tab_ico_life_gray" selectedImage:@"tab_ico_life_blue"];
@@ -50,6 +51,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    BOOL scoreShopIsRead = [[NSUSERDEFAULTS objectForKey:kScoreShopIsRead] boolValue];
+    if (!scoreShopIsRead) {
+        [self showBadgeOnItemIndex:3];
+    } else {
+        [self hideBadgeOnItemIndex:3];
+    }
+}
+
+- (void)showBadgeOnItemIndex:(int)index
+{
+    [self.tabBar showBadgeOnItemIndex:index];
+}
+
+- (void)hideBadgeOnItemIndex:(int)index
+{
+    [self.tabBar hideBadgeOnItemIndex:index];
 }
 
 - (void)didReceiveMemoryWarning {

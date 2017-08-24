@@ -16,6 +16,9 @@
 #import "PickHeadViewController.h"
 #import "PhotoManager.h"
 #import "AliyunOssService.h"
+#import "MeMenuModel.h"
+#import "WebViewController.h"
+#import "DGTabBarController.h"
 
 @interface MeViewController () <UITableViewDelegate, UITableViewDataSource, PhotoManagerDelegate>
 {
@@ -23,9 +26,24 @@
     MeHeader *_header;
     
 }
+
+@property (nonatomic, strong) NSArray *dataArray;
+
 @end
 
 @implementation MeViewController
+
+- (NSArray *)dataArray
+{
+    if (!_dataArray) {
+        BOOL scoreShopIsRead = [[NSUSERDEFAULTS objectForKey:kScoreShopIsRead] boolValue];
+        _dataArray = @[@[[MeMenuModel createWithIcon:@"my_ico_shop" title:@"我的积分" desc:@"免费领取进口零食" showPoint:!scoreShopIsRead]],
+                       @[[MeMenuModel createWithIcon:@"my_ico_problem" title:@"反馈问题" desc:@"" showPoint:NO],
+                         [MeMenuModel createWithIcon:@"my_ico_call" title:@"客服热线" desc:@"" showPoint:NO],
+                         [MeMenuModel createWithIcon:@"my_ico_set" title:@"设置" desc:@"" showPoint:NO]]];
+    }
+    return _dataArray;
+}
 
 - (void)dealloc
 {
@@ -151,32 +169,24 @@
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.dataArray.count;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return [self.dataArray[section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MeCell"];
-    switch (indexPath.row) {
-        case 0:
-        {
-            [cell setIcon:@"my_ico_problem" title:@"反馈问题"];
+    if (indexPath.section < self.dataArray.count) {
+        NSArray *subArray = self.dataArray[indexPath.section];
+        if (indexPath.row < subArray.count) {
+            [cell setMenuValue:subArray[indexPath.row]];
         }
-            break;
-        case 1:
-        {
-            [cell setIcon:@"my_ico_call" title:@"客服热线"];
-        }
-            break;
-        case 2:
-        {
-            [cell setIcon:@"my_ico_set" title:@"设置"];
-        }
-            break;
-        default:
-            break;
     }
     return cell;
 }
@@ -184,42 +194,77 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    switch (indexPath.row) {
-        case 0:
-        {
-            MobClick(@"Me_feedback");
-            FeedBackViewController *vc = [FeedBackViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
+    if (indexPath.section == 0) {
+        WebViewController *vc = [WebViewController new];
+        vc.url = [NSString stringWithFormat:@"http://api.yunxingzh.com/app/mall.html?uid=%ld&token=%@", SApp.uid, SApp.token];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        MeMenuModel *model = self.dataArray[0][0];
+        model.showPoint = NO;
+        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        [NSUSERDEFAULTS setObject:@(YES) forKey:kScoreShopIsRead];
+        [NSUSERDEFAULTS synchronize];
+        DGTabBarController *tabVC = (DGTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        [tabVC hideBadgeOnItemIndex:3];
+    } else {
+        switch (indexPath.row) {
+            case 0:
+            {
+                MobClick(@"Me_feedback");
+                FeedBackViewController *vc = [FeedBackViewController new];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            case 1:
+            {
+                [self showAlertWithTitle:@"拨打客服热线" message:@"0769-21660569" cancelTitle:@"取消" cancelHandler:nil defaultTitle:@"确定" defaultHandler:^(UIAlertAction *action) {
+                    NSURL *tel = [NSURL URLWithString:@"tel:076921660569"];
+                    if ([[UIApplication sharedApplication] canOpenURL:tel]) {
+                        [[UIApplication sharedApplication] openURL:tel];
+                    }
+                }];
+            }
+                break;
+            case 2:
+            {
+                MobClick(@"Me_setting");
+                SettingViewController *vc = [SettingViewController new];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            default:
+                break;
         }
-            break;
-        case 1:
-        {
-            [self showAlertWithTitle:@"拨打客服热线" message:@"0769-21660569" cancelTitle:@"取消" cancelHandler:nil defaultTitle:@"确定" defaultHandler:^(UIAlertAction *action) {
-                NSURL *tel = [NSURL URLWithString:@"tel:076921660569"];
-                if ([[UIApplication sharedApplication] canOpenURL:tel]) {
-                    [[UIApplication sharedApplication] openURL:tel];
-                }
-            }];
-        }
-            break;
-        case 2:
-        {
-            MobClick(@"Me_setting");
-            SettingViewController *vc = [SettingViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        default:
-            break;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 20;
+    if (section == 0) {
+        return 20;
+    } else {
+        return 0;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 10;
+    } else {
+        return 0;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [UIView new];
+    view.backgroundColor = RGB(0xf0f0f0, 1);
+    return view;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *view = [UIView new];
     view.backgroundColor = RGB(0xf0f0f0, 1);

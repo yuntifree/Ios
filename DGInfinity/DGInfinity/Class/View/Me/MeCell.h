@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MeMenuModel.h"
 
 @interface MeCell : UITableViewCell
 
-- (void)setIcon:(NSString *)imageName title:(NSString *)title;
+- (void)setMenuValue:(MeMenuModel *)model;
 
 @end

@@ -99,4 +99,6 @@ do { \
 #define MobClickBegin [MobClick beginLogPageView:MobClick_getVCName] // 友盟页面访问路径统计
 #define MobClickEnd [MobClick endLogPageView:MobClick_getVCName]
 
+#define kScoreShopIsRead @"kScoreShopIsRead"
+
 #endif /* DGInfinity_Prefix_pch */
