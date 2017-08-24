@@ -349,6 +349,7 @@
 		9917A4FC1F4E730F00DA722C /* my_ico_shop@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9917A4FA1F4E730F00DA722C /* my_ico_shop@3x.png */; };
 		9917A4FF1F4E77CF00DA722C /* MeMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917A4FE1F4E77CF00DA722C /* MeMenuModel.m */; };
 		9917A5021F4E816C00DA722C /* UITabBar+badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917A5011F4E816C00DA722C /* UITabBar+badge.m */; };
+		9917A5171F4ED21600DA722C /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9917A5161F4ED21600DA722C /* NetworkExtension.framework */; };
 		991B7ADA1E6D6155009C5AFC /* DetailLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 991B7AD81E6D6155009C5AFC /* DetailLocationViewController.m */; };
 		991B7ADB1E6D6155009C5AFC /* DetailLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 991B7AD91E6D6155009C5AFC /* DetailLocationViewController.xib */; };
 		993DE33B1E57007B00D284D9 /* ico_wifi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993DE3391E57007B00D284D9 /* ico_wifi@2x.png */; };
@@ -918,6 +919,7 @@
 		9917A4FE1F4E77CF00DA722C /* MeMenuModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeMenuModel.m; sourceTree = "<group>"; };
 		9917A5001F4E816C00DA722C /* UITabBar+badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+badge.h"; sourceTree = "<group>"; };
 		9917A5011F4E816C00DA722C /* UITabBar+badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+badge.m"; sourceTree = "<group>"; };
+		9917A5161F4ED21600DA722C /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		991B7AD71E6D6155009C5AFC /* DetailLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailLocationViewController.h; sourceTree = "<group>"; };
 		991B7AD81E6D6155009C5AFC /* DetailLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailLocationViewController.m; sourceTree = "<group>"; };
 		991B7AD91E6D6155009C5AFC /* DetailLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailLocationViewController.xib; sourceTree = "<group>"; };
@@ -1064,6 +1066,7 @@
 				6F2E655E1DC9C44000AF84BB /* SystemConfiguration.framework in Frameworks */,
 				9961A3591E0A7B2300870103 /* libssl.a in Frameworks */,
 				6F2E655C1DC9C42900AF84BB /* OpenGLES.framework in Frameworks */,
+				9917A5171F4ED21600DA722C /* NetworkExtension.framework in Frameworks */,
 				6F2E655A1DC9C3CF00AF84BB /* QuartzCore.framework in Frameworks */,
 				6F2E65581DC9C3C400AF84BB /* CoreLocation.framework in Frameworks */,
 				6F2E65531DC9C2FA00AF84BB /* BaiduMapAPI_Base.framework in Frameworks */,
@@ -1745,6 +1748,7 @@
 		6F6FDABB1DB4B70C00E50D9B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9917A5161F4ED21600DA722C /* NetworkExtension.framework */,
 				6F30DE541DF7E9FD00134B52 /* libxml2.tbd */,
 				6F30DE521DF7E9F200134B52 /* UserNotifications.framework */,
 				6F4D36581DF54B9C00483A66 /* CoreMotion.framework */,
@@ -2582,7 +2586,7 @@
 								enabled = 0;
 							};
 							com.apple.NetworkExtensions = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.Push = {
 								enabled = 1;
