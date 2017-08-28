@@ -24,6 +24,7 @@ NSString *const JavaScriptClosePage = @"javascript:(function() { \
                                             } \
                                         })()";
 NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrcode,.open_huajiao,.tool-bar').hide();$('.popup-dialog').remove()";
+NSString *const JavaScriptVideoSetting = @"document.getElementById('youkuplayer').style.height = document.documentElement.clientHeight + 'px';";
 
 @interface WebViewController () <WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler>
 {
@@ -65,11 +66,11 @@ NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrco
         config.preferences = [WKPreferences new];
         config.userContentController = [WKUserContentController new];
         [config.userContentController addScriptMessageHandler:[[WeakScriptMessageDelegate alloc] initWithDelegate:self] name:JSHOST];
-        if (!IOS9) {
-            config.mediaPlaybackRequiresUserAction = NO;
-        } else {
-            config.requiresUserActionForMediaPlayback = NO;
-        }
+//        if (!IOS9) {
+//            config.mediaPlaybackRequiresUserAction = NO;
+//        } else {
+//            config.requiresUserActionForMediaPlayback = NO;
+//        }
         if (_newsType == NT_LIVE) {
             config.allowsInlineMediaPlayback = YES;
         }
@@ -304,6 +305,11 @@ NSString *const JavaScriptLiveHidden = @"$('.js_hj_download,.recommendArea,.qrco
                 }
             }];
             [self.webView evaluateJavaScript:JavaScriptClosePage completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+                if (error) {
+                    DDDLog(@"javaScript error: %@",error);
+                }
+            }];
+            [self.webView evaluateJavaScript:JavaScriptVideoSetting completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
                 if (error) {
                     DDDLog(@"javaScript error: %@",error);
                 }

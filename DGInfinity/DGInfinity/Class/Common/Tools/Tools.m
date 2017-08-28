@@ -16,7 +16,6 @@
 #import <arpa/inet.h>
 #include <net/if.h>
 #include "getgateway.h"
-#import <MobileCoreServices/MobileCoreServices.h>
 
 #define IOS_CELLULAR    @"pdp_ip0"
 #define IOS_WIFI        @"en0"
@@ -34,42 +33,8 @@
     if ([[UIApplication sharedApplication] canOpenURL:openURL]) {
         [[UIApplication sharedApplication] openURL:openURL];
     } else {
-        NSString *defaultWork = [self getDefaultWork];
-        NSString *WiFiMethod = [self getWiFiMethod];
-        NSURL *url = [NSURL URLWithString:@"Prefs:root=WIFI"];
-        Class LSApplicationWorkspace = NSClassFromString(@"LSApplicationWorkspace");
-        SEL selectorOne = NSSelectorFromString(defaultWork);
-        SEL selectorTwo = NSSelectorFromString(WiFiMethod);
-        SuppressPerformSelectorLeakWarning(
-            if ([LSApplicationWorkspace respondsToSelector:selectorOne]) {
-                id obj = [LSApplicationWorkspace performSelector:selectorOne];
-                if ([obj respondsToSelector:selectorTwo]) {
-                    [obj performSelector:selectorTwo withObject:url withObject:nil];
-                } else {
-                    [[UIApplication sharedApplication].keyWindow.rootViewController showAlertWithTitle:@"提示" message:@"请手动打开系统WiFi列表" cancelTitle:@"知道了" cancelHandler:nil defaultTitle:nil defaultHandler:nil];
-                }
-            } else {
-                [[UIApplication sharedApplication].keyWindow.rootViewController showAlertWithTitle:@"提示" message:@"请手动打开系统WiFi列表" cancelTitle:@"知道了" cancelHandler:nil defaultTitle:nil defaultHandler:nil];
-            }
-        );
+        [[UIApplication sharedApplication].keyWindow.rootViewController showAlertWithTitle:@"提示" message:@"请手动打开系统WiFi列表" cancelTitle:@"知道了" cancelHandler:nil defaultTitle:nil defaultHandler:nil];
     }
-}
-
-+ (NSString *)getDefaultWork
-{
-    NSData *dataOne = [NSData dataWithBytes:(unsigned char []){0x64, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74, 0x57, 0x6f, 0x72, 0x6b, 0x73, 0x70, 0x61, 0x63, 0x65} length:16];
-    NSString *method = [[NSString alloc] initWithData:dataOne encoding:NSASCIIStringEncoding];
-    return method;
-}
-
-+ (NSString *)getWiFiMethod
-{
-    NSData *dataOne = [NSData dataWithBytes:(unsigned char []){0x6f, 0x70, 0x65, 0x6e, 0x53, 0x65, 0x6e, 0x73, 0x69, 0x74, 0x69, 0x76, 0x65, 0x55, 0x52, 0x4c} length:16];
-    NSString *keyone = [[NSString alloc] initWithData:dataOne encoding:NSASCIIStringEncoding];
-    NSData *dataTwo = [NSData dataWithBytes:(unsigned char []){0x77, 0x69, 0x74, 0x68, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73} length:11];
-    NSString *keytwo = [[NSString alloc] initWithData:dataTwo encoding:NSASCIIStringEncoding];
-    NSString *method = [NSString stringWithFormat:@"%@%@%@%@",keyone, @":", keytwo, @":"];
-    return method;
 }
 
 + (void)registerNotification
