@@ -29,12 +29,7 @@
 
 + (void)openWifiList
 {
-    NSURL *openURL = [NSURL URLWithString:@"prefs:root=WIFI"];
-    if ([[UIApplication sharedApplication] canOpenURL:openURL]) {
-        [[UIApplication sharedApplication] openURL:openURL];
-    } else {
-        [[UIApplication sharedApplication].keyWindow.rootViewController showAlertWithTitle:@"提示" message:@"请手动打开系统WiFi列表" cancelTitle:@"知道了" cancelHandler:nil defaultTitle:nil defaultHandler:nil];
-    }
+    [[UIApplication sharedApplication].keyWindow.rootViewController showAlertWithTitle:@"提示" message:@"请手动打开系统WiFi列表" cancelTitle:@"知道了" cancelHandler:nil defaultTitle:nil defaultHandler:nil];
 }
 
 + (void)registerNotification
@@ -124,11 +119,6 @@
         NSURL *appSettings = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
         if ([[UIApplication sharedApplication] canOpenURL:appSettings]) {
             [[UIApplication sharedApplication] openURL:appSettings];
-        }
-    } else {
-        NSURL *url = [NSURL URLWithString:@"prefs:root=com.yunxingzh.wireless"];
-        if ([[UIApplication sharedApplication] canOpenURL:url]) {
-            [[UIApplication sharedApplication] openURL:url];
         }
     }
 }
