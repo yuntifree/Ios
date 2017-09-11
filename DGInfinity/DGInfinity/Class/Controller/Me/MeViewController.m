@@ -206,7 +206,7 @@
         [NSUSERDEFAULTS setObject:@(YES) forKey:kScoreShopIsRead];
         [NSUSERDEFAULTS synchronize];
         DGTabBarController *tabVC = (DGTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-        [tabVC hideBadgeOnItemIndex:3];
+        [tabVC hideBadgeOnItemIndex:4];
     } else {
         switch (indexPath.row) {
             case 0:

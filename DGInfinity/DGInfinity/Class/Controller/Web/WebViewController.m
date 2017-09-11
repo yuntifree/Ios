@@ -342,6 +342,12 @@ NSString *const JavaScriptVideoSetting = @"document.getElementById('youkuplayer'
         NSURL *url = error.userInfo[NSURLErrorFailingURLErrorKey];
         if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
             [self makeToast:@"网页加载失败，请稍后再试"];
+        } else if ([url.scheme isEqualToString:@"dgfree"] || [url.scheme isEqualToString:@"dgfreehw"]) {
+            WebViewController *vc = [[WebViewController alloc] init];
+            vc.title = [url.scheme isEqualToString:@"dgfree"] ? @"零食商城" : @"数码商城";
+            vc.changeTitle = NO;
+            vc.url = [NSString stringWithFormat:@"%@:/%@?%@", url.host, url.path, url.query];
+            [self.navigationController pushViewController:vc animated:YES];
         } else if ([[UIApplication sharedApplication] canOpenURL:url]) {
             [[UIApplication sharedApplication] openURL:url];
         }

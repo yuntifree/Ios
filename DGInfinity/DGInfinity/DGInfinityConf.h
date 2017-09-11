@@ -103,10 +103,10 @@ typedef NS_ENUM(NSUInteger, JumpType) { // 跳转形式
 };
 
 // Server
-//#define ServerURL @"http://120.76.236.185/" // 测试环境
-#define ServerURL @"https://api.yunxingzh.com/" // 正式环境
+#define ServerURL @"http://120.76.236.185/" // 测试环境
+//#define ServerURL @"https://api.yunxingzh.com/" // 正式环境
 #define IPServerURL @"https://120.25.133.234/" // AC白名单
-#define AppVersion 10 // 客户端内部版本
+#define AppVersion 11 // 客户端内部版本
 
 // WifiSDK
 #define WIFISDK_TIMEOUT  5 * 1000
@@ -143,6 +143,7 @@ typedef NS_ENUM(NSUInteger, JumpType) { // 跳转形式
 #define CheckUpdateURL @"https://itunes.apple.com/cn/lookup?id=1177360625"
 #define LiveListURL @"http://web.free.wifi.360.cn/internet/huajiao"
 #define LiveRoomURL @"http://h.huajiao.com/l/index?liveid="
+#define MallURL @"http://api.yunxingzh.com/app/malllist.html?name=malllist&uid=%ld&token=%@"
 
 // APP审核账号及密码
 #define TestAccount @"12345678910"

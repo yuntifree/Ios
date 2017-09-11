@@ -14,6 +14,7 @@
 #import "UITabBarItem+Setup.h"
 #import "MeViewController.h"
 #import "UITabBar+badge.h"
+#import "WebViewController.h"
 
 @interface DGTabBarController () <UITabBarControllerDelegate>
 
@@ -35,6 +36,14 @@
         [newsNav.tabBarItem setImage:@"tab_ico_entertainment_gray" selectedImage:@"tab_ico_entertainment_blue"];
         newsNav.tabBarItem.title = @"资讯";
         
+        WebViewController *webVC = [[WebViewController alloc] init];
+        webVC.url = [NSString stringWithFormat:MallURL, SApp.uid, SApp.token];
+        webVC.title = @"无限商城";
+        webVC.changeTitle = NO;
+        DGNavigationViewController *mallNav = [[DGNavigationViewController alloc] initWithRootViewController:webVC];
+        [mallNav.tabBarItem setImage:@"tab_ico_shop_gray" selectedImage:@"tab_ico_shop_blue"];
+        mallNav.tabBarItem.title = @"商城";
+        
         DGNavigationViewController *serviceNav = [[DGNavigationViewController alloc] initWithRootViewController:[ServiceViewController new]];
         [serviceNav.tabBarItem setImage:@"tab_ico_life_gray" selectedImage:@"tab_ico_life_blue"];
         serviceNav.tabBarItem.title = @"生活";
@@ -43,7 +52,7 @@
         [meNav.tabBarItem setImage:@"tab_ico_my_gray" selectedImage:@"tab_ico_my_blue"];
         meNav.tabBarItem.title = @"我";
         
-        self.viewControllers = @[wifiNav, newsNav, serviceNav, meNav];
+        self.viewControllers = @[wifiNav, newsNav, mallNav, serviceNav, meNav];
     }
     return self;
 }
@@ -54,9 +63,9 @@
     
     BOOL scoreShopIsRead = [[NSUSERDEFAULTS objectForKey:kScoreShopIsRead] boolValue];
     if (!scoreShopIsRead) {
-        [self showBadgeOnItemIndex:3];
+        [self showBadgeOnItemIndex:4];
     } else {
-        [self hideBadgeOnItemIndex:3];
+        [self hideBadgeOnItemIndex:4];
     }
 }
 
