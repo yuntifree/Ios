@@ -119,9 +119,9 @@
                 break;
             case 1:
                 MobClick(@"tab_entertainment");
-            case 2:
-                MobClick(@"tab_life");
             case 3:
+                MobClick(@"tab_life");
+            case 4:
                 MobClick(@"tab_me");
                 break;
             default:

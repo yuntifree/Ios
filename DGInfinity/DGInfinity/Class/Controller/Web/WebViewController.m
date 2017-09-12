@@ -10,6 +10,7 @@
 #import <WebKit/WebKit.h>
 #import "NetworkManager.h"
 #import "WeakScriptMessageDelegate.h"
+#import "WebKitSupport.h"
 
 NSString *const JSHOST = @"JSHost";
 NSString *const JavaScriptBackgroundColor = @"document.body.style.backgroundColor = '#000';";
@@ -66,6 +67,10 @@ NSString *const JavaScriptVideoSetting = @"document.getElementById('youkuplayer'
         config.preferences = [WKPreferences new];
         config.userContentController = [WKUserContentController new];
         [config.userContentController addScriptMessageHandler:[[WeakScriptMessageDelegate alloc] initWithDelegate:self] name:JSHOST];
+        NSMutableString *cookies = [NSMutableString string];
+        WKUserScript *cookieScript = [[WKUserScript alloc] initWithSource:[cookies copy] injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:NO];
+        [config.userContentController addUserScript:cookieScript];
+        config.processPool = [WebKitSupport sharedSupport].processPool;
 //        if (!IOS9) {
 //            config.mediaPlaybackRequiresUserAction = NO;
 //        } else {
@@ -77,6 +82,7 @@ NSString *const JavaScriptVideoSetting = @"document.getElementById('youkuplayer'
         _webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:config];
         _webView.navigationDelegate = self;
         _webView.UIDelegate = self;
+        _webView.scrollView.bounces = NO;
         [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
         [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
         [_webView addObserver:self forKeyPath:@"canGoBack" options:NSKeyValueObservingOptionNew context:NULL];
@@ -161,7 +167,15 @@ NSString *const JavaScriptVideoSetting = @"document.getElementById('youkuplayer'
     }
     
     if (_url.length) {
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:_url]];
+        NSMutableString *cookies = [NSMutableString string];
+        for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]) {
+            [cookies appendFormat:@"%@=%@;", cookie.name, cookie.value];
+        }
+        if (cookies.length) {
+            [cookies deleteCharactersInRange:NSMakeRange(cookies.length - 1, 1)];
+        }
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:_url]];
+        [request setValue:cookies forHTTPHeaderField:@"Cookie"];
         [self.webView loadRequest:request];
     } else {
         [self makeToast:@"链接无效，加载失败"];
@@ -273,6 +287,17 @@ NSString *const JavaScriptVideoSetting = @"document.getElementById('youkuplayer'
     }
 }
 
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
+    
+    NSHTTPURLResponse *response = (NSHTTPURLResponse *)navigationResponse.response;
+    // 获取cookie,并设置到本地
+    NSArray *cookies = [NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields] forURL:response.URL];
+    for (NSHTTPCookie *cookie in cookies) {
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+    }
+    decisionHandler(WKNavigationResponsePolicyAllow);
+}
+
 #pragma mark - WKNavigationDelegate
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
@@ -343,11 +368,17 @@ NSString *const JavaScriptVideoSetting = @"document.getElementById('youkuplayer'
         if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
             [self makeToast:@"网页加载失败，请稍后再试"];
         } else if ([url.scheme isEqualToString:@"dgfree"] || [url.scheme isEqualToString:@"dgfreehw"]) {
-            WebViewController *vc = [[WebViewController alloc] init];
-            vc.title = [url.scheme isEqualToString:@"dgfree"] ? @"零食商城" : @"数码商城";
-            vc.changeTitle = NO;
-            vc.url = [NSString stringWithFormat:@"%@:/%@?%@", url.host, url.path, url.query];
-            [self.navigationController pushViewController:vc animated:YES];
+            NSMutableString *newUrl = [[NSMutableString alloc] initWithString:url.resourceSpecifier];
+            NSRange range = [newUrl rangeOfString:url.host];
+            if (range.location != NSNotFound) {
+                [newUrl deleteCharactersInRange:NSMakeRange(0, range.location + range.length)];
+                [newUrl insertString:[NSString stringWithFormat:@"%@:/", url.host] atIndex:0];
+                WebViewController *vc = [[WebViewController alloc] init];
+                vc.title = [url.scheme isEqualToString:@"dgfree"] ? @"零食商城" : @"数码商城";
+                vc.changeTitle = NO;
+                vc.url = newUrl;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
         } else if ([[UIApplication sharedApplication] canOpenURL:url]) {
             [[UIApplication sharedApplication] openURL:url];
         }

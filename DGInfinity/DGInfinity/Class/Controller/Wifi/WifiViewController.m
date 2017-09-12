@@ -178,7 +178,7 @@ NetWorkMgrDelegate
 {
     MobClick(@"Index_userinfo");
     UITabBarController *root = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-    root.selectedIndex = 3;
+    root.selectedIndex = 4;
 }
 
 - (void)scanQRcode
