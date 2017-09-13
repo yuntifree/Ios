@@ -10,6 +10,7 @@
 #import "AccountCGI.h"
 #import "NewsCGI.h"
 #import "WiFiCGI.h"
+#import "UpdateCGI.h"
 #import "MiPushSDK.h"
 #import <AFNetworking.h>
 #import "CheckUpdateView.h"
@@ -207,27 +208,17 @@ static MSApp *mSapp = nil;
 
 - (void)checkUpdate
 {
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager GET:CheckUpdateURL parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if (responseObject && [responseObject isKindOfClass:[NSData class]]) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            if ([dict isKindOfClass:[NSDictionary class]]) {
-                NSArray *results = dict[@"results"];
-                if ([results isKindOfClass:[NSArray class]] && results.count) {
-                    NSDictionary *info = results[0];
-                    if ([info isKindOfClass:[NSDictionary class]]) {
-                        NSString *version = info[@"version"];
-                        if ([version compare:XcodeAppVersion] == NSOrderedDescending) {
-                            CheckUpdateView *view = [[CheckUpdateView alloc] initWithVersion:version trackViewUrl:info[@"trackViewUrl"]];
-                            [view showInView:[UIApplication sharedApplication].keyWindow];
-                        }
-                    }
-                }
+    [UpdateCGI checkUpdate:@"ios" complete:^(DGCgiResult *res) {
+        if (E_OK == res._errno) {
+            NSDictionary *data = res.data[@"data"];
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                NSString *title = data[@"title"];
+                NSString *desc = data[@"desc"];
+                CheckUpdateView *view = [[CheckUpdateView alloc] initWithTitle:title desc:desc];
+                [view showInView:[UIApplication sharedApplication].keyWindow];
             }
         }
-    } failure:nil];
+    }];
 }
 
 #pragma mark - User Info

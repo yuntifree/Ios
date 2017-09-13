@@ -13,8 +13,6 @@
 {
     UIView *_backgroundView;
     UIView *_alertView;
-    
-    NSString *_trackViewUrl;
 }
 @end
 
@@ -25,11 +23,10 @@
     DDDLog(@"CheckUpdateView Dealloc");
 }
 
-- (instancetype)initWithVersion:(NSString *)version trackViewUrl:(NSString *)trakViewUrl
+- (instancetype)initWithTitle:(NSString *)title desc:(NSString *)desc
 {
     self = [super initWithFrame:kScreenFrame];
     if (self) {
-        _trackViewUrl = trakViewUrl;
         
         // backgroundView
         _backgroundView = [[UIView alloc] initWithFrame:self.bounds];
@@ -37,7 +34,7 @@
         [self addSubview:_backgroundView];
         
         // alertView
-        _alertView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 286, 220)];
+        _alertView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 286, 250)];
         _alertView.center = CGPointMake(kScreenWidth / 2 - 9, kScreenHeight / 2 - 20);
         [self addSubview:_alertView];
         
@@ -46,24 +43,31 @@
         [_alertView addSubview:alertBackgroundView];
         
         // versionLbl
-        UILabel *versionLbl = [[UILabel alloc] initWithFrame:CGRectMake(18, 100, _alertView.width - 18, 20)];
-        versionLbl.text = [NSString stringWithFormat:@"V%@",version];
-        versionLbl.textColor = COLOR(0, 156, 251, 1);
-        versionLbl.font = SystemFont(14);
+        UILabel *versionLbl = [[UILabel alloc] initWithFrame:CGRectMake(18, 102, _alertView.width - 18, 18)];
+        versionLbl.text = @"【新内容】";
+        versionLbl.textColor = COLOR(90, 90, 90, 1);
+        versionLbl.font = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
         versionLbl.textAlignment = NSTextAlignmentCenter;
         [_alertView addSubview:versionLbl];
         
+        // titleLbl
+        UILabel *titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(40, CGRectGetMaxY(versionLbl.frame) + 14, _alertView.width - 40 - 22, 18)];
+        titleLbl.text = title;
+        titleLbl.textColor = COLOR(90, 90, 90, 1);
+        titleLbl.font = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
+        [_alertView addSubview:titleLbl];
+        
         // descLbl
-        UILabel *descLbl = [[UILabel alloc] initWithFrame:CGRectMake(versionLbl.x, CGRectGetMaxY(versionLbl.frame) + 4, versionLbl.width, 20)];
-        descLbl.text = @"新版本来袭，立即尝新";
+        UILabel *descLbl = [[UILabel alloc] initWithFrame:CGRectMake(titleLbl.x, CGRectGetMaxY(titleLbl.frame) + 6, titleLbl.width, 36)];
+        descLbl.text = desc;
         descLbl.textColor = COLOR(90, 90, 90, 1);
-        descLbl.font = SystemFont(14);
-        descLbl.textAlignment = NSTextAlignmentCenter;
+        descLbl.font = SystemFont(15);
+        descLbl.numberOfLines = 2;
         [_alertView addSubview:descLbl];
         
         // cancelBtn
         UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-        cancelBtn.frame = CGRectMake(descLbl.x, CGRectGetMaxY(descLbl.frame) + 19.5, 134, 41);
+        cancelBtn.frame = CGRectMake(18, CGRectGetMaxY(descLbl.frame) + 15, 134, 41);
         [cancelBtn setTitle:@"以后再说" forState:UIControlStateNormal];
         [cancelBtn setTitleColor:COLOR(155, 155, 155, 1) forState:UIControlStateNormal];
         cancelBtn.titleLabel.font = SystemFont(16);
@@ -79,11 +83,6 @@
         [goBtn addTarget:self action:@selector(goBtnClick) forControlEvents:UIControlEventTouchUpInside];
         [_alertView addSubview:goBtn];
         
-        // padingView
-        UIView *padingView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(cancelBtn.frame), CGRectGetMaxY(descLbl.frame) + 33, 0.5, 17)];
-        padingView.backgroundColor = COLOR(155, 155, 155, 1);
-        [_alertView addSubview:padingView];
-        
     }
     return self;
 }
@@ -96,8 +95,7 @@
 - (void)goBtnClick
 {
     [self dismiss];
-    if (!_trackViewUrl) return;
-    NSURL *url = [NSURL URLWithString:_trackViewUrl];
+    NSURL *url = [NSURL URLWithString:CheckUpdateURL];
     if ([[UIApplication sharedApplication] canOpenURL:url]) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [[UIApplication sharedApplication] openURL:url];

@@ -140,7 +140,7 @@ typedef NS_ENUM(NSUInteger, JumpType) { // 跳转形式
 #define AgreementURL @"http://www.yunxingzh.com/app/agreement.html"
 #define SearchURL @"https://m.baidu.com/s?word="
 #define AboutmeURL @"http://yunxingzh.com/app/about.html"
-#define CheckUpdateURL @"https://itunes.apple.com/cn/lookup?id=1177360625"
+#define CheckUpdateURL @"https://itunes.apple.com/cn/app/%E4%B8%9C%E8%8E%9E%E6%97%A0%E9%99%90/id1177360625?mt=8"
 #define LiveListURL @"http://web.free.wifi.360.cn/internet/huajiao"
 #define LiveRoomURL @"http://h.huajiao.com/l/index?liveid="
 #define MallURL @"http://api.yunxingzh.com/app/malllist.html?name=malllist&uid=%ld&token=%@"

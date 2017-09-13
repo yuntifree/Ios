@@ -10,7 +10,7 @@
 
 @interface CheckUpdateView : UIView
 
-- (instancetype)initWithVersion:(NSString *)version trackViewUrl:(NSString *)trakViewUrl;
+- (instancetype)initWithTitle:(NSString *)title desc:(NSString *)desc;
 - (void)showInView:(UIView *)view;
 
 @end

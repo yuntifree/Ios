@@ -384,6 +384,7 @@
 		9943BFB91E14F1E500531FE4 /* XHMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943BFAF1E14F1E500531FE4 /* XHMenu.m */; };
 		9943BFBA1E14F1E500531FE4 /* XHMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943BFB11E14F1E500531FE4 /* XHMenuButton.m */; };
 		9943BFBB1E14F1E500531FE4 /* XHScrollMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943BFB31E14F1E500531FE4 /* XHScrollMenu.m */; };
+		99443A001F68D42A00E40BB0 /* UpdateCGI.m in Sources */ = {isa = PBXBuildFile; fileRef = 994439FF1F68D42A00E40BB0 /* UpdateCGI.m */; };
 		994641EA1E28B8BA00C81E53 /* img_bg_update@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 994641E81E28B8BA00C81E53 /* img_bg_update@2x.png */; };
 		994641EB1E28B8BA00C81E53 /* img_bg_update@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 994641E91E28B8BA00C81E53 /* img_bg_update@3x.png */; };
 		994641EF1E28B90E00C81E53 /* CheckUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 994641EE1E28B90E00C81E53 /* CheckUpdateView.m */; };
@@ -969,6 +970,8 @@
 		9943BFB11E14F1E500531FE4 /* XHMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHMenuButton.m; sourceTree = "<group>"; };
 		9943BFB21E14F1E500531FE4 /* XHScrollMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHScrollMenu.h; sourceTree = "<group>"; };
 		9943BFB31E14F1E500531FE4 /* XHScrollMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHScrollMenu.m; sourceTree = "<group>"; };
+		994439FE1F68D42A00E40BB0 /* UpdateCGI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateCGI.h; sourceTree = "<group>"; };
+		994439FF1F68D42A00E40BB0 /* UpdateCGI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateCGI.m; sourceTree = "<group>"; };
 		994641E81E28B8BA00C81E53 /* img_bg_update@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_bg_update@2x.png"; sourceTree = "<group>"; };
 		994641E91E28B8BA00C81E53 /* img_bg_update@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_bg_update@3x.png"; sourceTree = "<group>"; };
 		994641ED1E28B90E00C81E53 /* CheckUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckUpdateView.h; sourceTree = "<group>"; };
@@ -1886,6 +1889,7 @@
 		6F6FDAC11DB4B79300E50D9B /* Control */ = {
 			isa = PBXGroup;
 			children = (
+				994439FD1F68D3EF00E40BB0 /* Update */,
 				990E37D71E5ECFDE00F1E01F /* Joke */,
 				990D1E7A1E5AE1330039ECDD /* UserInfo */,
 				9943A8201E5428A1004AFF64 /* Live */,
@@ -2375,6 +2379,15 @@
 				9943BFA91E14F1E500531FE4 /* rightShadow@2x.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		994439FD1F68D3EF00E40BB0 /* Update */ = {
+			isa = PBXGroup;
+			children = (
+				994439FE1F68D42A00E40BB0 /* UpdateCGI.h */,
+				994439FF1F68D42A00E40BB0 /* UpdateCGI.m */,
+			);
+			path = Update;
 			sourceTree = "<group>";
 		};
 		994641E71E28B8BA00C81E53 /* Version */ = {
@@ -3047,6 +3060,7 @@
 				6F2ED0F01DDEB7E1009112C5 /* WiFiWelfareViewController.m in Sources */,
 				6FF5C7EE1DC1DA5B00B1A84A /* NewsReportViewController.m in Sources */,
 				994641EF1E28B90E00C81E53 /* CheckUpdateView.m in Sources */,
+				99443A001F68D42A00E40BB0 /* UpdateCGI.m in Sources */,
 				9912208A1E5C1DE3005A6BE9 /* PickHeadModel.m in Sources */,
 				6F2F9BFA1DDC89230055DAF9 /* WiFiExamSectionHeader.m in Sources */,
 				6F3079841DFE90FC00477FE0 /* DGSplashView.m in Sources */,
