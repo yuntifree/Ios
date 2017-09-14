@@ -70,7 +70,9 @@ NSString *const JavaScriptVideoSetting = @"document.getElementById('youkuplayer'
         NSMutableString *cookies = [NSMutableString string];
         WKUserScript *cookieScript = [[WKUserScript alloc] initWithSource:[cookies copy] injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:NO];
         [config.userContentController addUserScript:cookieScript];
-        config.processPool = [WebKitSupport sharedSupport].processPool;
+        if ([self.title isEqualToString:@"数码商城"]) {
+            config.processPool = [WebKitSupport sharedSupport].processPool;
+        }
 //        if (!IOS9) {
 //            config.mediaPlaybackRequiresUserAction = NO;
 //        } else {
@@ -167,15 +169,7 @@ NSString *const JavaScriptVideoSetting = @"document.getElementById('youkuplayer'
     }
     
     if (_url.length) {
-        NSMutableString *cookies = [NSMutableString string];
-        for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]) {
-            [cookies appendFormat:@"%@=%@;", cookie.name, cookie.value];
-        }
-        if (cookies.length) {
-            [cookies deleteCharactersInRange:NSMakeRange(cookies.length - 1, 1)];
-        }
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:_url]];
-        [request setValue:cookies forHTTPHeaderField:@"Cookie"];
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:_url]];
         [self.webView loadRequest:request];
     } else {
         [self makeToast:@"链接无效，加载失败"];
@@ -287,17 +281,6 @@ NSString *const JavaScriptVideoSetting = @"document.getElementById('youkuplayer'
     }
 }
 
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
-    
-    NSHTTPURLResponse *response = (NSHTTPURLResponse *)navigationResponse.response;
-    // 获取cookie,并设置到本地
-    NSArray *cookies = [NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields] forURL:response.URL];
-    for (NSHTTPCookie *cookie in cookies) {
-        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
-    }
-    decisionHandler(WKNavigationResponsePolicyAllow);
-}
-
 #pragma mark - WKNavigationDelegate
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
@@ -307,6 +290,11 @@ NSString *const JavaScriptVideoSetting = @"document.getElementById('youkuplayer'
     NSURL *URL = navigationAction.request.URL;
     NSString *scheme = [URL scheme];
     if ([scheme isEqualToString:@"huajiao"]) {
+        decisionHandler(WKNavigationActionPolicyCancel);
+    } else if ([scheme isEqualToString:@"alipay"]) {
+        if ([[UIApplication sharedApplication] canOpenURL:URL]) {
+            [[UIApplication sharedApplication] openURL:URL];
+        }
         decisionHandler(WKNavigationActionPolicyCancel);
     } else {
         decisionHandler(WKNavigationActionPolicyAllow);
